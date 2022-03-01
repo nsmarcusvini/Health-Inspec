@@ -1,0 +1,70 @@
+@font-face {
+    font-family: montserrat;
+    src: url(./assets/fontMontSerrat.otf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: montserrat;
+}
+
+.headerImage {
+    background-image: url(./assets/imagemHome.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 88vh;
+}
+
+.headerContainer {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 3%;
+    margin-right: 3%;
+    color: #FAFAFA;
+    transition: 0.5s;
+}
+
+.fixedHeader {
+    position: fixed;
+    background-color: #060b70;
+    z-index: 2;
+    width: 90%;
+}
+
+.header h1 {
+    font-weight: bolder;
+    margin-top: 1%;
+}
+
+.header ul {
+    display: flex;
+    list-style: none;
+    width: 40%;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+
+.header li {
+    cursor: pointer;
+    transition: 0.5s;
+}
+.header li:hover {
+    font-weight: bolder;
+    font-size: large;
+}
+.current {
+    font-weight: bolder;
+    font-size: large;
+}
+
+.containerServico {
+    height: 100vh;
+}
