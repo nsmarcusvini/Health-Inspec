@@ -66,11 +66,34 @@
     font-weight: bolder;
     font-size: large;
 }
-
 .containerComoFunciona {
     height: 95vh;
+    background-color: #FAFAFA;
 }
-
+.pageTitleContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    margin-left: 3%;
+}
+.pageTitle {
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.pageTitle .title {
+    line-height: 1.4;
+    font-weight: 600;
+    font-size: 40px;
+}
+.pageTitle .description {
+    line-height: 1.5;  
+    font-weight: 400;
+    font-size: 20px; 
+}
 .containerTitulo {
     margin-top: 3%;
     width: 100%;
@@ -115,5 +138,6 @@
     align-items: center;
     border-radius: 2cm;
 }
+
 
 
