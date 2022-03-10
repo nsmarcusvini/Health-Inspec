@@ -9,7 +9,7 @@
     font-family: montserrat;
 }
 
-.headerImage {
+.header-image {
     background-image: url(./assets/imagemHome.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,7 +17,7 @@
     height: 95vh;
 }
 
-.headerContainer {
+.header-container {
     width: 100%;
     transition: 0.5s;
 }
@@ -33,7 +33,7 @@
     transition: 0.5s;
 }
 
-.fixedHeader {
+.fixed-header {
     position: fixed;
     background-color: #01677E;
     z-index: 2;
@@ -66,11 +66,11 @@
     font-weight: bolder;
     font-size: large;
 }
-.containerComoFunciona {
+.container-como-funciona {
     height: 95vh;
     background-color: #FAFAFA;
 }
-.pageTitleContainer {
+.page-title-container {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -78,68 +78,64 @@
     color: white;
     margin-left: 3%;
 }
-.pageTitle {
+.page-title {
     height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.pageTitle .title {
+.page-title .title {
     line-height: 1.4;
     font-weight: 600;
     font-size: 40px;
 }
-.pageTitle .description {
+.page-title .description {
     line-height: 1.5;  
     font-weight: 400;
-    font-size: 20px; 
+    font-size: 20px;
 }
-.containerTitulo {
+.work-process-container {
+    background-color: #eceaea;
+    height: 95vh;
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+}
+.centered-title {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.containerTitulo h1 {
-    margin-top: 2%;
-}
-.msgfuncao{
-    background-color: grey;
-    height: 7cm;
-    width: 15cm;
-    align-items: center;
-    display: flex;
-    border-radius: 1cm;
-}
-.box{
-    background-color: gray;
-    height: 8cm;
-    width: 11cm;
-    align-items: center;
-    display: flex;
-    border-radius: 1cm;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    flex-direction: column;
-    }
-.boxes{
-    display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
-
-.footer{
-    background-color:gray ;
+.work-process-title {
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 45px;
+    color: #020710;
+}
+.work-process-title span {
+    color: #41566e;
+}
+.work-process-subtitle {
+    font-size: 16px;
+    line-height: 29px;
+    color: rgba(0, 0, 0, 0.623);
+    margin-top: 3%;
+}
+.line {
+    background-color: #01677E;
+    height: 0.2rem;
+    width: 10rem;
+    margin-top: 3%;
+}
+.phases-container {
     width: 100%;
-    height: 2cm;
-}
-.msgfooter{
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    border-radius: 2cm;
 }
-
-
+.step1 {
+    
+}
 
