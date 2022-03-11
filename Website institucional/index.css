@@ -7,6 +7,9 @@
     margin: 0;
     font-family: montserrat;
 }
+html {
+    scroll-behavior: smooth;
+}
 .header-image {
     background-image: url(./assets/imagemHome.jpg);
     background-size: cover;
@@ -39,7 +42,7 @@
     font-size: 30px;
     font-weight: 600;
     margin-top: 1%;
-    color: #FAFAFA;
+    color: #FAFAFA; 
 }
 .header ul {
     display: flex;
@@ -52,6 +55,10 @@
     cursor: pointer;
     color: #FAFAFA;
     transition: 0.5s;
+}
+.header li a {
+    text-decoration: none;
+    color: #FAFAFA;
 }
 .header li:hover {
     font-weight: bolder;
