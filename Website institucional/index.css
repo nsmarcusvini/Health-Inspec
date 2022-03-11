@@ -2,13 +2,11 @@
     font-family: montserrat;
     src: url(./assets/fontMontSerrat.otf);
 }
-
 * {
     padding: 0;
     margin: 0;
     font-family: montserrat;
 }
-
 .header-image {
     background-image: url(./assets/imagemHome.jpg);
     background-size: cover;
@@ -16,12 +14,10 @@
     background-attachment: fixed;
     height: 95vh;
 }
-
 .header-container {
     width: 100%;
     transition: 0.5s;
 }
-
 .header {
     display: flex;
     flex-direction: row;
@@ -32,7 +28,6 @@
     color: #FAFAFA;
     transition: 0.5s;
 }
-
 .fixed-header {
     position: fixed;
     background-color: #01677E;
@@ -40,12 +35,12 @@
     width: 100%;
     height: 11%;
 }
-
-.header h1 {
-    font-weight: bolder;
+.header span {
+    font-size: 30px;
+    font-weight: 600;
     margin-top: 1%;
+    color: #FAFAFA;
 }
-
 .header ul {
     display: flex;
     list-style: none;
@@ -53,9 +48,9 @@
     justify-content: space-between;
     margin-top: 2%;
 }
-
 .header li {
     cursor: pointer;
+    color: #FAFAFA;
     transition: 0.5s;
 }
 .header li:hover {
@@ -88,11 +83,14 @@
     line-height: 1.4;
     font-weight: 600;
     font-size: 40px;
+    color: #f8f7f7;
+    text-shadow: 4px 5px 22px #eceaea;
 }
 .page-title .description {
     line-height: 1.5;  
     font-weight: 400;
     font-size: 20px;
+    color: #fafafae8;
 }
 .work-process-container {
     background-color: #eceaea;
@@ -127,15 +125,48 @@
     height: 0.2rem;
     width: 10rem;
     margin-top: 3%;
+    margin-bottom: 16%;
 }
 .phases-container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
-.step1 {
-    
+.arrow img {
+    height: 7rem;
+    width: 7rem;    
+}
+.steps {
+    height: 5rem;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.step-image img {
+    height: 11rem;
+    width: 11rem;
+}
+.rocket-div {
+    margin-top: 2.5%;
+}
+.rocket-image img {
+    height: 9rem;
+    width: 9rem;
+}
+.step-title {
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 50px;
+}
+.step-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.623);
 }
 
