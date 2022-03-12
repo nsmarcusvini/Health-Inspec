@@ -141,6 +141,21 @@ html {
     justify-content: space-evenly;
     align-items: center;
 }
+.arrow{
+    animation: arrow 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes arrow {
+    from{
+        transform: translateX(0rem);
+    }
+    50%{
+        transform: translateX(-1rem);
+    }
+    to{
+        transform: translateX(0rem);
+    }
+}
 .arrow img {
     height: 7rem;
     width: 7rem;    
@@ -176,4 +191,44 @@ html {
     text-align: center;
     color: rgba(0, 0, 0, 0.623);
 }
+.about-us-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   
+    background: rgb(1,103,126);
+    background: linear-gradient(0deg, rgba(1,103,126,1) 78%, rgba(236,234,234,1) 90%, rgba(236,234,234,1) 100%);
+    padding-bottom: 5rem;
+}
+.about-us-title{
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 45px;
+    margin-top: 15rem;
+    margin-left: 15rem;
+    color: #FAFAFA;   
+}
 
+.about-us-subtitle{
+    display: flex;
+    font-size: 16px;
+    line-height: 29px;
+    color: #FAFAFA;
+    margin-top: 3%;
+    margin-left: 2.5rem;
+    width: 95%;
+}
+.about-us-subtitle img{
+    width: 500px;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    border-radius: 2.5rem;
+}
+.line-about-us {
+    background-color: #FAFAFA;
+    height: 0.2rem;
+    width: 15rem;
+    margin-top: 3%;
+    margin-left: 12.7rem;
+    margin-bottom: 1%;
+}

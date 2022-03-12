@@ -16,7 +16,7 @@
                 <ul>
                     <li class="current">Início</li>
                     <li><a href="#div-process">Como funciona</a></li>
-                    <li>Sobre nós</li>
+                    <li><a href="#div-about-us">Sobre nós</a></li>
                     <li>Cadastre-se</li>
                 </ul>
             </div>
@@ -89,7 +89,32 @@
         </div>
 
     </div>
+    <div id="div-about-us"class="about-us">
+        <div class="about-us-container">
+            <div class="about-us-title">
+                <span>Sobre nós</span>
+            </div>
+
+            <div class="line-about-us"></div>
+            
+            <div class="about-us-subtitle">
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore alias ad quia rerum reprehenderit dolorem natus eligendi, perferendis enim, incidunt dolorum mollitia tempora quas, optio dolor quisquam qui error quidem?</span>
+                <img src="assets/about-us-monitoring.png" alt="">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script src="assets/js/scrollreveal.min.js"></script>
+<script src="assets/js/comandosCSS.js"></script>
+<script>
+    const srr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 1500,
+    delay: 100
+});
+srr.reveal('work-process-container, .phases-container, .steps, .arrow', {interval: 300 })
+</script>
 
 <script src="index.js"></script>
