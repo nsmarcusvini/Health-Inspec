@@ -1,34 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
+
 <body>
+    <div class="register-dark-body-container">
+        <div class="register-container">
+            <div class="close-register-button">&times;</div>
+
+            <div class="form">
+                <h2>Cadastro</h2>
+
+                <div class="form-columns">
+                    <div>
+                        <div class="form-element">
+                            <label for="name">Razão social</label>
+                            <input type="text" id="name" placeholder="Health Inspec">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="phoneNumber">Telefone</label>
+                            <input type="text" id="phoneNumber" placeholder="(00) 12345-6789">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="logradouro">Logradouro</label>
+                            <input type="text" id="logradouro" placeholder="Rua exemplo, 111">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="city">Cidade</label>
+                            <input type="text" id="city" placeholder="São Paulo">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-element">
+                            <label for="state">Estado</label>
+                            <input type="text" id="state" placeholder="SP">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input type="text" id="email" placeholder="health_inspec@gmail.com">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="password">Senha</label>
+                            <input type="password" id="password" placeholder="******">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="passwordConfirmation">Confirme a senha</label>
+                            <input type="password" id="passwordConfirmation" placeholder="******">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-element">
+                    <button>Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-dark-body-container">
+        <div class="login-container">
+            <div class="close-login-button">&times;</div>
+            <div class="form">
+                <h2>Login</h2>
+                
+                <div class="form-element">
+                    <label for="loginEmail">Email</label>
+                    <input type="text" id="loginEmail" placeholder="health_inspec@gmail.com">
+                </div>
+
+                <div class="form-element">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" placeholder="******">
+                    <!-- <i class="far fa-eye"></i> -->
+                </div>
+
+                <div class="form-element">
+                    <button>Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="header-image">
         <div class="header-container">
             <div class="header">
                 <span>Health Inspec</span>
 
                 <ul>
-                    <li class="current">Início</li>
-                    <li><a href="#div-process">Como funciona</a></li>
-                    <li><a href="#div-about-us">Sobre nós</a></li>
-                    <li>Cadastre-se</li>
+                    <li id="beginButton" class="current"><a href="#div-begin">Início</a></li>
+                    <li id="workProcessButton"><a href="#div-process">Como funciona</a></li>
+                    <li id="aboutUsButton"><a href="#div-about-us">Sobre nós</a></li>
+                    <li id="registerButton">Cadastre-se</li>
+                    <li id="loginButton">Login</li>
                 </ul>
             </div>
-        </div>   
-        
-        <div class="page-title-container">
+        </div>
+
+        <div id="div-begin" class="page-title-container">
             <div class="page-title">
                 <span class="title">
-                    Suas máquinas de atendimento <br> 
+                    Suas máquinas de atendimento <br>
                     muito mais eficientes e seguras!
                 </span>
-                    
+
                 <span class="description">
                     Garantimos segurança no atendimento <br>
                     dos estabelecimentos de saúde com nosso <br>
@@ -42,7 +130,7 @@
     <div id="div-process" class="work-process-container">
         <div class="centered-title">
             <span class="work-process-title">
-                Como nosso produto <span>funciona?</span>  
+                Como nosso produto <span>funciona?</span>
             </span>
             <span class="work-process-subtitle">
                 Health Inspec te ajuda a ter um atendimento melhor
@@ -58,7 +146,8 @@
                 </div>
                 <span class="step-title">Implantação</span>
                 <br>
-                <span class="step-subtitle">Implementamos nossa aplicação nos computadores da recepção e nos totens de atendimento</span>
+                <span class="step-subtitle">Implementamos nossa aplicação nos computadores da recepção e nos totens de
+                    atendimento</span>
             </div>
 
             <div class="arrow">
@@ -71,7 +160,7 @@
                 </div>
                 <span class="step-title">Monitoramento</span>
                 <br>
-                <span class="step-subtitle">As máquinas monitoradas apresentarão os picos de processos que causam lenditão no sistema</span>
+                <span class="step-subtitle">As máquinas monitoradas apresentarão os picos de processos que causam lentidão no sistema</span>
             </div>
 
             <div class="arrow">
@@ -84,37 +173,49 @@
                 </div>
                 <span class="step-title">Agilidade</span>
                 <br>
-                <span class="step-subtitle">Com nossos serviços, as máquinas terão melhor desempenho e o atendimento será mais rápido</span>
+                <span class="step-subtitle">Com nossos serviços, as máquinas terão melhor desempenho e o atendimento
+                    será mais rápido</span>
             </div>
         </div>
 
     </div>
-    <div id="div-about-us"class="about-us">
+
+    <div id="div-about-us" class="about-us">
         <div class="about-us-container">
             <div class="about-us-title">
                 <span>Sobre nós</span>
             </div>
 
             <div class="line-about-us"></div>
-            
+
             <div class="about-us-subtitle">
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore alias ad quia rerum reprehenderit dolorem natus eligendi, perferendis enim, incidunt dolorum mollitia tempora quas, optio dolor quisquam qui error quidem?</span>
-                <img src="assets/about-us-monitoring.png" alt="">
+                <span>Fundada em 2022, Health Inspec é uma empresa voltada para o monitoramento de máquinas de estabelecimentos de saúde. Com nossos serviços, os hospitais e postos conseguem impedir problemas nos computadores e totens responsáveis pelos atendimentos, evitando, assim, lentidão e instabilidade. Nosso time de Tech acompanha o desenvolvimento do software que irá monitorar as máquinas do estabelecimento, a fim de alertar a equipe de suporte caso seja detectado algo fora dos padrões e que pode gerar travamento ou sobrecarga no sistema. Além disso, Health Inspec também te ajudará a controlar os processos abertos nos computadores para que, caso algum processo indevido esteja aberto consumindo memória, seja encerrado para evitar lentidão e melhorar a eficiência das máquinas.</span>
+                <img src="assets/about-us-monitoring.png">
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="footerContent">
+            <p>Monitorar para melhorar ❤☕</p>
+        </div>
+        <div class="footerBottom">
+            <p>copyright&copy; 2020. Developed by <span>Health Inspec</span></p>
+        </div>
+    </footer>
 </body>
+
 </html>
 <script src="assets/js/scrollreveal.min.js"></script>
 <script src="assets/js/comandosCSS.js"></script>
 <script>
     const srr = ScrollReveal({
-    origin: 'top',
-    distance: '60px',
-    duration: 1500,
-    delay: 100
-});
-srr.reveal('work-process-container, .phases-container, .steps, .arrow', {interval: 300 })
+        origin: 'top',
+        distance: '60px',
+        duration: 1000,
+        delay: 100
+    });
+    srr.reveal('work-process-container, .phases-container, .steps, .arrow', { interval: 300 })
 </script>
 
 <script src="index.js"></script>
