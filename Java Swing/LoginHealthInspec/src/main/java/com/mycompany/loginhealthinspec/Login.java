@@ -65,7 +65,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(1, 103, 126));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicolas\\Documents\\NetBeansProjects\\LoginHealthInspec\\src\\main\\java\\images\\200.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\danil\\Documents\\Health-Inspec\\Java Swing\\LoginHealthInspec\\src\\main\\java\\images\\200.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
@@ -161,10 +161,10 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel3.add(closeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicolas\\Documents\\NetBeansProjects\\LoginHealthInspec\\src\\main\\java\\images\\icons8-usuário-30.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\danil\\Documents\\Health-Inspec\\Java Swing\\LoginHealthInspec\\src\\main\\java\\images\\icons8-usuário-30.png")); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 165, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nicolas\\Documents\\NetBeansProjects\\LoginHealthInspec\\src\\main\\java\\images\\icons8-desbloquear-30.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\danil\\Documents\\Health-Inspec\\Java Swing\\LoginHealthInspec\\src\\main\\java\\images\\icons8-desbloquear-30.png")); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -206,7 +206,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeLblMouseClicked
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-
+        String username = txtUsuario.getText();
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void passwdSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwdSenhaActionPerformed
