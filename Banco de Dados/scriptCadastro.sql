@@ -22,7 +22,7 @@ SELECT
 	*
 FROM empresa;
 
-/* alter user 'root'@'localhost' identified with mysql_native_password by 'passwordHealthInspec'; */ 
+alter user 'root'@'localhost' identified with mysql_native_password by 'grupo7Sprint*'; 
 
 
 
