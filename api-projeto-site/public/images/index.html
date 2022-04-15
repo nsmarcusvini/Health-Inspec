@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoT | Home</title>
+    <script src="assets/js/funcoes.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="./images/iconGot.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="../apiCadastro/api-projeto-site/public/assets/js/funcoes.js"></script>
+    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="popUpContainer">
+        <div class="popUp">
+            <div class="closeButton">&times;</div>
+            <div class="form">
+                <h2>Login</h2>
+                <form id="form_login" method="post" onsubmit="entrar()">
+                    <div class="formElements">
+                        <label for="emailLogin">Email</label>
+                        <input type="text" id="emailLogin" name="email" placeholder="jonsnow@email.com">
+                    </div>
+                    <div class="formElements">
+                        <label for="senhaLogin">Senha</label>
+                        <input type="password" id="senhaLogin" name="senha" placeholder="******">
+                        <!-- <i class="far fa-eye"></i> -->
+                    </div>
+                    <div class="formElements">
+                        <button>Entrar</button>
+                        <span class="loginErrorText">Usuário ou senha inválida!</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+   
+    <div class="registerContainer">
+        <div class="register">
+            <div class="closeRegister">&times;</div>
+            <div class="form">
+                <h2>Cadastre-se</h2>
+                <form id="form_cadastro" method="post" onsubmit="cadastrar()">
+                    <div class="formElements">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nomeCadastro" name="nome" placeholder="Jon Snow">
+                    </div>
+                    <div class="formElements">
+                        <label for="emailCadastro">Email</label>
+                        <input type="text" id="emailCadastro" name="email" placeholder="jonsnow@email.com">
+                    </div>
+                    <div class="formElements">
+                        <label for="senhaCadastro">Senha</label>
+                        <input type="password" id="senhaCadastro" name="senha" placeholder="******">
+                        <i id="eyeIcon" class="far fa-eye"></i>
+                    </div>
+                    <div class="formElements">
+                        <label for="confirmacaoCadastro">Confirme a senha</label>
+                        <input type="password" id="confirmacaoCadastro" name="confirmacaoSenha" placeholder="******">
+                    </div>
+                    <div class="formElements">
+                        <button id="botaoCadastrar">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>   
+    
+    <div id="div_aguardar" class="loading-div" style="display: none;">
+        <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+    </div>
+    
+    <div class="headerImg">
+        <div id="menu" class="header">
+            <h1>Game of Thrones</h1>
+            <ul>
+                <li class="homeButton current">Inicio</li>
+                <li class="showLogin">Login</li>
+                <li class="showRegister">Cadastro</li>
+            </ul>
+        </div>
+
+        <h2>
+            O site oficial <br> 
+            da série mais amada <br> 
+            do mundo!
+        </h2>
+    </div>
+
+    <div class="news">
+        <h1>Noticias de Game of Thrones</h1>
+        
+        <div class="newsDesc">
+            <div class="newsText">
+                <h1>Trailer de <br> House of the Dragon</h1>
+                <label>
+                    <h2>Série derivada de Game of Thrones, intitulada House of The Dragon, 
+                    finalmente ganha seu primeiro trailer e encanta os fãs com sua 
+                    atmosfera e enredo!</h2>
+                    <br><br>
+                    O vídeo, por mais que seja curto e não revele 
+                    muitos detalhes, deixou boas impressões e alcançou mais de 13 milhões 
+                    de visualizações. A estréia é prevista para 1 de Janeiro de 2022. 
+                    <br><br><br>
+                    História é baseada no livro Fogo e Sangue de George R. R. Martin 
+                    e se passa 200 anos antes dos acontecimentos de Game of Thrones. 
+                    Como o nome sugere, a série será focada na Casa Targaryen e 
+                    irá mostrar a desastrosa Guerra Civil que ficou conhecida como 
+                    <span>A Dança dos Dragões</span>. 
+                </label>
+            </div>
+        </div>
+
+        <div id="slider">
+            <img class="selected" src="./images/imgNews.jpg">
+            <img src="./images/imgNews2.jpg">
+            <img src="./images/imgNews3.jpeg">
+            <img src="./images/imgNews4.jpg">
+            <img src="./images/imgNews5.jpeg">
+        </div>
+    </div>
+
+    <div class="explore">
+        <h1 class="exploreTitle">Explore nossa plataforma</h1>
+
+        <div class="textsContainer">
+            <div class="textQuiz">
+                <h2>Teste seu conhecimento <br> em Game of Thrones!</h2>
+                <br>
+                <label>
+                    Faça nosso Quiz para testar <br> 
+                    seu conhecimento na série! 
+                </label>
+            </div>
+
+            <div class="textCuriosity">
+                <h2>Curiosidades!</h2>
+                <br>
+                <label>
+                    Veja curiosidades sobre <br> 
+                    a série do universo de <br> 
+                    As Crônicas de Gelo e Fogo! 
+                </label>
+            </div>
+
+            <div class="textAndMuchMore">
+                <h2>...E mais!</h2>
+                <br>
+                <label>
+                    Basta cadastrar-se no nosso <br>
+                    site ou entrar com sua conta <br>
+                    para poder ter acesso a tudo <br>   
+                    isso e mais!
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerContent">
+            <p>Feito com amor e dedicação por um aluno da SPTech ❤</p>
+            <ul class="socialMedias">
+                <li><a href="https://github.com/daniloFerreira19"><i class="fa fa-github-square"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/danilo-ferreira-b9620620a/"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+        <div class="footerBottom">
+            <p>copyright&copy; 2020. Developed by <span>Danilo Ferreira</span></p>
+        </div>
+    </footer>
+</body>
+<script>
+    //Exibindo e fechando pop up login 
+    document.querySelector(".showLogin").addEventListener("click", function() {
+        document.querySelector(".popUpContainer").classList.add("containerActive");
+        document.querySelector(".popUp").classList.add("active");
+    })
+    
+    document.querySelector(".closeButton").addEventListener("click", function() {
+        document.querySelector(".popUpContainer").classList.remove("containerActive");
+        document.querySelector(".popUp").classList.remove("active");
+
+        document.querySelector("#emailLogin").value = "";
+        document.querySelector("#senhaLogin").value = "";
+
+        document.querySelector(".showLogin").classList.remove("current");
+        document.querySelector(".homeButton").classList.add("current");
+        document.querySelector(".loginErrorText").style.display = "none";
+
+        document.querySelector("title").textContent = "GoT | Home";
+    })
+
+    //Exibindo senha do cadastro com o ícone do olho
+    let eyeIcon = document.getElementById("eyeIcon");
+    eyeIcon.addEventListener("click", function() {
+        let password = document.getElementById("senhaCadastro");
+        let confirmation = document.getElementById("confirmacaoCadastro");
+        if (password.type == "password") {
+            eyeIcon.classList.remove("far", "fa-eye");
+            eyeIcon.classList.add("far", "fa-eye-slash");
+            password.type = "text";
+            confirmation.type = "text";
+        } else {
+            eyeIcon.classList.remove("far", "fa-eye-slash");
+            eyeIcon.classList.add("far", "fa-eye");
+            password.type = "password"
+            confirmation.type = "password"
+        }
+    })
+
+    //Exibindo e fechando pop up cadastro
+    document.querySelector(".showRegister").addEventListener("click", function() {
+        document.querySelector(".registerContainer").classList.add("registerActive");
+        document.querySelector(".register").classList.add("active");
+    })
+    
+    document.querySelector(".closeRegister").addEventListener("click", function() {
+        document.querySelector(".registerContainer").classList.remove("registerActive");
+        document.querySelector(".register").classList.remove("active");
+
+        document.querySelector("#nomeCadastro").value = "";
+        document.querySelector("#emailCadastro").value = "";
+        document.querySelector("#senhaCadastro").value = "";
+        document.querySelector("#confirmacaoCadastro").value = "";
+
+        document.querySelector(".showRegister").classList.remove("current");
+        document.querySelector(".homeButton").classList.add("current");
+
+        document.querySelector("title").textContent = "GoT | Home";
+    });
+
+    //Adicionando menu fixo com cor no scroll 
+    (() => {
+        let menu = document.getElementById("menu");
+        window.addEventListener("scroll", () => {
+            window.scrollY > 0 ? menu.classList.add("fixedHeader") : menu.classList.remove("fixedHeader");
+        })
+    })();
+
+    //Mudando a classe da li para ficar ativa se for clicada
+    let telaLogin = document.querySelector(".showLogin");
+    let telaCadastro = document.querySelector(".showRegister");
+    let homeButton = document.querySelector(".homeButton");
+    let title = document.querySelector("title");
+
+    telaLogin.addEventListener("click", function() {
+        homeButton.classList.remove("current");
+        telaLogin.classList.add("current");
+        title.textContent = "GoT | Login"
+    })
+
+    telaCadastro.addEventListener("click", function() {
+        homeButton.classList.remove("current");
+        telaCadastro.classList.add("current");
+        title.textContent = "GoT | Cadastro"
+    })
+
+    //Código do carrossel
+    let currentImageIndex = 0;
+    let images = document.querySelectorAll("#slider img");
+    let maxImages = images.length;
+
+    const nextImage = () => {
+        images[currentImageIndex].classList.remove("selected");
+
+        currentImageIndex++;
+
+        if (currentImageIndex >= maxImages) {
+            currentImageIndex = 0;
+        }
+
+        images[currentImageIndex].classList.add("selected");
+    }
+
+    const start = () => {
+        setInterval(() => {
+            nextImage();    
+        }, 4000);
+    }
+
+    window.addEventListener("load", start())
+
+    //Escondendo os textos e mostrando de acordo com o scroll 
+    let textQuiz = document.querySelector(".textQuiz");
+    let textCuriosity = document.querySelector(".textCuriosity");
+    let textAnalytics = document.querySelector(".textAnalytics");
+    let textAndMuchMore = document.querySelector(".textAndMuchMore");
+
+    (() => {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 1040) {
+                textQuiz.style.visibility = "visible";
+                textQuiz.classList.remove('animate__animated', 'animate__fadeOutUp');
+                textQuiz.classList.add('animate__animated', 'animate__fadeInDownBig');
+            } else {
+                textQuiz.classList.remove('animate__animated', 'animate__fadeInDownBig');
+                textQuiz.classList.add('animate__animated', 'animate__fadeOutUp');
+            }
+
+            if (window.scrollY > 1285) {
+                textCuriosity.style.visibility = "visible";
+                textCuriosity.classList.remove('animate__animated', 'animate__fadeOutUp');
+                textCuriosity.classList.add('animate__animated', 'animate__fadeInDownBig');
+            } else {
+                textCuriosity.classList.remove('animate__animated', 'animate__fadeInDownBig');
+                textCuriosity.classList.add('animate__animated', 'animate__fadeOutUp');
+            }
+
+            if (window.scrollY > 1580) {
+                textAndMuchMore.style.visibility = "visible";
+                textAndMuchMore.classList.remove('animate__animated', 'animate__fadeOutUp');
+                textAndMuchMore.classList.add('animate__animated', 'animate__fadeInDownBig');
+            } else {
+                textAndMuchMore.classList.remove('animate__animated', 'animate__fadeInDownBig');
+                textAndMuchMore.classList.add('animate__animated', 'animate__fadeOutUp');
+            }
+        })
+    })();
+
+    
+    // CODIGO DA API PARA O CADASTRO
+    function limparFormularioCadastro() {
+        document.getElementById("form_cadastro").reset();
+    }
+
+    function cadastrar() {
+        aguardar();
+
+        var formulario = new URLSearchParams(new FormData(document.getElementById("form_cadastro")));
+
+        var nome = formulario.get("nome");
+        var email = formulario.get("email");
+        var senha = formulario.get("senha");
+        var confirmacaoSenha = formulario.get("confirmacaoSenha");
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (nome == "" || email == "" || senha == "" || confirmacaoSenha == "") {
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'Preencha todos os campos!',
+            showConfirmButton: false,
+            timer: 1500
+            });
+            return false;
+        }
+        
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'Email deve conter "@" e ".com"!',
+            showConfirmButton: false,
+            timer: 1500
+            });
+            return false;
+        }
+        
+        if (senha != confirmacaoSenha) {
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'As senhas devem ser iguais!',
+            showConfirmButton: false,
+            timer: 1500
+            });;
+            return false;
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Cadastrado(a) com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+                });
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 1600);
+                limparFormularioCadastro();
+            } else {
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
+
+
+    // CODIGO DA API PARA O LOGIN
+    function limparFormulario() {
+        document.getElementById("form_login").reset();
+    }
+
+    function entrar() {
+        aguardar();
+
+        var formulario = new URLSearchParams(new FormData(document.getElementById("form_login")));
+
+        var email = formulario.get("email");
+        var senha = formulario.get("senha");
+
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", senha);
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (email == "" || senha == "") {
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'Preencha todos os campos!',
+            showConfirmButton: false,
+            timer: 1500
+            });
+            return false;
+        }
+
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'Email deve conter "@" e ".com"!',
+            showConfirmButton: false,
+            timer: 1500
+            });
+            return false;
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "curiosidades.html";
+                    }, 500); // apenas para exibir o loading
+
+                });
+
+            } else {
+                document.querySelector(".loginErrorText").style.display = "block";
+                setTimeout(() => {
+                    document.querySelector(".loginErrorText").style.display = "none";
+                }, 2000);
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+</script>
+</html>

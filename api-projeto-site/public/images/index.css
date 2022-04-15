@@ -1,0 +1,465 @@
+html {
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: gotFont;
+    src: url(./images/fontGoT.ttf);
+}
+
+@font-face {
+    font-family: montserrat;
+    src: url(./images/fontMontSerrat.otf);
+}
+
+@font-face {
+    font-family: montserratLight;
+    src: url(./images/MontserratAlternates-Light.otf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+} 
+
+::-webkit-scrollbar {
+    width: 0.625rem;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0.625rem rgba(0, 0, 0, 0.25);
+}
+::-webkit-scrollbar-thumb {
+    background-color: #242633;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #383b50;
+}
+
+.headerImg {
+    background-image: url(./images/imgIndex.jpg);
+    height: 88vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;   
+    padding: 0.938rem;
+}   
+
+.header h1 {    
+    font-weight: bolder;
+    text-align: center;
+    font-family: gotFont !important;
+    text-decoration: underline;
+    color: #FCFEF0;
+}
+
+.header ul {
+    display: flex;
+    list-style: none;
+    width: 40%;
+    justify-content: space-between;
+    margin-top: 2%;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: small;
+    color: #FCFEF0;
+}
+
+.header li {
+    font-family: gotFont !important;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.header li:hover {
+    font-weight: bolder;
+    font-size: medium;
+}
+
+.header {
+    transition: 0.50s;
+    width: 98.5%;
+}
+
+.fixedHeader {
+    position: fixed;
+    background-color: #242633;
+    height: 5.625rem;
+    width: 98%;
+    padding: 0.938rem;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.current {
+    font-weight: bolder;
+    font-size: medium;
+}
+
+.headerImg h2 {
+    display: flex;
+    margin-top: 8%;
+    font-size: 2.5rem;
+    margin-left: 3%;
+    color: #172a33;
+    text-shadow: 0.094rem 0.063rem rgb(156, 156, 156);
+}
+
+.popUpContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s opacity 0.5s;
+}
+
+.registerContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s opacity 0.5s;
+}
+        
+.containerActive {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1000;
+}
+
+.registerActive {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1000;
+}
+
+.popUp {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    width: 380px;
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.register {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    width: 380px;
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.active {
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popUp .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: #888;
+    color: #eee;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.closeRegister {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: #888;
+    color: #eee;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+    margin-left: -2%;
+}
+
+.form form button {
+    width: 100%;
+    height: 100%;
+    margin-left: 3%;
+}
+
+.form h2 {
+    text-align: center;
+    color: #222;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.form .formElements {
+    margin: 15px 0px;
+}
+
+.form .formElements label {
+    font-size: 14px;
+    color: #222;
+}
+
+.form .formElements input {
+    margin-top: 5px;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #eee;
+}
+
+.form .formElements i {
+    position: absolute;
+    right: 15px;
+    transform: translate(0, -50%);
+    top: 59%;
+    cursor: pointer;
+}
+
+.form .formElements button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: #222;
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.loginErrorText {
+    color: red;
+    font-size: medium;
+    font-weight: bolder;
+    display: none;
+}
+
+.news {
+    background-color: #FCFEF0;
+    height: 140vh;
+    padding: 1.25rem;
+}
+
+.news h1 {
+    text-align: center;
+    font-size: 1.875rem;
+    font-family: gotFont !important;
+    margin-top: 3%;
+}
+
+.newsDesc {
+    margin-top: 5%;
+    margin-left: 7%;
+    height: 38.75rem;
+    width: 34.375rem;
+    padding: 1.563rem;
+    background-color: #10141B;
+    color: #FCFEF0;
+}
+
+.newsText {
+    height: 43.75rem;
+    width: 31.25rem;
+    margin: auto;
+}
+
+.newsText h1 {
+    margin-top: 7%;
+    margin-bottom: 17%;
+    text-align: center;
+    font-family: montserrat !important;
+}
+
+.newsText label {
+    font-family: montserratLight;
+}
+
+#slider {
+    height: 40.9rem;
+    width: 35.6rem;
+    margin-left: 50%;
+    margin-top: -48%;
+    position: relative;
+    z-index: 1;
+}
+
+#slider img{
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 800ms;
+}
+
+#slider img.selected { 
+    opacity: 1;
+}
+
+.explore {
+    height: 120vh;
+    padding: 1.25rem;
+    background-image: url(https://wallpapercave.com/wp/wp4759509.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #FCFEF0;
+}
+
+.explore h1 {
+    text-align: center;
+    font-size: 1.875rem;
+    font-family: gotFont !important;
+    margin-top: 0.5%;
+}
+
+.textsContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.textsContainer label {
+    text-align: justify;
+}
+
+.textQuiz {
+    visibility: hidden;
+}
+
+.textQuiz h2 {
+    margin-top: 5%;
+    margin-bottom: 1%;
+    text-align: center;
+}
+
+.textQuiz label {
+    font-size: larger;
+}
+
+.textCuriosity {
+    visibility: hidden;
+    margin-top: 5%;
+}
+
+.textCuriosity h2 {
+    margin-bottom: 1%;
+    text-align: center;
+}
+
+.textCuriosity label {
+    font-size: large;
+}
+
+.textAndMuchMore {
+    visibility: hidden;
+    margin-top: 2%;
+}
+
+.textAndMuchMore h2 {
+    text-align: center;
+}
+
+footer {
+    background-color: #242633;
+    width: 98.5%;
+    height: auto;
+    padding: 0.625rem;
+    color: #FCFEF0;
+}
+
+.footerContent {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footerContent p {
+    max-width: 28.125rem;
+    margin: 0.438rem auto;
+    line-height: 1.438rem;
+    font-size: 0.875rem;
+}
+
+.socialMedias {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.socialMedias li {
+    margin: 0 0.438rem;
+}
+
+.socialMedias a {
+    text-decoration: none;
+    color: #FCFEF0;
+    font-size: 2.5rem;
+}
+
+.footerBottom {
+    width: 100%;
+    padding: 0.938rem 0;
+    text-align: center;
+}
+
+.footerBottom p {
+    font-size: 0.875rem;
+    word-spacing: 0.125rem;
+    text-transform: capitalize;
+}
+
+.footerBottom span {
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+
+
+
+  
