@@ -99,21 +99,28 @@
             <div class="close-login-button">&times;</div>
             <div class="form">
                 <h2>Login</h2>
+
+                <form id="form-login" method="post" onsubmit="entrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="loginEmail">Email</label>
+                            <input type="text" id="loginEmail" name="loginEmail" placeholder="health_inspec@gmail.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="loginPassword">Senha</label>
+                            <input type="password" id="loginPassword" name="loginPassword" placeholder="******">
+                            <!-- <i class="far fa-eye"></i> -->
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button>Entrar</button>
+                    </div>
+                </form>
                 
-                <div class="form-element">
-                    <label for="loginEmail">Email</label>
-                    <input type="text" id="loginEmail" placeholder="health_inspec@gmail.com">
-                </div>
-
-                <div class="form-element">
-                    <label for="loginPassword">Senha</label>
-                    <input type="password" id="loginPassword" placeholder="******">
-                    <!-- <i class="far fa-eye"></i> -->
-                </div>
-
-                <div class="form-element">
-                    <button>Entrar</button>
-                </div>
             </div>
         </div>
     </div>
@@ -441,7 +448,7 @@
                 });
 
                 setTimeout(() => {
-                    window.location = "dashboard.com";
+                    window.location = "index.html"; 
                 }, 1600);
                 
                 limparFormularioCadastro();
@@ -457,7 +464,7 @@
 
     // CODIGO DA API PARA O LOGIN
     function limparFormulario() {
-        document.getElementById("form_login").reset();
+        document.getElementById("form-login").reset();
     }
 
     function entrar() {
@@ -465,8 +472,8 @@
 
         var formulario = new URLSearchParams(new FormData(document.getElementById("form_login")));
 
-        var email = formulario.get("email");
-        var senha = formulario.get("senha");
+        var email = formulario.get("loginEmail");
+        var senha = formulario.get("loginPassword");
 
         console.log("FORM LOGIN: ", email);
         console.log("FORM SENHA: ", senha);
@@ -483,7 +490,7 @@
             return false;
         }
 
-        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+        if (!email.includes("@") || !email.includes(".com")) {
             Swal.fire({
             position: 'top-center',
             icon: 'error',
@@ -512,7 +519,7 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "curiosidades.html";
+                        window.location = "dashboard.html";
                     }, 500); // apenas para exibir o loading
 
                 });

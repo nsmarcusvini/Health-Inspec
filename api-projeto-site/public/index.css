@@ -168,9 +168,6 @@ html {
     border: 1px solid #aaa;
     border-radius: 5px;
 }
-.login-container input {
-    width: 95% !important;
-}
 .form .form-element button {
     width: 50%;
     height: 2.5rem;
