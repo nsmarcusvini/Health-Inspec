@@ -88,10 +88,12 @@
                 </form>
             </div>
         </div>
-    </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
 
-    <div id="div_aguardar" class="loading-div" style="display: none;">
-        <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        <div id="div_erros_login"></div>
     </div>
 
     <div class="login-dark-body-container">
@@ -272,162 +274,55 @@
         let passwdConfirmation = formulario.get("passwdConfirmation");
 
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
-        let registerInputs = Array.from(document.querySelectorAll(".form-element input"));
-
-        registerInputs.forEach(input => {
-            if (input.value == "") {
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'error',
-                    title: 'Preencha todos os campos!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-                return false;
+        if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == ''|| passwdConfirmation == '') {
+            
+            window.alert("Preencha todos os campos para prosseguir!");
+            if (corporateName == "")  {
+                console.log('nome está em branco')
             }
-        });
+            if (cnpj == "" )  {
+                console.log('email está em branco')
+            }
+            if (email == "" )  {
+                console.log('senha está em branco')
+            }
+            if (phoneNumber == "" )  {
+                console.log('confirmacaoSenha está em branco')
+            }
+            if (cep == '') {
+                console.log('Telefone está em branco')
+            }
+            if (publicPlace == '') {
+                console.log('CNPJ está em branco');
+            }
+            if (state == '') {
+                console.log('cep está em branco');
+            }
+            if (city == '') {
+                console.log('Logradouro está em branco');
+            }
+            if (password == '') {
+                console.log('cidade está em branco');
+            }
+            if (passwdConfirmation == '') {
+                console.log('bairro está em branco');
+            }
 
-        // if (corporateName== "" || email == "" || password == "" || passwdConfirmation == "") {
-        //     Swal.fire({
-        //     position: 'top-center',
-        //     icon: 'error',
-        //     title: 'Preencha todos os campos!',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        //     });
-        //     return false;
-        // }
-
-        if (corporateName.length > 45) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Razão social não deve passar de 45 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (cnpj.length > 14) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'CNPJ não deve passar de 14 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (email.length > 100) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Email não deve passar de 100 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
+            finalizarAguardar();
             return false;
         }
         
-        if (!email.includes("@") || !email.includes(".com")) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Email deve conter "@" e ".com"!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (phoneNumber.length > 11) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Telefone não deve passar de 11 dígitos!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (cep.length > 8) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'CEP não deve passar de 8 dígitos!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (publicPlace.length > 45) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Logradouro não deve passar de 45 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (state.length > 15) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Estado não deve conter mais de 15 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (city.length > 30) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Cidade não deve conter mais de 30 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
-            return false;
-        }
-
-        if (password.length > 20) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Senha não deve conter mais de 20 caracteres!',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
             return false;
         }
         
         if (password != passwdConfirmation) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'As senhas devem ser iguais!',
-                showConfirmButton: false,
-                timer: 1500
-            });;
-            
+            window.alert("As senhas inseridas devem ser iguais para prosseguir!");
+
+            finalizarAguardar();
+
             return false;
         }
 
@@ -439,25 +334,20 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Cadastrado(a) com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                window.alert("Cadastro realizado com sucesso!");
 
-                setTimeout(() => {
-                    window.location = "index.html"; 
-                }, 1600);
-                
-                limparFormularioCadastro();
+                window.location = "index.html";
+
+                limparFormulario();
+
+                finalizarAguardar();
             } else {
                 throw("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-        }); 
+            finalizarAguardar();
+        });
 
         return false;
     }
@@ -470,36 +360,10 @@
     function entrar() {
         aguardar();
 
-        var formulario = new URLSearchParams(new FormData(document.getElementById("form_login")));
+        var formulario = new URLSearchParams(new FormData(document.getElementById("form-login")));
 
-        var email = formulario.get("loginEmail");
-        var senha = formulario.get("loginPassword");
-
-        console.log("FORM LOGIN: ", email);
-        console.log("FORM SENHA: ", senha);
-
-        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
-        if (email == "" || senha == "") {
-            Swal.fire({
-            position: 'top-center',
-            icon: 'error',
-            title: 'Preencha todos os campos!',
-            showConfirmButton: false,
-            timer: 1500
-            });
-            return false;
-        }
-
-        if (!email.includes("@") || !email.includes(".com")) {
-            Swal.fire({
-            position: 'top-center',
-            icon: 'error',
-            title: 'Email deve conter "@" e ".com"!',
-            showConfirmButton: false,
-            timer: 1500
-            });
-            return false;
-        }
+        console.log("FORM LOGIN: ", formulario.get("email"));
+        console.log("FORM SENHA: ", formulario.get("senha"));
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -510,28 +374,26 @@
             if (resposta.ok) {
                 console.log(resposta);
 
-                resposta.json().then(json => {
+                resposta.json().then(json => {                    
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.LOGIN_USUARIO = json.login;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "dashboard.html";
-                    }, 500); // apenas para exibir o loading
-
+                        window.location = "/index.html";
+                    }, 1000);
                 });
 
             } else {
-                document.querySelector(".loginErrorText").style.display = "block";
-                setTimeout(() => {
-                    document.querySelector(".loginErrorText").style.display = "none";
-                }, 2000);
+
+                console.log("Erro de login!");
 
                 resposta.text().then(texto => {
-                    console.error(texto);
+                    console.error(texto);                    
+                    // limparFormulario();
                 });
             }
 
@@ -540,5 +402,28 @@
         })
 
         return false;
+    }
+
+    function validarSessao() {
+        aguardar();
+
+        var login = sessionStorage.LOGIN_USUARIO;
+        var nome = sessionStorage.NOME_USUARIO;
+        
+        var h1Titulo = document.getElementById("h1_titulo");
+
+        if (login != null && nome != null) {
+            // window.alert(`Seja bem-vindo, ${nome}!`);
+            h1Titulo.innerHTML = `${login}`;
+            
+        } else {
+            window.location = "login.html";
+        }
+    }
+
+    function sair() {
+        aguardar();
+        sessionStorage.clear();
+        window.location = "index.html";
     }
 </script>

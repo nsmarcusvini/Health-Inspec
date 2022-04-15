@@ -4,7 +4,7 @@ USE health_inspec;
 DROP TABLE empresa;
 
 CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT, 
+	id INT PRIMARY KEY AUTO_INCREMENT,
     razao_social varchar(45),
     cnpj char(14),
     email varchar(100), 
@@ -18,7 +18,12 @@ CREATE TABLE empresa (
 
 TRUNCATE TABLE empresa;
 
-SELECT 
+INSERT INTO 
+	empresa (razao_social, cnpj, email, telefone, cep, logradouro, estado, cidade, senha) 
+VALUES
+	("Albert Einstein", 12345678912345, "albert_einstein@email.com", 12345678912, 00000000, "teste", "sp", "sp", "Teste123*");
+
+SELECT
 	*
 FROM empresa;
 
