@@ -18,11 +18,6 @@ CREATE TABLE empresa (
 
 TRUNCATE TABLE empresa;
 
-INSERT INTO 
-	empresa (razao_social, cnpj, email, telefone, cep, logradouro, estado, cidade, senha) 
-VALUES
-	("Albert Einstein", 12345678912345, "albert_einstein@email.com", 12345678912, 00000000, "teste", "sp", "sp", "Teste123*");
-
 SELECT
 	*
 FROM empresa;
