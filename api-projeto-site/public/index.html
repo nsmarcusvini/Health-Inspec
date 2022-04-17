@@ -21,7 +21,7 @@
             <div class="form">
                 <h2>Cadastro</h2>
 
-                <form id="form-cadastro" method="post" onsubmit="cadastrar()" class="form-columns">
+                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
                             <label for="corporateName">Razão social</label>
@@ -102,7 +102,7 @@
             <div class="form">
                 <h2>Login</h2>
 
-                <form id="form-login" method="post" onsubmit="entrar()" class="form-columns">
+                <form id="form-login" method="post" onsubmit="return entrar()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
                             <label for="loginEmail">Email</label>
@@ -362,8 +362,23 @@
 
         var formulario = new URLSearchParams(new FormData(document.getElementById("form-login")));
 
-        console.log("FORM LOGIN: ", formulario.get("email"));
-        console.log("FORM SENHA: ", formulario.get("senha"));
+        let email = formulario.get("loginEmail");
+        let password = formulario.get("loginPassword");
+        
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", password);
+
+        if (email == "" || password == "") {
+            window.alert("Preencha todos os campos para prosseguir!");
+            finalizarAguardar();
+            return false;
+        }
+
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -373,17 +388,17 @@
 
             if (resposta.ok) {
                 console.log(resposta);
-
-                resposta.json().then(json => {                    
+                
+                resposta.json().then(json => { 
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.LOGIN_USUARIO = json.login;
-                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.razao_social;
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "/index.html";
+                        window.location = "dashboard.html";
                     }, 1000);
                 });
 
@@ -402,23 +417,6 @@
         })
 
         return false;
-    }
-
-    function validarSessao() {
-        aguardar();
-
-        var login = sessionStorage.LOGIN_USUARIO;
-        var nome = sessionStorage.NOME_USUARIO;
-        
-        var h1Titulo = document.getElementById("h1_titulo");
-
-        if (login != null && nome != null) {
-            // window.alert(`Seja bem-vindo, ${nome}!`);
-            h1Titulo.innerHTML = `${login}`;
-            
-        } else {
-            window.location = "login.html";
-        }
     }
 
     function sair() {

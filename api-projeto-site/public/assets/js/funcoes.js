@@ -9,7 +9,7 @@ function validarSessao() {
         document.getElementById("b_usuario").textContent = nome;       
         // finalizarAguardar();
     } else {
-        window.location = "dashboard.html";
+        window.location = "index.html";
     }
 }
 
