@@ -65,7 +65,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(1, 103, 126));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\danil\\Documents\\Health-Inspec\\Java Swing\\LoginHealthInspec\\src\\main\\java\\images\\200.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/200.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
@@ -78,11 +78,11 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jLabel1)))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -148,7 +148,7 @@ public class Login extends javax.swing.JFrame {
                 minimizeLblMouseClicked(evt);
             }
         });
-        jPanel3.add(minimizeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 30, 70));
+        jPanel3.add(minimizeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 30, 40));
 
         closeLbl.setBackground(new java.awt.Color(1, 103, 126));
         closeLbl.setFont(new java.awt.Font("Myanmar Text", 0, 24)); // NOI18N
@@ -161,10 +161,10 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel3.add(closeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\danil\\Documents\\Health-Inspec\\Java Swing\\LoginHealthInspec\\src\\main\\java\\images\\icons8-usuário-30.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-usuário-30.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 165, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\danil\\Documents\\Health-Inspec\\Java Swing\\LoginHealthInspec\\src\\main\\java\\images\\icons8-desbloquear-30.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-desbloquear-30.png"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

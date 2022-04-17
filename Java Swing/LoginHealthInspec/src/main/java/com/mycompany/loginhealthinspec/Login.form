@@ -77,12 +77,12 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="101" max="32767" attributes="0"/>
@@ -105,7 +105,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\danil\Documents\Health-Inspec\Java Swing\LoginHealthInspec\src\main\java\images\200.png"/>
+                  <Image iconType="3" name="/200.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -264,7 +264,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="370" y="0" width="30" height="70"/>
+                  <AbsoluteConstraints x="370" y="0" width="30" height="40"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -293,7 +293,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\danil\Documents\Health-Inspec\Java Swing\LoginHealthInspec\src\main\java\images\icons8-usu&#xe1;rio-30.png"/>
+                  <Image iconType="3" name="/icons8-usu&#xe1;rio-30.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -305,7 +305,7 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\danil\Documents\Health-Inspec\Java Swing\LoginHealthInspec\src\main\java\images\icons8-desbloquear-30.png"/>
+                  <Image iconType="3" name="/icons8-desbloquear-30.png"/>
                 </Property>
               </Properties>
               <Constraints>
