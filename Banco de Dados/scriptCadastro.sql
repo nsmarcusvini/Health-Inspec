@@ -69,6 +69,8 @@ PRIMARY KEY (idProcessos, fkMaquina),
 FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina)
 );
 
+SELECT * FROM registros;
+
 
 TRUNCATE TABLE empresa;
 
