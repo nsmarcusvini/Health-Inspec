@@ -396,7 +396,7 @@ html {
     text-align: justify;
 }
 .about-us-subtitle img{
-    width: 500px;
+    width: 30rem;
     margin-left: 2.5rem;
     margin-right: 2.5rem;
     border-radius: 1rem;
@@ -445,4 +445,16 @@ footer {
 .footerBottom span {
     text-transform: uppercase;
     font-weight: 200;
+}
+
+@media (max-width: 720px) {
+    .phases-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .arrow {
+        display: none;
+    }
 }
