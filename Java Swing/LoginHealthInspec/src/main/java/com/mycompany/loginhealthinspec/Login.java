@@ -43,7 +43,6 @@ public class Login extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         minimizeLbl = new javax.swing.JLabel();
         closeLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -131,13 +130,7 @@ public class Login extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(1, 103, 126));
         jButton1.setText("Entrar");
         jButton1.setBorder(null);
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 112, 35));
-
-        jButton2.setBackground(new java.awt.Color(250, 250, 250));
-        jButton2.setForeground(new java.awt.Color(1, 103, 126));
-        jButton2.setText("Cadastrar-se");
-        jButton2.setBorder(null);
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 107, 35));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 290, 256, 35));
 
         minimizeLbl.setBackground(new java.awt.Color(1, 103, 126));
         minimizeLbl.setFont(new java.awt.Font("Myanmar Text", 0, 48)); // NOI18N
@@ -265,7 +258,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLbl;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
