@@ -4,6 +4,7 @@
  */
 package com.mycompany.loginhealthinspec;
 
+import com.github.britooo.looca.api.core.Looca;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
  * @author Nicolas
  */
 public class Login extends javax.swing.JFrame {
+    
+    Looca looca = new Looca();
     
     private int mouseX = 0, mouseY = 0;
     
@@ -42,12 +45,13 @@ public class Login extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         minimizeLbl = new javax.swing.JLabel();
         closeLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        lblTeste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -127,11 +131,16 @@ public class Login extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(1, 103, 126));
         jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 250, 20));
 
-        jButton1.setBackground(new java.awt.Color(250, 250, 250));
-        jButton1.setForeground(new java.awt.Color(1, 103, 126));
-        jButton1.setText("Entrar");
-        jButton1.setBorder(null);
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 112, 35));
+        btnEntrar.setBackground(new java.awt.Color(250, 250, 250));
+        btnEntrar.setForeground(new java.awt.Color(1, 103, 126));
+        btnEntrar.setText("Entrar");
+        btnEntrar.setBorder(null);
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 112, 35));
 
         jButton2.setBackground(new java.awt.Color(250, 250, 250));
         jButton2.setForeground(new java.awt.Color(1, 103, 126));
@@ -166,6 +175,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-desbloquear-30.png"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
+
+        lblTeste.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTeste.setText("jLabel5");
+        lblTeste.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel3.add(lblTeste, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 420, 120));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -226,6 +240,14 @@ public class Login extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_closeLblMouseClicked
 
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+        String sistema = looca.getSistema().toString();
+        
+        lblTeste.setText(sistema);
+        
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -263,8 +285,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel closeLbl;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -276,6 +298,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblTeste;
     private javax.swing.JLabel minimizeLbl;
     private javax.swing.JPasswordField passwdSenha;
     private javax.swing.JTextField txtUsuario;
