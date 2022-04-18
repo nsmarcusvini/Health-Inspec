@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Inspec</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <script src="assets/js/funcoes.js"></script>
+    <script src="../src/controllers/usuarioController.js"></script>
+</head>
+
+<body>
+    <div class="register-dark-body-container">
+        <div class="register-container">
+            <div class="close-register-button">&times;</div>
+
+            <div class="form">
+                <h2>Cadastro</h2>
+
+                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="corporateName">Razão social</label>
+                            <input type="text" name="corporateName" id="corporateName" placeholder="Health Inspec">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text" name="cnpj" id="cnpj" placeholder="XX. XXX. XXX/0001-XX">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="health_inspec@gmail.com">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="phoneNumber">Telefone</label>
+                            <input type="text" data-mask="(00) 00000-0000" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="cep">CEP</label>
+                            <input type="text" name="cep" id="cep" placeholder="0000-0000">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="publicPlace">Logradouro</label>
+                            <input type="text" name="publicPlace" id="publicPlace" placeholder="Rua exemplo, 111">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="state">Estado</label>
+                            <input type="text" name="state" id="state" placeholder="SP">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="city">Cidade</label>
+                            <input type="text" name="city" id="city" placeholder="São Paulo">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" id="password" placeholder="******">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="passwdConfirmation">Confirme a senha</label>
+                            <input type="password" name="passwdConfirmation" id="passwdConfirmation" placeholder="******">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button>Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+
+        <div id="div_erros_login"></div>
+    </div>
+
+    <div class="login-dark-body-container">
+        <div class="login-container">
+            <div class="close-login-button">&times;</div>
+            <div class="form">
+                <h2>Login</h2>
+
+                <form id="form-login" method="post" onsubmit="return entrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="loginEmail">Email</label>
+                            <input type="text" id="loginEmail" name="loginEmail" placeholder="health_inspec@gmail.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="loginPassword">Senha</label>
+                            <input type="password" id="loginPassword" name="loginPassword" placeholder="******">
+                            <!-- <i class="far fa-eye"></i> -->
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button>Entrar</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="header-image">
+        <div class="header-container">
+            <div class="header">
+                <span>Health Inspec</span>
+
+                <div class="right">
+                    <a href="#" class="close-sidebar">X</a>
+                </div>
+                <ul>
+                    <li id="beginButton" class="current"><a href="#div-begin">Início</a></li>
+                    <li id="workProcessButton"><a href="#div-process">Como funciona</a></li>
+                    <li id="aboutUsButton"><a href="#div-about-us">Sobre nós</a></li>
+                    <li id="registerButton">Cadastre-se</li>
+                    <li id="loginButton">Login</li>
+                </ul>
+
+                <div class="sidebar">
+                    <div class="center">
+                        <img src="" class="image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="div-begin" class="page-title-container">
+            <div class="page-title">
+                <span class="title">
+                    Suas máquinas de atendimento <br>
+                    muito mais eficientes e seguras!
+                </span>
+
+                <span class="description">
+                    Garantimos segurança no atendimento <br>
+                    dos estabelecimentos de saúde com nosso <br>
+                    monitoramento de CPUs dos totens e das <br>
+                    máquinas da recepção!
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="div-process" class="work-process-container">
+        <div class="centered-title">
+            <span class="work-process-title">
+                Como nosso produto <span>funciona?</span>
+            </span>
+            <span class="work-process-subtitle">
+                Health Inspec te ajuda a ter um atendimento melhor
+            </span>
+
+            <div class="line"></div>
+        </div>
+
+        <div class="phases-container">
+            <div class="steps">
+                <div class="step-image">
+                    <img src="./assets/implantacao.png">
+                </div>
+                <span class="step-title">Implantação</span>
+                <br>
+                <span class="step-subtitle">Implementamos nossa aplicação nos computadores da recepção e nos totens de
+                    atendimento</span>
+            </div>
+
+            <div class="arrow">
+                <img src="./assets/arrow.png">
+            </div>
+
+            <div class="steps">
+                <div class="step-image">
+                    <img src="./assets/monitoramento.png">
+                </div>
+                <span class="step-title">Monitoramento</span>
+                <br>
+                <span class="step-subtitle">As máquinas monitoradas apresentarão os picos de processos que causam lentidão no sistema</span>
+            </div>
+
+            <div class="arrow">
+                <img src="./assets/arrow.png">
+            </div>
+
+            <div class="steps rocket-div">
+                <div class="rocket-image">
+                    <img src="./assets/agilidade.png">
+                </div>
+                <span class="step-title">Agilidade</span>
+                <br>
+                <span class="step-subtitle">Com nossos serviços, as máquinas terão melhor desempenho e o atendimento
+                    será mais rápido</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="div-about-us" class="about-us">
+        <div class="about-us-container">
+            <div class="about-us-title">
+                <span>Sobre nós</span>
+            </div>
+
+            <div class="line-about-us"></div>
+
+            <div class="about-us-subtitle">
+                <span>Fundada em 2022, Health Inspec é uma empresa voltada para o monitoramento de máquinas de estabelecimentos de saúde. Com nossos serviços, os hospitais e postos conseguem impedir problemas nos computadores e totens responsáveis pelos atendimentos, evitando, assim, lentidão e instabilidade. Nosso time de Tech acompanha o desenvolvimento do software que irá monitorar as máquinas do estabelecimento, a fim de alertar a equipe de suporte caso seja detectado algo fora dos padrões e que pode gerar travamento ou sobrecarga no sistema. Além disso, Health Inspec também te ajudará a controlar os processos abertos nos computadores para que, caso algum processo indevido esteja aberto consumindo memória, seja encerrado para evitar lentidão e melhorar a eficiência das máquinas.</span>
+                <img src="assets/about-us-monitoring.png">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerContent">
+            <p>Monitorar para melhorar ❤☕</p>
+        </div>
+        <div class="footerBottom">
+            <p>copyright&copy; 2022. Developed by <span>Health Inspec</span></p>
+        </div>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
+<script src="assets/jsEffects/scrollreveal.min.js"></script>
+<script src="assets/jsEffects/comandosCSS.js"></script>
+<script>
+    const srr = ScrollReveal({
+        origin: 'top',
+        distance: '60px',
+        duration: 1000,
+        delay: 100
+    });
+    srr.reveal('work-process-container, .phases-container, .steps, .arrow', { interval: 300 })
+</script>
+
+<script src="index.js"></script>
+
+<script>
+    function limparFormularioCadastro() {
+        document.getElementById("form-cadastro").reset();
+    }
+
+    function cadastrar() {
+        aguardar();
+
+        let formulario = new URLSearchParams(new FormData(document.getElementById("form-cadastro")));
+
+        let corporateName = formulario.get("corporateName");
+        let cnpj = formulario.get("cnpj");
+        let email = formulario.get("email");
+        let phoneNumber = formulario.get("phoneNumber")
+        let cep = formulario.get("cep");
+        let publicPlace = formulario.get("publicPlace");
+        let state = formulario.get("state");
+        let city = formulario.get("city");
+        let password = formulario.get("password");
+        let passwdConfirmation = formulario.get("passwdConfirmation");
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == ''|| passwdConfirmation == '') {
+            
+            window.alert("Preencha todos os campos para prosseguir!");
+            if (corporateName == "")  {
+                console.log('nome está em branco')
+            }
+            if (cnpj == "" )  {
+                console.log('email está em branco')
+            }
+            if (email == "" )  {
+                console.log('senha está em branco')
+            }
+            if (phoneNumber == "" )  {
+                console.log('confirmacaoSenha está em branco')
+            }
+            if (cep == '') {
+                console.log('Telefone está em branco')
+            }
+            if (publicPlace == '') {
+                console.log('CNPJ está em branco');
+            }
+            if (state == '') {
+                console.log('cep está em branco');
+            }
+            if (city == '') {
+                console.log('Logradouro está em branco');
+            }
+            if (password == '') {
+                console.log('cidade está em branco');
+            }
+            if (passwdConfirmation == '') {
+                console.log('bairro está em branco');
+            }
+
+            finalizarAguardar();
+            return false;
+        }
+        
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+        
+        if (password != passwdConfirmation) {
+            window.alert("As senhas inseridas devem ser iguais para prosseguir!");
+
+            finalizarAguardar();
+
+            return false;
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Cadastro realizado com sucesso!");
+
+                window.location = "index.html";
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    // CODIGO DA API PARA O LOGIN
+    function limparFormulario() {
+        document.getElementById("form-login").reset();
+    }
+
+    function entrar() {
+        aguardar();
+
+        var formulario = new URLSearchParams(new FormData(document.getElementById("form-login")));
+
+        let email = formulario.get("loginEmail");
+        let password = formulario.get("loginPassword");
+        
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", password);
+
+        if (email == "" || password == "") {
+            window.alert("Preencha todos os campos para prosseguir!");
+            finalizarAguardar();
+            return false;
+        }
+
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+                
+                resposta.json().then(json => { 
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.razao_social;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "dashboard.html";
+                    }, 1000);
+                });
+
+            } else {
+
+                console.log("Erro de login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);                    
+                    // limparFormulario();
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sair() {
+        aguardar();
+        sessionStorage.clear();
+        window.location = "index.html";
+    }
+</script>
