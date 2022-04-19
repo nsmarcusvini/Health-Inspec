@@ -1,5 +1,6 @@
 CREATE DATABASE health_inspec;
 USE health_inspec;
+DROP DATABASE health_inspec;
 
 DROP TABLE empresa;
 
@@ -16,6 +17,10 @@ CREATE TABLE empresa (
     senha VARCHAR(20)
 );	
 
+INSERT INTO empresa VALUES (
+NULL, "Chagas", "123456789-1234", "chagas@gmail.com", "91234-56789",
+"12345-78", "Rua Santo Santinho", "São Paulo", "São Paulo", "1234");
+
 CREATE TABLE funcionario (
 idFuncionario INT AUTO_INCREMENT,
 nomeFuncionario VARCHAR(45),
@@ -28,17 +33,27 @@ FOREIGN KEY (fkHospital) REFERENCES empresa (id),
 FOREIGN KEY (fkGestor) REFERENCES funcionario (idFuncionario)
 ); 
 
+INSERT INTO funcionario VALUES (
+NULL, "José", "jose@gmail.com", "124535351-23", 1, 1);
+
+INSERT INTO funcionario VALUES (
+NULL, "André", "andre@gmail.com", "12442435351-23", 1, 1);
+
+SELECT * FROM funcionario;
+
 CREATE TABLE maquinas (
 idMaquina INT AUTO_INCREMENT,
 tipoMaquina VARCHAR(45),
 nomeMaquina VARCHAR(45),
 sistemaOperacional VARCHAR(45),
-tempoDeUso TIME,
-bits INT,
+tempoDeUso VARCHAR(45),
+bits VARCHAR(45),
 fkTecnico INT,
 PRIMARY KEY (idMaquina, fkTecnico),
 FOREIGN KEY (fkTecnico) REFERENCES funcionario (idFuncionario)
 );
+
+SELECT * FROM maquinas;
 
 CREATE TABLE componentes (
 idComponentes INT AUTO_INCREMENT,
@@ -69,7 +84,7 @@ PRIMARY KEY (idProcessos, fkMaquina),
 FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina)
 );
 
-SELECT * FROM registros;
+
 
 
 TRUNCATE TABLE empresa;

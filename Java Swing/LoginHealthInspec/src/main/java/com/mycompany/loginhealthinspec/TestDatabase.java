@@ -2,10 +2,14 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
+import java.net.InetAddress;
 import org.springframework.jdbc.core.JdbcTemplate; 
 
 
+
 public class TestDatabase {
+    
+    
     
     public static void main(String[] args) {
         
@@ -14,17 +18,34 @@ public class TestDatabase {
         JdbcTemplate con = new JdbcTemplate(config.getDataSource());
         
         
-        // Parametros para o primeiro insert
-        String processador = looca.getProcessador().getNome().toString();
-        String so = looca.getSistema().getSistemaOperacional().toString();
-        String regi = looca.getSistema().getTempoDeAtividade().toString();
         
-        // Inserindo valores na tabela
-        con.update("INSERT INTO registros VALUES ( ?, ?, ?, ?)",
-                null, processador, so, regi);
+        try {
+            
+        String tipoMaquina = "Totem";
+        String nomeMaquina = InetAddress.getLocalHost().getHostName().toString();
+        String sistemaOperacional = looca.getSistema().getSistemaOperacional().toString();
+        String tempoDeUso = looca.getSistema().getTempoDeAtividade().toString();
+        String bits = looca.getSistema().getArquitetura().toString();
+        
+        con.update("INSERT INTO maquinas VALUES ( ?, ?, ?, ?, ?, ?, ?)",
+                null, tipoMaquina, nomeMaquina, sistemaOperacional,
+                tempoDeUso, bits, 1);
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        // Parametros para o primeiro insert de uma maquina
+ 
+        
+        // Inserindo valores na tabela componentes
+       
         
         
     }
+
     
-    
+  
 }
+
