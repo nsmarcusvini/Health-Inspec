@@ -3,19 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.loginhealthinspec;
-
-import com.github.britooo.looca.api.core.Looca;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 /**
  *
  * @author Nicolas
  */
 public class Login extends javax.swing.JFrame {
-    
-    Looca looca = new Looca();
-    
+       
     private int mouseX = 0, mouseY = 0;
     
     /**
@@ -46,12 +39,10 @@ public class Login extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         btnEntrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         minimizeLbl = new javax.swing.JLabel();
         closeLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lblTeste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -140,13 +131,7 @@ public class Login extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 112, 35));
-
-        jButton2.setBackground(new java.awt.Color(250, 250, 250));
-        jButton2.setForeground(new java.awt.Color(1, 103, 126));
-        jButton2.setText("Cadastrar-se");
-        jButton2.setBorder(null);
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 107, 35));
+        jPanel3.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 290, 256, 35));
 
         minimizeLbl.setBackground(new java.awt.Color(1, 103, 126));
         minimizeLbl.setFont(new java.awt.Font("Myanmar Text", 0, 48)); // NOI18N
@@ -175,11 +160,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-desbloquear-30.png"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
-
-        lblTeste.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTeste.setText("jLabel5");
-        lblTeste.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel3.add(lblTeste, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 420, 120));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -242,10 +222,6 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-        String sistema = looca.getSistema().toString();
-        
-        lblTeste.setText(sistema);
-        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     
@@ -287,7 +263,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel closeLbl;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -298,7 +273,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JLabel lblTeste;
     private javax.swing.JLabel minimizeLbl;
     private javax.swing.JPasswordField passwdSenha;
     private javax.swing.JTextField txtUsuario;
