@@ -14,8 +14,8 @@ html {
 /* Modal */
 .register-dark-body-container {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: row;
@@ -74,8 +74,8 @@ html {
 }
 .login-dark-body-container {
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
@@ -220,7 +220,7 @@ html {
     margin-top: 1%;
     color: #FAFAFA; 
 }
-.header ul {
+.header-items {
     display: flex;
     list-style: none;
     width: 40%;
@@ -243,6 +243,48 @@ html {
 .current {
     font-weight: bolder;
     font-size: large;
+}
+.open-slide {
+    display: none;
+}
+.sidebar {
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    background-color: #222;
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 3.75rem;
+    transition: 0.5s;
+}
+.sidebar ul {
+    padding: 0.625rem 0.625rem 0.625rem 1.875rem;
+    list-style: none;
+    font-size: 1rem;
+    color: #ccc;
+    transition: 0.3s;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.sidebar-close {
+    position: absolute;
+    top: 0;
+    left: 1.375rem;
+    margin-right: 3.125rem;
+    font-size: 1.375rem;
+    text-decoration: none;
+    padding: 0.625rem 0.625rem 0.625rem 1.875rem;
+    color: #ccc;
+}
+.sidebar ul li:hover {
+    color: #fff;
+    font-size: 1.05rem;
 }
 .container-como-funciona {
     height: 95vh;
@@ -447,7 +489,16 @@ footer {
     font-weight: 200;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
+    .open-slide {
+        display: block;
+    }
+    .header-items {
+        display: none;
+    }
+
+
+
     .phases-container {
         height: 100%;
         display: flex;
