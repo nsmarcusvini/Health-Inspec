@@ -2,6 +2,12 @@ let ctx = document.getElementById('chart').getContext('2d');
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
 
+var cpuAleatorio = Math.random() * (10 - 1) + 1;
+var ramAleatorio = Math.random() * (10 - 1) + 1;
+var Discoleatorio = Math.random() * (10 - 1) + 1;
+
+
+
 let chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
@@ -26,7 +32,7 @@ let chart = new Chart(ctx, {
                 'rgba(149, 165, 166,1.0)',
                 'rgba(127, 140, 141,1.0)'
             ],
-            data: [0, 10, 5,],
+            data: [ramAleatorio, Discoleatorio, cpuAleatorio],
         }]
     },
     // Configuration options go here
