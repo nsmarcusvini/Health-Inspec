@@ -215,7 +215,7 @@ html {
     height: 11%;
 }
 .header span {
-    font-size: 30px;
+    font-size: 1.8rem;
     font-weight: 600;
     margin-top: 1%;
     color: #FAFAFA; 
@@ -223,7 +223,7 @@ html {
 .header-items {
     display: flex;
     list-style: none;
-    width: 40%;
+    width: 50%;
     justify-content: space-between;
     margin-top: 2%;
 }
@@ -292,6 +292,7 @@ html {
 }
 .page-title-container {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -300,6 +301,7 @@ html {
 }
 .page-title {
     height: 45%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -307,14 +309,14 @@ html {
 .page-title .title {
     line-height: 1.4;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 2.5rem;
     color: #f8f7f7;
     text-shadow: 4px 5px 22px #eceaea;
 }
 .page-title .description {
     line-height: 1.5;  
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #fafafae8;
 }
 .work-process-container {
@@ -335,7 +337,7 @@ html {
     font-size: 34px;
     line-height: 45px;
     color: #020710;
-}
+} 
 .work-process-title span {
     color: #41566e;
 }
@@ -489,16 +491,32 @@ footer {
     font-weight: 200;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
+    .header-items {
+        width: 60%;
+    }
+}
+
+@media (max-width: 850px) {
     .open-slide {
         display: block;
     }
     .header-items {
         display: none;
     }
-
-
-
+    .page-title {
+        height: 50%;
+        width: 80%;
+        justify-content: space-between;
+    }
+    .page-title .title {
+        line-height: 1.8;
+        font-size: 1.5rem;
+    }
+    .page-title .description {
+        line-height: 1.8;
+        font-size: 1rem;
+    }
     .phases-container {
         height: 100%;
         display: flex;
