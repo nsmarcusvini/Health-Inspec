@@ -19,7 +19,7 @@ let chartCpu = new Chart(ctxCpu, {
         datasets: [{
             label: "Processador/Cpu",
             backgroundColor: [
-                'rgba(41, 128, 185,0.8)',
+                'rgba(252, 252, 14,0.8)',
                 'rgba(41, 128, 185,0.8)',
                 'rgba(52, 73, 94,0.8)',
                 'rgba(44, 62, 80,0.8)',
@@ -44,7 +44,7 @@ let chartCpu = new Chart(ctxCpu, {
                 'rgb(10, 10, 10)',
                 'rgb(10, 10, 10)'
             ],
-            data: [10,20,30,40,50,60,78,80,90,10,110]}]
+            data: [10,5,36,100,140,60,78,110,90,10,110]}]
     },
     // Configuration options go here
     options: {
@@ -102,7 +102,7 @@ let chartDisco = new Chart(ctxDisco, {
         datasets: [{
             label: "Disco",
             backgroundColor: [
-                'rgba(41, 128, 185,0.8)',
+                'rgba(0,0,0,0.8)',
                 'rgba(41, 128, 185,0.8)',
                 'rgba(52, 73, 94,0.8)',
                 'rgba(44, 62, 80,0.8)',
@@ -204,7 +204,7 @@ let chartRam = new Chart(ctxRam, {
                 'rgb(10, 10, 10)',
                 'rgb(10, 10, 10)'
             ],
-            data: [10,20,30,40,50,60,78,80,90,10,110],
+            data: [100,40,25,80,110,60,38,90,40,10,110],
         }]
     },
     // Configuration options go here
