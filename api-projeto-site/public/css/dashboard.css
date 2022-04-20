@@ -54,6 +54,8 @@ canvas {
     height: auto;
     padding: 0.625rem;
     color: #FCFEF0;
+    margin-top: 2rem;
+    
 }
 
 #chartCpu {
