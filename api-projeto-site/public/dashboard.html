@@ -24,23 +24,50 @@
                     <li id="loginButton">Login</li>
                 </ul>
             </div>
+            
         </div>
-        <div class="dash-container">
-            <div class="boxGraficos">
-                <div class="container">
-                    <canvas id='chartCpu'></canvas>
-                </div>
-                <div class="container">
+        <div id="div-begin" class="page-title-container">
+            <div class="page-title">
+                <span class="title">
+                   Àrea de Dashboard
+                </span>
 
-                    <canvas id='chartDisco'></canvas>
-                </div>
-                <div class="container">
-                    <canvas id='chartRam'></canvas>
-                </div>
+                <span class="description">
+                    Mais a baixo nós da Health Inspec disponibilizaremos Dashboards para <br>
+                    que nossos usuários consigam monitorar o desempenho da suas máquinas,<br> 
+                    fazendo a gestão de controle fazendo assim que não perca a qualidade nos <br>
+                    atendimentos.
+                </span>
             </div>
         </div>
     </div>
+    <h1 class="titleMonitoramento">Monitoramento</h1>
+    <div class="dash-container">
+        <div class="boxGraficos">
+            <div class="container">
+                <canvas id='chartCpu'></canvas>
+
+
+
+                <canvas id='chartDisco'></canvas>
+
+
+                <canvas id='chartRam'></canvas>
+            </div>
+
+        </div>
     </div>
+    <footer>
+        <div class="footerContent">
+            <p>Monitorar para melhorar ❤☕</p>
+        </div>
+        <div class="footerBottom">
+            <p>copyright&copy; 2020. Developed by <span>Health Inspec</span></p>
+        </div>
+    </footer>
+
+   
+    
     <script src='./node_modules/chart.js/dist/Chart.js'></script>
     <script src="./js/index.js"></script>
 

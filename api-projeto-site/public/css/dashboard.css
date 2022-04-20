@@ -6,22 +6,70 @@ body {
 canvas {
     border: 1px solid gainsboro;
     background: white;
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.boxGraficos{
+.boxGraficos {
     display: grid;
-    flex-direction: column;
+    flex-direction: row;
     width: 40%;
     height: 100%;
 }
-.container{
+
+.container {
     height: 100%;
     width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
 }
-.dash-container{
+
+.dash-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    flex-direction: row;
+    background-color: whitesmoke;
+    margin-top: 3cm;
 }
+.titleMonitoramento{
+    margin-top: 2cm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer{
+    background-color: #01677E;
+    width: 98.5%;
+    height: auto;
+    padding: 0.625rem;
+    color: #FCFEF0;
+}
+
+#chartCpu {
+    border: 3px solid grey;
+    border-radius: 2px;
+}
+
+#chartRam {
+    border: 3px solid grey;
+    border-radius: 2px;
+    width: 810px;
+}
+
+
+#chartDisco {
+    border: 3px solid gray;
+    border-radius: 2px;
+    width: 810px;
+} 
