@@ -17,7 +17,7 @@ let chartCpu = new Chart(ctxCpu, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Processador/Cpu",
+            label: "Nível emergêncial",
             backgroundColor: [
                 'rgba(252, 252, 14,0.8)',
                 'rgba(41, 128, 185,0.8)',
@@ -66,7 +66,7 @@ let chartCpu = new Chart(ctxCpu, {
         },
         title: {
             display: true,
-            text: 'Dashboard Processador/Cpu',
+            text: 'Processador/Cpu',
             fontSize: 20
         },
         tooltips: {
@@ -100,7 +100,7 @@ let chartDisco = new Chart(ctxDisco, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Disco",
+            label: "Nível emergêncial",
             backgroundColor: [
                 'rgba(0,0,0,0.8)',
                 'rgba(41, 128, 185,0.8)',
@@ -153,7 +153,7 @@ let chartDisco = new Chart(ctxDisco, {
         },
         title: {
             display: true,
-            text: 'Dashboard Disco',
+            text: 'Disco',
             fontSize: 20
         },
         tooltips: {
@@ -187,7 +187,7 @@ let chartRam = new Chart(ctxRam, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Memoria Ram",
+            label: "Nível emergêncial",
             backgroundColor: [
                 'rgba(41, 128, 185,0.8)',
                 'rgba(41, 128, 185,0.8)',
@@ -227,7 +227,7 @@ let chartRam = new Chart(ctxRam, {
         },
         title: {
             display: true,
-            text: 'Dashboard Memória Ram',
+            text: 'Memória Ram',
             fontSize: 20
         },
         tooltips: {
