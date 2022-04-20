@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="index.css">
     <title>ChartJs</title>
 </head>
+
 <body>
-    <div style="background-color: rgb(10, 10, 10);"></div>
-    <div class="container">
-        <canvas id='chartCpu'></canvas>
-        <!-- <button onclick="addData()">Adicionar componente</button>
-        <button onclick="removeData()">Remover componente</button>
-    </div> -->
-    <div style="background-color: rgb(10, 10, 10);"></div>
-    <div class="container">
-        <canvas id='chartDisco'></canvas>
-        <!-- <button onclick="addData()">Adicionar componente</button>
-        <button onclick="removeData()">Remover componente</button>
-    </div> -->
-    <div style="background-color: rgb(10, 10, 10);"></div>
-    <div class="container">
-        <canvas id='chartRam'></canvas>
-        <!-- <button onclick="addData()">Adicionar componente</button>
-        <button onclick="removeData()">Remover componente</button> -->
+
+    <div class="header-image">
+        <div class="header-container">
+            <div class="header">
+                <span>Health Inspec</span>
+                <ul>
+                    <li id="beginButton" class="current"><a href="#div-begin">Início</a></li>
+                    <li id="workProcessButton"><a href="#div-process">Como funciona</a></li>
+                    <li id="aboutUsButton"><a href="#div-about-us">Sobre nós</a></li>
+                    <li id="registerButton">Cadastre-se</li>
+                    <li id="loginButton">Login</li>
+                </ul>
+            </div>
+        </div>
+        <div class="dash-container">
+            <div class="boxGraficos">
+                <div class="container">
+                    <canvas id='chartCpu'></canvas>
+                </div>
+                <div class="container">
+
+                    <canvas id='chartDisco'></canvas>
+                </div>
+                <div class="container">
+                    <canvas id='chartRam'></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <script src='./node_modules/chart.js/dist/Chart.js'></script>
     <script src="./js/index.js"></script>
+
+
+
+
 </body>
+
 </html>

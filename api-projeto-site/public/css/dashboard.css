@@ -1,0 +1,27 @@
+body {
+    background: whitesmoke;
+    padding: 15px;
+}
+
+canvas {
+    border: 1px solid gainsboro;
+    background: white;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+}
+
+.boxGraficos{
+    display: grid;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+}
+.container{
+    height: 100%;
+    width: 100%;
+}
+.dash-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
