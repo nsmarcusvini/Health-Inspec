@@ -54,22 +54,25 @@ canvas {
     height: auto;
     padding: 0.625rem;
     color: #FCFEF0;
+    margin-top: 2rem;
+    
 }
 
 #chartCpu {
     border: 3px solid grey;
     border-radius: 2px;
+    
 }
 
 #chartRam {
     border: 3px solid grey;
     border-radius: 2px;
-    width: 810px;
+    margin-top: 1rem;
 }
 
 
 #chartDisco {
     border: 3px solid gray;
     border-radius: 2px;
-    width: 810px;
+    margin-top: 1rem;
 } 
