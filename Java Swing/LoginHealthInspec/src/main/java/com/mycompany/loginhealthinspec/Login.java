@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
                 minimizeLblMouseClicked(evt);
             }
         });
-        jPanel3.add(minimizeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 30, 40));
+        jPanel3.add(minimizeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 30, 20));
 
         closeLbl.setBackground(new java.awt.Color(1, 103, 126));
         closeLbl.setFont(new java.awt.Font("Myanmar Text", 0, 24)); // NOI18N
@@ -153,7 +153,7 @@ public class Login extends javax.swing.JFrame {
                 closeLblMouseClicked(evt);
             }
         });
-        jPanel3.add(closeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, -1));
+        jPanel3.add(closeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-usuário-30.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 165, -1, -1));
