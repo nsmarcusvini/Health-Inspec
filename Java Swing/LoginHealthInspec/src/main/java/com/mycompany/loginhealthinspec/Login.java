@@ -3,16 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.loginhealthinspec;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 /**
  *
  * @author Nicolas
  */
 public class Login extends javax.swing.JFrame {
-    
+       
     private int mouseX = 0, mouseY = 0;
     
     /**
@@ -42,8 +38,7 @@ public class Login extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         minimizeLbl = new javax.swing.JLabel();
         closeLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -127,17 +122,16 @@ public class Login extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(1, 103, 126));
         jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 250, 20));
 
-        jButton1.setBackground(new java.awt.Color(250, 250, 250));
-        jButton1.setForeground(new java.awt.Color(1, 103, 126));
-        jButton1.setText("Entrar");
-        jButton1.setBorder(null);
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 112, 35));
-
-        jButton2.setBackground(new java.awt.Color(250, 250, 250));
-        jButton2.setForeground(new java.awt.Color(1, 103, 126));
-        jButton2.setText("Cadastrar-se");
-        jButton2.setBorder(null);
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 107, 35));
+        btnEntrar.setBackground(new java.awt.Color(250, 250, 250));
+        btnEntrar.setForeground(new java.awt.Color(1, 103, 126));
+        btnEntrar.setText("Entrar");
+        btnEntrar.setBorder(null);
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 290, 256, 35));
 
         minimizeLbl.setBackground(new java.awt.Color(1, 103, 126));
         minimizeLbl.setFont(new java.awt.Font("Myanmar Text", 0, 48)); // NOI18N
@@ -226,6 +220,10 @@ public class Login extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_closeLblMouseClicked
 
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -263,9 +261,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel closeLbl;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
