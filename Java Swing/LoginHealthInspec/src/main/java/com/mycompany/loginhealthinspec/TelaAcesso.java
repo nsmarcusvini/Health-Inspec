@@ -54,6 +54,10 @@ public class TelaAcesso extends javax.swing.JFrame {
         lblProcessador = new javax.swing.JLabel();
         lblMemoriaRam = new javax.swing.JLabel();
         lblDisco = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -108,7 +112,7 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator2.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 400, 20));
+        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 400, 20));
 
         jSeparator3.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator3.setForeground(new java.awt.Color(250, 250, 250));
@@ -139,30 +143,30 @@ public class TelaAcesso extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(250, 250, 250));
         jLabel11.setText("Sistema Operacional: ");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(250, 250, 250));
         jLabel12.setText("Processador: ");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 210, -1, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
 
         jSeparator4.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator4.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 400, 20));
+        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 400, 20));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(250, 250, 250));
         jLabel13.setText("Memória RAM: ");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 280, -1, -1));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
 
         jSeparator5.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator5.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 400, 20));
+        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 400, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(250, 250, 250));
         jLabel14.setText("Disco Rígido: ");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 350, -1, -1));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(250, 250, 250));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -172,23 +176,35 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         jSeparator6.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator6.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 400, 20));
+        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 400, 20));
 
         lblSistemaOperacional.setForeground(new java.awt.Color(250, 250, 250));
         lblSistemaOperacional.setText("-");
-        jPanel3.add(lblSistemaOperacional, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
+        jPanel3.add(lblSistemaOperacional, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
         lblProcessador.setForeground(new java.awt.Color(250, 250, 250));
         lblProcessador.setText("-");
-        jPanel3.add(lblProcessador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+        jPanel3.add(lblProcessador, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
 
         lblMemoriaRam.setForeground(new java.awt.Color(250, 250, 250));
         lblMemoriaRam.setText("-");
-        jPanel3.add(lblMemoriaRam, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, -1, -1));
+        jPanel3.add(lblMemoriaRam, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
         lblDisco.setForeground(new java.awt.Color(250, 250, 250));
         lblDisco.setText("-");
-        jPanel3.add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
+        jPanel3.add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hard-disk.png"))); // NOI18N
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistema-operacional.png"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cpu.png"))); // NOI18N
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memoria-ram.png"))); // NOI18N
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -286,6 +302,10 @@ public class TelaAcesso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
