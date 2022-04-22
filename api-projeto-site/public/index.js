@@ -79,6 +79,21 @@ closeButton.addEventListener("click", function() {
     })
 });
 
+// funcoes para menu lateral 
+let openSideBarButton = document.getElementById("sidebar-open-button");
+
+openSideBarButton.addEventListener("click", () => {
+    document.querySelector(".sidebar").style.width = "15.625rem";
+    document.querySelector(".sidebar").style.marginLeft = "15.625rem";
+});
+
+let closeSideBarButton = document.getElementById("sidebar-close-button");
+
+closeSideBarButton.addEventListener("click", () => {
+    document.querySelector(".sidebar").style.width = "0rem";
+    document.querySelector(".sidebar").style.marginLeft = "0rem";
+});
+
 // revelando texto e imagem do "Sobre nós" com efeito 
 (() => {
     window.addEventListener("scroll", () => {
@@ -89,3 +104,4 @@ closeButton.addEventListener("click", function() {
         }
     })
 })();
+

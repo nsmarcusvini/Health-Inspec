@@ -42,7 +42,11 @@
 
                         <div class="form-element">
                             <label for="phoneNumber">Telefone</label>
+<<<<<<< HEAD
                             <input type="text" data-mask="(00) 00000-0000" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+=======
+                            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+>>>>>>> feat/implementar-responsividade-no-site
                         </div>
                     </div>
 
@@ -132,10 +136,24 @@
             <div class="header">
                 <span>Health Inspec</span>
 
+<<<<<<< HEAD
                 <div class="right">
                     <a href="#" class="close-sidebar">X</a>
                 </div>
                 <ul>
+=======
+                <div class="open-slide">
+                    <a href="#" id="sidebar-open-button">
+                        <svg width="30" height="30">
+                            <path d="M0, 5 30,5" stroke="#fff" stroke-width="5"/>
+                            <path d="M0, 14 30,14" stroke="#fff" stroke-width="5"/>
+                            <path d="M0, 23 30,23" stroke="#fff" stroke-width="5"/>
+                        </svg>
+                    </a>
+                </div>
+ 
+                <ul class="header-items">
+>>>>>>> feat/implementar-responsividade-no-site
                     <li id="beginButton" class="current"><a href="#div-begin">Início</a></li>
                     <li id="workProcessButton"><a href="#div-process">Como funciona</a></li>
                     <li id="aboutUsButton"><a href="#div-about-us">Sobre nós</a></li>
@@ -144,9 +162,15 @@
                 </ul>
 
                 <div class="sidebar">
-                    <div class="center">
-                        <img src="" class="image">
-                    </div>
+                    <a href="#" id="sidebar-close-button" class="sidebar-close">&times;</a>
+
+                    <ul>
+                        <li id="beginButton" class="current"><a href="#div-begin">Início</a></li>
+                        <li id="workProcessButton"><a href="#div-process">Como funciona</a></li>
+                        <li id="aboutUsButton"><a href="#div-about-us">Sobre nós</a></li>
+                        <li id="registerButton">Cadastre-se</li>
+                        <li id="loginButton">Login</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -244,14 +268,18 @@
             <p>copyright&copy; 2022. Developed by <span>Health Inspec</span></p>
         </div>
     </footer>
+<<<<<<< HEAD
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+=======
+>>>>>>> feat/implementar-responsividade-no-site
 </body>
-
 </html>
+
 <script src="assets/jsEffects/scrollreveal.min.js"></script>
 <script src="assets/jsEffects/comandosCSS.js"></script>
+
 <script>
     const srr = ScrollReveal({
         origin: 'top',
