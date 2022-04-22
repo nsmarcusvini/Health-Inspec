@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.loginhealthinspec;
+
 /**
  *
  * @author Nicolas
  */
 public class Login extends javax.swing.JFrame {
-       
+
     private int mouseX = 0, mouseY = 0;
     
     /**
@@ -222,6 +223,9 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
+        TelaAcesso acesso = new TelaAcesso();
+        dispose();
+        acesso.setVisible(true);       
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     

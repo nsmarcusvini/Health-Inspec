@@ -1,6 +1,12 @@
 package com.mycompany.loginhealthinspec;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 public class Usuario {
+    Connection config = new Connection();
+    JdbcTemplate con = new JdbcTemplate(config.getDataSource());
+    
+    
     private Integer id;
     private String nome;
     private String senha; 

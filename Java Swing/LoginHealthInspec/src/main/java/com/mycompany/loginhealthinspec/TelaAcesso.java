@@ -4,6 +4,9 @@
  */
 package com.mycompany.loginhealthinspec;
 
+import com.github.britooo.looca.api.core.Looca;
+import java.awt.Color;
+import java.net.InetAddress;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -12,15 +15,37 @@ import javax.swing.JLabel;
  * @author Nicolas
  */
 public class TelaAcesso extends javax.swing.JFrame {
-    
+
     private int mouseX = 0, mouseY = 0;
-    
+
     /**
      * Creates new form Login
      */
-    
     public TelaAcesso() {
         initComponents();
+        this.setUpOs();
+    }
+
+    private void setUpOs() {
+        Looca looca = new Looca();
+
+        try {
+
+            Double ram = looca.getMemoria().getTotal() / 1073741824.0;
+            Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+
+            lblHostName.setText(InetAddress.getLocalHost().getHostName());
+            lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
+            lblProcessador.setText(looca.getProcessador().getNome());
+            lblMemoriaRam.setText(String.format("%.1f Gb", ram));
+            lblDisco.setText(String.format("%.1f Gb", disco));
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
     }
 
     /**
@@ -34,7 +59,7 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblHostName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -71,10 +96,11 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 250));
 
-        jLabel2.setBackground(new java.awt.Color(1, 103, 126));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(1, 103, 126));
-        jLabel2.setText("HOSTNAME");
+        lblHostName.setBackground(new java.awt.Color(1, 103, 126));
+        lblHostName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblHostName.setForeground(new java.awt.Color(1, 103, 126));
+        lblHostName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHostName.setText("HOSTNAME");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/computador.png"))); // NOI18N
 
@@ -83,14 +109,13 @@ public class TelaAcesso extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel2)))
+                .addGap(66, 66, 66)
+                .addComponent(jLabel1)
                 .addContainerGap(67, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblHostName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,9 +123,11 @@ public class TelaAcesso extends javax.swing.JFrame {
                 .addContainerGap(89, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(131, 131, 131))
+                .addComponent(lblHostName)
+                .addGap(90, 90, 90))
         );
+
+        lblHostName.getAccessibleContext().setAccessibleParent(lblHostName);
 
         jPanel3.setBackground(new java.awt.Color(1, 103, 126));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -240,7 +267,6 @@ public class TelaAcesso extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_closeLblMouseClicked
 
-    
     /**
      * @param args the command line arguments
      */
@@ -273,9 +299,11 @@ public class TelaAcesso extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAcesso().setVisible(true);
+
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLbl;
@@ -284,7 +312,6 @@ public class TelaAcesso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -296,6 +323,7 @@ public class TelaAcesso extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lblDisco;
+    private javax.swing.JLabel lblHostName;
     private javax.swing.JLabel lblMemoriaRam;
     private javax.swing.JLabel lblProcessador;
     private javax.swing.JLabel lblSistemaOperacional;
