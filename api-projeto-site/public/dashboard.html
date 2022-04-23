@@ -12,18 +12,94 @@
 
 <body>
 
+    <div class="register-dark-body-container">
+        <div class="register-container">
+            <div class="close-register-button">&times;</div>
+
+            <div class="form">
+                <h2>Cadastro</h2>
+
+                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="corporateName">Razão social</label>
+                            <input type="text" name="corporateName" id="corporateName" placeholder="Health Inspec">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text" name="cnpj" id="cnpj" placeholder="XX. XXX. XXX/0001-XX">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="health_inspec@gmail.com">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="phoneNumber">Telefone</label>
+                            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="cep">CEP</label>
+                            <input type="text" name="cep" id="cep" placeholder="0000-0000">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="publicPlace">Logradouro</label>
+                            <input type="text" name="publicPlace" id="publicPlace" placeholder="Rua exemplo, 111">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="state">Estado</label>
+                            <input type="text" name="state" id="state" placeholder="SP">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="city">Cidade</label>
+                            <input type="text" name="city" id="city" placeholder="São Paulo">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" id="password" placeholder="******">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="passwdConfirmation">Confirme a senha</label>
+                            <input type="password" name="passwdConfirmation" id="passwdConfirmation" placeholder="******">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button>Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="header-image">
         <div class="header-container">
             <div class="dash">
                 <span>Health Inspec</span>
                 <ul >
+                    <li id="registerButton">Cadastro de máquina</li>
                     <li id="workProcessButton"><a href="index.html">Sair</a></li>
-                    <li id="workProcessButton"><a href="TelaDeCadastroMaquinas"> Cadastro de máquinas</a></li>
                 </ul>
             </div>
             
         </div>
-        <div id="div-begin" class="page-title-container">
+        <div id="div-begin" class="page-title-container dashboard-title-container">
             <div class="page-title">
                 <span class="title">
                    Área de Dashboard
@@ -68,7 +144,7 @@
     
     <script src='./node_modules/chart.js/dist/Chart.js'></script>
     <script src="./js/index.js"></script>
-
+    <script src="index.js"></script>
     
 
 

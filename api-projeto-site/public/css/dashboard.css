@@ -13,6 +13,11 @@ canvas {
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+.dashboard-title-container {
+    display: flex;
+    align-items: center !important;
+}
+
 .boxGraficos {
     display: grid;
     flex-direction: row;
