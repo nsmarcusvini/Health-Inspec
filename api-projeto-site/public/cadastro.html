@@ -5,17 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/dashboard.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="cadastro.css">
+    <link rel="icon" href="./assets/logo.ico">
+    <script src="./assets/js/funcoes.js"></script>
     <title>Cadastro Máquinas</title>
 </head>
 
-<body>
+<body onload="validarSessao()">
+    <div class="main-div">
+        <div class="header-container">
+            <div class="header">
+                <span class="title">Health Inspec</span>
+    
+                <span class="sign-out-button"><a href="index.html">Sair</a></span>
+            </div>
+        </div>
 
-    <div class="register-dark-body-container">
-        <div class="register-container">
-            <div class="close-register-button">&times;</div>
+        <div class="page-desc">
+            <span>
+                Olá, <span id="username"></span>
+            </span>
 
+            <span>
+                Cadastre as informações da máquina para poder monitorar seus componentes
+            </span>
+        </div>
+        
+        <div class="form-container">
             <div class="form">
                 <h2>Cadastro</h2>
 
@@ -25,7 +41,9 @@
                             <label for="corporateName">Apelidar Maquina</label>
                             <input type="text" name="corporateName" id="corporateName" placeholder="Totem - Recepção">
                         </div>
+                    </div>
 
+                    <div class="form-row">
                         <div class="form-element">
                             <label for="hostName">HostName da Maquina</label>
                             <input type="text" name="hostName" id="hostName" placeholder="TOTEM-UV93VJF">
@@ -40,12 +58,10 @@
                                 <option value="">Desktop</option>
                                 <option value="">Totem</option>
                             </select>
-                        </div>
-
-                        
+                        </div>                    
                     </div>
 
-                    <div class="form-element form-row">
+                    <div class="form-row">
                         <button>Cadastrar</button>
                     </div>
                 </form>
@@ -53,51 +69,17 @@
         </div>
     </div>
 
-    <div class="header-image">
-        <div class="header-container">
-            <div class="dash">
-                <span>Health Inspec</span>
-                <ul >
-                    <li id="registerButton">Cadastro de máquina</li>
-                    <li id="workProcessButton"><a href="index.html">Sair</a></li>
-                </ul>
-            </div>
-            
-        </div>
-        <div id="div-begin" class="page-title-container dashboard-title-container">
-            <div class="page-title">
-                <span class="title">
-                   Área de Cadastros
-                </span>
-
-                <span class="description">
-                    Abaixo, nós da Health Inspec disponibilizaremos<br> 
-                    Dashboards para que nossos usuários consigam<br> 
-                    monitorar o desempenho das suas máquinas, fazendo<br> 
-                    a gestão de controle para que assim os atendimentos<br> 
-                    não percam sua qualidade.
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
+    <!-- <footer class="footer">
         <div class="footerContent">
             <p>Monitorar para melhorar ❤☕</p>
         </div>
         <div class="footerBottom">
             <p>copyright&copy; 2022. Developed by <span>Health Inspec</span></p>
         </div>
-    </footer>
+    </footer> -->
 
-   
-    
     <script src='./node_modules/chart.js/dist/Chart.js'></script>
     <script src="./js/index.js"></script>
     <script src="index.js"></script>
-    
-
-
 </body>
-
 </html>
