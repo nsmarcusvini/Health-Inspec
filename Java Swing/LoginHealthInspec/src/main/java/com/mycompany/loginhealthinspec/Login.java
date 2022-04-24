@@ -4,12 +4,20 @@
  */
 package com.mycompany.loginhealthinspec;
 
+import java.awt.Color;
+import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 /**
  *
  * @author Nicolas
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    Connection config = new Connection();
+    JdbcTemplate template = new JdbcTemplate(config.getDataSource());
+    
     private int mouseX = 0, mouseY = 0;
     
     /**
@@ -44,6 +52,7 @@ public class Login extends javax.swing.JFrame {
         closeLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        lblError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -95,7 +104,7 @@ public class Login extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtUsuario.setBackground(new java.awt.Color(250, 250, 250));
-        txtUsuario.setText("Usuário");
+        txtUsuario.setText("E-mail");
         txtUsuario.setBorder(null);
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +171,12 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-desbloquear-30.png"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
 
+        lblError.setBackground(java.awt.Color.white);
+        lblError.setForeground(java.awt.Color.black);
+        lblError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblError.setText("-");
+        jPanel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 290, 30));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,9 +238,26 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-        TelaAcesso acesso = new TelaAcesso();
-        dispose();
-        acesso.setVisible(true);       
+        try {
+            String email = txtUsuario.getText();             
+            String senha = passwdSenha.getText();
+            
+            List<Usuario> listaLoginUsuario = template.query(""
+                    + "SELECT email, senha FROM empresa WHERE email = '" + email +
+                    "' AND senha = '" + senha + "';", 
+                    new BeanPropertyRowMapper<>(Usuario.class));
+
+            if (listaLoginUsuario.isEmpty()) {
+                lblError.setForeground(Color.red);
+                lblError.setText("Usuário ou senha incorreta!");
+            } else {
+                TelaAcesso acesso = new TelaAcesso();
+                dispose();
+                acesso.setVisible(true);
+            }
+        } catch (Exception e) { 
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     
@@ -277,6 +309,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblError;
     private javax.swing.JLabel minimizeLbl;
     private javax.swing.JPasswordField passwdSenha;
     private javax.swing.JTextField txtUsuario;

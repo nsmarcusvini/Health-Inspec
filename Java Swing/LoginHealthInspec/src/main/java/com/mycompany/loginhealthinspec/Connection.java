@@ -11,7 +11,7 @@ public class Connection {
         dataSource​.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource​.setUrl("jdbc:mysql://localhost:3306/health_inspec");
         dataSource​.setUsername("root");
-        dataSource​.setPassword("spt3ch");
+        dataSource​.setPassword("grupo7Sprint*");
     }
 
     public BasicDataSource getDataSource() {
