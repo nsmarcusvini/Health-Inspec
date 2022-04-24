@@ -100,11 +100,10 @@ let chartDisco = new Chart(ctxDisco, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Atenção",
+            label: "Alerta",
             backgroundColor: [
-                'rgb(250, 246, 11)',
+                'rgba(238, 241, 26, 0.801)',
                 'rgba(41, 128, 185,0.8)',
-                'rgba(0,0,0,0.8)',
                 'rgba(52, 73, 94,0.8)',
                 'rgba(44, 62, 80,0.8)',
                 'rgba(149, 165, 166,0.8)',
@@ -113,9 +112,7 @@ let chartDisco = new Chart(ctxDisco, {
                 'rgba(127, 140, 141,0.8)',
                 'rgba(149, 165, 166,0.8)',
                 'rgba(127, 140, 141,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-
+                'rgba(127, 140, 141,0.8)'
             ],
             borderColor: [
                 'rgb(0, 0, 0)',
@@ -128,11 +125,9 @@ let chartDisco = new Chart(ctxDisco, {
                 'rgb(0, 0, 0)',
                 'rgb(0, 0, 0)',
                 'rgb(0, 0, 0)',
-                'rgb(0, 0, 0)',
                 'rgb(0, 0, 0)'
             ],
-            data: [10,20,30,40,50,60,78,80,90,10,110]
-        }]
+            data: [10,5,36,100,140,60,78,110,90,10,110]}]
     },
     // Configuration options go here
     options: {
@@ -154,7 +149,7 @@ let chartDisco = new Chart(ctxDisco, {
         },
         title: {
             display: true,
-            text: 'Disco',
+            text: 'Processador/Cpu',
             fontSize: 20
         },
         tooltips: {

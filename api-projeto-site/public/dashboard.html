@@ -18,33 +18,41 @@
                 <span>Health Inspec</span>
                 <ul >
                     <li id="workProcessButton"><a href="index.html">Sair</a></li>
-                    <li id="workProcessButton"><a href="TelaDeCadastroMaquinas"> Cadastro de máquinas</a></li>
                 </ul>
             </div>
             
         </div>
-        <div id="div-begin" class="page-title-container">
+        <div id="div-begin" class="page-title-container dashboard-title-container">
             <div class="page-title">
                 <span class="title">
                    Área de Dashboard
                 </span>
 
                 <span class="description">
-                    Abaixo, nós da Health Inspec disponibilizaremos <br> 
-                    Dashboards para que nossos usuários consigam <br> 
-                    monitorar o desempenho das suas máquinas,fazendo<br> 
-                    a gestão de controle para que assim os atendimentos <br> 
+                    Nós da Health Inspec disponibilizaremos<br> 
+                    Dashboards para que nossos usuários consigam<br> 
+                    monitorar o desempenho das suas máquinas, fazendo<br> 
+                    a gestão de controle para que assim os atendimentos<br> 
                     não percam sua qualidade.
                 </span>
             </div>
         </div>
     </div>
     <h1 class="titleMonitoramento">Monitoramento</h1>
+
+    <div class="buttons-container">
+        <div class="buttons">
+            <button>Totem 1</button>
+            <button>Totem 2</button>
+            <button>Desktop 1</button>
+            <button>Desktop 2</button>
+        </div>
+    </div>
+
     <div class="dash-container">
         <div class="boxGraficos">
             <div class="container">
                 <canvas id='chartCpu'></canvas>
-
 
 
                 <canvas id='chartDisco'></canvas>
@@ -65,10 +73,8 @@
     </footer>
 
    
-    
     <script src='./node_modules/chart.js/dist/Chart.js'></script>
-    <script src="./js/dashboard.js"></script>
-
+    <script src="index.js"></script>
+    <script src="./js/dashboard.js"></script> 
 </body>
-
 </html>
