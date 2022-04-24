@@ -47,6 +47,29 @@ canvas {
     justify-content: center;
     align-items: center;
 }
+.buttons-container {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttons-container .buttons {
+    width: 35%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.buttons-container .buttons button {
+    width: 6.5rem;
+    height: 2.5rem;
+    background-color: #01677E;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: .2rem;
+}
 .title{
     display: flex;
     justify-content: center;
