@@ -5,8 +5,8 @@ var sql = require('mssql');
 var sqlServerConfig = {
     user: "root",
     password: "grupo7Sprint*",  
-    database: "usuarios",
-    server: "plantech.database.windows.net",
+    database: "health_inspec",
+    server: "health-inspec.database.windows.net",
     pool: {
         max: 10,
         min: 0,
