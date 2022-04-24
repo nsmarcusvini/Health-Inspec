@@ -45,14 +45,23 @@
     color: #FAFAFA; 
 }
 
-.sign-out-button a {
-    text-decoration: none;
+.header ul {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    /* margin-top: 2%; */
+}
+.header li {
     cursor: pointer;
     color: #FAFAFA;
-    transition: .5s;
+    transition: 0.7s;
 }
-
-.sign-out-button a:hover {
+.header li a {
+    text-decoration: none;
+    color: #FAFAFA;
+}
+.header li:hover {
     font-weight: bolder;
     font-size: large;
 }

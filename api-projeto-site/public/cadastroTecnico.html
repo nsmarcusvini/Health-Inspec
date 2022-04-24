@@ -17,17 +17,20 @@
             <div class="header">
                 <span class="title">Health Inspec</span>
     
-                <span class="sign-out-button"><a href="index.html">Sair</a></span>
+                <ul>
+                    <li><a href="cadastroMaquinas.html">Cadastrar máquinas</a></li>
+                    <li><a href="index.html">Sair</a></li>
+                </ul>
             </div>
         </div>
 
         <div class="page-desc">
             <span>
-                Olá, <span id="username"></span>
+                Olá, <span id="username"></span>!
             </span>
 
             <span>
-                Cadastre as informações da máquina para poder monitorar seus componentes
+                Cadastre os técnicos que serão responsáveis pelas máquinas monitoradas
             </span>
         </div>
         
@@ -38,26 +41,22 @@
                 <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="corporateName">Apelidar Maquina</label>
-                            <input type="text" name="corporateName" id="corporateName" placeholder="Totem - Recepção">
+                            <label for="name">Nome</label>
+                            <input type="text" name="name" id="name" placeholder="Manoel">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="hostName">HostName da Maquina</label>
-                            <input type="text" name="hostName" id="hostName" placeholder="TOTEM-UV93VJF">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="selectTipoMaquina">Tipo de Máquina</label> <!--pra atualizar o tamanho-->
-                            <select name="tipoMaquina" id="tipoMaquina">
-                                <option value="">Selecione a máquina</option>
-                                <option value="">Desktop</option>
-                                <option value="">Totem</option>
-                            </select>
+                            <label for="password">Senha</label> <!--pra atualizar o tamanho-->
+                            <input type="password" name="password" id="password" placeholder="********">
                         </div>                    
                     </div>
 
