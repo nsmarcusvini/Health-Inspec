@@ -17,7 +17,7 @@ let chartCpu = new Chart(ctxCpu, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Urgente",
+            label: "",
             backgroundColor: [
                 'rgb(255, 0, 0, 0.8)',
                 'rgba(41, 128, 185,0.8)',
@@ -100,7 +100,7 @@ let chartDisco = new Chart(ctxDisco, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Alerta",
+            label: "",
             backgroundColor: [
                 'rgba(238, 241, 26, 0.801)',
                 'rgba(41, 128, 185,0.8)',
@@ -183,7 +183,7 @@ let chartRam = new Chart(ctxRam, {
     data: {
         labels: ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00","20:00","21:00","22:00","23:00"],
         datasets: [{
-            label: "Estável",
+            label: "",
             backgroundColor: [
                 'rgb(21, 243, 1, 0.8)',
                 'rgba(41, 128, 185,0.8)',
