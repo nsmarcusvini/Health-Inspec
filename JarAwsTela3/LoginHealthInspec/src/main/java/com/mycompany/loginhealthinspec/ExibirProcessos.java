@@ -166,6 +166,7 @@ public class ExibirProcessos extends javax.swing.JFrame {
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
         dispose();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
     private void minimizeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLblMouseClicked

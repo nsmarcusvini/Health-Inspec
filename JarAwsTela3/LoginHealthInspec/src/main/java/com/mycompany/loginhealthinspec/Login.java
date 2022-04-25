@@ -252,6 +252,7 @@ public class Login extends javax.swing.JFrame {
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
         dispose();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed

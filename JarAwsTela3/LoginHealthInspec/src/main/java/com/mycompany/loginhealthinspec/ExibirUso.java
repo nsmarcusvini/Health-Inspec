@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.io.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 /**
  *
  * @author Nicolas
@@ -212,6 +214,7 @@ public class ExibirUso extends javax.swing.JFrame {
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
         dispose();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
     /**
