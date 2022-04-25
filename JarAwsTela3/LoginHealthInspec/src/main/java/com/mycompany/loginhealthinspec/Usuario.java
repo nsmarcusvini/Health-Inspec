@@ -1,12 +1,10 @@
 package com.mycompany.loginhealthinspec;
 
-import com.github.britooo.looca.api.core.Looca;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Usuario {
     Connection config = new Connection();
     JdbcTemplate con = new JdbcTemplate(config.getDataSource());
-    
     
     
     private Integer id;
