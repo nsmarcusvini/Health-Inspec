@@ -89,7 +89,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(93, 93, 93)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                        .addGap(126, 126, 126)
                         .addComponent(jLabel1)))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
@@ -191,7 +191,6 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
 
         lblError.setBackground(java.awt.Color.white);
-        lblError.setForeground(java.awt.Color.black);
         lblError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblError.setText("-");
         jPanel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 290, 30));
@@ -262,6 +261,7 @@ public class Login extends javax.swing.JFrame {
   
 
         ResultSet resultSetEmail = null;
+        Integer contador = 1;
 
         try  {
             String connectionAzureUrl = "jdbc:sqlserver://svr-health-inspec.database.windows.net:1433;database=bd-health-inspec;user=admin-health-inspec@svr-health-inspec;password=2ads@grupo7;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
@@ -272,10 +272,11 @@ public class Login extends javax.swing.JFrame {
             String selectEmailSql = "select email, senha from empresa;";
             resultSetEmail = statement.executeQuery(selectEmailSql);
 
-            while (resultSetEmail.next()) {
+            while (resultSetEmail.next() && contador == 1) {
 
                 if (txtUsuario.getText().equals(resultSetEmail.getString(1)) && passwdSenha.getText().equals(resultSetEmail.getString(2))) {
 
+                    contador++;
                     TelaAcesso acesso = new TelaAcesso();
                     dispose();
                     acesso.setVisible(true);

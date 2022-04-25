@@ -57,6 +57,7 @@ public class TelaAcesso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblHostName = new javax.swing.JLabel();
@@ -83,6 +84,8 @@ public class TelaAcesso extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnExibirUso = new javax.swing.JButton();
+        btnExibirProcessos1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -233,6 +236,28 @@ public class TelaAcesso extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memoria-ram.png"))); // NOI18N
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
 
+        btnExibirUso.setBackground(new java.awt.Color(250, 250, 250));
+        btnExibirUso.setForeground(new java.awt.Color(1, 103, 126));
+        btnExibirUso.setText("Exibir Uso");
+        btnExibirUso.setBorder(null);
+        btnExibirUso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExibirUsoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnExibirUso, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, 170, 35));
+
+        btnExibirProcessos1.setBackground(new java.awt.Color(250, 250, 250));
+        btnExibirProcessos1.setForeground(new java.awt.Color(1, 103, 126));
+        btnExibirProcessos1.setText("Exibir Processos");
+        btnExibirProcessos1.setBorder(null);
+        btnExibirProcessos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExibirProcessos1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnExibirProcessos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 170, 35));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -283,6 +308,20 @@ public class TelaAcesso extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_closeLblMouseClicked
 
+    private void btnExibirUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirUsoActionPerformed
+        // TODO add your handling code here:
+        ExibirUso exibirUso = new ExibirUso();
+        
+        exibirUso.setVisible(true);
+    }//GEN-LAST:event_btnExibirUsoActionPerformed
+
+    private void btnExibirProcessos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirProcessos1ActionPerformed
+        // TODO add your handling code here:
+        ExibirProcessos exibirProcessos = new ExibirProcessos();
+        
+        exibirProcessos.setVisible(true);
+    }//GEN-LAST:event_btnExibirProcessos1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -322,6 +361,8 @@ public class TelaAcesso extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExibirProcessos1;
+    private javax.swing.JButton btnExibirUso;
     private javax.swing.JLabel closeLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -336,6 +377,7 @@ public class TelaAcesso extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
