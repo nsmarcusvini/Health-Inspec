@@ -2,6 +2,7 @@ com\mycompany\loginhealthinspec\TelaAcesso$5.class
 com\mycompany\loginhealthinspec\Login$5.class
 com\mycompany\loginhealthinspec\TelaAcesso$2.class
 com\mycompany\loginhealthinspec\Login$2.class
+com\mycompany\loginhealthinspec\Login$9.class
 com\mycompany\loginhealthinspec\Login$7.class
 com\mycompany\loginhealthinspec\Login$4.class
 com\mycompany\loginhealthinspec\Connection.class
@@ -16,3 +17,4 @@ com\mycompany\loginhealthinspec\TestDatabase.class
 com\mycompany\loginhealthinspec\TelaAcesso$3.class
 com\mycompany\loginhealthinspec\TelaAcesso$1.class
 com\mycompany\loginhealthinspec\Login$8.class
+com\mycompany\loginhealthinspec\Login$10.class

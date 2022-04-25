@@ -4,7 +4,7 @@
  */
 package com.mycompany.loginhealthinspec;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+import java.sql.*;
 import java.awt.Color;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -258,15 +256,15 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_closeLblMouseClicked
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        
-        
+        // TODO add your handling code here:
+
         
   
 
         ResultSet resultSetEmail = null;
 
         try  {
-            String connectionAzureUrl = "jdbc:sqlserver://localhost:1433;databaseName=bd-health-inspec;user=admin-health-inspec@svr-health-inspec;password=2ads@grupo7;";
+            String connectionAzureUrl = "jdbc:sqlserver://svr-health-inspec.database.windows.net:1433;database=bd-health-inspec;user=admin-health-inspec@svr-health-inspec;password=2ads@grupo7;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             java.sql.Connection connection = DriverManager.getConnection(connectionAzureUrl);  
             Statement statement = connection.createStatement();
@@ -294,6 +292,7 @@ public class Login extends javax.swing.JFrame {
             System.out.println("Não conectou ou não fez o select!:");
             e.printStackTrace();
         }
+
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
