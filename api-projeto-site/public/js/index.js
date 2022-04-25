@@ -149,7 +149,7 @@ let chartDisco = new Chart(ctxDisco, {
         },
         title: {
             display: true,
-            text: 'Processador/Cpu',
+            text: 'Disco',
             fontSize: 20
         },
         tooltips: {
