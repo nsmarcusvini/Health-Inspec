@@ -3,14 +3,29 @@
     margin: 0; 
 }
 
-body {
-    background: whitesmoke;
-}
-
 canvas {
     border: 1px solid gainsboro;
     background: white;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart-main-container {
+    width: 100%;
+    height: 200vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: whitesmoke;
+}
+
+.chart-container {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dashboard-title-container {
@@ -31,26 +46,34 @@ canvas {
     flex-direction: row;
     justify-content: space-around;
 }
-.alertaUrgente{
-    background-color:rgb(255, 0, 0, 0.8) ;
-    width: 2cm;
-    height: 20px;
-    border: black solid 1px;
-    margin-left: 3cm;
+.graph-description-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.alerta{
-    background-color:rgba(238, 241, 26, 0.801) ;
-    width: 2cm;
-    height: 20px;
-    border: black solid 1px;
-    margin-left: 3cm;
+.graph-description {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.alertaEstavel{
-    background-color:rgb(21, 243, 1, 0.8) ;
-    width: 2cm;
-    height: 20px;
-    border: black solid 1px;
-    margin-left: 3cm;
+.graph-description .color {
+    width: 5.5rem;
+    height: 2rem;
+    border: none;
+    border-radius: .2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+.graph-description .stable {
+    background-color: rgb(21, 243, 1, 0.8);
+}
+.graph-description .alert {
+    background-color: rgba(238, 241, 26, 0.801);
+}
+.graph-description .urgent {
+    background-color: red;
 }
 .dash-container {
     display: flex;
@@ -59,25 +82,22 @@ canvas {
     width: 100%;
     flex-direction: row;
     background-color: whitesmoke;
-    margin-top: 3cm;
 }
 .titleMonitoramento{
-    margin-top: 2cm;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .buttons-container {
-    margin-top: 5%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .buttons-container .buttons {
-    width: 35%;
+    width: 50%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 .buttons-container .buttons button {
@@ -106,27 +126,23 @@ canvas {
     height: auto;
     padding: 0.625rem;
     color: #FCFEF0;
-    margin-top: 2rem;
-    
 }
 
 #chartCpu {
     border: 3px solid grey;
     border-radius: 2px;
-    
 }
 
 #chartRam {
     border: 3px solid grey;
     border-radius: 2px;
-    margin-top: 1rem;
+    margin-top: 2%;
 }
-
 
 #chartDisco {
     border: 3px solid gray;
     border-radius: 2px;
-    margin-top: 1rem;
+    margin-top: 2%;
 } 
 
 .dash-image {
@@ -150,6 +166,7 @@ canvas {
     color: #FAFAFA;
     transition: 0.5s;
 }
+
 .fixed-dash {
     position: fixed;
     background-color: #01677E;
