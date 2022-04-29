@@ -1,6 +1,6 @@
 @font-face {
     font-family: montserrat;
-    src: url(./assets/fontMontSerrat.otf);
+    src: url(../assets/fontMontSerrat.otf);
 }
 * {
     padding: 0;
@@ -188,7 +188,7 @@ html {
 /* FIM DO MODAL */
 
 .header-image {
-    background-image: url(./assets/imagemHome.jpg);
+    background-image: url(../assets/imagemHome.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

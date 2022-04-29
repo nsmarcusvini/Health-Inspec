@@ -1,39 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="cadastro.css">
-    <link rel="icon" href="./assets/logo.ico">
-    <script src="./assets/js/funcoes.js"></script>
-    <title>Cadastro Máquinas</title>
+    <title>Health Inspec | Cadastro</title>
+    <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
 </head>
+<body>
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
 
-<body onload="validarSessao()">
-    <div class="main-div">
-        <div class="header-container">
-            <div class="header">
-                <span class="title">Health Inspec</span>
-    
+                <span class="username">Hospital SPTech</span>
+            </div>
+
+            <div class="items-container">
                 <ul>
-                    <li><a href="cadastroMaquinas.html">Cadastrar máquinas</a></li>
-                    <li><a href="index.html">Sair</a></li>
+                    <li>
+                        <a href="cadastro-tecnicos.html">Cadastrar técnicos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
+                    </li>
+                    
+                    <li>
+                        <a href="login-tecnico.html" class="current">Entrar como técnico</a>
+                    </li>
                 </ul>
             </div>
         </div>
+    </div>
 
-        <div class="page-desc">
-            <span>
-                Olá, <span id="username"></span>!
-            </span>
-
-            <span>
-                Cadastre os técnicos que serão responsáveis pelas máquinas monitoradas
-            </span>
+    <div class="page-content">
+        <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
         </div>
-        
+
+        <span>
+            Entre com a sua conta de técnico para cadastrar e monitorar as máquinas
+        </span>
+
         <div class="form-container">
             <div class="form">
                 <h2>Cadastro</h2>
@@ -67,18 +82,5 @@
             </div>
         </div>
     </div>
-
-    <!-- <footer class="footer">
-        <div class="footerContent">
-            <p>Monitorar para melhorar ❤☕</p>
-        </div>
-        <div class="footerBottom">
-            <p>copyright&copy; 2022. Developed by <span>Health Inspec</span></p>
-        </div>
-    </footer> -->
-
-    <script src='./node_modules/chart.js/dist/Chart.js'></script>
-    <script src="./js/index.js"></script>
-    <script src="index.js"></script>
 </body>
 </html>

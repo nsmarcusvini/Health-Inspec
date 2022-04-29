@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Inspec | Dashboards</title>
-    <link rel="stylesheet" href="teste-dash.css">
+    <title>Health Inspec | Cadastro</title>
+    <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
 </head>
 <body>
     <div class="sidebar-menu-container">
@@ -19,15 +19,15 @@
             <div class="items-container">
                 <ul>
                     <li>
-                        <a href="#" class="current">Cadastrar técnicos</a>
+                        <a href="cadastro-tecnicos.html" class="current">Cadastrar técnicos</a>
                     </li>
                     
                     <li>
-                        <a href="#">Técnicos cadastrados</a>
+                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
                     </li>
                     
                     <li>
-                        <a href="#">Entrar como técnico</a>
+                        <a href="login-tecnico.html">Entrar como técnico</a>
                     </li>
                 </ul>
             </div>
@@ -59,6 +59,23 @@
                             <label for="name">Nome</label>
                             <input type="text" name="name" id="name" placeholder="Manoel">
                         </div>
+                        
+                        <div class="form-element">
+                            <label for="registration">Número da matrícula</label>
+                            <input type="text" name="registration" id="registration" placeholder="F001671">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="phone">Telefone</label>
+                            <input type="text" name="phone" id="phone" placeholder="11989970024">
+                        </div>
                     </div>
 
                     <div class="form-row">
@@ -66,9 +83,7 @@
                             <label for="email">E-mail</label>
                             <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
                         </div>
-                    </div>
 
-                    <div class="form-row">
                         <div class="form-element">
                             <label for="password">Senha</label> <!--pra atualizar o tamanho-->
                             <input type="password" name="password" id="password" placeholder="********">
