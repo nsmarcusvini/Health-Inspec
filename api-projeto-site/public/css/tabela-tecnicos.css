@@ -86,25 +86,26 @@ body {
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
-.page-content .open-slide {
+/* .page-content .open-slide {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     padding-left: 1rem;
     padding-top: 1rem;
-}
+} */
 .page-content span {
     width: 45%; 
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 600;
     text-align: center;
+    line-height: 1.6;
 }
 .table-container {
     width: 100%;
-    height: 60%;
+    height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -115,7 +116,7 @@ table, th, td {
 }
 table {
     width: 88%;
-    height: 60%;
+    height: 70%;
 }
 td {
     text-align: center;

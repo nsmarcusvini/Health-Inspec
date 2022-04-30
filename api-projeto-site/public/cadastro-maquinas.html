@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Cadastro</title>
-    <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
+    <link rel="stylesheet" href="./css/cadastro-maquinas.css">
 </head>
 <body>
     <div class="sidebar-menu-container">
@@ -13,21 +13,21 @@
             <div class="user-container">
                 <div class="user-icon"></div>
 
-                <span class="username">Hospital SPTech</span>
+                <span class="username">Manoel de Souza</span>
             </div>
 
             <div class="items-container">
                 <ul>
                     <li>
-                        <a href="cadastro-tecnicos.html" class="current">Cadastrar técnicos</a>
+                        <a href="cadastro-maquinas.html" class="current">Cadastrar máquinas</a>
                     </li>
                     
                     <li>
-                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
+                        <a href="tabela-maquinas.html">Máquinas cadastradas</a>
                     </li>
                     
                     <li>
-                        <a href="login-tecnico.html">Entrar como técnico</a>
+                        <a href="dashboard.html">Dashboards</a>
                     </li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@
         </div> -->
 
         <span>
-            Cadastre os técnicos que serão responsáveis pelas máquinas monitoradas
+            Cadastre as máquinas do estabelecimento que serão monitoradas.
         </span>
 
         <div class="form-container">
@@ -56,38 +56,29 @@
                 <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="name">Nome</label>
-                            <input type="text" name="name" id="name" placeholder="Manoel">
+                            <label for="alias">Apelido da máquina</label>
+                            <input type="text" name="alias" id="alias" placeholder="Desktop 1 - Recepção">
                         </div>
                         
+                    </div>
+
+                    <div class="form-row">
                         <div class="form-element">
-                            <label for="registration">Número da matrícula</label>
-                            <input type="text" name="registration" id="registration" placeholder="F001671">
+                            <label for="hostname">Hostname da máquina</label>
+                            <input type="text" name="hostname" id="hostname" placeholder="DESKTOP-51LJJK5">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="cpf">CPF</label>
-                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
-                        </div>
+                            <label for="type">Tipo da máquina</label>
 
-                        <div class="form-element">
-                            <label for="phone">Telefone</label>
-                            <input type="text" name="phone" id="phone" placeholder="11989970024">
+                            <select name="tipoMaquina" id="tipoMaquina">
+                                <option value="">Selecione a máquina</option>
+                                <option value="desktop">Desktop</option>
+                                <option value="totem">Totem</option>
+                            </select>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-element">
-                            <label for="email">E-mail</label>
-                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
-                        </div>
-
-                        <div class="form-element">
-                            <label for="password">Senha</label> <!--pra atualizar o tamanho-->
-                            <input type="password" name="password" id="password" placeholder="********">
-                        </div>                    
                     </div>
 
                     <div class="form-row">
