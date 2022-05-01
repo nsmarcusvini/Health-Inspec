@@ -1,4 +1,4 @@
-package com.mycompany.loginhealthinspec;
+    package com.mycompany.loginhealthinspec;
 
 import java.awt.Color;
 import java.sql.DriverManager;
@@ -15,15 +15,24 @@ public class ConnectionAzure {
             + "database=bd-health-inspec;"
             + "user=admin-health-inspec@svr-health-inspec;"
             + "password=2ads@grupo7;"
-            + "encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;"
+            + "encrypt=true;"
+            + "trustServerCertificate=false;"
+            + "hostNameInCertificate=*.database.windows.net;"
             + "loginTimeout=30;";
+
+    public ConnectionAzure() {
+    }
+    
 
     public String getEmail() throws SQLException {
 
         ResultSet resultSetEmail = null;
 
-        try ( java.sql.Connection connection = DriverManager.getConnection(connectionUrl);  Statement statement = connection.createStatement();) {
-
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            java.sql.Connection connection = DriverManager.getConnection(connectionUrl);  
+            Statement statement = connection.createStatement();
+            System.out.println("Conexão obtida com sucesso!");
             String selectEmailSql = "select email from empresa;";
             resultSetEmail = statement.executeQuery(selectEmailSql);
             
