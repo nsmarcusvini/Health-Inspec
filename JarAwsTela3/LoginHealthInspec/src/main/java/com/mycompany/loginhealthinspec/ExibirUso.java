@@ -9,37 +9,39 @@ import java.awt.Color;
 import java.net.InetAddress;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
+import java.io.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 /**
  *
  * @author Nicolas
  */
-public class TelaAcesso extends javax.swing.JFrame {
+public class ExibirUso extends javax.swing.JFrame {
 
     private int mouseX = 0, mouseY = 0;
 
     /**
      * Creates new form Login
      */
-    public TelaAcesso() {
+    public ExibirUso() {
         initComponents();
         this.setUpOs();
     }
 
     private void setUpOs() {
         Looca looca = new Looca();
-
         try {
-
-            Double ram = looca.getMemoria().getTotal() / 1073741824.0;
+            
+            
+            Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
             Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
-
-            lblHostName.setText(InetAddress.getLocalHost().getHostName());
-            lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
-            lblProcessador.setText(looca.getProcessador().getNome());
-            lblMemoriaRam.setText(String.format("%.1f Gb", ram));
-            lblDisco.setText(String.format("%.1f Gb", disco));
-
+            
+            double tamanho = new File("C:\\").getTotalSpace()- new File("C:\\").getFreeSpace();
+            
+            lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
+            lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
+            lblUsoDisco.setText(String.format("%.2f usados", tamanho/1073741824.0));
+            
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -57,30 +59,24 @@ public class TelaAcesso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        lblHostName = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         minimizeLbl = new javax.swing.JLabel();
         closeLbl = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblUsoDisco = new javax.swing.JLabel();
+        lblUsoProcessador = new javax.swing.JLabel();
+        lblUsoMemoriaRam = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         jLabel12 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        lblSistemaOperacional = new javax.swing.JLabel();
-        lblProcessador = new javax.swing.JLabel();
-        lblMemoriaRam = new javax.swing.JLabel();
-        lblDisco = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -97,53 +93,15 @@ public class TelaAcesso extends javax.swing.JFrame {
                 jPanel1MousePressed(evt);
             }
         });
-
-        jPanel2.setBackground(new java.awt.Color(250, 250, 250));
-
-        lblHostName.setBackground(new java.awt.Color(1, 103, 126));
-        lblHostName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblHostName.setForeground(new java.awt.Color(1, 103, 126));
-        lblHostName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHostName.setText("HOSTNAME");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/computador.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel1)
-                .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblHostName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblHostName)
-                .addGap(90, 90, 90))
-        );
-
-        lblHostName.getAccessibleContext().setAccessibleParent(lblHostName);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(1, 103, 126));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
 
-        jSeparator2.setBackground(new java.awt.Color(250, 250, 250));
-        jSeparator2.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 400, 20));
-
         jSeparator3.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator3.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 80, 340, 20));
+        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 140, 20));
 
         minimizeLbl.setBackground(new java.awt.Color(250, 250, 250));
         minimizeLbl.setFont(new java.awt.Font("Myanmar Text", 0, 48)); // NOI18N
@@ -167,89 +125,64 @@ public class TelaAcesso extends javax.swing.JFrame {
         });
         jPanel3.add(closeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 30, 30));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel11.setText("Sistema Operacional: ");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+        jLabel3.setBackground(new java.awt.Color(250, 250, 250));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(250, 250, 250));
+        jLabel3.setText("EM USO");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+
+        lblUsoDisco.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblUsoDisco.setForeground(new java.awt.Color(250, 250, 250));
+        lblUsoDisco.setText("jLabel1");
+        jPanel3.add(lblUsoDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 236, -1, -1));
+
+        lblUsoProcessador.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblUsoProcessador.setForeground(new java.awt.Color(250, 250, 250));
+        lblUsoProcessador.setText("jLabel1");
+        jPanel3.add(lblUsoProcessador, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 96, -1, -1));
+
+        lblUsoMemoriaRam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblUsoMemoriaRam.setForeground(new java.awt.Color(250, 250, 250));
+        lblUsoMemoriaRam.setText("jLabel1");
+        jPanel3.add(lblUsoMemoriaRam, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 166, -1, -1));
+
+        jSeparator2.setBackground(new java.awt.Color(250, 250, 250));
+        jSeparator2.setForeground(new java.awt.Color(250, 250, 250));
+        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 400, 20));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(250, 250, 250));
         jLabel12.setText("Processador: ");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         jSeparator4.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator4.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 400, 20));
+        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 400, 20));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(250, 250, 250));
         jLabel13.setText("Memória RAM: ");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
 
         jSeparator5.setBackground(new java.awt.Color(250, 250, 250));
         jSeparator5.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 400, 20));
+        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 400, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(250, 250, 250));
         jLabel14.setText("Disco Rígido: ");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
-
-        jLabel3.setBackground(new java.awt.Color(250, 250, 250));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel3.setText("CONFIGURAÇÕES DO SISTEMA");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
-
-        jSeparator6.setBackground(new java.awt.Color(250, 250, 250));
-        jSeparator6.setForeground(new java.awt.Color(250, 250, 250));
-        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 400, 20));
-
-        lblSistemaOperacional.setForeground(new java.awt.Color(250, 250, 250));
-        lblSistemaOperacional.setText("-");
-        jPanel3.add(lblSistemaOperacional, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
-
-        lblProcessador.setForeground(new java.awt.Color(250, 250, 250));
-        lblProcessador.setText("-");
-        jPanel3.add(lblProcessador, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
-
-        lblMemoriaRam.setForeground(new java.awt.Color(250, 250, 250));
-        lblMemoriaRam.setText("-");
-        jPanel3.add(lblMemoriaRam, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
-
-        lblDisco.setForeground(new java.awt.Color(250, 250, 250));
-        lblDisco.setText("-");
-        jPanel3.add(lblDisco, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hard-disk.png"))); // NOI18N
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistema-operacional.png"))); // NOI18N
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cpu.png"))); // NOI18N
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/memoria-ram.png"))); // NOI18N
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,7 +192,7 @@ public class TelaAcesso extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -267,7 +200,7 @@ public class TelaAcesso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void minimizeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLblMouseClicked
-        this.setExtendedState(TelaAcesso.ICONIFIED);
+        this.setExtendedState(ExibirUso.ICONIFIED);
     }//GEN-LAST:event_minimizeLblMouseClicked
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
@@ -281,6 +214,7 @@ public class TelaAcesso extends javax.swing.JFrame {
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
         dispose();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
     /**
@@ -300,21 +234,27 @@ public class TelaAcesso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAcesso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExibirUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAcesso().setVisible(true);
+                new ExibirUso().setVisible(true);
 
             }
         });
@@ -323,30 +263,24 @@ public class TelaAcesso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeLbl;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JLabel lblDisco;
-    private javax.swing.JLabel lblHostName;
-    private javax.swing.JLabel lblMemoriaRam;
-    private javax.swing.JLabel lblProcessador;
-    private javax.swing.JLabel lblSistemaOperacional;
+    private javax.swing.JLabel lblUsoDisco;
+    private javax.swing.JLabel lblUsoMemoriaRam;
+    private javax.swing.JLabel lblUsoProcessador;
     private javax.swing.JLabel minimizeLbl;
     // End of variables declaration//GEN-END:variables
 }

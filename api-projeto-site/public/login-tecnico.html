@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Inspec | Login</title>
+    <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
+</head>
+<body>
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
+
+                <span class="username">Hospital SPTech</span>
+            </div>
+
+            <div class="items-container">
+                <ul>
+                    <li>
+                        <a href="cadastro-tecnicos.html">Cadastrar técnicos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
+                    </li>
+                    
+                    <li>
+                        <a href="login-tecnico.html" class="current">Entrar como técnico</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
+        </div> -->
+
+        <span>
+            Entre com a sua conta de técnico para cadastrar e monitorar as máquinas
+        </span>
+
+        <div class="form-container">
+            <div class="form">
+                <h2>Login</h2>
+
+                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="name">Nome</label>
+                            <input type="text" name="name" id="name" placeholder="Manoel">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="password">Senha</label> <!--pra atualizar o tamanho-->
+                            <input type="password" name="password" id="password" placeholder="********">
+                        </div>                    
+                    </div>
+
+                    <div class="form-row">
+                        <button>Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

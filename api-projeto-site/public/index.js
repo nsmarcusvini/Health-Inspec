@@ -42,7 +42,7 @@ registerButton.addEventListener("click", function() {
     registerContainer.classList.add("active");
     registerDarkBodyContainer.classList.add("active-register-dark-body-container");
     registerButton.classList.add("current")
-})
+});
 
 document.querySelector(".close-register-button").addEventListener("click", function() {
     registerContainer.classList.remove("active");

@@ -1,0 +1,123 @@
+@font-face {
+    font-family: montserrat;
+    src: url(../assets/fontMontSerrat.otf);
+}
+* {
+    padding: 0;
+    margin: 0;
+    font-family: montserrat;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sidebar-menu-container {
+    width: 22%;
+    height: 100vh;
+    background-color: #01677E;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 1rem;
+    border-radius: 0rem 1rem 1rem 0rem;
+}
+.sidebar-menu {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.user-container {
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.user-container .user-icon {
+    width: 5rem;
+    height: 5rem;
+    background-image: url(../assets/profile-picture.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.user-container span {
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    word-spacing: .2rem;
+}
+.items-container {
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.items-container ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: center;
+}
+.items-container ul li {
+    font-size: 1rem;
+}
+.items-container ul li:hover {
+    font-weight: bolder;
+}
+.items-container ul li a {
+    text-decoration: none;
+    color: white;
+}
+.items-container ul li .current {
+    font-weight: bolder;
+}
+.page-content {
+    width: 80%;
+    height: 100vh;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+/* .page-content .open-slide {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    padding-top: 1rem;
+} */
+.page-content span {
+    width: 45%; 
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.6;
+}
+.table-container {
+    width: 100%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+table, th, td {
+    border: 1px solid black;
+}
+table {
+    width: 88%;
+    height: 70%;
+}
+td {
+    text-align: center;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Inspec | Cadastro</title>
+    <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
+</head>
+<body>
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
+
+                <span class="username">Hospital SPTech</span>
+            </div>
+
+            <div class="items-container">
+                <ul>
+                    <li>
+                        <a href="cadastro-tecnicos.html" class="current">Cadastrar técnicos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
+                    </li>
+                    
+                    <li>
+                        <a href="login-tecnico.html">Entrar como técnico</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
+        </div> -->
+
+        <span>
+            Cadastre os técnicos que serão responsáveis pelas máquinas monitoradas
+        </span>
+
+        <div class="form-container">
+            <div class="form">
+                <h2>Cadastro</h2>
+
+                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="name">Nome</label>
+                            <input type="text" name="name" id="name" placeholder="Manoel">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="registration">Número da matrícula</label>
+                            <input type="text" name="registration" id="registration" placeholder="F001671">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="phone">Telefone</label>
+                            <input type="text" name="phone" id="phone" placeholder="11989970024">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="password">Senha</label> <!--pra atualizar o tamanho-->
+                            <input type="password" name="password" id="password" placeholder="********">
+                        </div>                    
+                    </div>
+
+                    <div class="form-row">
+                        <button>Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Inspec | Cadastro</title>
+    <link rel="stylesheet" href="./css/cadastro-maquinas.css">
+</head>
+<body>
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
+
+                <span class="username">Manoel de Souza</span>
+            </div>
+
+            <div class="items-container">
+                <ul>
+                    <li>
+                        <a href="cadastro-maquinas.html" class="current">Cadastrar máquinas</a>
+                    </li>
+                    
+                    <li>
+                        <a href="tabela-maquinas.html">Máquinas cadastradas</a>
+                    </li>
+                    
+                    <li>
+                        <a href="dashboard.html">Dashboards</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
+        </div> -->
+
+        <span>
+            Cadastre as máquinas do estabelecimento que serão monitoradas.
+        </span>
+
+        <div class="form-container">
+            <div class="form">
+                <h2>Cadastro</h2>
+
+                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="alias">Apelido da máquina</label>
+                            <input type="text" name="alias" id="alias" placeholder="Desktop 1 - Recepção">
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="hostname">Hostname da máquina</label>
+                            <input type="text" name="hostname" id="hostname" placeholder="DESKTOP-51LJJK5">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="type">Tipo da máquina</label>
+
+                            <select name="tipoMaquina" id="tipoMaquina">
+                                <option value="">Selecione a máquina</option>
+                                <option value="desktop">Desktop</option>
+                                <option value="totem">Totem</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <button>Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

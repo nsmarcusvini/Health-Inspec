@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/dashboard.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./css/index.css">
     <title>Dashboard</title>
 </head>
 
@@ -16,45 +16,73 @@
         <div class="header-container">
             <div class="dash">
                 <span>Health Inspec</span>
-                <ul >
+                <ul>
                     <li id="workProcessButton"><a href="index.html">Sair</a></li>
-                    <li id="workProcessButton"><a href="TelaDeCadastroMaquinas"> Cadastro de máquinas</a></li>
                 </ul>
             </div>
-            
         </div>
-        <div id="div-begin" class="page-title-container">
+
+        <div id="div-begin" class="page-title-container dashboard-title-container">
             <div class="page-title">
                 <span class="title">
-                   Área de Dashboard
+                    Área de Dashboard
                 </span>
 
                 <span class="description">
-                    Abaixo, nós da Health Inspec disponibilizaremos <br> 
-                    Dashboards para que nossos usuários consigam <br> 
-                    monitorar o desempenho das suas máquinas,fazendo<br> 
-                    a gestão de controle para que assim os atendimentos <br> 
-                    não percam sua qualidade.
+                    <!-- Nós da Health Inspec disponibilizaremos<br>
+                    Dashboards para que nossos usuários consigam<br>
+                    monitorar o desempenho das suas máquinas, fazendo<br>
+                    a gestão de controle para que assim os atendimentos<br>
+                    não percam sua qualidade. -->
+                    As máquinas que foram cadastradas no site deverão<br> 
+                    ter o sistema de monitoramento da Health Inspec<br> 
+                    instalado para que os dados sejam capturados e exibidos <br> 
+                    nos gráficos. Caso a máquina cadastrada aqui não esteja <br> 
+                    no sistema, os gráficos não poderão ser exibidos. 
                 </span>
             </div>
         </div>
     </div>
-    <h1 class="titleMonitoramento">Monitoramento</h1>
-    <div class="dash-container">
-        <div class="boxGraficos">
-            <div class="container">
-                <canvas id='chartCpu'></canvas>
 
+    <div class="chart-main-container">
+        
+        <h1 class="titleMonitoramento">Monitoramento</h1>
 
-
-                <canvas id='chartDisco'></canvas>
-
-
-                <canvas id='chartRam'></canvas>
+        <div class="chart-container">
+            <div class="buttons-container">
+                <div class="buttons">
+                    <button>Totem 1</button>
+                    <button>Totem 2</button>
+                    <button>Desktop 1</button>
+                    <button>Desktop 2</button>
+                </div>
             </div>
-
+    
+            <div class="graph-description-container">
+                <div class="graph-description">
+                    <div class="color stable">Estável</div>
+            
+                    <div class="color alert">Alerta</div>
+                    
+                    <div class="color urgent">Urgente</div>
+                </div>
+            </div>
+        
+            <div class="dash-container">
+                <div class="boxGraficos">
+                    <div class="container">
+                        <canvas id='chartCpu'></canvas>
+        
+                        <canvas id='chartDisco'></canvas>
+        
+                        <canvas id='chartRam'></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
+
     <footer class="footer">
         <div class="footerContent">
             <p>Monitorar para melhorar ❤☕</p>
@@ -63,12 +91,9 @@
             <p>copyright&copy; 2022. Developed by <span>Health Inspec</span></p>
         </div>
     </footer>
-
    
-    
     <script src='./node_modules/chart.js/dist/Chart.js'></script>
-    <script src="./js/dashboard.js"></script>
-
+    <script src="index.js"></script>
+    <script src="./js/dashboard.js"></script> 
 </body>
-
 </html>

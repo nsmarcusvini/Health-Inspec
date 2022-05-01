@@ -4,18 +4,9 @@
  */
 package com.mycompany.loginhealthinspec;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
 import java.awt.Color;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -91,7 +82,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(93, 93, 93)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
+                        .addGap(126, 126, 126)
                         .addComponent(jLabel1)))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
@@ -193,7 +184,6 @@ public class Login extends javax.swing.JFrame {
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 215, -1, -1));
 
         lblError.setBackground(java.awt.Color.white);
-        lblError.setForeground(java.awt.Color.black);
         lblError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblError.setText("-");
         jPanel3.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 290, 30));
@@ -255,45 +245,29 @@ public class Login extends javax.swing.JFrame {
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
         dispose();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+
+        ConnectionAzure azure = new ConnectionAzure();
         
-        
-        
-  
+        try {
 
-        ResultSet resultSetEmail = null;
+            if ( txtUsuario.getText().equals(azure.getEmail()) && passwdSenha.getText().equals(azure.getSenha()) ) {
+                TelaAcesso acesso = new TelaAcesso();
+                acesso.setVisible(true);
+                dispose();
 
-        try  {
-            String connectionAzureUrl = "jdbc:sqlserver://localhost:1433;databaseName=bd-health-inspec;user=admin-health-inspec@svr-health-inspec;password=2ads@grupo7;";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            java.sql.Connection connection = DriverManager.getConnection(connectionAzureUrl);  
-            Statement statement = connection.createStatement();
-            
-            String selectEmailSql = "select email, senha from empresa;";
-            resultSetEmail = statement.executeQuery(selectEmailSql);
-
-            while (resultSetEmail.next()) {
-
-                if (txtUsuario.getText().equals(resultSetEmail.getString(1)) && passwdSenha.getText().equals(resultSetEmail.getString(2))) {
-
-                    TelaAcesso acesso = new TelaAcesso();
-                    dispose();
-                    acesso.setVisible(true);
-
-                } else {
-                    lblError.setForeground(Color.red);
-                    lblError.setText("Usuário ou senha incorreta!");
-
-                }
-
+            } else {
+                lblError.setForeground(Color.red);
+                lblError.setText("Usuário ou senha incorreta!");
             }
-
-        } catch (Exception e) {
-            System.out.println("Não conectou ou não fez o select!:");
-            e.printStackTrace();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
         }
+
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 

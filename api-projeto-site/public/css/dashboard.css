@@ -3,14 +3,34 @@
     margin: 0; 
 }
 
-body {
-    background: whitesmoke;
-}
-
 canvas {
     border: 1px solid gainsboro;
     background: white;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart-main-container {
+    width: 100%;
+    height: 200vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: whitesmoke;
+}
+
+.chart-container {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-title-container {
+    display: flex;
+    align-items: center !important;
 }
 
 .boxGraficos {
@@ -26,7 +46,35 @@ canvas {
     flex-direction: row;
     justify-content: space-around;
 }
-
+.graph-description-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.graph-description {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.graph-description .color {
+    width: 5.5rem;
+    height: 2rem;
+    border: none;
+    border-radius: .2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+.graph-description .stable {
+    background-color: rgb(21, 243, 1, 0.8);
+}
+.graph-description .alert {
+    background-color: rgba(238, 241, 26, 0.801);
+}
+.graph-description .urgent {
+    background-color: red;
+}
 .dash-container {
     display: flex;
     justify-content: center;
@@ -34,13 +82,33 @@ canvas {
     width: 100%;
     flex-direction: row;
     background-color: whitesmoke;
-    margin-top: 3cm;
 }
 .titleMonitoramento{
-    margin-top: 2cm;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttons-container .buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.buttons-container .buttons button {
+    width: 6.5rem;
+    height: 2.5rem;
+    background-color: #01677E;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: .2rem;
 }
 .title{
     display: flex;
@@ -58,31 +126,27 @@ canvas {
     height: auto;
     padding: 0.625rem;
     color: #FCFEF0;
-    margin-top: 2rem;
-    
 }
 
 #chartCpu {
     border: 3px solid grey;
     border-radius: 2px;
-    
 }
 
 #chartRam {
     border: 3px solid grey;
     border-radius: 2px;
-    margin-top: 1rem;
+    margin-top: 2%;
 }
-
 
 #chartDisco {
     border: 3px solid gray;
     border-radius: 2px;
-    margin-top: 1rem;
+    margin-top: 2%;
 } 
 
 .dash-image {
-    background-image: url(./assets/imagemHome.jpg);
+    background-image: url(../assets/imagemHome.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -102,6 +166,7 @@ canvas {
     color: #FAFAFA;
     transition: 0.5s;
 }
+
 .fixed-dash {
     position: fixed;
     background-color: #01677E;
@@ -118,9 +183,8 @@ canvas {
 .dash ul {
     display: flex;
     list-style: none;
-    width: 40%;
-    justify-content: space-around;
     margin-top: 2%;
+    margin-right: 1%;
 }
 .dash li {
     cursor: pointer;
@@ -135,3 +199,11 @@ canvas {
     font-weight: bolder;
     font-size: large;
 }
+
+/* select {
+    width: 10rem;
+    height: 2rem;
+    color: #ccc;
+    background-color: #222;
+    border-radius: .2rem;
+} */
