@@ -4,16 +4,9 @@
  */
 package com.mycompany.loginhealthinspec;
 
-import java.sql.*;
+
 import java.awt.Color;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -258,41 +251,21 @@ public class Login extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
 
+        ConnectionAzure azure = new ConnectionAzure();
         
-  
+        try {
 
-        ResultSet resultSetEmail = null;
-        Integer contador = 1;
+            if ( txtUsuario.getText().equals(azure.getEmail()) && passwdSenha.getText().equals(azure.getSenha()) ) {
+                TelaAcesso acesso = new TelaAcesso();
+                acesso.setVisible(true);
+                dispose();
 
-        try  {
-            String connectionAzureUrl = "jdbc:sqlserver://svr-health-inspec.database.windows.net:1433;database=bd-health-inspec;user=admin-health-inspec@svr-health-inspec;password=2ads@grupo7;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            java.sql.Connection connection = DriverManager.getConnection(connectionAzureUrl);  
-            Statement statement = connection.createStatement();
-            
-            String selectEmailSql = "select email, senha from empresa;";
-            resultSetEmail = statement.executeQuery(selectEmailSql);
-
-            while (resultSetEmail.next() && contador == 1) {
-
-                if (txtUsuario.getText().equals(resultSetEmail.getString(1)) && passwdSenha.getText().equals(resultSetEmail.getString(2))) {
-
-                    contador++;
-                    TelaAcesso acesso = new TelaAcesso();
-                    dispose();
-                    acesso.setVisible(true);
-
-                } else {
-                    lblError.setForeground(Color.red);
-                    lblError.setText("Usuário ou senha incorreta!");
-
-                }
-
+            } else {
+                lblError.setForeground(Color.red);
+                lblError.setText("Usuário ou senha incorreta!");
             }
-
-        } catch (Exception e) {
-            System.out.println("Não conectou ou não fez o select!:");
-            e.printStackTrace();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
         }
 
 
