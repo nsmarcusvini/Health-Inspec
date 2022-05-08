@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.net.InetAddress;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.lang.Runtime;
+import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -27,6 +30,7 @@ public class ExibirProcessos extends javax.swing.JFrame {
     }
 
     private void setUpOs() {
+        
         Looca looca = new Looca();
         try {
             
@@ -35,8 +39,12 @@ public class ExibirProcessos extends javax.swing.JFrame {
             Double ram = looca.getMemoria().getTotal() / 1073741824.0;
             Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
             
-            txtProcessos1.setText(looca.getGrupoDeProcessos().getProcessos().toString());
-            
+            int proclist = looca.getGrupoDeProcessos().getProcessos().size();
+            for (int i = 0; i < proclist; i++) {  
+                txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
+            }
+            //Runtime.getRuntime().exec("taskkill /F /PID <processname>.exe");
+                        
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -62,9 +70,9 @@ public class ExibirProcessos extends javax.swing.JFrame {
         minimizeLbl = new javax.swing.JLabel();
         closeLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtProcessos1 = new javax.swing.JTextArea();
+        txtPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtTxtArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -117,26 +125,24 @@ public class ExibirProcessos extends javax.swing.JFrame {
         jLabel3.setText("PROCESSOS");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
-        txtProcessos1.setColumns(20);
-        txtProcessos1.setRows(5);
-        jScrollPane3.setViewportView(txtProcessos1);
+        txtTxtArea.setEditable(false);
+        txtTxtArea.setColumns(20);
+        txtTxtArea.setRows(5);
+        txtTxtArea.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane2.setViewportView(txtTxtArea);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout txtPanelLayout = new javax.swing.GroupLayout(txtPanel);
+        txtPanel.setLayout(txtPanelLayout);
+        txtPanelLayout.setHorizontalGroup(
+            txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        txtPanelLayout.setVerticalGroup(
+            txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 360, 210));
+        jPanel3.add(txtPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 360, 210));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 471));
 
@@ -217,13 +223,13 @@ public class ExibirProcessos extends javax.swing.JFrame {
     private javax.swing.JLabel closeLbl;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel minimizeLbl;
-    private javax.swing.JTextArea txtProcessos1;
+    private javax.swing.JPanel txtPanel;
+    private javax.swing.JTextArea txtTxtArea;
     // End of variables declaration//GEN-END:variables
 }

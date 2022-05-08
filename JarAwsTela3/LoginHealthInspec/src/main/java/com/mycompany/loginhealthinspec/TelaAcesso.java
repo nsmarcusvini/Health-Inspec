@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.net.InetAddress;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.util.*;
 
 /**
  *
@@ -25,10 +26,45 @@ public class TelaAcesso extends javax.swing.JFrame {
         initComponents();
         this.setUpOs();
     }
+    
+    Thread function = new Thread() {
+
+        @Override
+        public void run() {
+            Looca looca = new Looca();
+            // MAP DE PROCESSOS QUE SERÃO FECHADOS
+
+            Map<Integer, String> listax = new HashMap<Integer, String>();
+            listax.put(0, "notepad");
+            Boolean verdadeiro = true;
+            while (verdadeiro) {
+                Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
+                for (int i = 0; i < processlist; i++) {
+                    try {
+                        if (listax.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
+                            if (looca.getSistema().getSistemaOperacional() == "Windows") {
+                                Runtime.getRuntime().exec("taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid());
+                                looca.getGrupoDeProcessos().getProcessos().remove(i);
+                            }
+                            if (looca.getSistema().getSistemaOperacional() == "Linux") {
+                                Runtime.getRuntime().exec("kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid());
+                                looca.getGrupoDeProcessos().getProcessos().remove(i);
+                            }
+                        }
+                    } catch (Exception x) {
+                    }
+
+                }
+            }
+        }
+    };
 
     private void setUpOs() {
         Looca looca = new Looca();
+        // MAP DE PROCESSOS QUE SERÃO FECHADOS
 
+        Map<Integer, String> listax = new HashMap<Integer, String>();
+        listax.put(0, "notepad");
         try {
 
             Double ram = looca.getMemoria().getTotal() / 1073741824.0;
@@ -40,6 +76,39 @@ public class TelaAcesso extends javax.swing.JFrame {
             lblMemoriaRam.setText(String.format("%.1f Gb", ram));
             lblDisco.setText(String.format("%.1f Gb", disco));
 
+            //WHILE
+            function.start();
+            //FIM DO WHILE
+
+            /*FOR QUE VAI VARRER TODOS OS PROCESSOS EXECUTADOS, SE FOR IGUAL
+             AO ITEM QUE CONTÉM NO MAP DE PROCESSOS, O PROCESSO QUE ESTÁ SENDO
+            EXECUTADO IRÁ FECHAR
+             */
+            /*int proclist = looca.getGrupoDeProcessos().getProcessos().size();
+            for (int i = 0; i < proclist; i++) {
+                try
+                {
+                    if(listax.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome()))           
+                    {
+                        if(looca.getSistema().getSistemaOperacional() == "Windows")
+                        {
+                            Runtime.getRuntime().exec("taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid());
+                            looca.getGrupoDeProcessos().getProcessos().remove(i);
+                        }
+                        if(looca.getSistema().getSistemaOperacional() == "Linux")
+                        {
+                            Runtime.getRuntime().exec("kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid());
+                            looca.getGrupoDeProcessos().getProcessos().remove(i);
+                        }     
+                    }
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }*/
+            //FIM DO FOR
+            
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -305,21 +374,23 @@ public class TelaAcesso extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
+        function.stop();
         dispose();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
     }//GEN-LAST:event_closeLblMouseClicked
 
     private void btnExibirUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirUsoActionPerformed
         // TODO add your handling code here:
         ExibirUso exibirUso = new ExibirUso();
-        
+
         exibirUso.setVisible(true);
     }//GEN-LAST:event_btnExibirUsoActionPerformed
 
     private void btnExibirProcessos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirProcessos1ActionPerformed
         // TODO add your handling code here:
         ExibirProcessos exibirProcessos = new ExibirProcessos();
-        
+
         exibirProcessos.setVisible(true);
     }//GEN-LAST:event_btnExibirProcessos1ActionPerformed
 
@@ -355,7 +426,6 @@ public class TelaAcesso extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAcesso().setVisible(true);
-
             }
         });
     }
