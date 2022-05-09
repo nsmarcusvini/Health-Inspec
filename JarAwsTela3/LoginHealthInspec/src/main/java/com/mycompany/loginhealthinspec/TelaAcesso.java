@@ -28,6 +28,7 @@ public class TelaAcesso extends javax.swing.JFrame {
         this.setUpOs();
     }
     Boolean disposeUso = true;
+
     Thread function = new Thread() {
 
         @Override
@@ -38,34 +39,33 @@ public class TelaAcesso extends javax.swing.JFrame {
             // MAP DE PROCESSOS QUE SERÃO FECHADOS
             Map<Integer, String> blackList = new HashMap<Integer, String>();
             blackList.put(0, "notepad");
+            blackList.put(1, "gedit");
 
-            
             //Try que pega todos os processos que estão sendo executados
             try {
                 for (int i = 0; i < processList; i++) {
                     txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
                 }
             } catch (Exception e) {
+
             }
 
             // while que verifica o uso de CPU e RAM(falta o disco)
-            while (disposeUso) {
-                try {
+            try {
 
-                    Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                    Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
 
-                    double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
 
-                    lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
-                    lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
-                    lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
+                lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
+                lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
+                lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
 
-                } catch (Exception e) {
+            } catch (Exception e) {
 
-                    e.printStackTrace();
+                e.printStackTrace();
 
-                }
             }
 
             //While da blacklist
@@ -75,18 +75,20 @@ public class TelaAcesso extends javax.swing.JFrame {
                 for (int i = 0; i < processlist; i++) {
                     try {
                         if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
-                            if (looca.getSistema().getSistemaOperacional() == "Windows") {
-                                Runtime.getRuntime().exec("taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid());
+                            if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
+                                String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
+                                Runtime.getRuntime().exec(killWindows);
                                 looca.getGrupoDeProcessos().getProcessos().remove(i);
                             }
-                            if (looca.getSistema().getSistemaOperacional() == "Linux") {
-                                Runtime.getRuntime().exec("kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid());
+                            if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
+                                String killUbuntu = "kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
+                                Runtime.getRuntime().exec(killUbuntu);
                                 looca.getGrupoDeProcessos().getProcessos().remove(i);
                             }
                         }
                     } catch (Exception x) {
+                        
                     }
-
                 }
             }
         }
