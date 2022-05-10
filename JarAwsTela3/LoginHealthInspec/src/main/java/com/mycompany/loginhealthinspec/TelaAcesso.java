@@ -27,7 +27,7 @@ public class TelaAcesso extends javax.swing.JFrame {
         initComponents();
         this.setUpOs();
     }
-    Boolean disposeUso = true;
+    
 
     Thread function = new Thread() {
 
@@ -491,8 +491,8 @@ public class TelaAcesso extends javax.swing.JFrame {
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
         function.stop();
-        disposeUso = false;
         dispose();
+        System.exit(0);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
