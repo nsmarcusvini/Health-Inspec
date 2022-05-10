@@ -4,9 +4,11 @@
  */
 package com.mycompany.loginhealthinspec;
 
-
 import java.awt.Color;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -252,20 +254,34 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         ConnectionAzure azure = new ConnectionAzure();
-        
+
+        ResultSet resultSetEmail = null;
         try {
 
-            if ( txtUsuario.getText().equals(azure.getEmail()) && passwdSenha.getText().equals(azure.getSenha()) ) {
-                TelaAcesso acesso = new TelaAcesso();
-                acesso.setVisible(true);
-                dispose();
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
+            java.sql.Connection connection = DriverManager.getConnection(azure.connectionUrl);
+            Statement statement = connection.createStatement();
+            System.out.println("Conexão obtida com sucesso!");
+            String selectEmailSql = "SELECT email, senha FROM empresa;";
+            resultSetEmail = statement.executeQuery(selectEmailSql);
 
-            } else {
-                lblError.setForeground(Color.red);
-                lblError.setText("Usuário ou senha incorreta!");
+            while (resultSetEmail.next()) {
+
+                if (txtUsuario.getText().equals(resultSetEmail.getString(1))
+                        && passwdSenha.getText().equals(resultSetEmail.getString(2))) {
+                    TelaAcesso acesso = new TelaAcesso();
+                    acesso.setVisible(true);
+                    dispose();
+
+                } else {
+                    lblError.setForeground(Color.red);
+                    lblError.setText("Usuário ou senha incorreta!");
+                }
+
             }
-        } catch (SQLException ex) {
-           ex.printStackTrace();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
