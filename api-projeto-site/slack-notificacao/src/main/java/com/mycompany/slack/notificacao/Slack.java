@@ -12,7 +12,7 @@ public class Slack {
     // executar execuções http e capturar resposta(se tiver)
     private static HttpClient client = HttpClient.newHttpClient();
     // link do slack
-    private static final String url = "https://hooks.slack.com/services/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";
+    private static final String url = "https://hooks.slack.com/services/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";
 
     public static void eviarMensagem(JSONObject content) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder(URI.create(url))
