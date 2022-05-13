@@ -1,8 +1,5 @@
 CREATE DATABASE health_inspec;
 USE health_inspec;
-DROP DATABASE health_inspec;
-
-DROP TABLE empresa;
 
 CREATE TABLE empresa (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -84,17 +81,10 @@ PRIMARY KEY (idProcessos, fkMaquina),
 FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina)
 );
 
-
-
-
-TRUNCATE TABLE empresa;
-
 SELECT
 	*
 FROM empresa;
 
-alter user 'root'@'localhost' identified with mysql_native_password by 'grupo7Sprint*';
-alter user 'root'@'localhost' identified with mysql_native_password by 'root';
 
  
 
