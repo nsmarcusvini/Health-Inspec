@@ -262,7 +262,7 @@ public class Login extends javax.swing.JFrame {
             java.sql.Connection connection = DriverManager.getConnection(azure.connectionUrl);
             Statement statement = connection.createStatement();
             System.out.println("Conexão obtida com sucesso!");
-            String selectEmailSql = "SELECT email, senha FROM empresa;";
+            String selectEmailSql = "SELECT emailHospital, senha FROM hospital;";
             resultSetEmail = statement.executeQuery(selectEmailSql);
 
             while (resultSetEmail.next()) {
@@ -271,11 +271,13 @@ public class Login extends javax.swing.JFrame {
                         && passwdSenha.getText().equals(resultSetEmail.getString(2))) {
                     TelaAcesso acesso = new TelaAcesso();
                     acesso.setVisible(true);
+                    Log.guardarLog("Login efetuado com sucesso");
                     dispose();
-
                 } else {
+                    Log.guardarLog("Tentativa de login falhou");
                     lblError.setForeground(Color.red);
                     lblError.setText("Usuário ou senha incorreta!");
+                    
                 }
 
             }

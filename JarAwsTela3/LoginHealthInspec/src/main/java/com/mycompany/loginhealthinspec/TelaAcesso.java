@@ -27,13 +27,13 @@ public class TelaAcesso extends javax.swing.JFrame {
         initComponents();
         this.setUpOs();
     }
-    
 
     Thread function = new Thread() {
 
         @Override
         public void run() {
             Looca looca = new Looca();
+            Log log = new Log();
             Integer processList = looca.getGrupoDeProcessos().getProcessos().size();
 
             // MAP DE PROCESSOS QUE SERÃO FECHADOS
@@ -44,30 +44,34 @@ public class TelaAcesso extends javax.swing.JFrame {
             //Try que pega todos os processos que estão sendo executados
             try {
                 for (int i = 0; i < processList; i++) {
+                    String fraseProcesso = "";
+
                     txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
+                    fraseProcesso = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
+                    log.guardarLog("Processo: " + fraseProcesso + " em execução.");
                 }
             } catch (Exception e) {
 
             }
-
-            // while que verifica o uso de CPU e RAM(falta o disco)
+            
             try {
 
-                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                        Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                        Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
 
-                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+                        double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
 
-                lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
-                lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
-                lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
+                        lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
+                        lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
+                        lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
 
-            } catch (Exception e) {
+                    } catch (Exception e) {
 
-                e.printStackTrace();
+                        e.printStackTrace();
 
-            }
+                    }
 
+            // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
             Boolean verdadeiro = true;
             while (verdadeiro) {
@@ -76,8 +80,10 @@ public class TelaAcesso extends javax.swing.JFrame {
                     try {
                         if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
                             if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
+                                String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
                                 String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
                                 Runtime.getRuntime().exec(killWindows);
+                                log.guardarLog("Processo: " + processoFinalizado + " finalizado!");
                                 looca.getGrupoDeProcessos().getProcessos().remove(i);
                             }
                             if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
@@ -87,7 +93,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                             }
                         }
                     } catch (Exception x) {
-                        
+
                     }
                 }
             }
