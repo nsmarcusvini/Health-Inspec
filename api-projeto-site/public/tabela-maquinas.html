@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Tabela</title>
     <link rel="stylesheet" href="./css/tabela-maquinas.css">
+    <script src="./assets/js/funcoes.js"></script>
 </head>
-<body>
+<body onload="validarSessao()">
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
                 <div class="user-icon"></div>
 
-                <span class="username">Manoel de Souza</span>
+                <span class="username" id="employeeName"></span>
             </div>
 
             <div class="items-container">
@@ -28,6 +29,10 @@
                     
                     <li>
                         <a href="dashboard-maquinas.html">Dashboards</a>
+                    </li>
+
+                    <li>
+                        <a href="index.html">Sair</a>
                     </li>
                 </ul>
             </div>

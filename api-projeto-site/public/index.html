@@ -11,6 +11,7 @@
 
     <script src="assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
+    <!-- <script src="../src/models/usuarioModel.js"></script> -->
 </head>
 
 <body>
@@ -118,6 +119,14 @@
                         <div class="form-element">
                             <label for="loginPassword">Senha</label>
                             <input type="password" id="loginPassword" name="loginPassword" placeholder="******">
+                            <!-- <i class="far fa-eye"></i> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element checkbox-element">
+                            <input type="checkbox" id="checkbox-tecnico" name="checkbox">
+                            <label for="checkbox">Sou um técnico cadastrado!</label>
                             <!-- <i class="far fa-eye"></i> -->
                         </div>
                     </div>
@@ -256,7 +265,7 @@
                     </span>
     
                     <span class="paragraph">
-                        <span>Com nossos serviços, os hospitais</span>
+                        <span>Com nossos serviços, hospitais</span>
                         <span>e postos conseguem impedir problemas</span>
                         <span>nos computadores e totens responsáveis</span>
                         <span>pelos atendimentos, evitando, assim,</span>
@@ -407,7 +416,9 @@
 
         let email = formulario.get("loginEmail");
         let password = formulario.get("loginPassword");
-        
+        let checkbox = document.getElementById("checkbox-tecnico");
+        let isChecked = checkbox.checked;
+
         console.log("FORM LOGIN: ", email);
         console.log("FORM SENHA: ", password);
 
@@ -438,11 +449,18 @@
 
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.razao_social;
+                    sessionStorage.NOME_TECNICO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
-                    setTimeout(function () {
-                        window.location = "cadastro-tecnicos.html";
-                    }, 1000);
+                    if (isChecked) {
+                        setTimeout(function () {
+                            window.location = "cadastro-maquinas.html";
+                        }, 100);
+                    } else {
+                        setTimeout(function () {
+                            window.location = "cadastro-tecnicos.html";
+                        }, 100);
+                    }
                 });
 
             } else {
@@ -460,11 +478,5 @@
         })
 
         return false;
-    }
-
-    function sair() {
-        aguardar();
-        sessionStorage.clear();
-        window.location = "index.html";
     }
 </script>

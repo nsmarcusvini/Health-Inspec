@@ -28,14 +28,17 @@ function entrar (req, res) {
     var email = req.body.loginEmail;
     var senha = req.body.loginPassword;
 
+    let checkboxTecnico = req.body.checkbox;
+    
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        usuarioModel.entrar(email, senha)
+        usuarioModel.entrar(email, senha, checkboxTecnico)
         .then(
             function (resultado) {
+                console.log(checkboxTecnico);
                 console.log(`\nResultados encontrados: ${resultado.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
@@ -56,7 +59,6 @@ function entrar (req, res) {
             }
         );
     }
-
 }
 
 function cadastrar(req, res) {
@@ -107,6 +109,45 @@ function cadastrar(req, res) {
     }
 }
 
+function cadastrarTecnico(req, res) {
+    let name = req.body.name;
+    let registration = req.body.registration;
+    let cpf = req.body.cpf;
+    let phoneNumber = req.body.phone;
+    let email = req.body.email;
+    let password = req.body.password;
+
+    if (name == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (registration == undefined) {
+        res.status(400).send("Sua matrícula está undefined!");
+    } else if (cpf == undefined) {
+        res.status(400).send("Seu cpf está undefined!");
+    } else if (phoneNumber == undefined) {
+        res.status(400).send("Seu telefone está undefined!"); 
+    } else if (email == undefined) {
+        res.status(400).send("Seu email está undefined!"); 
+    } else if (password == undefined) {
+        res.status(400).send("Sua senha está undefined!"); 
+    } else {
+        usuarioModel.cadastrarTecnico(name, registration, cpf, phoneNumber, email, password)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+    }
+}
+
 function listarAcessos(req, res) {
     usuarioModel.listarAcessos()
         .then(function (resultado) {
@@ -127,6 +168,7 @@ function listarAcessos(req, res) {
 module.exports = {
     entrar,
     cadastrar,
+    cadastrarTecnico,
     listar,   
     testar,
     listarAcessos

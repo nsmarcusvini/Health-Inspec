@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Cadastro</title>
     <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
+
+    <script src="assets/js/funcoes.js"></script>
 </head>
-<body>
+<body onload="validarSessao()">
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
                 <div class="user-icon"></div>
 
-                <span class="username">Hospital SPTech</span>
+                <span class="username" id="hospitalName"></span>
             </div>
 
             <div class="items-container">
@@ -53,7 +55,7 @@
             <div class="form">
                 <h2>Cadastro</h2>
 
-                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                <form id="form-cadastro-tecnico" method="post" onsubmit="return cadastrarTecnico()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
                             <label for="name">Nome</label>
@@ -96,6 +98,84 @@
                 </form>
             </div>
         </div>
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+
+        <div id="div_erros_login"></div>
     </div>
 </body>
 </html>
+
+<script>
+    function cadastrarTecnico() {
+        aguardar();
+
+        let formulario = new URLSearchParams(new FormData(document.getElementById("form-cadastro-tecnico")));
+
+        let name = formulario.get("name");
+        let registration = formulario.get("registration");
+        let cpf = formulario.get("cpf");
+        let phoneNumber = formulario.get("phone")
+        let email = formulario.get("email");
+        let password = formulario.get("password");
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (name == "" || registration == "" || cpf == "" || phoneNumber == "" || email == "" || password == "") {
+            
+            window.alert("Preencha todos os campos para prosseguir!");
+            if (name == "")  {
+                console.log('nome está em branco')
+            }
+            if (registration == "" )  {
+                console.log('matricula está em branco')
+            }
+            if (cpf == "" )  {
+                console.log('cpf está em branco')
+            }
+            if (phoneNumber == "" )  {
+                console.log('telefone está em branco')
+            }
+            if (email == '') {
+                console.log('email está em branco')
+            }
+            if (password == '') {
+                console.log('registration está em branco');
+            }
+
+            finalizarAguardar();
+            return false;
+        }
+        
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+
+        fetch("/usuarios/cadastrarTecnico", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Cadastro realizado com sucesso!");
+
+                // window.location = "index.html";
+
+                document.getElementById("form-cadastro-tecnico").reset();
+
+                finalizarAguardar();
+            } else {
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+</script>
