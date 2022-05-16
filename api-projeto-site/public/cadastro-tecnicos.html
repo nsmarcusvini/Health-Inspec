@@ -153,7 +153,7 @@
             return false;
         }
 
-        fetch("/usuarios/cadastrarTecnico", {
+        fetch(`/usuarios/cadastrarTecnico/${sessionStorage.ID_EMPRESA}`, {
             method: "POST",
             body: formulario
         }).then(function (resposta) {

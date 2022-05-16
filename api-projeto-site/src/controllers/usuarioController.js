@@ -38,7 +38,6 @@ function entrar (req, res) {
         usuarioModel.entrar(email, senha, checkboxTecnico)
         .then(
             function (resultado) {
-                console.log(checkboxTecnico);
                 console.log(`\nResultados encontrados: ${resultado.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
@@ -116,6 +115,7 @@ function cadastrarTecnico(req, res) {
     let phoneNumber = req.body.phone;
     let email = req.body.email;
     let password = req.body.password;
+    let fkEmpresa = req.params.fkEmpresa;
 
     if (name == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -130,7 +130,7 @@ function cadastrarTecnico(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua senha está undefined!"); 
     } else {
-        usuarioModel.cadastrarTecnico(name, registration, cpf, phoneNumber, email, password)
+        usuarioModel.cadastrarTecnico(name, fkEmpresa, registration, cpf, phoneNumber, email, password)
         .then(
             function (resultado) {
                 res.json(resultado);

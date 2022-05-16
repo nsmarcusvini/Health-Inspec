@@ -450,11 +450,11 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.razao_social;
                     sessionStorage.NOME_TECNICO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.ID_HOSPITAL = json.idHospital;
 
                     if (isChecked) {
                         setTimeout(function () {
-                            window.location = "cadastro-maquinas.html";
+                            window.location = "tabela-maquinas.html";
                         }, 100);
                     } else {
                         setTimeout(function () {
