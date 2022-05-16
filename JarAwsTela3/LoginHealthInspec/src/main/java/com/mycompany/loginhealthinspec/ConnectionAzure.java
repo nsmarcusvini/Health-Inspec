@@ -1,12 +1,4 @@
-    package com.mycompany.loginhealthinspec;
-
-import java.awt.Color;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.sql.*;
+package com.mycompany.loginhealthinspec;
 
 public class ConnectionAzure {
 
@@ -22,47 +14,4 @@ public class ConnectionAzure {
 
     public ConnectionAzure() {
     }
-    
-
-    public String getEmail() throws SQLException {
-
-        ResultSet resultSetEmail = null;
-
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            java.sql.Connection connection = DriverManager.getConnection(connectionUrl);  
-            Statement statement = connection.createStatement();
-            System.out.println("Conexão obtida com sucesso!");
-            String selectEmailSql = "select email from empresa;";
-            resultSetEmail = statement.executeQuery(selectEmailSql);
-            
-        while( resultSetEmail.next() ) {
-            return resultSetEmail.getString("email") + "";
-        }
-            
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String getSenha() throws SQLException {
-
-        ResultSet resultSetSenha = null;
-
-        try ( java.sql.Connection connection = DriverManager.getConnection(connectionUrl);  Statement statement = connection.createStatement();) {
-
-            String selectSenhaSql = "select senha from empresa;";
-            resultSetSenha = statement.executeQuery(selectSenhaSql);
-        while( resultSetSenha.next() ) {
-            return resultSetSenha.getString("senha") + "";
-        }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }
