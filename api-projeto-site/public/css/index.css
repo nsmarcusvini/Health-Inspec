@@ -300,7 +300,7 @@ html {
     margin-left: 3%;
 }
 .page-title {
-    height: 45%;
+    height: 48%;
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -314,7 +314,7 @@ html {
     text-shadow: 4px 5px 22px #eceaea;
 }
 .page-title .description {
-    line-height: 1.5;  
+    line-height: 1.8;  
     font-weight: 400;
     font-size: 1.25rem;
     color: #fafafae8;
@@ -430,14 +430,31 @@ html {
 }
 .about-us-subtitle{
     display: flex;
-    font-size: 16px;
-    line-height: 32px;
-    color: #FAFAFA;
+    justify-content: space-around;
     margin-top: 3%;
     margin-left: 2.5rem;
     width: 95%;
     visibility: hidden;
+}
+.about-us-subtitle .paragraphs-container {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.about-us-subtitle .paragraphs-container .paragraph {
+    height: 40%;
+    width: 100%;
+    font-size: 16px;
+    line-height: 2.5;
+    color: #FAFAFA;
     text-align: justify;
+}
+.about-us-subtitle .paragraphs-container .paragraph .health-inspec {
+    font-weight: bolder;
+    font-size: 18px;
 }
 .about-us-subtitle img{
     width: 30rem;
