@@ -1,45 +1,40 @@
-CREATE DATABASE health_inspec;
-USE health_inspec;
-DROP DATABASE health_inspec;
+CREATE DATABASE health_inspec-bd;
+USE health_inspec-bd;
 
-DROP TABLE empresa;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE hospital (
+idHospital INT PRIMARY KEY AUTO_INCREMENT,
     razao_social VARCHAR(45),
-    cnpj CHAR(14),
-    email VARCHAR(100), 
-    telefone CHAR(11),
-    cep CHAR(8),
-    logradouro VARCHAR(45),
+    cep VARCHAR(9),
+    cidade VARCHAR(30),
     estado VARCHAR(15),
-    cidade VARCHAR(30), 
-    senha VARCHAR(20)
-);	
+    telefone VARCHAR(11),
+    email VARCHAR(100), 
+    senha VARCHAR(20),
+    logradouro VARCHAR(45),
+    cnpj CHAR(14));
 
-INSERT INTO empresa VALUES (
-NULL, "Chagas", "123456789-1234", "chagas@gmail.com", "91234-56789",
-"12345-78", "Rua Santo Santinho", "São Paulo", "São Paulo", "1234");
+INSERT INTO hospital VALUES (
+NULL, "Chagas", "01234-210", "São Paulo", "São Paulo",
+"91234-5678", "chagas@gmail.com", "chagas123", "Rua Chagas 548", "12341356215234");
 
 CREATE TABLE funcionario (
 idFuncionario INT AUTO_INCREMENT,
-nomeFuncionario VARCHAR(45),
-emailFuncionario VARCHAR(45),
-rg VARCHAR(45),
+nome VARCHAR(45),
+email VARCHAR(45),
+cpf VARCHAR(14),
+telefone VARCHAR(11),
+senha VARCHAR(55),
 fkHospital INT,
 fkGestor INT,
 PRIMARY KEY (idFuncionario, fkHospital, fkGestor),
-FOREIGN KEY (fkHospital) REFERENCES empresa (id),
-FOREIGN KEY (fkGestor) REFERENCES funcionario (idFuncionario)
-); 
+FOREIGN KEY (fkHospital) REFERENCES hospital (idHospital),
+FOREIGN KEY (fkGestor) REFERENCES funcionario (idFuncionario)); 
 
 INSERT INTO funcionario VALUES (
-NULL, "José", "jose@gmail.com", "124535351-23", 1, 1);
+NULL, "José", "jose@gmail.com", "124535351-23", "94331-8976", "jose123", 1, 1);
 
 INSERT INTO funcionario VALUES (
-NULL, "André", "andre@gmail.com", "12442435351-23", 1, 1);
-
-SELECT * FROM funcionario;
+NULL, "André", "andre@gmail.com", "154898456-66", "91567-6543", "andre123", 1, 1);
 
 CREATE TABLE maquinas (
 idMaquina INT AUTO_INCREMENT,
@@ -47,13 +42,10 @@ tipoMaquina VARCHAR(45),
 nomeMaquina VARCHAR(45),
 sistemaOperacional VARCHAR(45),
 tempoDeUso VARCHAR(45),
-bits VARCHAR(45),
+arquitetura INT,
 fkTecnico INT,
 PRIMARY KEY (idMaquina, fkTecnico),
-FOREIGN KEY (fkTecnico) REFERENCES funcionario (idFuncionario)
-);
-
-SELECT * FROM maquinas;
+FOREIGN KEY (fkTecnico) REFERENCES funcionario (idFuncionario));
 
 CREATE TABLE componentes (
 idComponentes INT AUTO_INCREMENT,
@@ -62,46 +54,20 @@ tipoComponente VARCHAR(45),
 descricaoComponente VARCHAR(70),
 fkMaquina INT,
 PRIMARY KEY (idComponentes, fkMaquina),
-FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina)
-);
+FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina));
 
 CREATE TABLE registros (
-idRegistros INT AUTO_INCREMENT,
+idRegistro INT AUTO_INCREMENT,
 dataHora DATETIME,
-totalLivre DOUBLE,
 totalUsado DOUBLE,
 fkComponente INT,
-PRIMARY KEY (idRegistros, fkComponente),
-FOREIGN KEY (fkComponente) REFERENCES componentes (idComponentes)
-);
+PRIMARY KEY (idRegistro, fkComponente),
+FOREIGN KEY (fkComponente) REFERENCES componentes (idComponentes));
 
 CREATE TABLE processos (
-idProcessos INT AUTO_INCREMENT,
+idProcesso INT AUTO_INCREMENT,
 nomeProcesso VARCHAR(45),
 processoPermitido BINARY,
 fkMaquina INT,
-PRIMARY KEY (idProcessos, fkMaquina),
-FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina)
-);
-
-
-
-
-TRUNCATE TABLE empresa;
-
-SELECT
-	*
-FROM empresa;
-
-alter user 'root'@'localhost' identified with mysql_native_password by 'grupo7Sprint*';
-alter user 'root'@'localhost' identified with mysql_native_password by 'root';
-
- 
-
-
-
-
-
-
-
-    
+PRIMARY KEY (idProcesso, fkMaquina),
+FOREIGN KEY (fkMaquina) REFERENCES maquinas (idMaquina));
