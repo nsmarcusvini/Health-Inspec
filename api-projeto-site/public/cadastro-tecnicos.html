@@ -61,35 +61,35 @@
                             <label for="name">Nome</label>
                             <input type="text" name="name" id="name" placeholder="Manoel">
                         </div>
-                        
+
                         <div class="form-element">
-                            <label for="registration">Número da matrícula</label>
-                            <input type="text" name="registration" id="registration" placeholder="F001671">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="cpf">CPF</label>
-                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
+                            <label for="phone">Telefone</label>
+                            <input type="text" name="phone" id="phone" placeholder="11989970024">
                         </div>
 
                         <div class="form-element">
-                            <label for="phone">Telefone</label>
-                            <input type="text" name="phone" id="phone" placeholder="11989970024">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="email">E-mail</label>
-                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" id="password" placeholder="********">
                         </div>
 
                         <div class="form-element">
-                            <label for="password">Senha</label> <!--pra atualizar o tamanho-->
-                            <input type="password" name="password" id="password" placeholder="********">
-                        </div>                    
+                            <label for="confirmation">Confirmação de senha</label>
+                            <input type="password" name="confirmation" id="confirmation" placeholder="********">
+                        </div>    
                     </div>
 
                     <div class="form-row">
@@ -114,21 +114,18 @@
         let formulario = new URLSearchParams(new FormData(document.getElementById("form-cadastro-tecnico")));
 
         let name = formulario.get("name");
-        let registration = formulario.get("registration");
         let cpf = formulario.get("cpf");
         let phoneNumber = formulario.get("phone")
         let email = formulario.get("email");
         let password = formulario.get("password");
+        let confirmation = formulario.get("confirmation");
 
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
-        if (name == "" || registration == "" || cpf == "" || phoneNumber == "" || email == "" || password == "") {
+        if (name == "" || cpf == "" || phoneNumber == "" || email == "" || password == "" || confirmation == "") {
             
             window.alert("Preencha todos os campos para prosseguir!");
             if (name == "")  {
                 console.log('nome está em branco')
-            }
-            if (registration == "" )  {
-                console.log('matricula está em branco')
             }
             if (cpf == "" )  {
                 console.log('cpf está em branco')
@@ -140,7 +137,10 @@
                 console.log('email está em branco')
             }
             if (password == '') {
-                console.log('registration está em branco');
+                console.log('senha está em branco');
+            }
+            if (confirmation == '') {
+                console.log('confirmação está em branco!');
             }
 
             finalizarAguardar();
@@ -153,7 +153,12 @@
             return false;
         }
 
-        fetch(`/usuarios/cadastrarTecnico/${sessionStorage.ID_EMPRESA}`, {
+        if (password != confirmation) {
+            window.alert("As senhas devem ser iguais!");
+            return false;
+        }
+
+        fetch(`/usuarios/cadastrarTecnico/${sessionStorage.ID_HOSPITAL}`, {
             method: "POST",
             body: formulario
         }).then(function (resposta) {

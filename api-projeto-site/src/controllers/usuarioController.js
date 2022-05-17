@@ -110,17 +110,14 @@ function cadastrar(req, res) {
 
 function cadastrarTecnico(req, res) {
     let name = req.body.name;
-    let registration = req.body.registration;
     let cpf = req.body.cpf;
     let phoneNumber = req.body.phone;
     let email = req.body.email;
     let password = req.body.password;
-    let fkEmpresa = req.params.fkEmpresa;
+    let fkHospital = req.params.fkHospital;
 
     if (name == undefined) {
         res.status(400).send("Seu nome está undefined!");
-    } else if (registration == undefined) {
-        res.status(400).send("Sua matrícula está undefined!");
     } else if (cpf == undefined) {
         res.status(400).send("Seu cpf está undefined!");
     } else if (phoneNumber == undefined) {
@@ -130,7 +127,7 @@ function cadastrarTecnico(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua senha está undefined!"); 
     } else {
-        usuarioModel.cadastrarTecnico(name, fkEmpresa, registration, cpf, phoneNumber, email, password)
+        usuarioModel.cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password)
         .then(
             function (resultado) {
                 res.json(resultado);
