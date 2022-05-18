@@ -190,6 +190,16 @@ html {
     border: 1px solid #aaa;
     border-radius: 5px;
 }
+.form .form-row .checkbox-element {
+    width: 100%;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+}
+.form .form-row .checkbox-element label {
+    padding: .25rem 0rem 0rem .3rem;
+}
 .form .form-element button {
     width: 50%;
     height: 2.5rem;
@@ -206,15 +216,13 @@ html {
     background-color: #eceaea;
     color: #222;
 }
-.form .form-row .checkbox-element {
-    width: 100%;
-    display: flex;
-    flex-direction: row !important;
-    justify-content: center;
-    align-items: center;
+.form .errorTextContainer {
+    display: none;
 }
-.form .form-row .checkbox-element label {
-    padding: .25rem 0rem 0rem .3rem;
+.form .form-element .loginErrorText {
+    color: red;
+    font-size: medium;
+    font-weight: bolder;
 }
 /* FIM DO MODAL */
 

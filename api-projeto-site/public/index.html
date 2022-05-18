@@ -134,6 +134,12 @@
                     <div class="form-element form-row">
                         <button>Entrar</button>
                     </div>
+                    
+                    <div class="form-row errorTextContainer">
+                        <div class="form-element">
+                            <span class="loginErrorText">Usuário ou senha inválida!</span>
+                        </div>
+                    </div>
                 </form>
                 
             </div>
@@ -471,6 +477,14 @@
                     console.error(texto);                    
                     // limparFormulario();
                 });
+
+                let errorText = document.querySelector(".errorTextContainer"); 
+                
+                errorText.style.display = "flex";
+
+                setTimeout(() => {
+                    errorText.style.display = "none";
+                }, 3000);
             }
 
         }).catch(function (erro) {
