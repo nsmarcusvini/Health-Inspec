@@ -12,7 +12,7 @@ router.get("/listar", function(req, res) {
 });
 
 router.post("/cadastrar", function(req, res) {
-    usuarioController.cadastrar(req, res);
+    usuarioController.validarLogin(req, res);
 })
 
 router.post("/cadastrarTecnico/:fkHospital", function(req, res) {

@@ -60,7 +60,7 @@ function entrar (req, res) {
     }
 }
 
-function cadastrar(req, res) {
+function validarLogin(req, res) {
     let corporateName = req.body.corporateName;
     let cnpj = req.body.cnpj;
     let email = req.body.email;
@@ -90,7 +90,39 @@ function cadastrar(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua bairro está undefined!"); 
     } else {
-        usuarioModel.cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
+        usuarioModel.validarLogin(email)
+        .then(
+            function (resultado) {
+                console.log(`ESTOU NA FUNCAO, O TAMANHO DO RESULTADO É ${resultado.length}`);
+
+                if (resultado.length == 0) {
+                    cadastrar(req, res);
+                } else {
+                    res.status(409).send("E-mail já cadastrado!")
+                }
+            }
+        ).catch(
+            function (error) {
+                console.log(error);
+                res.status(500).send(error.sqlMessage);
+                res.status(500).send(error);
+            }
+        )
+    }
+}
+
+function cadastrar(req, res) {
+    let corporateName = req.body.corporateName;
+    let cnpj = req.body.cnpj;
+    let email = req.body.email;
+    let phoneNumber = req.body.phoneNumber;
+    let cep = req.body.cep;
+    let publicPlace = req.body.publicPlace;
+    let state = req.body.state;
+    let city = req.body.city;
+    let password = req.body.password;
+
+    usuarioModel.cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -105,7 +137,6 @@ function cadastrar(req, res) {
                 res.status(500).json(erro.sqlMessage);
             }
         );
-    }
 }
 
 function cadastrarTecnico(req, res) {
@@ -164,6 +195,7 @@ function listarAcessos(req, res) {
 
 module.exports = {
     entrar,
+    validarLogin,
     cadastrar,
     cadastrarTecnico,
     listar,   

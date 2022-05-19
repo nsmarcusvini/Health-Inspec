@@ -24,6 +24,12 @@ function entrar(email, senha, checkboxTecnico) {
     return database.executar(instrucao);
 }
 
+function validarLogin(email) {
+    let instrucao = `SELECT * FROM hospital WHERE email = '${email}'`;
+
+    return database.executar(instrucao);
+}
+
 function cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", corporateName, email, password);
     
@@ -56,6 +62,7 @@ function cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password) {
 
 module.exports = {
     entrar,
+    validarLogin,
     cadastrar,
     cadastrarTecnico,
     listar
