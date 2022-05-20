@@ -37,9 +37,10 @@ public class TelaAcesso extends javax.swing.JFrame {
             Integer processList = looca.getGrupoDeProcessos().getProcessos().size();
 
             // MAP DE PROCESSOS QUE SERÃO FECHADOS
-            Map<Integer, String> blackList = new HashMap<Integer, String>();
+            Map<Integer, String> blackList = new HashMap<>();
             blackList.put(0, "notepad");
             blackList.put(1, "gedit");
+            
 
             //Try que pega todos os processos que estão sendo executados
             try {
@@ -81,14 +82,17 @@ public class TelaAcesso extends javax.swing.JFrame {
                         if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
                             if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
                                 String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
+                                System.out.println(processoFinalizado);
                                 String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
                                 Runtime.getRuntime().exec(killWindows);
-                                log.guardarLog("Processo: " + processoFinalizado + " finalizado!");
+                                log.guardarLog("PROCESSO ENCONTRADO BLACKLIST: " + processoFinalizado + " foi finalizado!");
                                 looca.getGrupoDeProcessos().getProcessos().remove(i);
                             }
                             if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
+                                String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
                                 String killUbuntu = "kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
                                 Runtime.getRuntime().exec(killUbuntu);
+                                log.guardarLog("PROCESSO ENCONTRADO BLACKLIST: " + processoFinalizado + " foi finalizado!");
                                 looca.getGrupoDeProcessos().getProcessos().remove(i);
                             }
                         }
