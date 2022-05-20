@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
+    <!-- <script src="../src/models/usuarioModel.js"></script> -->
 </head>
 
 <body>
@@ -122,8 +125,22 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-element checkbox-element">
+                            <input type="checkbox" id="checkbox-tecnico" name="checkbox">
+                            <label for="checkbox">Sou um técnico cadastrado!</label>
+                            <!-- <i class="far fa-eye"></i> -->
+                        </div>
+                    </div>
+
                     <div class="form-element form-row">
                         <button>Entrar</button>
+                    </div>
+                    
+                    <div class="form-row errorTextContainer">
+                        <div class="form-element">
+                            <span class="loginErrorText">Usuário ou senha inválida!</span>
+                        </div>
                     </div>
                 </form>
                 
@@ -256,7 +273,7 @@
                     </span>
     
                     <span class="paragraph">
-                        <span>Com nossos serviços, os hospitais</span>
+                        <span>Com nossos serviços, hospitais</span>
                         <span>e postos conseguem impedir problemas</span>
                         <span>nos computadores e totens responsáveis</span>
                         <span>pelos atendimentos, evitando, assim,</span>
@@ -319,7 +336,15 @@
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
         if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == ''|| passwdConfirmation == '') {
             
-            window.alert("Preencha todos os campos para prosseguir!");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Preencha todos os campos!',
+                width: "30rem",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             if (corporateName == "")  {
                 console.log('nome está em branco')
             }
@@ -356,13 +381,26 @@
         }
         
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'E-mail deve conter "@" e ".com"!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             finalizarAguardar();
             return false;
         }
         
         if (password != passwdConfirmation) {
-            window.alert("As senhas inseridas devem ser iguais para prosseguir!");
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'As senhas inseridas devem ser iguais!',
+            showConfirmButton: false,
+            timer: 1500
+            });
 
             finalizarAguardar();
 
@@ -377,18 +415,39 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Cadastro realizado com sucesso!");
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Cadastrado(a) com sucesso!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
-                window.location = "index.html";
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 1500);
 
                 limparFormulario();
 
                 finalizarAguardar();
             } else {
+                console.log(resposta);
+
+                if (resposta.status == 409) {
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: 'Esse e-mail já foi cadastrado!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
                 throw("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
+
             finalizarAguardar();
         });
 
@@ -407,18 +466,34 @@
 
         let email = formulario.get("loginEmail");
         let password = formulario.get("loginPassword");
-        
+        let checkbox = document.getElementById("checkbox-tecnico");
+        let isChecked = checkbox.checked;
+
         console.log("FORM LOGIN: ", email);
         console.log("FORM SENHA: ", password);
 
         if (email == "" || password == "") {
-            window.alert("Preencha todos os campos para prosseguir!");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Preencha todos os campos!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             finalizarAguardar();
             return false;
         }
 
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'E-mail deve conter "@" e ".com"!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             finalizarAguardar();
             return false;
         }
@@ -438,11 +513,18 @@
 
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.razao_social;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.NOME_TECNICO = json.nome;
+                    sessionStorage.ID_HOSPITAL = json.idHospital;
 
-                    setTimeout(function () {
-                        window.location = "cadastro-tecnicos.html";
-                    }, 1000);
+                    if (isChecked) {
+                        setTimeout(function () {
+                            window.location = "tabela-maquinas.html";
+                        }, 100);
+                    } else {
+                        setTimeout(function () {
+                            window.location = "cadastro-tecnicos.html";
+                        }, 100);
+                    }
                 });
 
             } else {
@@ -453,6 +535,14 @@
                     console.error(texto);                    
                     // limparFormulario();
                 });
+
+                let errorText = document.querySelector(".errorTextContainer"); 
+                
+                errorText.style.display = "flex";
+
+                setTimeout(() => {
+                    errorText.style.display = "none";
+                }, 3000);
             }
 
         }).catch(function (erro) {
@@ -460,11 +550,5 @@
         })
 
         return false;
-    }
-
-    function sair() {
-        aguardar();
-        sessionStorage.clear();
-        window.location = "index.html";
     }
 </script>

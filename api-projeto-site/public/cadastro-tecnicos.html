@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Cadastro</title>
     <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
+
+    <script src="assets/js/funcoes.js"></script>
 </head>
-<body>
+<body onload="validarSessao()">
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
                 <div class="user-icon"></div>
 
-                <span class="username">Hospital SPTech</span>
+                <span class="username" id="hospitalName"></span>
             </div>
 
             <div class="items-container">
@@ -53,41 +55,41 @@
             <div class="form">
                 <h2>Cadastro</h2>
 
-                <form id="form-cadastro" method="post" onsubmit="return cadastrar()" class="form-columns">
+                <form id="form-cadastro-tecnico" method="post" onsubmit="return cadastrarTecnico()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
                             <label for="name">Nome</label>
                             <input type="text" name="name" id="name" placeholder="Manoel">
                         </div>
-                        
+
                         <div class="form-element">
-                            <label for="registration">Número da matrícula</label>
-                            <input type="text" name="registration" id="registration" placeholder="F001671">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="cpf">CPF</label>
-                            <input type="text" name="cpf" id="cpf" placeholder="54229225814">
+                            <label for="phone">Telefone</label>
+                            <input type="text" name="phone" id="phone" placeholder="11989970024">
                         </div>
 
                         <div class="form-element">
-                            <label for="phone">Telefone</label>
-                            <input type="text" name="phone" id="phone" placeholder="11989970024">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="email">E-mail</label>
-                            <input type="text" name="email" id="email" placeholder="manoel@gmail.com">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" id="password" placeholder="********">
                         </div>
 
                         <div class="form-element">
-                            <label for="password">Senha</label> <!--pra atualizar o tamanho-->
-                            <input type="password" name="password" id="password" placeholder="********">
-                        </div>                    
+                            <label for="confirmation">Confirmação de senha</label>
+                            <input type="password" name="confirmation" id="confirmation" placeholder="********">
+                        </div>    
                     </div>
 
                     <div class="form-row">
@@ -96,6 +98,118 @@
                 </form>
             </div>
         </div>
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+
+        <div id="div_erros_login"></div>
     </div>
 </body>
 </html>
+
+<script>
+    function cadastrarTecnico() {
+        aguardar();
+
+        let formulario = new URLSearchParams(new FormData(document.getElementById("form-cadastro-tecnico")));
+
+        let name = formulario.get("name");
+        let cpf = formulario.get("cpf");
+        let phoneNumber = formulario.get("phone")
+        let email = formulario.get("email");
+        let password = formulario.get("password");
+        let confirmation = formulario.get("confirmation");
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (name == "" || cpf == "" || phoneNumber == "" || email == "" || password == "" || confirmation == "") {
+            
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Preencha todos os campos!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            if (name == "")  {
+                console.log('nome está em branco')
+            }
+            if (cpf == "" )  {
+                console.log('cpf está em branco')
+            }
+            if (phoneNumber == "" )  {
+                console.log('telefone está em branco')
+            }
+            if (email == '') {
+                console.log('email está em branco')
+            }
+            if (password == '') {
+                console.log('senha está em branco');
+            }
+            if (confirmation == '') {
+                console.log('confirmação está em branco!');
+            }
+
+            finalizarAguardar();
+            return false;
+        }
+        
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'E-mail deve conter "@" e ".com"!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            finalizarAguardar();
+            return false;
+        }
+
+        if (password != confirmation) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'As senhas inseridas devem ser iguais!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return false;
+        }
+
+        fetch(`/usuarios/cadastrarTecnico/${sessionStorage.ID_HOSPITAL}`, {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Cadastrado(a) com sucesso!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 1500);
+
+                // window.location = "index.html";
+
+                document.getElementById("form-cadastro-tecnico").reset();
+
+                finalizarAguardar();
+            } else {
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+</script>
