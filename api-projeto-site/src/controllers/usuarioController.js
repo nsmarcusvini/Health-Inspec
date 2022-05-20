@@ -7,6 +7,22 @@ function testar (req, res) {
     res.json("ESTAMOS FUNCIONANDO!");
 }
 
+function listarTecnicos(req, res) {
+    let fkHospital = req.params.fkHospital;
+
+    usuarioModel.listarTecnicos(fkHospital)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 function listar(req, res) {
     usuarioModel.listar()
     .then(function (resultado) {
@@ -200,6 +216,7 @@ module.exports = {
     cadastrar,
     cadastrarTecnico,
     listar,   
+    listarTecnicos,
     testar,
     listarAcessos
 }
