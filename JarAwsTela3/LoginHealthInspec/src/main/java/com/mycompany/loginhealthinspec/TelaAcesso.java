@@ -311,9 +311,6 @@ public class TelaAcesso extends javax.swing.JFrame {
 
     private void btnExibirUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirUsoActionPerformed
         // TODO add your handling code here:
-        ExibirUso exibirUso = new ExibirUso();
-        
-        exibirUso.setVisible(true);
     }//GEN-LAST:event_btnExibirUsoActionPerformed
 
     private void btnExibirProcessos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirProcessos1ActionPerformed
