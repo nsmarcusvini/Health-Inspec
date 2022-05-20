@@ -7,6 +7,8 @@
     <title>Health Inspec | Cadastro</title>
     <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="assets/js/funcoes.js"></script>
 </head>
 <body onload="validarSessao()">
@@ -193,16 +195,19 @@
                     timer: 1500
                 });
 
-                setTimeout(() => {
-                    window.location = "index.html";
-                }, 1500);
-
-                // window.location = "index.html";
-
                 document.getElementById("form-cadastro-tecnico").reset();
 
                 finalizarAguardar();
             } else {
+                if (resposta.status == 409) {
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: 'Esse e-mail já foi cadastrado!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
                 throw("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
