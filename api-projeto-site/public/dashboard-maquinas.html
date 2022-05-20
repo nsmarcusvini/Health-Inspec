@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Inspec | Dashboard</title>
+    <link rel="stylesheet" href="./css/dashboard-maquinas.css">
+    <script src="./assets/js/funcoes.js"></script>
+</head>
+<body onload="validarSessao()">
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
+
+                <span class="username" id="employeeName"></span>
+            </div>
+
+            <div class="items-container">
+                <ul>
+                    <!-- <li>
+                        <a href="cadastro-maquinas.html">Cadastrar máquinas</a>
+                    </li> -->
+                    
+                    <li>
+                        <a href="tabela-maquinas.html">Máquinas cadastradas</a>
+                    </li>
+                    
+                    <li>
+                        <a href="dashboard-maquinas.html" class="current">Dashboards</a>
+                    </li>
+                    
+                    <li>
+                        <a href="index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
+        </div> -->
+
+        <div class="page-title">
+            <div class="title">
+                Selecione a máquina desejada para monitorar seus componentes pelos gráficos.
+            </div>
+
+            <div class="desc">
+                Caso a máquina não tenha o sistema da Health Inspec ou não tenha sido cadastrada 
+                no site, os gráficos não poderão ser exibidos.
+            </div>
+        </div>
+
+        <div class="graphs-container">
+
+        </div>
+    </div>
+</body>
+</html>

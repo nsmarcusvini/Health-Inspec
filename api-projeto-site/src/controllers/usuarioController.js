@@ -7,6 +7,22 @@ function testar (req, res) {
     res.json("ESTAMOS FUNCIONANDO!");
 }
 
+function listarTecnicos(req, res) {
+    let fkHospital = req.params.fkHospital;
+
+    usuarioModel.listarTecnicos(fkHospital)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 function listar(req, res) {
     usuarioModel.listar()
     .then(function (resultado) {
@@ -28,14 +44,17 @@ function entrar (req, res) {
     var email = req.body.loginEmail;
     var senha = req.body.loginPassword;
 
+    let checkboxTecnico = req.body.checkbox;
+    
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        usuarioModel.entrar(email, senha)
+        usuarioModel.entrar(email, senha, checkboxTecnico)
         .then(
             function (resultado) {
+                console.log(checkboxTecnico);
                 console.log(`\nResultados encontrados: ${resultado.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
@@ -56,10 +75,9 @@ function entrar (req, res) {
             }
         );
     }
-
 }
 
-function cadastrar(req, res) {
+function validarLogin(req, res) {
     let corporateName = req.body.corporateName;
     let cnpj = req.body.cnpj;
     let email = req.body.email;
@@ -89,7 +107,75 @@ function cadastrar(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua bairro está undefined!"); 
     } else {
-        usuarioModel.cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
+        usuarioModel.validarLogin(email)
+        .then(
+            function (resultado) {
+                console.log(`ESTOU NA FUNCAO, O TAMANHO DO RESULTADO É ${resultado.length}`);
+
+                if (resultado.length == 0) {
+                    cadastrar(req, res);
+                } else {
+                    res.status(409).send("E-mail já cadastrado!")
+                }
+            }
+        ).catch(
+            function (error) {
+                console.log(error);
+                res.status(500).send(error.sqlMessage);
+                res.status(500).send(error);
+            }
+        )
+    }
+}
+
+function cadastrar(req, res) {
+    let corporateName = req.body.corporateName;
+    let cnpj = req.body.cnpj;
+    let email = req.body.email;
+    let phoneNumber = req.body.phoneNumber;
+    let cep = req.body.cep;
+    let publicPlace = req.body.publicPlace;
+    let state = req.body.state;
+    let city = req.body.city;
+    let password = req.body.password;
+
+    usuarioModel.cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function cadastrarTecnico(req, res) {
+    let name = req.body.name;
+    let cpf = req.body.cpf;
+    let phoneNumber = req.body.phone;
+    let email = req.body.email;
+    let password = req.body.password;
+    let fkHospital = req.params.fkHospital;
+
+    if (name == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (cpf == undefined) {
+        res.status(400).send("Seu cpf está undefined!");
+    } else if (phoneNumber == undefined) {
+        res.status(400).send("Seu telefone está undefined!"); 
+    } else if (email == undefined) {
+        res.status(400).send("Seu email está undefined!"); 
+    } else if (password == undefined) {
+        res.status(400).send("Sua senha está undefined!"); 
+    } else {
+        usuarioModel.cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -126,8 +212,11 @@ function listarAcessos(req, res) {
 
 module.exports = {
     entrar,
+    validarLogin,
     cadastrar,
+    cadastrarTecnico,
     listar,   
+    listarTecnicos,
     testar,
     listarAcessos
 }

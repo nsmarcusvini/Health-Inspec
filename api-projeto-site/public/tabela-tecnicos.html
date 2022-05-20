@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Tabela</title>
     <link rel="stylesheet" href="./css/tabela-tecnicos.css">
+    <script src="./assets/js/funcoes.js"></script>
 </head>
-<body>
+<body onload="validarSessao()">
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
                 <div class="user-icon"></div>
 
-                <span class="username">Hospital SPTech</span>
+                <span class="username" id="hospitalName"></span>
             </div>
 
             <div class="items-container">
@@ -27,7 +28,7 @@
                     </li>
                     
                     <li>
-                        <a href="login-tecnico.html">Entrar como técnico</a>
+                        <a href="index.html">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -50,70 +51,67 @@
         </span>
 
         <div class="table-container">
-            <table>
-                <tr>
-                    <th>Nome</th>
-                    <th>Matrícula</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>E-mail</th>
-                </tr>
-
-                <tr>
-                    <td>
-                        Manoel de Souza Almeida
-                    </td>
-                    <td>
-                        F001671
-                    </td>
-                    <td>
-                        54229225814
-                    </td>
-                    <td>
-                        11989970024
-                    </td>
-                    <td>
-                        manoel.almeida@sptech.com.br
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        Fernanda Ferreira Caramico 
-                    </td>
-                    <td>
-                        F001672
-                    </td>
-                    <td>
-                        57447862813
-                    </td>
-                    <td>
-                        11995068512
-                    </td>
-                    <td>
-                        fernanda.caramico@sptech.com.br
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        Gerson Santos 
-                    </td>
-                    <td>
-                        F001673
-                    </td>
-                    <td>
-                        47587469215
-                    </td>
-                    <td>
-                        11994437209
-                    </td>
-                    <td>
-                        gerson.santos@sptech.com.br
-                    </td>
-                </tr>
-            </table>
+            <div class="table-scroll">
+                <table class="fixed-tr">
+                    <tr>
+                        <th>ID</th>
+                        
+                        <th>Nome</th>
+                        
+                        <th>E-mail</th>
+                        
+                        <th>CPF</th>
+                        
+                        <th>Telefone</th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+    fetch(`/usuarios/listarTecnicos/${sessionStorage.ID_HOSPITAL}`).then(function(resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function(resposta) {
+                let tableContainer = document.querySelector(".table-scroll");
+
+                // tableContainer.innerHTML = "";
+
+                for (let i = 0; i < resposta.length; i++) {
+                    let tecnico = resposta[i];
+
+                    let table = document.createElement("table");
+                    let elements = document.createElement("tr");
+                    
+                    let id = document.createElement("td");
+                    let nome = document.createElement("td");
+                    let email = document.createElement("td");
+                    let cpf = document.createElement("td");
+                    let telefone = document.createElement("td");
+
+                    id.textContent = tecnico.idFuncionario;
+                    nome.textContent = tecnico.nome;
+                    email.textContent = tecnico.email;
+                    cpf.textContent = tecnico.cpf;
+                    telefone.textContent = tecnico.telefone;
+
+                    elements.appendChild(id);
+                    elements.appendChild(nome);
+                    elements.appendChild(email);
+                    elements.appendChild(cpf);
+                    elements.appendChild(telefone);
+
+                    table.appendChild(elements);
+
+                    tableContainer.appendChild(table);
+                }
+            })
+        } else {
+            throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+        }
+    }).catch(function(resposta) {
+        console.log(resposta);
+    })
+</script>

@@ -5,29 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Tabela</title>
-    <link rel="stylesheet" href="./css/tabela-tecnicos.css">
+    <link rel="stylesheet" href="./css/tabela-maquinas.css">
+    <script src="./assets/js/funcoes.js"></script>
 </head>
-<body>
+<body onload="validarSessao()">
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
                 <div class="user-icon"></div>
 
-                <span class="username">Manoel de Souza</span>
+                <span class="username" id="employeeName"></span>
             </div>
 
             <div class="items-container">
                 <ul>
-                    <li>
+                    <!-- <li>
                         <a href="cadastro-maquinas.html">Cadastrar máquinas</a>
-                    </li>
+                    </li> -->
                     
                     <li>
                         <a href="tabela-maquinas.html" class="current">Máquinas cadastradas</a>
                     </li>
                     
                     <li>
-                        <a href="dashboard.html">Dashboards</a>
+                        <a href="dashboard-maquinas.html">Dashboards</a>
+                    </li>
+
+                    <li>
+                        <a href="index.html">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -50,69 +55,149 @@
         </span>
 
         <div class="table-container">
-            <table>
-                <tr>
-                    <th>Apelido</th>
-                    <th>Hostname</th>
-                    <th>Tipo</th>
-                    <th>Data do cadastro</th>
-                    <th>Hora do cadastro</th>
-                </tr>
+            <div class="table-scroll">
+                <table class="fixed-tr">
+                    <tr>
+                        <th>Apelido</th>
+                        <th>Hostname</th>
+                        <th>Tipo</th>
+                        <th>Processador</th>
+                        <th>RAM</th>
+                        <th>Disco</th>
+                        <th>Data do cadastro</th>
+                    </tr>
+                </table>
 
-                <tr>
-                    <td>
-                        Desktop Dell 1 - Recepção
-                    </td>
-                    <td>
-                        DESKTOP-51LJJK5
-                    </td>
-                    <td>
-                        Desktop
-                    </td>
-                    <td>
-                        30/04/2022
-                    </td>
-                    <td>
-                        13:35:21
-                    </td>
-                </tr>
+                <table>
+                    <tr>
+                        <td>
+                            Desktop Dell 1 - Recepção
+                        </td>
+                        <td>
+                            DESKTOP-51LJJK5
+                        </td>
+                        <td>
+                            Desktop
+                        </td>
+                        <td>
+                            AMD Ryzen 7
+                        </td>
+                        <td>
+                            16GB
+                        </td>
+                        <td>
+                            256 SSD
+                        </td>
+                        <td>
+                            18/02/2022
+                        </td>
+                    </tr>
+                </table>
 
-                <tr>
-                    <td>
-                        Totem 1 - Andar 2 
-                    </td>
-                    <td>
-                        TOTEM-51LJJK5
-                    </td>
-                    <td>
-                        Totem
-                    </td>
-                    <td>
-                        18/02/2022
-                    </td>
-                    <td>
-                        16:05:57
-                    </td>
-                </tr>
+                <table>
+                    <tr>
+                        <td>
+                            Totem 1 - Andar 2 
+                        </td>
+                        <td>
+                            TOTEM-51LJJK5
+                        </td>
+                        <td>
+                            Totem
+                        </td>
+                        <td>
+                            Intel i5
+                        </td>
+                        <td>
+                            4GB
+                        </td>
+                        <td>
+                            512GB HDD
+                        </td>
+                        <td>
+                            05/03/2022
+                        </td>
+                    </tr>
+                </table>
+    
+                <table>
+                    <tr>
+                        <td>
+                            Desktop Dell 3 - Andar 4
+                        </td>
+                        <td>
+                            DESKTOP-IFC110
+                        </td>
+                        <td>
+                            Desktop
+                        </td>
+                        <td>
+                            Intel i5
+                        </td>
+                        <td>
+                            8GB
+                        </td>
+                        <td>
+                            256GB SSD
+                        </td>
+                        <td>
+                            30/04/2022
+                        </td>
+                    </tr>
+                </table>
 
-                <tr>
-                    <td>
-                        Desktop Dell 3 - Andar 4
-                    </td>
-                    <td>
-                        DESKTOP-IFC110
-                    </td>
-                    <td>
-                        Desktop
-                    </td>
-                    <td>
-                        29/10/2021
-                    </td>
-                    <td>
-                        09:43:12
-                    </td>
-                </tr>
-            </table>
+                <table>
+                    <tr>
+                        <td>
+                            Desktop Dell 5 - Andar 10
+                        </td>
+                        <td>
+                            DESKTOP-IFC125
+                        </td>
+                        <td>
+                            Desktop
+                        </td>
+                        <td>
+                            Intel i5
+                        </td>
+                        <td>
+                            8GB
+                        </td>
+                        <td>
+                            1TB HDD
+                        </td>
+                        <td>
+                            30/04/2022
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td>
+                            Totem 3 - Andar 6
+                        </td>
+                        <td>
+                            TOTEM-IFC110
+                        </td>
+                        <td>
+                            Totem
+                        </td>
+                        <td>
+                            Intel i5
+                        </td>
+                        <td>
+                            8GB
+                        </td>
+                        <td>
+                            512GB
+                        </td>
+                        <td>
+                            30/04/2022
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>

@@ -141,34 +141,46 @@ table {
     background-color: whitesmoke;
 }
 .fixed-tr tr th:nth-child(1) {
-    width: 10%;
+    width: 20%;
 }
 .fixed-tr tr th:nth-child(2) {
-    width: 25%;
+    width: 20%;
 }
 .fixed-tr tr th:nth-child(3) {
-    width: 30%;
+    width: 10%;
 }
 .fixed-tr tr th:nth-child(4) {
     width: 15%;
 }
 .fixed-tr tr th:nth-child(5) {
-    width: 20%;
-}
-table tr td:nth-child(1) {
     width: 10%;
 }
+.fixed-tr tr th:nth-child(6) {
+    width: 10%;
+}
+.fixed-tr tr th:nth-child(7) {
+    width: 15%;
+}
+table tr td:nth-child(1) {
+    width: 20%;
+}
 table tr td:nth-child(2) {
-    width: 25%; 
+    width: 20%;
 }
 table tr td:nth-child(3) {
-    width: 30%;
+    width: 10%;
 }
 table tr td:nth-child(4) {
-   width: 15%;
+    width: 15%;
 }
 table tr td:nth-child(5) {
-    width: 20%;
+    width: 10%;
+}
+table tr td:nth-child(6) {
+    width: 10%;
+}
+table tr td:nth-child(7) {
+    width: 15%;
 }
 table, th, td, tr {
     border: 1px solid black;
