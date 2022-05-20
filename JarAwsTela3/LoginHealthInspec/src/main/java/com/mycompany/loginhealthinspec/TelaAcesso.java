@@ -5,11 +5,8 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
-import java.awt.Color;
 import java.io.File;
 import java.net.InetAddress;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import java.util.*;
 
 /**
@@ -51,25 +48,25 @@ public class TelaAcesso extends javax.swing.JFrame {
                     log.guardarLog("Processo: " + fraseProcesso + " em execução.");
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
-            
+
             try {
 
-                        Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                        Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
 
-                        double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
 
-                        lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
-                        lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
-                        lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
+                lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
+                lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
+                lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
 
-                    } catch (Exception e) {
+            } catch (Exception e) {
 
-                        e.printStackTrace();
+                e.printStackTrace();
 
-                    }
+            }
 
             // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
@@ -502,22 +499,18 @@ public class TelaAcesso extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
-<<<<<<< HEAD
+
     private void btnExibirUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirUsoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExibirUsoActionPerformed
 
     private void btnExibirProcessos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirProcessos1ActionPerformed
         // TODO add your handling code here:
-        ExibirProcessos exibirProcessos = new ExibirProcessos();
-        
-        exibirProcessos.setVisible(true);
     }//GEN-LAST:event_btnExibirProcessos1ActionPerformed
-=======
+
     private void minimizeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLblMouseClicked
         this.setExtendedState(TelaAcesso.ICONIFIED);
     }//GEN-LAST:event_minimizeLblMouseClicked
->>>>>>> a3ac24060bc53b6a32d8b17e6adb0c8a09570bb9
 
     /**
      * @param args the command line arguments
