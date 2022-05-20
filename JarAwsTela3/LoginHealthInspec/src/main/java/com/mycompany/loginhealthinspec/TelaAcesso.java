@@ -517,9 +517,22 @@ public class TelaAcesso extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
 
+<<<<<<< HEAD
+    private void btnExibirUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirUsoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExibirUsoActionPerformed
+
+    private void btnExibirProcessos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirProcessos1ActionPerformed
+        // TODO add your handling code here:
+        ExibirProcessos exibirProcessos = new ExibirProcessos();
+        
+        exibirProcessos.setVisible(true);
+    }//GEN-LAST:event_btnExibirProcessos1ActionPerformed
+=======
     private void minimizeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLblMouseClicked
         this.setExtendedState(TelaAcesso.ICONIFIED);
     }//GEN-LAST:event_minimizeLblMouseClicked
+>>>>>>> a3ac24060bc53b6a32d8b17e6adb0c8a09570bb9
 
     /**
      * @param args the command line arguments
