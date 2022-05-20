@@ -53,6 +53,7 @@ public class TelaAcesso extends javax.swing.JFrame {
 
             try {
 
+<<<<<<< HEAD
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
 
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
@@ -60,11 +61,19 @@ public class TelaAcesso extends javax.swing.JFrame {
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
                 if (disco > disco * 0.33) {
                     SlackIntegration.sendMessageToSlack("Disco elevado : acima 75%");
+=======
+                Double ram = looca.getMemoria().getTotal() / 1073741824.0;
+                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
+                if (disco > disco * 0.75) {
+                    SlackIntegration.sendMessageToSlack("Disco elevado acima 75%");
+>>>>>>> refs/remotes/origin/develop
                 }
                 if (disco < disco * 0.75) {
                     SlackIntegration.sendMessageToSlack("Disco estável");
                 }
                 if (ramTotal > 1) {
+<<<<<<< HEAD
                     SlackIntegration.sendMessageToSlack("Memória ram elevada : acima 75%");
                 }
                 if (ramTotal < ramTotal * 0.75) {
@@ -74,6 +83,19 @@ public class TelaAcesso extends javax.swing.JFrame {
                 lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
                 lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
                 lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
+=======
+                    SlackIntegration.sendMessageToSlack("memoria ram elevado acima 75%");
+                }
+                if (ramTotal < 1) {
+                    SlackIntegration.sendMessageToSlack("memoria ram estavel");
+                }
+
+                lblHostName.setText(InetAddress.getLocalHost().getHostName());
+                lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
+                lblProcessador.setText(looca.getProcessador().getNome());
+                lblMemoriaRam.setText(String.format("%.1f Gb", ram));
+                lblDisco.setText(String.format("%.1f Gb", disco));
+>>>>>>> refs/remotes/origin/develop
 
             } catch (Exception e) {
 
