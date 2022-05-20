@@ -336,14 +336,7 @@
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
         if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == ''|| passwdConfirmation == '') {
             
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Preencha todos os campos!',
-                width: "30rem",
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "Preencha todos os campos!");
 
             if (corporateName == "")  {
                 console.log('nome está em branco')
@@ -381,26 +374,14 @@
         }
         
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'E-mail deve conter "@" e ".com"!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", 'E-mail deve conter "@" e ".com"!');
 
             finalizarAguardar();
             return false;
         }
         
         if (password != passwdConfirmation) {
-            Swal.fire({
-            position: 'top-center',
-            icon: 'error',
-            title: 'As senhas inseridas devem ser iguais!',
-            showConfirmButton: false,
-            timer: 1500
-            });
+            throwAlert("error", "As senhas inseridas devem ser iguais!");
 
             finalizarAguardar();
 
@@ -415,13 +396,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Cadastrado(a) com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                throwAlert("success", "Cadastrado com sucesso!");
 
                 setTimeout(() => {
                     window.location = "index.html";
@@ -434,13 +409,7 @@
                 console.log(resposta);
 
                 if (resposta.status == 409) {
-                    Swal.fire({
-                        position: 'top-center',
-                        icon: 'error',
-                        title: 'Esse e-mail já foi cadastrado!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    throwAlert("error", "Esse e-mail já foi cadastrado!");
                 }
 
                 throw("Houve um erro ao tentar realizar o cadastro!");
@@ -473,26 +442,14 @@
         console.log("FORM SENHA: ", password);
 
         if (email == "" || password == "") {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Preencha todos os campos!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "Preencha todos os campos!");
 
             finalizarAguardar();
             return false;
         }
 
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'E-mail deve conter "@" e ".com"!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", 'E-mail deve conter "@" e ".com"!');
 
             finalizarAguardar();
             return false;
@@ -550,5 +507,24 @@
         })
 
         return false;
+    }
+
+    function throwAlert(icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
     }
 </script>

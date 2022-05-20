@@ -218,6 +218,22 @@ function cadastrarTecnico(req, res) {
     }
 }
 
+function deletarTecnico(req, res) {
+    let id = req.params.idTecnico;
+
+    usuarioModel.deletarTecnico(id)
+        .then(
+            function(resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function(erro) {
+                console.log(erro);
+                console.log(erro.sqlMessage);
+            }
+        )
+}
+
 function listarAcessos(req, res) {
     usuarioModel.listarAcessos()
         .then(function (resultado) {
@@ -241,6 +257,7 @@ module.exports = {
     validarCadastroTecnico,
     cadastrar,
     cadastrarTecnico,
+    deletarTecnico,
     listar,   
     listarTecnicos,
     testar,

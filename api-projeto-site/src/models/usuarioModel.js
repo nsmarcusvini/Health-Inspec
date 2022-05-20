@@ -53,6 +53,12 @@ function validarCadastroTecnico(email) {
     return database.executar(instrucao);
 }
 
+function deletarTecnico(id) {
+    let instrucao = `DELETE FROM funcionario WHERE idFuncionario = ${id};`;
+
+    return database.executar(instrucao);
+}
+
 function cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", corporateName, email, password);
     
@@ -87,6 +93,7 @@ module.exports = {
     entrar,
     validarCadastro,
     validarCadastroTecnico,
+    deletarTecnico,
     cadastrar,
     cadastrarTecnico,
     listar,

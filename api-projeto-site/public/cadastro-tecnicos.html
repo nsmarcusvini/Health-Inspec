@@ -125,13 +125,7 @@
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
         if (name == "" || cpf == "" || phoneNumber == "" || email == "" || password == "" || confirmation == "") {
             
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Preencha todos os campos!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "Preencha todos os campos!");
 
             if (name == "")  {
                 console.log('nome está em branco')
@@ -157,25 +151,13 @@
         }
         
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'E-mail deve conter "@" e ".com"!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "E-mail deve conter @ e .com!");
             finalizarAguardar();
             return false;
         }
 
         if (password != confirmation) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'As senhas inseridas devem ser iguais!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "As senhas inseridas devem ser iguais!");
             return false;
         }
 
@@ -187,26 +169,14 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Cadastrado(a) com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                throwAlert("success", "Cadastrado com sucesso!");
 
                 document.getElementById("form-cadastro-tecnico").reset();
 
                 finalizarAguardar();
             } else {
                 if (resposta.status == 409) {
-                    Swal.fire({
-                        position: 'top-center',
-                        icon: 'error',
-                        title: 'Esse e-mail já foi cadastrado!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    throwAlert("error", "Esse e-mail já foi cadastrado!");
                 }
                 throw("Houve um erro ao tentar realizar o cadastro!");
             }
@@ -216,5 +186,24 @@
         });
 
         return false;
+    }
+
+    function throwAlert(icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
     }
 </script>

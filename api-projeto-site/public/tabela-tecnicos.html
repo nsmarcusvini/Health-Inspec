@@ -7,8 +7,43 @@
     <title>Health Inspec | Tabela</title>
     <link rel="stylesheet" href="./css/tabela-tecnicos.css">
     <script src="./assets/js/funcoes.js"></script>
+    <script src="../src/controllers/usuarioController.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body onload="validarSessao()">
+    <div class="dark-body-container">
+        <div class="pop-up-container">
+            <div class="close-pop-up-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Deletar conta</h2>
+
+                <form id="form_deletar" method="post" onsubmit="return deletar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+
+                            <label for="userSelect">Selecione o usuário</label>
+
+                            <select name="userSelect" id="user_select">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button>Deletar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
@@ -51,8 +86,17 @@
         </span>
 
         <div class="table-container">
+            <div class="options-container">
+                <div class="options">
+                    <span class="update-button">Atualizar</span>
+    
+                    <span class="delete-button">Deletar</span>
+                </div>
+            </div>
+
             <div class="table-scroll">
                 <table class="fixed-tr">
+
                     <tr>
                         <th>ID</th>
                         
@@ -64,6 +108,7 @@
                         
                         <th>Telefone</th>
                     </tr>
+
                 </table>
             </div>
         </div>
@@ -76,6 +121,7 @@
         if (resposta.ok) {
             resposta.json().then(function(resposta) {
                 let tableContainer = document.querySelector(".table-scroll");
+                let userSelect = document.querySelector(".form-element select");
 
                 // tableContainer.innerHTML = "";
 
@@ -106,6 +152,12 @@
                     table.appendChild(elements);
 
                     tableContainer.appendChild(table);
+
+                    let nameOption = document.createElement("option");
+                    nameOption.value = tecnico.idFuncionario;
+                    nameOption.textContent = tecnico.nome;
+
+                    userSelect.appendChild(nameOption);
                 }
             })
         } else {
@@ -114,4 +166,87 @@
     }).catch(function(resposta) {
         console.log(resposta);
     })
+</script>
+
+<script>
+    let darkBodyContainer = document.querySelector(".dark-body-container");
+    let popUpContainer = document.querySelector(".pop-up-container");
+    let deleteButton = document.querySelector(".delete-button");
+    let closeButton = document.querySelector(".close-pop-up-button");
+
+    deleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.add("active-dark-body-container");
+        popUpContainer.classList.add("active");
+    });
+
+    closeButton.addEventListener("click", () => {
+        document.getElementById("user_select").value = "";
+        darkBodyContainer.classList.remove("active-dark-body-container");
+        popUpContainer.classList.remove("active");
+    });
+</script>
+
+<script>
+    // function testar(sel) {
+    //     throwAlert("info", `O id do ${sel.options[sel.selectedIndex].text} é ${sel.value}`);
+    // }
+    function deletar() {
+        aguardar();
+
+        let formulario = new URLSearchParams(new FormData(document.getElementById("form_deletar")));
+
+        let select = document.getElementById("user_select");
+
+        if (select.value == "") {
+            throwAlert("error", "Selecione um usuário!");
+
+            return false;
+        }
+
+        fetch(`/usuarios/deletarTecnico/${user_select.value}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("error", "Conta deletada com sucesso!");
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function throwAlert(icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
+    }
 </script>
