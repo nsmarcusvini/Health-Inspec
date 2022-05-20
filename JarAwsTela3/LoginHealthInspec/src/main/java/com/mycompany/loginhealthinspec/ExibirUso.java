@@ -5,6 +5,7 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.temperatura.Temperatura;
 import java.awt.Color;
 import java.net.InetAddress;
 import javax.swing.ImageIcon;
@@ -17,7 +18,7 @@ import javax.swing.WindowConstants;
  * @author Nicolas
  */
 public class ExibirUso extends javax.swing.JFrame {
-
+    
     private int mouseX = 0, mouseY = 0;
 
     /**
@@ -34,7 +35,20 @@ public class ExibirUso extends javax.swing.JFrame {
             
             
             Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+            Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
             Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+            if(disco > disco *0.75 ){
+                SlackIntegration.sendMessageToSlack("Disco elevado : acima 75%");
+            }
+            if(disco < disco *0.75 ){
+                SlackIntegration.sendMessageToSlack("Disco estável");
+            }
+            if(ramTotal < ramTotal *0.75 ){
+                SlackIntegration.sendMessageToSlack("Memória ram elevada : acima 75%");
+            }
+            if(ramTotal < ramTotal *0.75 ){
+                SlackIntegration.sendMessageToSlack("Memória ram estável");
+            }
             
             double tamanho = new File("C:\\").getTotalSpace()- new File("C:\\").getFreeSpace();
             

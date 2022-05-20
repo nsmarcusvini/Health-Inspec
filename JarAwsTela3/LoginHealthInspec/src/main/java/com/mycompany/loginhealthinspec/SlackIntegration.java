@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.slack.notificacao;
+package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
 import com.github.seratch.jslack.Slack;
@@ -11,12 +11,11 @@ import com.github.seratch.jslack.api.webhook.WebhookResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SlackIntegrationTest {
+public class SlackIntegration {
     Looca looca = new Looca();
-    Double ram = looca.getMemoria().getTotal() / 1073741824.0;
-    Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+   
     public static void main(String[] args) {
-        sendMessageToSlack(" novo teste");
+        
     }
 
     private static String webHookUrl = "https://hooks.slack.com/services/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";
@@ -39,6 +38,5 @@ public class SlackIntegrationTest {
         }
 
     }
-    
-
 }
+

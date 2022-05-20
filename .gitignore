@@ -167,3 +167,4 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
 /JarAwsTela3/LoginHealthInspec/target/
+/JarAwsTela3/slack-notificacao/target/
