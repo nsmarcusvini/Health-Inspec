@@ -123,7 +123,14 @@
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
         if (name == "" || cpf == "" || phoneNumber == "" || email == "" || password == "" || confirmation == "") {
             
-            window.alert("Preencha todos os campos para prosseguir!");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Preencha todos os campos!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             if (name == "")  {
                 console.log('nome está em branco')
             }
@@ -148,13 +155,25 @@
         }
         
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'E-mail deve conter "@" e ".com"!',
+                showConfirmButton: false,
+                timer: 1500
+            });
             finalizarAguardar();
             return false;
         }
 
         if (password != confirmation) {
-            window.alert("As senhas devem ser iguais!");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'As senhas inseridas devem ser iguais!',
+                showConfirmButton: false,
+                timer: 1500
+            });
             return false;
         }
 
@@ -166,7 +185,17 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Cadastro realizado com sucesso!");
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Cadastrado(a) com sucesso!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 1500);
 
                 // window.location = "index.html";
 

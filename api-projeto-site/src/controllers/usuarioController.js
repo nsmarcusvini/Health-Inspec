@@ -38,6 +38,7 @@ function entrar (req, res) {
         usuarioModel.entrar(email, senha, checkboxTecnico)
         .then(
             function (resultado) {
+                console.log(checkboxTecnico);
                 console.log(`\nResultados encontrados: ${resultado.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
     <!-- <script src="../src/models/usuarioModel.js"></script> -->
@@ -334,7 +336,15 @@
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
         if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == ''|| passwdConfirmation == '') {
             
-            window.alert("Preencha todos os campos para prosseguir!");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Preencha todos os campos!',
+                width: "30rem",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             if (corporateName == "")  {
                 console.log('nome está em branco')
             }
@@ -371,13 +381,26 @@
         }
         
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'E-mail deve conter "@" e ".com"!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             finalizarAguardar();
             return false;
         }
         
         if (password != passwdConfirmation) {
-            window.alert("As senhas inseridas devem ser iguais para prosseguir!");
+            Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'As senhas inseridas devem ser iguais!',
+            showConfirmButton: false,
+            timer: 1500
+            });
 
             finalizarAguardar();
 
@@ -392,9 +415,17 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Cadastro realizado com sucesso!");
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Cadastrado(a) com sucesso!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
-                window.location = "index.html";
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 1500);
 
                 limparFormulario();
 
@@ -403,7 +434,13 @@
                 console.log(resposta);
 
                 if (resposta.status == 409) {
-                    window.alert("email já foi cadastrado!")
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: 'Esse e-mail já foi cadastrado!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
 
                 throw("Houve um erro ao tentar realizar o cadastro!");
@@ -436,13 +473,27 @@
         console.log("FORM SENHA: ", password);
 
         if (email == "" || password == "") {
-            window.alert("Preencha todos os campos para prosseguir!");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'Preencha todos os campos!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             finalizarAguardar();
             return false;
         }
 
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'E-mail deve conter "@" e ".com"!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             finalizarAguardar();
             return false;
         }
