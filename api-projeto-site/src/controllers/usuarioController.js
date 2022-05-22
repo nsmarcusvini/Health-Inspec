@@ -234,6 +234,32 @@ function deletarTecnico(req, res) {
         )
 }
 
+function atualizarTecnico(req, res) {
+    let id = req.params.idTecnico;
+    let field = req.body.fieldSelect;
+    let value = req.body.newValue;
+
+    if(id == undefined) {
+        res.status(400).send("O nome está undefined!");
+    } else if (field == undefined) {
+        res.status(400).send("O campo está undefined!");
+    } else if (value == undefined) {
+        res.status(400).send("O valor está undefined!");
+    } else {
+        usuarioModel.atualizarTecnico(id, field, value)
+            .then(
+                function(resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function(error) {
+                    console.log(error);
+                    console.log(error.sqlMessage);
+                }
+            )
+    }
+}
+
 function listarAcessos(req, res) {
     usuarioModel.listarAcessos()
         .then(function (resultado) {
@@ -258,6 +284,7 @@ module.exports = {
     cadastrar,
     cadastrarTecnico,
     deletarTecnico,
+    atualizarTecnico,
     listar,   
     listarTecnicos,
     testar,

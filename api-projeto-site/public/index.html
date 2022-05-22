@@ -11,6 +11,8 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+
     <script src="assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
     <!-- <script src="../src/models/usuarioModel.js"></script> -->
@@ -80,15 +82,16 @@
                     <div class="form-row">
                         <div class="form-element">
                             <label for="password">Senha</label>
+                            <i id="eye_icon" class="far fa-eye"></i>
                             <input type="password" name="password" id="password" placeholder="******">
                         </div>
-
+                        
                         <div class="form-element">
                             <label for="passwdConfirmation">Confirme a senha</label>
                             <input type="password" name="passwdConfirmation" id="passwdConfirmation" placeholder="******">
                         </div>
                     </div>
-
+                    
                     <div class="form-element form-row">
                         <button>Cadastrar</button>
                     </div>
@@ -112,16 +115,26 @@
                 <form id="form-login" method="post" onsubmit="return entrar()" class="form-columns">
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="loginEmail">Email</label>
-                            <input type="text" id="loginEmail" name="loginEmail" placeholder="health_inspec@gmail.com">
+                            <div class="elements">
+                                <div class="label-container">
+                                    <label for="loginEmail">Email</label>
+                                </div>
+                                <i class="fa fa-envelope"></i>
+                                <input type="text" id="loginEmail" name="loginEmail" placeholder="health_inspec@gmail.com">
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="loginPassword">Senha</label>
-                            <input type="password" id="loginPassword" name="loginPassword" placeholder="******">
-                            <!-- <i class="far fa-eye"></i> -->
+                            <div class="elements">
+                                <div class="label-container">
+                                    <label for="loginPassword">Senha</label>
+                                </div>
+                                <i class="fa fa-lock"></i>
+                                <i id="login_eye" class="far fa-eye login-eye"></i>
+                                <input type="password" id="loginPassword" name="loginPassword" placeholder="******">
+                            </div>
                         </div>
                     </div>
 
@@ -129,7 +142,6 @@
                         <div class="form-element checkbox-element">
                             <input type="checkbox" id="checkbox-tecnico" name="checkbox">
                             <label for="checkbox">Sou um técnico cadastrado!</label>
-                            <!-- <i class="far fa-eye"></i> -->
                         </div>
                     </div>
 
@@ -400,7 +412,7 @@
 
                 setTimeout(() => {
                     window.location = "index.html";
-                }, 1500);
+                }, 2000);
 
                 limparFormulario();
 
@@ -514,7 +526,7 @@
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2000,
             timerProgressBar: true,
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)

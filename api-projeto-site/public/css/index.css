@@ -175,8 +175,28 @@ html {
     justify-content: space-evenly;
     align-items: center;
 }
-.register-container .form .form-element {
+.form .form-element {
     margin: 5px 0px;
+    position: relative;
+}
+.login-container .form .form-element {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-container .form .form-element .elements {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.elements .label-container {
+    display: flex;
+    width: 67%;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 .form .form-element label {
     font-size: 14px;
@@ -189,6 +209,26 @@ html {
     outline: none;
     border: 1px solid #aaa;
     border-radius: 5px;
+}
+.login-container .form .form-element input[type=text],
+.login-container .form .form-element input[type=password] {
+    width: 60%;
+}
+.form .form-element i {
+    position: absolute;
+    top: 2.2rem;
+}
+.register-container .form .form-element i {
+    cursor: pointer;
+    right: 0.2rem;
+}
+.login-container .form .form-element i {
+    left: 4.5rem;
+    top: 2.1rem;
+}
+.login-container .login-eye {
+    left: 17.5rem !important;
+    cursor: pointer;
 }
 .form .form-row .checkbox-element {
     width: 100%;
