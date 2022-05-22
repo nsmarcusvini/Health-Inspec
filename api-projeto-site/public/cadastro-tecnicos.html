@@ -7,6 +7,8 @@
     <title>Health Inspec | Cadastro</title>
     <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
 
+    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="assets/js/funcoes.js"></script>
@@ -85,6 +87,7 @@
                     <div class="form-row">
                         <div class="form-element">
                             <label for="password">Senha</label>
+                            <i id="passwd_eye" class="far fa-eye"></i>
                             <input type="password" name="password" id="password" placeholder="********">
                         </div>
 
@@ -108,6 +111,29 @@
     </div>
 </body>
 </html>
+
+<script>
+    let passwdEye = document.getElementById("passwd_eye");
+
+    passwdEye.addEventListener("click", () => {
+        let password = document.getElementById("password");
+        let confirmation = document.getElementById("confirmation");
+
+        if (password.type == "password") {
+            passwdEye.classList.remove("fa-eye");
+            passwdEye.classList.add("fa-eye-slash");
+
+            password.type = "text";
+            confirmation.type = "text";
+        } else if (password.type == "text") {
+            passwdEye.classList.remove("fa-eye-slash");
+            passwdEye.classList.add("fa-eye");
+
+            password.type = "password";
+            confirmation.type = "password";
+        }
+    });
+</script>
 
 <script>
     function cadastrarTecnico() {

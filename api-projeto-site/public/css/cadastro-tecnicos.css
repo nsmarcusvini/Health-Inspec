@@ -139,6 +139,7 @@ body {
 }
 .form .form-element {
     margin: 5px 0px;
+    position: relative;
 }
 .form .form-element label {
     font-size: 14px;
@@ -151,6 +152,12 @@ body {
     outline: none;
     border: 1px solid #aaa;
     border-radius: 5px;
+}
+.form .form-element i {
+    position: absolute;
+    top: 2.2rem;
+    left: 10.5rem;
+    cursor: pointer;
 }
 .form .form-row button {
     /* padding: 10px; */
