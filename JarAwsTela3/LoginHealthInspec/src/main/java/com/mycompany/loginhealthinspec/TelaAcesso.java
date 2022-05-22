@@ -5,11 +5,8 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
-import java.awt.Color;
 import java.io.File;
 import java.net.InetAddress;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import java.util.*;
 
 /**
@@ -51,25 +48,51 @@ public class TelaAcesso extends javax.swing.JFrame {
                     log.guardarLog("Processo: " + fraseProcesso + " em execução.");
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
-            
+
             try {
 
-                        Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                        Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
 
-                        double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-
-                        lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
-                        lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
-                        lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-
+                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
+                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                if (disco > disco * 0.33) {
+                    SlackIntegration.sendMessageToSlack("Disco elevado : acima 75%");
+                    if (disco > disco * 0.75) {
+                        SlackIntegration.sendMessageToSlack("Disco elevado acima 75%");
                     }
+                    if (disco < disco * 0.75) {
+                        SlackIntegration.sendMessageToSlack("Disco estável");
+                    }
+                    if (ramTotal > 1) {
+                        SlackIntegration.sendMessageToSlack("Memória ram elevada : acima 75%");
+                    }
+                    if (ramTotal < ramTotal * 0.75) {
+                        SlackIntegration.sendMessageToSlack("Memória ram estável");
+                    }
+
+                    lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
+                    lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
+                    lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
+                    SlackIntegration.sendMessageToSlack("memoria ram elevado acima 75%");
+                }
+                if (ramTotal < 1) {
+                    SlackIntegration.sendMessageToSlack("memoria ram estavel");
+                }
+
+                lblHostName.setText(InetAddress.getLocalHost().getHostName());
+                lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
+                lblProcessador.setText(looca.getProcessador().getNome());
+                lblMemoriaRam.setText(String.format("%.1f Gb", ram));
+                lblDisco.setText(String.format("%.1f Gb", disco));
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
 
             // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
@@ -83,7 +106,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                                 String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
                                 String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
                                 Runtime.getRuntime().exec(killWindows);
-                                log.guardarLog("Processo: " + processoFinalizado + " finalizado!");
+                                log.guardarLog("Processo: " + processoFinalizado + " finalizado pela BlackList!");
                                 looca.getGrupoDeProcessos().getProcessos().remove(i);
                             }
                             if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
@@ -501,6 +524,15 @@ public class TelaAcesso extends javax.swing.JFrame {
         System.exit(0);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }//GEN-LAST:event_closeLblMouseClicked
+
+
+    private void btnExibirUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirUsoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExibirUsoActionPerformed
+
+    private void btnExibirProcessos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExibirProcessos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExibirProcessos1ActionPerformed
 
     private void minimizeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeLblMouseClicked
         this.setExtendedState(TelaAcesso.ICONIFIED);
