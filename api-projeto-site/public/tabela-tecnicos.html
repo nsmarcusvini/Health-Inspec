@@ -7,8 +7,96 @@
     <title>Health Inspec | Tabela</title>
     <link rel="stylesheet" href="./css/tabela-tecnicos.css">
     <script src="./assets/js/funcoes.js"></script>
+    <script src="../src/controllers/usuarioController.js"></script>
+
+    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body onload="validarSessao()">
+    <div class="dark-body-container">
+        <div class="pop-up-container">
+            <div class="close-pop-up-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Deletar conta</h2>
+
+                <form id="form_deletar" method="post" onsubmit="return deletar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+
+                            <label for="userSelect">Selecione o usuário</label>
+
+                            <select name="userSelect" id="user_select">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-delete-button">Deletar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+    
+    <div class="update-dark-body">
+        <div class="update-pop-up">
+            <div class="close-update-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Atualizar conta</h2>
+
+                <form id="form_atualizar" method="post" onsubmit="return atualizar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+
+                            <label for="userSelect">Selecione o usuário</label>
+                            <select name="userSelect" id="update_user_select">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="fieldSelect">Selecione o campo</label>
+                            <select name="fieldSelect" id="field_select">
+                                <option value=""></option>
+                                <option value="nome">Nome</option>
+                                <option value="email">E-mail</option>
+                                <option value="cpf">CPF</option>
+                                <option value="telefone">Telefone</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="newValue">Digite o novo valor</label>
+                            <input type="text" name="newValue" id="new_value" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-update-button">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
@@ -51,8 +139,17 @@
         </span>
 
         <div class="table-container">
+            <div class="options-container">
+                <div class="options">
+                    <span class="update-button">Atualizar</span>
+    
+                    <span class="delete-button">Deletar</span>
+                </div>
+            </div>
+
             <div class="table-scroll">
                 <table class="fixed-tr">
+
                     <tr>
                         <th>ID</th>
                         
@@ -64,6 +161,7 @@
                         
                         <th>Telefone</th>
                     </tr>
+
                 </table>
             </div>
         </div>
@@ -76,6 +174,8 @@
         if (resposta.ok) {
             resposta.json().then(function(resposta) {
                 let tableContainer = document.querySelector(".table-scroll");
+                let userSelect = document.querySelector(".form-element select");
+                let updateUserSelect = document.querySelector("#update_user_select");
 
                 // tableContainer.innerHTML = "";
 
@@ -106,6 +206,18 @@
                     table.appendChild(elements);
 
                     tableContainer.appendChild(table);
+
+                    let nameOption = document.createElement("option");
+                    nameOption.value = tecnico.idFuncionario;
+                    nameOption.textContent = tecnico.nome;
+
+                    userSelect.appendChild(nameOption);
+
+                    let updateName = document.createElement("option");
+                    updateName.value = tecnico.idFuncionario;
+                    updateName.textContent = tecnico.nome;
+                    
+                    updateUserSelect.appendChild(updateName);
                 }
             })
         } else {
@@ -114,4 +226,182 @@
     }).catch(function(resposta) {
         console.log(resposta);
     })
+</script>
+
+<script>
+    const darkBodyContainer = document.querySelector(".dark-body-container");
+    const popUpContainer = document.querySelector(".pop-up-container");
+    const deleteButton = document.querySelector(".delete-button");
+    const closeDeleteButton = document.querySelector(".close-pop-up-button");
+
+    deleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.add("active-dark-body-container");
+        popUpContainer.classList.add("active");
+    });
+
+    closeDeleteButton.addEventListener("click", () => {
+        document.getElementById("user_select").value = "";
+        darkBodyContainer.classList.remove("active-dark-body-container");
+        popUpContainer.classList.remove("active");
+    });
+
+    const updateDarkBody = document.querySelector(".update-dark-body");
+    const updatePopUp = document.querySelector(".update-pop-up");
+    const updateButton = document.querySelector(".update-button");
+    const closeUpdateButton = document.querySelector(".close-update-button");
+
+    updateButton.addEventListener("click", () => {
+        updateDarkBody.classList.add("active-update-dark-body");
+        updatePopUp.classList.add("active");
+    });
+
+    closeUpdateButton.addEventListener("click", () => {
+        document.getElementById("update_user_select").value = "";
+        document.getElementById("field_select").value = "";
+        document.getElementById("new_value").value = "";
+        updateDarkBody.classList.remove("active-update-dark-body");
+        updatePopUp.classList.remove("active");
+    });
+</script>
+
+<script>
+    // function testar(sel) {
+    //     throwAlert("info", `O id do ${sel.options[sel.selectedIndex].text} é ${sel.value}`);
+    // }
+    function deletar() {
+        aguardar();
+
+        let formulario = new URLSearchParams(new FormData(document.getElementById("form_deletar")));
+
+        let select = document.getElementById("user_select");
+
+        if (select.value == "") {
+            throwAlert("error", "Selecione um usuário!");
+
+            return false;
+        }
+
+        fetch(`/usuarios/deletarTecnico/${user_select.value}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Conta deletada com sucesso!");
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function atualizar() {
+        aguardar();
+
+        const formulario = new URLSearchParams(new FormData(document.getElementById("form_atualizar")));
+
+        const userSelect= document.getElementById("update_user_select");
+        const fieldSelect = document.getElementById("field_select");
+        const newValue = document.getElementById("new_value");
+
+        if (userSelect.value == "") {
+            throwAlert("error", "Selecione um usuário!");
+
+            return false;
+        }
+        if (fieldSelect.value == "") {
+            throwAlert("error", "Selecione um campo para ser atualizado!");
+
+            return false;
+        } 
+        if (newValue.value == "") {
+            throwAlert("error", "Digite o novo valor!");
+
+            return false;
+        }
+
+        const isEmailSelected = fieldSelect.value == "email";
+        const isCpfSelected = fieldSelect.value == "cpf";
+        const isPhoneSelected = fieldSelect.value == "telefone";
+
+        if (isEmailSelected) {
+            if (newValue.value.indexOf("@") == -1 || newValue.value.indexOf(".com") == -1) {
+                throwAlert("error", "Novo e-mail deve conter @ e .com!");
+                
+                return false;
+            }
+        } else if (isCpfSelected) {
+            if (newValue.value.length != 11) {
+                throwAlert("error", "Digite um CPF válido (11 dígitos)!");
+
+                return false;
+            }
+        } else if (isPhoneSelected) {
+            if (newValue.value.length != 11) {
+                throwAlert("error", "Digite um número de telefone válido (11 dígitos)!");
+
+                return false;
+            }
+        }
+
+        fetch(`/usuarios/atualizarTecnico/${userSelect.value}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Conta atualizada com sucesso!");
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function throwAlert(icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
+    }
 </script>

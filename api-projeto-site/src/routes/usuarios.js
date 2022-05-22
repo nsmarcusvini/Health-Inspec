@@ -23,6 +23,14 @@ router.post("/cadastrarTecnico/:fkHospital", function(req, res) {
     usuarioController.validarCadastroTecnico(req, res);
 })
 
+router.post("/deletarTecnico/:idTecnico", function(req, res) {
+    usuarioController.deletarTecnico(req, res);
+})
+
+router.post("/atualizarTecnico/:idTecnico", function(req, res) {
+    usuarioController.atualizarTecnico(req, res);
+})
+
 router.post("/autenticar", function(req, res) {
     usuarioController.entrar(req, res);
 });
