@@ -77,7 +77,7 @@ function entrar (req, res) {
     }
 }
 
-function validarLogin(req, res) {
+function validarCadastro(req, res) {
     let corporateName = req.body.corporateName;
     let cnpj = req.body.cnpj;
     let email = req.body.email;
@@ -107,7 +107,7 @@ function validarLogin(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua bairro está undefined!"); 
     } else {
-        usuarioModel.validarLogin(email)
+        usuarioModel.validarCadastro(email)
         .then(
             function (resultado) {
                 console.log(`ESTOU NA FUNCAO, O TAMANHO DO RESULTADO É ${resultado.length}`);
@@ -116,6 +116,31 @@ function validarLogin(req, res) {
                     cadastrar(req, res);
                 } else {
                     res.status(409).send("E-mail já cadastrado!")
+                }
+            }
+        ).catch(
+            function (error) {
+                console.log(error);
+                res.status(500).send(error.sqlMessage);
+                res.status(500).send(error);
+            }
+        )
+    }
+}
+
+function validarCadastroTecnico(req, res) {
+    let email = req.body.email;
+
+    if (email == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    } else {
+        usuarioModel.validarCadastroTecnico(email)
+        .then(
+            function(resultado) {
+                if (resultado.length == 0) {
+                    cadastrarTecnico(req, res);
+                } else {
+                    res.status(409).send("E-mail já cadastrado!");
                 }
             }
         ).catch(
@@ -193,6 +218,48 @@ function cadastrarTecnico(req, res) {
     }
 }
 
+function deletarTecnico(req, res) {
+    let id = req.params.idTecnico;
+
+    usuarioModel.deletarTecnico(id)
+        .then(
+            function(resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function(erro) {
+                console.log(erro);
+                console.log(erro.sqlMessage);
+            }
+        )
+}
+
+function atualizarTecnico(req, res) {
+    let id = req.params.idTecnico;
+    let field = req.body.fieldSelect;
+    let value = req.body.newValue;
+
+    if(id == undefined) {
+        res.status(400).send("O nome está undefined!");
+    } else if (field == undefined) {
+        res.status(400).send("O campo está undefined!");
+    } else if (value == undefined) {
+        res.status(400).send("O valor está undefined!");
+    } else {
+        usuarioModel.atualizarTecnico(id, field, value)
+            .then(
+                function(resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function(error) {
+                    console.log(error);
+                    console.log(error.sqlMessage);
+                }
+            )
+    }
+}
+
 function listarAcessos(req, res) {
     usuarioModel.listarAcessos()
         .then(function (resultado) {
@@ -212,9 +279,12 @@ function listarAcessos(req, res) {
 
 module.exports = {
     entrar,
-    validarLogin,
+    validarCadastro,
+    validarCadastroTecnico,
     cadastrar,
     cadastrarTecnico,
+    deletarTecnico,
+    atualizarTecnico,
     listar,   
     listarTecnicos,
     testar,

@@ -7,6 +7,10 @@
     <title>Health Inspec | Cadastro</title>
     <link rel="stylesheet" href="./css/cadastro-tecnicos.css">
 
+    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="assets/js/funcoes.js"></script>
 </head>
 <body onload="validarSessao()">
@@ -83,6 +87,7 @@
                     <div class="form-row">
                         <div class="form-element">
                             <label for="password">Senha</label>
+                            <i id="passwd_eye" class="far fa-eye"></i>
                             <input type="password" name="password" id="password" placeholder="********">
                         </div>
 
@@ -108,6 +113,29 @@
 </html>
 
 <script>
+    let passwdEye = document.getElementById("passwd_eye");
+
+    passwdEye.addEventListener("click", () => {
+        let password = document.getElementById("password");
+        let confirmation = document.getElementById("confirmation");
+
+        if (password.type == "password") {
+            passwdEye.classList.remove("fa-eye");
+            passwdEye.classList.add("fa-eye-slash");
+
+            password.type = "text";
+            confirmation.type = "text";
+        } else if (password.type == "text") {
+            passwdEye.classList.remove("fa-eye-slash");
+            passwdEye.classList.add("fa-eye");
+
+            password.type = "password";
+            confirmation.type = "password";
+        }
+    });
+</script>
+
+<script>
     function cadastrarTecnico() {
         aguardar();
 
@@ -123,13 +151,7 @@
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
         if (name == "" || cpf == "" || phoneNumber == "" || email == "" || password == "" || confirmation == "") {
             
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'Preencha todos os campos!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "Preencha todos os campos!");
 
             if (name == "")  {
                 console.log('nome está em branco')
@@ -155,25 +177,13 @@
         }
         
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'E-mail deve conter "@" e ".com"!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "E-mail deve conter @ e .com!");
             finalizarAguardar();
             return false;
         }
 
         if (password != confirmation) {
-            Swal.fire({
-                position: 'top-center',
-                icon: 'error',
-                title: 'As senhas inseridas devem ser iguais!',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            throwAlert("error", "As senhas inseridas devem ser iguais!");
             return false;
         }
 
@@ -185,24 +195,15 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'Cadastrado(a) com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-                setTimeout(() => {
-                    window.location = "index.html";
-                }, 1500);
-
-                // window.location = "index.html";
+                throwAlert("success", "Cadastrado com sucesso!");
 
                 document.getElementById("form-cadastro-tecnico").reset();
 
                 finalizarAguardar();
             } else {
+                if (resposta.status == 409) {
+                    throwAlert("error", "Esse e-mail já foi cadastrado!");
+                }
                 throw("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
@@ -211,5 +212,24 @@
         });
 
         return false;
+    }
+
+    function throwAlert(icon, message) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: icon,
+            title: message
+        })
     }
 </script>

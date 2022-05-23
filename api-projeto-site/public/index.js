@@ -79,6 +79,38 @@ closeButton.addEventListener("click", function() {
     })
 });
 
+// funcao para mostrar/esconder senha com icone do olho
+let eyeIcon = document.getElementById("eye_icon");
+eyeIcon.addEventListener("click", function() {
+    let password = document.getElementById("password");
+    let confirmation = document.getElementById("passwdConfirmation");
+    if (password.type == "password") {
+        eyeIcon.classList.remove("far", "fa-eye");
+        eyeIcon.classList.add("far", "fa-eye-slash");
+        password.type = "text";
+        confirmation.type = "text";
+    } else {
+        eyeIcon.classList.remove("far", "fa-eye-slash");
+        eyeIcon.classList.add("far", "fa-eye");
+        password.type = "password"
+        confirmation.type = "password"
+    }
+});
+
+let loginEyeIcon = document.getElementById("login_eye");
+loginEyeIcon.addEventListener("click", () => {
+    const loginPasswd = document.getElementById("loginPassword");
+    if (loginPasswd.type == "password") {
+        loginPasswd.classList.remove("far", "fa-eye");
+        loginPasswd.classList.add("far", "fa-eye-slash");
+        loginPasswd.type = "text";
+    } else {
+        loginPasswd.classList.remove("far", "fa-eye-slash");
+        loginPasswd.classList.add("far", "fa-eye");
+        loginPasswd.type = "password";
+    }
+});
+
 // funcoes para menu lateral 
 let openSideBarButton = document.getElementById("sidebar-open-button");
 

@@ -26,6 +26,192 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #383b50;
 }
+.dark-body-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+    z-index: 3;
+}
+.update-dark-body {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+    z-index: 3;
+}
+.active-dark-body-container {
+    visibility: visible;
+    opacity: 1;
+    transition: top 0ms ease-out 0ms,
+                opacity 200ms ease-out 0ms,
+                transform 200ms ease-out 0ms;
+}
+.active-update-dark-body {
+    visibility: visible;
+    opacity: 1;
+    transition: top 0ms ease-out 0ms,
+                opacity 200ms ease-out 0ms,
+                transform 200ms ease-out 0ms;
+}
+.pop-up-container {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    width: 25rem;
+    height: 16rem;
+    padding: 20px 30px;
+    background-color: #FAFAFA;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+    z-index: 3;
+}
+.update-pop-up {
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    width: 28rem;
+    height: 24.5rem;
+    padding: 20px 30px;
+    background-color: #FAFAFA;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+    z-index: 3;
+}
+.pop-up-container.active {
+    top: 52%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+}
+.update-pop-up.active {
+    top: 52%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+}
+.close-pop-up-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: #888;
+    color: #eee;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.close-update-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: #888;
+    color: #eee;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.pop-up {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.pop-up h2 {
+    text-align: center;
+    color: #222;
+    font-size: 25px;
+}
+.pop-up .form-columns {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.form-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.form-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-element label {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #222;
+}
+.form-element select, .form-element input {
+    margin-top: 5px;
+    display: block;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+.form-element button {
+    width: 50%;
+    height: 2.5rem;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #f5f5f5;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 200ms;
+}
+.form-element .confirm-delete-button {
+    background-color: rgb(170, 5, 5);
+}
+.form-element .confirm-update-button {
+    background-color: #01677E;
+    /* background-color: #01677E; */
+}
 .sidebar-menu-container {
     width: 22%;
     height: 100vh;
@@ -121,8 +307,24 @@ body {
     height: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
+}
+.options-container {
+    width: 94%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.options {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.options span {
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 .table-scroll {
     width: 95%;

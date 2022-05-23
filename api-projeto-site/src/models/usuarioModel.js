@@ -41,8 +41,26 @@ function entrar(email, senha, checkboxTecnico) {
     return database.executar(instrucao);
 }
 
-function validarLogin(email) {
-    let instrucao = `SELECT * FROM hospital WHERE email = '${email}'`;
+function validarCadastro(email) {
+    let instrucao = `SELECT * FROM hospital WHERE email = '${email}';`;
+
+    return database.executar(instrucao);
+}
+
+function validarCadastroTecnico(email) {
+    let instrucao = `SELECT * FROM funcionario WHERE email = '${email}';`;
+
+    return database.executar(instrucao);
+}
+
+function deletarTecnico(id) {
+    let instrucao = `DELETE FROM funcionario WHERE idFuncionario = ${id};`;
+
+    return database.executar(instrucao);
+}
+
+function atualizarTecnico(id, field, value) {
+    let instrucao = `UPDATE funcionario SET ${field} = '${value}' WHERE idFuncionario = ${id};`;
 
     return database.executar(instrucao);
 }
@@ -79,7 +97,10 @@ function cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password) {
 
 module.exports = {
     entrar,
-    validarLogin,
+    validarCadastro,
+    validarCadastroTecnico,
+    deletarTecnico,
+    atualizarTecnico,
     cadastrar,
     cadastrarTecnico,
     listar,
