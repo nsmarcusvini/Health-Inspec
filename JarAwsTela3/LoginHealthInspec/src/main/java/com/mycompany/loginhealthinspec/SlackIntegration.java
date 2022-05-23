@@ -12,13 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SlackIntegration {
-    Looca looca = new Looca();
-    
-    
 
-    private static String webHookUrl = "https://hooks.slack.com/services/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";
+    Looca looca = new Looca();
+
+    private static String webHookUrl = "https://hooks.slack.com/services/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";
     private static String oAuthToken = "xoxb-3482532505233-3523046039027-MbPFejOnM6mGpr7dk4IKTOWK";
     private static String slackChannel = "projeto-agilidade-de-processos";
+
+    
 
     public static void sendMessageToSlack(String message) {
 
@@ -37,4 +38,3 @@ public class SlackIntegration {
 
     }
 }
-

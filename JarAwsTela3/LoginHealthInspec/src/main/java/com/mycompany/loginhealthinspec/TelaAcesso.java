@@ -17,12 +17,19 @@ public class TelaAcesso extends javax.swing.JFrame {
 
     private int mouseX = 0, mouseY = 0;
 
+    Looca looca = new Looca();
+
     /**
      * Creates new form Login
      */
     public TelaAcesso() {
         initComponents();
         this.setUpOs();
+
+//        for (MonitoramentoDisco monitoramentoDisco1 : looca.getGrupoDeDiscos().getDiscos()) {;;
+//            MonitoramentoDisco monitoramentoDisco = new MonitoramentoDisco();
+//            this.monitoramentoDisco.add(monitoramentoDisco);
+//        }
     }
 
     Thread function = new Thread() {
@@ -55,20 +62,30 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                 Double ram = looca.getMemoria().getTotal() / 1073741824.0;
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
-                Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
-                if (disco > disco * 0.75) {
-                    SlackIntegration.sendMessageToSlack("Disco elevado acima 75%");
+                Double ConsumoCpu = looca.getProcessador().getUso();
+                Long consumoMemoriaRam = looca.getMemoria().getEmUso();
+                Long porcentagemMemoriaRam = (consumoMemoriaRam * 100 / looca.getMemoria().getTotal() * 100) / 100;
+                if (ConsumoCpu > 75) {
+                    SlackIntegration.sendMessageToSlack("Sr.(a) usuário"
+                            + " sua máquina está com o consumo de CPU acima de 75%");
                 }
-                if (disco < disco * 0.75) {
-                    SlackIntegration.sendMessageToSlack("Disco estável");
-                }
-                if (ramTotal > 1) {
-                    SlackIntegration.sendMessageToSlack("memoria ram elevado acima 75%");
-                }
-                if (ramTotal < 1) {
-                    SlackIntegration.sendMessageToSlack("memoria ram estavel");
+                if (porcentagemMemoriaRam > 75) {
+                    SlackIntegration.sendMessageToSlack("Sr.(a) usuário"
+                            + " sua máquina está com o consumo de memória acima de 75%");
                 }
 
+//                if (disco > disco * 0.90) {
+//                    SlackIntegration.sendMessageToSlack("Disco chegando a 100%");
+//                }
+//                if (disco == disco * 0.100) {
+//                    SlackIntegration.sendMessageToSlack("Disco elevado");
+//                }
+//                if (ramTotal > 1) {
+//                    SlackIntegration.sendMessageToSlack("memoria ram elevado acima 75%");
+//                }
+//                if (ramTotal < 1) {
+//                    SlackIntegration.sendMessageToSlack("memoria ram estavel");
+//                }
                 lblHostName.setText(InetAddress.getLocalHost().getHostName());
                 lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
                 lblProcessador.setText(looca.getProcessador().getNome());
