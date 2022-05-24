@@ -7,6 +7,8 @@
     <title>Health Inspec | Dashboard</title>
     <link rel="stylesheet" href="./css/dashboard-maquinas.css">
     <script src="./assets/js/funcoes.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body onload="validarSessao()">
     <div class="sidebar-menu-container">
@@ -52,18 +54,113 @@
 
         <div class="page-title">
             <div class="title">
-                Selecione a máquina desejada para monitorar seus componentes pelos gráficos.
+                Monitoramento de componentes
             </div>
 
-            <div class="desc">
-                Caso a máquina não tenha o sistema da Health Inspec ou não tenha sido cadastrada 
-                no site, os gráficos não poderão ser exibidos.
+            <div class="select-machine-container">
+                <label for="select-machine">Máquina selecionada: </label>
+                <select name="select-machine" id="select_machine">
+                    <option value=""></option>
+                    <option value="">Máquina teste</option>
+                </select>
             </div>
         </div>
 
-        <div class="graphs-container">
 
+        <div class="cards-container">
+            <div class="card" onclick="obterDadosGrafico(ram)">
+                <div class="card-title">RAM</div>
+                <div class="card-subtitle">Espaço total - 8GB</div>
+                <div class="card-subtitle">Espaço livre - 30%</div>
+                <div class="card-status">
+                    <div class="box green"></div>
+                    <label>Ideal</label>
+                </div>
+            </div>
+            
+            <div class="card" onclick="obterDadosGrafico(disco)">
+                <div class="card-title">Disco</div>
+                <div class="card-subtitle">Espaço total - 256SSD</div>
+                <div class="card-subtitle">Espaço livre - 20%</div>
+                <div class="card-status">
+                    <div class="box yellow"></div>
+                    Alerta!
+                </div>
+            </div>
+
+            <div class="card" onclick="obterDadosGrafico(processador)">
+                <div class="card-title">Processador</div>
+                <div class="card-subtitle">Uso ideal - 65%</div>
+                <div class="card-subtitle">Uso atual - 90%</div>
+                <div class="card-status">
+                    <div class="box red"></div>
+                    Urgente!
+                </div>
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title-container">
+                <div class="graph-title">Gráfico - RAM</div>
+
+                <div class="graph-desc">
+                    <div class="box-container">
+                        <div class="box green"></div> 
+                        <label class="desc">Uso ideal</label>
+                        <label>-</label>
+                        <label id="graph-range" class="range">até 600</label>
+                    </div>
+                    
+                    <div class="box-container">
+                        <div class="box yellow"></div> 
+                        <label class="desc">Uso em alerta</label>
+                        <label>-</label>
+                        <label id="graph-range" class="range">600 a 700</label>
+                    </div>
+                    
+                    <div class="box-container">
+                        <div class="box red"></div> 
+                        <label class="desc">Uso em urgência</label>
+                        <label>-</label>
+                        <label id="graph-range" class="range">acima de 700</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph">
+                <canvas id="chart_bar"></canvas>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+    let proximaAtualizacao;
+    let proximaAtualizacao2;
+
+    function obterDadosGrafico(nomeComponente) {
+        if (proximaAtualizacao != undefined && proximaAtualizacao2 != undefined) {
+            clearTimeout(proximaAtualizacao);
+            clearTimeout(proximaAtualizacao2);
+        }
+
+        fetch(`/medidas/ultimas/${nomeComponente}`, 
+            { cache: 'no-store' }
+        ).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, nomeComponente);
+                    plotarGrafico2(resposta, nomeComponente);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });    
+    }
+</script>

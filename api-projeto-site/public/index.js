@@ -85,13 +85,13 @@ eyeIcon.addEventListener("click", function() {
     let password = document.getElementById("password");
     let confirmation = document.getElementById("passwdConfirmation");
     if (password.type == "password") {
-        eyeIcon.classList.remove("far", "fa-eye");
-        eyeIcon.classList.add("far", "fa-eye-slash");
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
         password.type = "text";
         confirmation.type = "text";
     } else {
-        eyeIcon.classList.remove("far", "fa-eye-slash");
-        eyeIcon.classList.add("far", "fa-eye");
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
         password.type = "password"
         confirmation.type = "password"
     }
