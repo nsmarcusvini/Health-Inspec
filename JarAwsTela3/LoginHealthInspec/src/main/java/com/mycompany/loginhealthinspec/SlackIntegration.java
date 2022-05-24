@@ -16,7 +16,7 @@ public class SlackIntegration {
     
     
 
-    private static String webHookUrl = "https://hooks.slack.com/services/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";
+    private static String webHookUrl = "https://hooks.slack.com/services/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";
     private static String oAuthToken = "xoxb-3482532505233-3523046039027-MbPFejOnM6mGpr7dk4IKTOWK";
     private static String slackChannel = "projeto-agilidade-de-processos";
 

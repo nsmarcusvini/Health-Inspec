@@ -59,42 +59,64 @@ public class TelaAcesso extends javax.swing.JFrame {
                 Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
                 Double cpu = looca.getProcessador().getUso();
-                if (disco > disco * 0.75) {
-                    SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 75%");
-                    if (disco > disco * 0.90) {
-                        SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 90%");
+                Long discoTotaL = looca.getGrupoDeDiscos().getTamanhoTotal();
+                List<Double> tamanhoListaDisco = new ArrayList<>();
+                List<Double> tamanhoListaCpu = new ArrayList<>();
+                List<Double> tamanhoListaRam = new ArrayList<>();
+                while (true) {
+                    tamanhoListaDisco.add(disco);
+                    tamanhoListaCpu.add(ramTotal);
+                    tamanhoListaRam.add(cpu);
+                    if (tamanhoListaDisco.size() > 30) {
+
+                        if (discoTotaL < disco * 0.35) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 35%");
+                        }
+                        if (discoTotaL > disco * 0.90) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 90%");
+                        }
+                        if (discoTotaL > disco * 0.150) {
+                            SlackIntegration.sendMessageToSlack("Alerta!!Sr.(A) usuario seu disco esta em: 100%");
+                        }
+                        tamanhoListaDisco.clear();
                     }
-                    if (disco > disco * 0.99) {
-                        SlackIntegration.sendMessageToSlack("Alerta maximo !!Sr.(A) usuario seu disco esta em: 100%");
+                    if (tamanhoListaRam.size() > 30) {
+
+                        if (ramTotal > 0.75) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 75%");
+                        }
+                        if (ramTotal == ramTotal * 0.100) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria ram esta em: 100%");
+                        }
+                        if (ramTotal > ramTotal * 0.45) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria ram esta em: 45%");
+                        }
+                        tamanhoListaRam.clear();
                     }
-                    if (ramTotal > 0.75) {
-                        SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 75%");
-                    }
-                    if (ramTotal == ramTotal * 0.100) {
-                        SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria ram esta em: 100%");
-                    }
-                    if (cpu > 0.80) {
-                        SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%%");
-                    }
-                    if (cpu < 0.70) {
-                        SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: abaixo de 70%");
+                    if (tamanhoListaCpu.size() > 30) {
+
+                        if (cpu > 0.80) {
+                            SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%%");
+                        }
+                        if (cpu < 0.70) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: abaixo de 70%");
+                        }
+                        if (cpu > 0.30) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: em 35%");
+                        }
+                        tamanhoListaCpu.clear();
                     }
 
                     lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
                     lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
                     lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
-                    SlackIntegration.sendMessageToSlack("memoria ram elevado acima 75%");
-                }
-                if (ramTotal < 1) {
-                    SlackIntegration.sendMessageToSlack("memoria ram estavel");
-                }
 
-                lblHostName.setText(InetAddress.getLocalHost().getHostName());
-                lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
-                lblProcessador.setText(looca.getProcessador().getNome());
-                lblMemoriaRam.setText(String.format("%.1f Gb", ram));
-                lblDisco.setText(String.format("%.1f Gb", disco));
-
+                    lblHostName.setText(InetAddress.getLocalHost().getHostName());
+                    lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
+                    lblProcessador.setText(looca.getProcessador().getNome());
+                    lblMemoriaRam.setText(String.format("%.1f Gb", ram));
+                    lblDisco.setText(String.format("%.1f Gb", disco));
+                }
             } catch (Exception e) {
 
                 e.printStackTrace();
