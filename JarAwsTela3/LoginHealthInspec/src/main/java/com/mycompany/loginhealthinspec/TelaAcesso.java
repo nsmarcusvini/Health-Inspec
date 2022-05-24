@@ -7,7 +7,10 @@ package com.mycompany.loginhealthinspec;
 import com.github.britooo.looca.api.core.Looca;
 import java.io.File;
 import java.net.InetAddress;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -29,7 +32,15 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         @Override
         public void run() {
+
+            ConnectionAzure azure = new ConnectionAzure();
+            JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
+            Scanner scan = new Scanner(System.in);
             Looca looca = new Looca();
+            Inserts inserts = new Inserts();
+            ResultSet resultSetEmail = null;
+            String so = looca.getSistema().getSistemaOperacional();
+            Integer bits = looca.getSistema().getArquitetura();
             Log log = new Log();
             Integer processList = looca.getGrupoDeProcessos().getProcessos().size();
 
@@ -96,9 +107,49 @@ public class TelaAcesso extends javax.swing.JFrame {
 
             // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
-            Boolean verdadeiro = true;
-            while (verdadeiro) {
+            try {
+                Boolean contador = true;
+                String espaco = "==========";
+                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+                String hostName = InetAddress.getLocalHost().getHostName();
+                
+                while (contador) {
+
+                Boolean verdadeiro = true;
                 Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
+
+                System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
+                        espaco, looca.getProcessador().getUso(),
+                        espaco, ram, espaco, tamanho / 1073741824.0));
+
+                String insert = "INSERT INTO maquinas (tipoMaquina, fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
+
+                con.update(insert,
+                        "Computador",
+                        1,
+                        hostName,
+                        so,
+                        bits
+                );
+
+                String insertComp = "INSERT INTO componentes (nomeComponente, tipoComponente, descricaoComponente, fkMaquina) VALUES (?, ?, ?, ?);";
+
+                con.update(insertComp,
+                        hostName,
+                        "CPU",
+                        looca.getProcessador().getNome(),
+                        2
+                );
+
+                String insertReg = "INSERT INTO registros (totalUsado, dataHora, fkComponente) VALUES (?, ?, ?)";
+
+                con.update(insertReg,
+                        looca.getProcessador().getUso(),
+                        LocalDateTime.now(),
+                        2
+                );
+
                 for (int i = 0; i < processlist; i++) {
                     try {
                         if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
@@ -119,7 +170,11 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                     }
                 }
+
             }
+            } catch (Exception e) {
+            }
+            
         }
     };
 
