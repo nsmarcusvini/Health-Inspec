@@ -317,7 +317,7 @@ body {
     align-items: center;
 }
 .options {
-    width: 20%;
+    width: 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -325,6 +325,12 @@ body {
 .options span {
     font-size: 1.1rem;
     cursor: pointer;
+}
+.options .trash-icon {
+    color: rgb(204, 3, 3);
+}
+.options .update-icon {
+    color: #017892;
 }
 .table-scroll {
     width: 95%;

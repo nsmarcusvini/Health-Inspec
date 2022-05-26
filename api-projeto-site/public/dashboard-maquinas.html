@@ -68,7 +68,7 @@
 
 
         <div class="cards-container">
-            <div class="card" onclick="obterDadosGrafico(ram)">
+            <div id="card1" class="card" onclick="obterDadosGrafico(ram)">
                 <div class="card-title">RAM</div>
                 <div class="card-subtitle">Espaço total - 8GB</div>
                 <div class="card-subtitle">Espaço livre - 30%</div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             
-            <div class="card" onclick="obterDadosGrafico(disco)">
+            <div id="card2" class="card" onclick="obterDadosGrafico(disco)">
                 <div class="card-title">Disco</div>
                 <div class="card-subtitle">Espaço total - 256SSD</div>
                 <div class="card-subtitle">Espaço livre - 20%</div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="card" onclick="obterDadosGrafico(processador)">
+            <div id="card3" class="card" onclick="obterDadosGrafico(processador)">
                 <div class="card-title">Processador</div>
                 <div class="card-subtitle">Uso ideal - 65%</div>
                 <div class="card-subtitle">Uso atual - 90%</div>
@@ -134,6 +134,30 @@
     </div>
 </body>
 </html>
+
+<script>
+    const card1 = document.getElementById("card1");
+    const card2 = document.getElementById("card2");
+    const card3 = document.getElementById("card3");
+
+    card1.addEventListener("click", () => {
+        card1.classList.toggle("active");
+        card2.classList.remove("active");
+        card3.classList.remove("active");
+    });
+
+    card2.addEventListener("click", () => {
+        card2.classList.toggle("active");
+        card1.classList.remove("active");
+        card3.classList.remove("active");
+    });
+    
+    card3.addEventListener("click", () => {
+        card3.classList.toggle("active");
+        card1.classList.remove("active");
+        card2.classList.remove("active");
+    });
+</script>
 
 <script>
     let proximaAtualizacao;

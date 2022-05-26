@@ -226,7 +226,7 @@ html {
     left: 4.5rem;
     top: 2.1rem;
 }
-.login-container .login-eye {
+.login-container #login_eye {
     left: 17.5rem !important;
     cursor: pointer;
 }
@@ -272,6 +272,11 @@ html {
     background-repeat: no-repeat;
     background-attachment: fixed;
     height: 95vh;
+}
+@media only screen and (max-width: 600px) {
+    .header-image {
+        background-image: url(../assets/mobileHomeImage.jpg);
+    }
 }
 .header-container {
     width: 100%;

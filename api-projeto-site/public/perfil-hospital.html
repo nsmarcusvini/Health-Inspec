@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="./css/perfil-hospital.css">
+
+    <script src="https://kit.fontawesome.com/dc4799c2db.js" crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="assets/js/funcoes.js"></script>
+</head>
+<body onload="validarSessao()">
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
+
+                <span class="username" id="hospitalName"></span>
+            </div>
+
+            <div class="items-container">
+                <ul>
+                    <li>
+                        <a href="cadastro-tecnicos.html">Cadastrar técnicos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
+                    </li>
+                    
+                    <li>
+                        <a href="perfil-hospital.html" class="current">Perfil</a>
+                    </li>
+                    
+                    <li>
+                        <a href="index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
+        </div> -->
+
+        <span>
+            Altere sua conta
+        </span>
+
+        <div class="form-container">
+            <div class="form">
+                <form id="form-cadastro-tecnico" method="post" onsubmit="return cadastrarTecnico()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="corporateName">Razão social</label>
+                            <input disabled type="text" name="corporateName" id="corporateName" placeholder="Health Inspec">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="cnpj">CNPJ</label>
+                            <input disabled type="text" name="cnpj" id="cnpj" placeholder="XX. XXX. XXX/0001-XX">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="state">Estado</label>
+                            <input disabled type="text" name="state" id="state" placeholder="SP">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="city">Cidade</label>
+                            <input disabled type="text" name="city" id="city" placeholder="São Paulo">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="cep">CEP</label>
+                            <input disabled type="text" name="cep" id="cep" placeholder="0000-0000">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="publicPlace">Logradouro</label>
+                            <input disabled type="text" name="publicPlace" id="publicPlace" placeholder="Rua exemplo, 111">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="phoneNumber">Telefone</label>
+                            <input disabled type="text" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input disabled type="text" name="email" id="email" placeholder="health_inspec@gmail.com">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="centered-line"></div>
+        </div>
+        <!-- <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div> -->
+
+        <!-- <div id="div_erros_login"></div> -->
+
+        <div class="update-form-container">
+            <h2>Atualizar conta</h2>
+
+                <form id="form_atualizar" method="post" onsubmit="return atualizar()" class="form-columns">
+                    <div class="form-row">
+
+                        <div class="form-element">
+                            <label for="fieldSelect">Selecione o campo</label>
+
+                            <select name="fieldSelect" id="field_select">
+
+                                <option value=""></option>
+                                <option value="razao_social">Razão Social</option>
+                                <option value="cnpj">CNPJ</option>
+                                <option value="estado">Estado</option>
+                                <option value="cidade">Cidade</option>
+                                <option value="cep">CEP</option>
+                                <option value="logradouro">Logradouro</option>
+                                <option value="telefone">Telefone</option>
+                                <option value="email">E-mail</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="newValue">Digite o novo valor</label>
+                            <input type="text" name="newValue" id="new_value" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-update-button">Atualizar</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -155,6 +155,15 @@ function validarCadastroTecnico(req, res) {
 
 function cadastrar(req, res) {
     let corporateName = req.body.corporateName;
+
+    let arrayNome = corporateName.split(" ");
+
+    for (let i = 0; i < arrayNome.length; i++) {
+        arrayNome[i] = arrayNome[i].charAt(0).toUpperCase() + arrayNome[i].slice(1);
+    }
+
+    const capitalizedName = arrayNome.join(" ");
+
     let cnpj = req.body.cnpj;
     let email = req.body.email;
     let phoneNumber = req.body.phoneNumber;
@@ -164,7 +173,7 @@ function cadastrar(req, res) {
     let city = req.body.city;
     let password = req.body.password;
 
-    usuarioModel.cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
+    usuarioModel.cadastrar(capitalizedName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -183,6 +192,13 @@ function cadastrar(req, res) {
 
 function cadastrarTecnico(req, res) {
     let name = req.body.name;
+    let arrayNome = name.split(" ");
+
+    for (let i = 0; i < arrayNome.length; i++) {
+        arrayNome[i] = arrayNome[i].charAt(0).toUpperCase() + arrayNome[i].slice(1);
+    }
+
+    const capitalizedName = arrayNome.join(" ");
     let cpf = req.body.cpf;
     let phoneNumber = req.body.phone;
     let email = req.body.email;
@@ -200,7 +216,7 @@ function cadastrarTecnico(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua senha está undefined!"); 
     } else {
-        usuarioModel.cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password)
+        usuarioModel.cadastrarTecnico(capitalizedName, email, fkHospital, cpf, phoneNumber, password)
         .then(
             function (resultado) {
                 res.json(resultado);

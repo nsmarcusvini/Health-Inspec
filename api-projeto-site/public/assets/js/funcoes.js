@@ -12,6 +12,7 @@ function validarSessao() {
 
         if (hospitalName != null) {
             hospitalName.textContent = capitalizeName(nomeEmpresa);
+            document.querySelector("title").textContent = `Health Inspec | ${nomeEmpresa}`;
         }
         if (employeeName != null) {
             employeeName.textContent = capitalizeName(nomeTecnico);

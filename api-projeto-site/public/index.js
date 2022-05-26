@@ -97,17 +97,20 @@ eyeIcon.addEventListener("click", function() {
     }
 });
 
-let loginEyeIcon = document.getElementById("login_eye");
+const loginEyeIcon = document.getElementById("login_eye");
 loginEyeIcon.addEventListener("click", () => {
-    const loginPasswd = document.getElementById("loginPassword");
-    if (loginPasswd.type == "password") {
-        loginPasswd.classList.remove("far", "fa-eye");
-        loginPasswd.classList.add("far", "fa-eye-slash");
-        loginPasswd.type = "text";
+    const loginInput = document.getElementById("loginPassword");
+
+    if (loginInput.type == "password") {
+        loginEyeIcon.classList.remove("fa-eye");
+        loginEyeIcon.classList.add("fa-eye-slash");
+
+        loginInput.type = "text";
     } else {
-        loginPasswd.classList.remove("far", "fa-eye-slash");
-        loginPasswd.classList.add("far", "fa-eye");
-        loginPasswd.type = "password";
+        loginEyeIcon.classList.remove("fa-eye-slash");
+        loginEyeIcon.classList.add("fa-eye");
+
+        loginInput.type = "password";
     }
 });
 
