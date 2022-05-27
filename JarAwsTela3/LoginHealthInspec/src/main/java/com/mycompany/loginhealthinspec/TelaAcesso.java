@@ -103,6 +103,8 @@ public class TelaAcesso extends javax.swing.JFrame {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: em 35%");
                         }
                         tamanhoListaCpu.clear();
+                        tamanhoListaDisco.clear();
+                        tamanhoListaRam.clear();
                     }
 
                     lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
