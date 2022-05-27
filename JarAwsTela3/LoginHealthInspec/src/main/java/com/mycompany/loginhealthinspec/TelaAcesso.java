@@ -5,6 +5,7 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.processos.Processo;
 import java.io.File;
 import java.net.InetAddress;
 import java.sql.ResultSet;
@@ -54,9 +55,18 @@ public class TelaAcesso extends javax.swing.JFrame {
                 for (int i = 0; i < processList; i++) {
                     String fraseProcesso = "";
 
-                    txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
+                    Processo processoAtual = looca.getGrupoDeProcessos().getProcessos().get(i);
+                    
+                    if (processoAtual.getUsoMemoria() > 0.1 && processoAtual.getUsoCpu() > 0.1) {
+                        txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
+                    }
+                    
                     fraseProcesso = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
                     log.guardarLog("Processo: " + fraseProcesso + " em execução.");
+                    
+                    if (i == processList - 1) {
+                        break;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
