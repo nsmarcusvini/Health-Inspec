@@ -54,7 +54,6 @@ public class TelaAcesso extends javax.swing.JFrame {
             try {
 
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
                 Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
