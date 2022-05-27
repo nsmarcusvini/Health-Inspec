@@ -12,6 +12,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="assets/js/funcoes.js"></script>
+    <script src="assets/js/alert.js"></script>
 </head>
 <body onload="validarSessao()">
     <div class="sidebar-menu-container">
@@ -120,19 +121,55 @@
 
         <!-- <div id="div_erros_login"></div> -->
 
-        <div class="update-form-container">
-            <h2>Atualizar conta</h2>
+        <div class="options-container">
+            <div class="options">   
+                <button class="update-button">Atualizar</button>
+                <button class="delete-button">Deletar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dark-body-container">
+        <div class="pop-up-container">
+            <div class="close-pop-up-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Deletar conta</h2>
+
+                <form id="form_deletar" method="post" onsubmit="return deletar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="userSelect">Digite o nome do hospital</label>
+                            <input id="delete_confirmation" type="text" placeholder="Health Inspec">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-delete-button">Deletar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+
+    <div class="update-dark-body">
+        <div class="update-pop-up">
+            <div class="close-update-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Atualizar conta</h2>
 
                 <form id="form_atualizar" method="post" onsubmit="return atualizar()" class="form-columns">
                     <div class="form-row">
-
                         <div class="form-element">
                             <label for="fieldSelect">Selecione o campo</label>
-
                             <select name="fieldSelect" id="field_select">
-
                                 <option value=""></option>
-                                <option value="razao_social">Razão Social</option>
+                                <option value="razao_social"></option>
                                 <option value="cnpj">CNPJ</option>
                                 <option value="estado">Estado</option>
                                 <option value="cidade">Cidade</option>
@@ -140,10 +177,8 @@
                                 <option value="logradouro">Logradouro</option>
                                 <option value="telefone">Telefone</option>
                                 <option value="email">E-mail</option>
-
                             </select>
                         </div>
-
                     </div>
 
                     <div class="form-row">
@@ -157,7 +192,125 @@
                         <button class="confirm-update-button">Atualizar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
         </div>
     </div>
 </body>
 </html>
+
+<script>
+    const darkBodyContainer = document.querySelector(".dark-body-container");
+    const popUpContainer = document.querySelector(".pop-up-container");
+    const deleteButton = document.querySelector(".delete-button");
+    const closeDeleteButton = document.querySelector(".close-pop-up-button");
+
+    deleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.add("active-dark-body-container");
+        popUpContainer.classList.add("active");
+    });
+
+    closeDeleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.remove("active-dark-body-container");
+        popUpContainer.classList.remove("active");
+    });
+
+    const updateDarkBody = document.querySelector(".update-dark-body");
+    const updatePopUp = document.querySelector(".update-pop-up");
+    const updateButton = document.querySelector(".update-button");
+    const closeUpdateButton = document.querySelector(".close-update-button");
+
+    updateButton.addEventListener("click", () => {
+        updateDarkBody.classList.add("active-update-dark-body");
+        updatePopUp.classList.add("active");
+    });
+
+    closeUpdateButton.addEventListener("click", () => {
+        document.getElementById("field_select").value = "";
+        document.getElementById("new_value").value = "";
+        updateDarkBody.classList.remove("active-update-dark-body");
+        updatePopUp.classList.remove("active");
+    });
+</script>
+
+<script>
+    fetch(`/usuarios/listarInfoHospital/${sessionStorage.ID_HOSPITAL}`).then(function(resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function(resposta) {
+                const corporateName = document.getElementById("corporateName");
+                const cnpj = document.getElementById("cnpj");
+                const state = document.getElementById("state");
+                const city = document.getElementById("city");
+                const cep = document.getElementById("cep");
+                const publicPlace = document.getElementById("publicPlace");
+                const phoneNumber = document.getElementById("phoneNumber");
+                const email = document.getElementById("email");
+
+                for (let i = 0; i < resposta.length; i++) {
+                    const hospital = resposta[i];
+
+                    corporateName.placeholder = hospital.razao_social;
+                    cnpj.placeholder = hospital.cnpj;
+                    state.placeholder = hospital.estado;
+                    city.placeholder = hospital.cidade;
+                    cep.placeholder = hospital.cep;
+                    publicPlace.placeholder = hospital.logradouro;
+                    phoneNumber.placeholder = hospital.telefone;
+                    email.placeholder = hospital.email;
+                }
+            })
+        } else {
+            throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+        }
+    }).catch(function(resposta) {
+        console.log(resposta);
+    })
+</script>
+
+<script>
+    function deletar() {
+        const formulario = new URLSearchParams(new FormData(document.getElementById("form_deletar")));
+
+        const confirmation = document.getElementById("delete_confirmation");
+
+        if (confirmation.value.toUpperCase() != sessionStorage.NOME_USUARIO.toUpperCase()) {
+            throwAlert("error", "Digite o nome do hospital para confirmar!");
+            
+            return false;
+        }
+
+        fetch(`/usuarios/deletarHospital/${sessionStorage.ID_HOSPITAL}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Conta deletada com sucesso!");
+
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o delete!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function atualizar() {
+        
+    }
+</script>

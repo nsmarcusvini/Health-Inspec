@@ -12,6 +12,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="assets/js/funcoes.js"></script>
+    <script src="assets/js/alert.js"></script>
 </head>
 <body onload="validarSessao()">
     <div class="sidebar-menu-container">
@@ -216,24 +217,5 @@
         });
 
         return false;
-    }
-
-    function throwAlert(icon, message) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: icon,
-            title: message
-        })
     }
 </script>

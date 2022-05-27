@@ -9,6 +9,26 @@ function listar() {
     return database.executar(instrucao);
 }
 
+function listarInfoHospital(idHospital) {
+    let instrucao = `
+        SELECT
+            razao_social,
+            cnpj,
+            estado,
+            cidade,
+            cep,
+            logradouro,
+            telefone,
+            email
+        FROM
+            hospital
+        WHERE
+            idHospital = ${idHospital};
+    `;
+
+    return database.executar(instrucao);
+}
+
 function listarTecnicos(fkHospital) {
     let instrucao = `
         SELECT 
@@ -51,6 +71,28 @@ function validarCadastroTecnico(email) {
     let instrucao = `SELECT * FROM funcionario WHERE email = '${email}';`;
 
     return database.executar(instrucao);
+}
+
+function deletarHospital(idHospital) {
+    let instrucao = `
+        DELETE FROM
+            hospital
+        WHERE
+            idHospital = ${idHospital};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function deletarTodosTecnicos(fkHospital) {
+    let instrucao = `
+        DELETE FROM
+            funcionario
+        WHERE
+            fkHospital = ${fkHospital};
+    `;
+
+    return database.executar(instrucao)
 }
 
 function deletarTecnico(id) {
@@ -99,10 +141,13 @@ module.exports = {
     entrar,
     validarCadastro,
     validarCadastroTecnico,
+    deletarHospital,
+    deletarTodosTecnicos,
     deletarTecnico,
     atualizarTecnico,
     cadastrar,
     cadastrarTecnico,
     listar,
-    listarTecnicos
+    listarTecnicos,
+    listarInfoHospital
 };

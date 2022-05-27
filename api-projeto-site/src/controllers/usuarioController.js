@@ -23,6 +23,22 @@ function listarTecnicos(req, res) {
     )
 }
 
+function listarInfoHospital(req, res) {
+    const idHospital = req.params.idHospital;
+
+    usuarioModel.listarInfoHospital(idHospital)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 function listar(req, res) {
     usuarioModel.listar()
     .then(function (resultado) {
@@ -234,6 +250,23 @@ function cadastrarTecnico(req, res) {
     }
 }
 
+function deletarHospital(req, res) {
+    const idHospital = req.params.idHospital;
+
+    usuarioModel.deletarTodosTecnicos(idHospital)
+    .then(
+        function(resultado) {
+            usuarioModel.deletarHospital(idHospital)
+            res.json(resultado);
+        }
+    ).catch(
+        function(erro) {
+            console.log(erro);
+            console.log(erro.sqlMessage);
+        }
+    )
+}
+
 function deletarTecnico(req, res) {
     let id = req.params.idTecnico;
 
@@ -299,10 +332,12 @@ module.exports = {
     validarCadastroTecnico,
     cadastrar,
     cadastrarTecnico,
+    deletarHospital,
     deletarTecnico,
     atualizarTecnico,
     listar,   
     listarTecnicos,
+    listarInfoHospital,
     testar,
     listarAcessos
 }
