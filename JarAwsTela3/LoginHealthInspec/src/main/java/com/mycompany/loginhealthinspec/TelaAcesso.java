@@ -75,9 +75,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                         if (discoTotaL > disco * 0.90) {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 90%");
                         }
-                        if (discoTotaL > disco * 0.150) {
-                            SlackIntegration.sendMessageToSlack("Alerta!!Sr.(A) usuario seu disco esta em: 100%");
-                        }
+
                         tamanhoListaDisco.clear();
                     }
                     if (tamanhoListaRam.size() > 30) {
