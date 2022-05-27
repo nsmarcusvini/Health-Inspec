@@ -108,72 +108,36 @@ public class TelaAcesso extends javax.swing.JFrame {
             //While da blacklist
             try {
                 Boolean contador = true;
-                String espaco = "==========";
-                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-                String hostName = InetAddress.getLocalHost().getHostName();
-                
                 while (contador) {
 
-                Boolean verdadeiro = true;
-                Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
+                    Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
+                    inserts.msg();
 
-                System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
-                        espaco, looca.getProcessador().getUso(),
-                        espaco, ram, espaco, tamanho / 1073741824.0));
-
-                String insert = "INSERT INTO maquinas (tipoMaquina, fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
-
-                con.update(insert,
-                        "Computador",
-                        1,
-                        hostName,
-                        so,
-                        bits
-                );
-
-                String insertComp = "INSERT INTO componentes (nomeComponente, tipoComponente, descricaoComponente, fkMaquina) VALUES (?, ?, ?, ?);";
-
-                con.update(insertComp,
-                        hostName,
-                        "CPU",
-                        looca.getProcessador().getNome(),
-                        2
-                );
-
-                String insertReg = "INSERT INTO registros (totalUsado, dataHora, fkComponente) VALUES (?, ?, ?)";
-
-                con.update(insertReg,
-                        looca.getProcessador().getUso(),
-                        LocalDateTime.now(),
-                        2
-                );
-
-                for (int i = 0; i < processlist; i++) {
-                    try {
-                        if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
-                            if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
-                                String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
-                                String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
-                                Runtime.getRuntime().exec(killWindows);
-                                log.guardarLog("Processo: " + processoFinalizado + " finalizado pela BlackList!");
-                                looca.getGrupoDeProcessos().getProcessos().remove(i);
+                    for (int i = 0; i < processlist; i++) {
+                        try {
+                            if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
+                                if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
+                                    String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
+                                    String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
+                                    Runtime.getRuntime().exec(killWindows);
+                                    log.guardarLog("Processo: " + processoFinalizado + " finalizado pela BlackList!");
+                                    looca.getGrupoDeProcessos().getProcessos().remove(i);
+                                }
+                                if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
+                                    String killUbuntu = "kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
+                                    Runtime.getRuntime().exec(killUbuntu);
+                                    looca.getGrupoDeProcessos().getProcessos().remove(i);
+                                }
                             }
-                            if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
-                                String killUbuntu = "kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
-                                Runtime.getRuntime().exec(killUbuntu);
-                                looca.getGrupoDeProcessos().getProcessos().remove(i);
-                            }
+                        } catch (Exception x) {
+
                         }
-                    } catch (Exception x) {
-
                     }
-                }
 
-            }
+                }
             } catch (Exception e) {
             }
-            
+
         }
     };
 
