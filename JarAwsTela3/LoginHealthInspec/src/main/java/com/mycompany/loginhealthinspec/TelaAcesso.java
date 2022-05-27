@@ -75,9 +75,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                         if (discoTotaL > disco * 0.90) {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 90%");
                         }
-                        if (discoTotaL > disco * 0.150) {
-                            SlackIntegration.sendMessageToSlack("Alerta!!Sr.(A) usuario seu disco esta em: 100%");
-                        }
+
                         tamanhoListaDisco.clear();
                     }
                     if (tamanhoListaRam.size() > 30) {
@@ -96,7 +94,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                     if (tamanhoListaCpu.size() > 30) {
 
                         if (cpu > 0.80) {
-                            SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%%");
+                            SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%");
                         }
                         if (cpu < 0.70) {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: abaixo de 70%");
@@ -105,6 +103,8 @@ public class TelaAcesso extends javax.swing.JFrame {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: em 35%");
                         }
                         tamanhoListaCpu.clear();
+                        tamanhoListaDisco.clear();
+                        tamanhoListaRam.clear();
                     }
 
                     lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
