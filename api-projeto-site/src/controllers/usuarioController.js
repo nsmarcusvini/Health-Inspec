@@ -283,6 +283,32 @@ function deletarTecnico(req, res) {
         )
 }
 
+function atualizarHospital(req, res) {
+    let idHospital = req.params.idHospital;
+    let field = req.body.fieldSelect;
+    let value = req.body.newValue;
+
+    if (idHospital == undefined) {
+        res.status(400).send("O id está undefined!");
+    } else if (field == undefined) {
+        res.status(400).send("O campo está undefined!");
+    } else if (value == undefined) {
+        res.status(400).send("o valor está undefined!");
+    } else {
+        usuarioModel.atualizarHospital(idHospital, field, value)
+        .then(
+            function(resposta) {
+                res.json(resposta);
+            }
+        ).catch(
+            function(error) {
+                console.log(error);
+                console.log(error.sqlMessage);
+            }
+        )
+    }
+}
+
 function atualizarTecnico(req, res) {
     let id = req.params.idTecnico;
     let field = req.body.fieldSelect;
@@ -334,6 +360,7 @@ module.exports = {
     cadastrarTecnico,
     deletarHospital,
     deletarTecnico,
+    atualizarHospital,
     atualizarTecnico,
     listar,   
     listarTecnicos,

@@ -101,6 +101,19 @@ function deletarTecnico(id) {
     return database.executar(instrucao);
 }
 
+function atualizarHospital(id, field, value) {
+    let instrucao = `
+        UPDATE 
+            hospital
+        SET 
+            ${field} = '${value}'
+        WHERE
+            idHospital = ${id};
+    `;
+
+    return database.executar(instrucao);
+}
+
 function atualizarTecnico(id, field, value) {
     let instrucao = `UPDATE funcionario SET ${field} = '${value}' WHERE idFuncionario = ${id};`;
 
@@ -144,6 +157,7 @@ module.exports = {
     deletarHospital,
     deletarTodosTecnicos,
     deletarTecnico,
+    atualizarHospital,
     atualizarTecnico,
     cadastrar,
     cadastrarTecnico,

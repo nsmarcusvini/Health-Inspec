@@ -66,48 +66,48 @@
                     <div class="form-row">
                         <div class="form-element">
                             <label for="corporateName">Razão social</label>
-                            <input disabled type="text" name="corporateName" id="corporateName" placeholder="Health Inspec">
-                        </div>
+                            <input disabled type="text" name="corporateName" id="corporateName">
+                        </div>  
                         
                         <div class="form-element">
                             <label for="cnpj">CNPJ</label>
-                            <input disabled type="text" name="cnpj" id="cnpj" placeholder="XX. XXX. XXX/0001-XX">
+                            <input disabled type="text" name="cnpj" id="cnpj">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
                             <label for="state">Estado</label>
-                            <input disabled type="text" name="state" id="state" placeholder="SP">
+                            <input disabled type="text" name="state" id="state">
                         </div>
                         
                         <div class="form-element">
                             <label for="city">Cidade</label>
-                            <input disabled type="text" name="city" id="city" placeholder="São Paulo">
+                            <input disabled type="text" name="city" id="city">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
                             <label for="cep">CEP</label>
-                            <input disabled type="text" name="cep" id="cep" placeholder="0000-0000">
+                            <input disabled type="text" name="cep" id="cep">
                         </div>
 
                         <div class="form-element">
                             <label for="publicPlace">Logradouro</label>
-                            <input disabled type="text" name="publicPlace" id="publicPlace" placeholder="Rua exemplo, 111">
+                            <input disabled type="text" name="publicPlace" id="publicPlace">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-element">
                             <label for="phoneNumber">Telefone</label>
-                            <input disabled type="text" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+                            <input disabled type="text" name="phoneNumber" id="phoneNumber">
                         </div>
 
                         <div class="form-element">
                             <label for="email">E-mail</label>
-                            <input disabled type="text" name="email" id="email" placeholder="health_inspec@gmail.com">
+                            <input disabled type="text" name="email" id="email">
                         </div>
                     </div>
                 </form>
@@ -169,7 +169,7 @@
                             <label for="fieldSelect">Selecione o campo</label>
                             <select name="fieldSelect" id="field_select">
                                 <option value=""></option>
-                                <option value="razao_social"></option>
+                                <option value="razao_social">Razão Social</option>
                                 <option value="cnpj">CNPJ</option>
                                 <option value="estado">Estado</option>
                                 <option value="cidade">Cidade</option>
@@ -287,7 +287,7 @@
             body: formulario
         }).then(function(resposta) {
             if (resposta.ok) {
-                throwAlert("success", "Conta deletada com sucesso!");
+                throwAlert("success", "Conta deletada com sucesso. Até logo!");
 
                 setTimeout(() => {
                     window.location = "index.html";
@@ -311,6 +311,92 @@
     }
 
     function atualizar() {
-        
+        aguardar();
+
+        const formulario = new URLSearchParams(new FormData(document.getElementById("form_atualizar")));
+
+        const fieldSelect = document.getElementById("field_select");
+        const newValue = document.getElementById("new_value");
+
+        if (fieldSelect.value == "") {
+            throwAlert("error", "Selecione um campo para ser atualizado!");
+
+            return false;
+        } 
+        if (newValue.value == "") {
+            throwAlert("error", "Digite o novo valor!");
+
+            return false;
+        }
+
+        const isNameSelected = fieldSelect.value == "razao_social";
+        const isCnpjSelected = fieldSelect.value == "cnpj";
+        const isCepSelected = fieldSelect.value == "cep";
+        const isEmailSelected = fieldSelect.value == "email";
+        const isCpfSelected = fieldSelect.value == "cpf";
+        const isPhoneSelected = fieldSelect.value == "telefone";
+
+        if (isCnpjSelected) {
+            if (newValue.value.length != 14) {
+                throwAlert("error", "Digite um CNPJ válido (14 dígitos)!");
+
+                return false;
+            }
+        } else if (isCepSelected) {
+            if (newValue.value.length != 8) {
+                throwAlert("error", "Digite um CEP válido (8 dígitos)!");
+
+                return false;
+            }
+        } else if (isEmailSelected) {
+            if (newValue.value.indexOf("@") == -1 || newValue.value.indexOf(".com") == -1) {
+                throwAlert("error", "Novo e-mail deve conter @ e .com!");
+                
+                return false;
+            }
+        } else if (isCpfSelected) {
+            if (newValue.value.length != 11) {
+                throwAlert("error", "Digite um CPF válido (11 dígitos)!");
+
+                return false;
+            }
+        } else if (isPhoneSelected) {
+            if (newValue.value.length != 11) {
+                throwAlert("error", "Digite um número de telefone válido (11 dígitos)!");
+
+                return false;
+            }
+        }
+
+        fetch(`/usuarios/atualizarHospital/${sessionStorage.ID_HOSPITAL}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Conta atualizada com sucesso!");
+
+                if (isNameSelected) {
+                    sessionStorage.NOME_USUARIO = newValue.value;
+                }
+                
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
     }
 </script>

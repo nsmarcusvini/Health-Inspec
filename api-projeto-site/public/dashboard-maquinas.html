@@ -128,12 +128,17 @@
             </div>
 
             <div class="graph">
-                <canvas id="chart_bar"></canvas>
+                <canvas id="chart_ram" style="display: none;"></canvas>
+                <canvas id="chart_disco" style="display: none;"></canvas>
+                <canvas id="chart_cpu" style="display: none;"></canvas>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+<script src='./node_modules/chart.js/dist/Chart.js'></script>
+<script src="./js/dashboard.js"></script>  
 
 <script>
     const card1 = document.getElementById("card1");
@@ -144,18 +149,45 @@
         card1.classList.toggle("active");
         card2.classList.remove("active");
         card3.classList.remove("active");
+
+        if (card1.classList.contains("active")) {
+            document.getElementById("chart_ram").style.display = "block";
+        } else {
+            document.getElementById("chart_ram").style.display = "none";
+        }
+
+        document.getElementById("chart_disco").style.display = "none";
+        document.getElementById("chart_cpu").style.display = "none";
     });
 
     card2.addEventListener("click", () => {
         card2.classList.toggle("active");
         card1.classList.remove("active");
         card3.classList.remove("active");
+
+        if (card2.classList.contains("active")) {
+            document.getElementById("chart_disco").style.display = "block";
+        } else {
+            document.getElementById("chart_disco").style.display = "none";
+        }
+
+        document.getElementById("chart_ram").style.display = "none";
+        document.getElementById("chart_cpu").style.display = "none";
     });
     
     card3.addEventListener("click", () => {
         card3.classList.toggle("active");
         card1.classList.remove("active");
         card2.classList.remove("active");
+        
+        if (card3.classList.contains("active")) {
+            document.getElementById("chart_cpu").style.display = "block";
+        } else {
+            document.getElementById("chart_cpu").style.display = "none";
+        }
+        
+        document.getElementById("chart_ram").style.display = "none";
+        document.getElementById("chart_disco").style.display = "none";
     });
 </script>
 
