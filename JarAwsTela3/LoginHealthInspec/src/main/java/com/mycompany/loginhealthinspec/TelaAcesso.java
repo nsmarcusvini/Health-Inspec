@@ -94,7 +94,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                     if (tamanhoListaCpu.size() > 30) {
 
                         if (cpu > 0.80) {
-                            SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%%");
+                            SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%");
                         }
                         if (cpu < 0.70) {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: abaixo de 70%");
