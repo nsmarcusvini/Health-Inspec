@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.InetAddress;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -33,12 +34,9 @@ public class TelaAcesso extends javax.swing.JFrame {
         @Override
         public void run() {
 
-            ConnectionAzure azure = new ConnectionAzure();
-            JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
             Scanner scan = new Scanner(System.in);
             Looca looca = new Looca();
             Inserts inserts = new Inserts();
-            ResultSet resultSetEmail = null;
             String so = looca.getSistema().getSistemaOperacional();
             Integer bits = looca.getSistema().getArquitetura();
             Log log = new Log();
@@ -107,11 +105,120 @@ public class TelaAcesso extends javax.swing.JFrame {
             // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
             try {
+                String tipoMaquina = "Computador";
+                Random gerador = new Random();
+                String espaco = "==========";
+                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+                String hostName = InetAddress.getLocalHost().getHostName();
+                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+                ConnectionAzure azure = new ConnectionAzure();
+                JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
                 Boolean contador = true;
+                
+                // Máquinas
+                    String insertMaq = "INSERT INTO maquinas (tipoMaquina, fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
+
+                    con.update(insertMaq,
+                            "Computador",
+                            gerador.nextInt(3) + 1,
+                            hostName,
+                            so,
+                            bits
+                    );
+
+                    // Componentes:
+                    String insertCompMaq = "INSERT INTO componentes_has_maquinas (fkComponente, fkMaquina, totalComponente, unidadeMedida) VALUES (?, ?, ?, ?);";
+
+                    //CPU
+                    con.update(insertCompMaq,
+                            1,
+                            1,
+                            looca.getProcessador().getFrequencia(),
+                            "Ghz"
+                    );
+
+                    con.update(insertCompMaq,
+                            1,
+                            2,
+                            looca.getProcessador().getFrequencia(),
+                            "Ghz"
+                    );
+
+                    //RAM
+                    con.update(insertCompMaq,
+                            2,
+                            1,
+                            String.format("Memória de %.1f",
+                                    ram),
+                            "Gb"
+                    );
+
+                    con.update(insertCompMaq,
+                            2,
+                            2,
+                            String.format("Memória de %.1f",
+                                    ram),
+                            "Gb"
+                    );
+
+                    //DISCO
+                    con.update(insertCompMaq,
+                            3,
+                            1,
+                            String.format("Disco de %.1f",
+                                    disco),
+                            "Gb"
+                    );
+
+                    con.update(insertCompMaq,
+                            3,
+                            2,
+                            String.format("Disco de %.1f",
+                                    disco),
+                            "Gb"
+                    );
+                
                 while (contador) {
 
+
+                    while (contador) {
+
+                        System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
+                                espaco, looca.getProcessador().getUso(),
+                                espaco, ram, espaco, tamanho / 1073741824.0));
+
+                        // Registros:
+                        String insertReg = "INSERT INTO registros (fkComponenteMaquina, fkComponente, fkMaquina, dataHora, totalUsado) VALUES (?, ?, ?, ?, ?)";
+
+                        //CPU
+                        con.update(insertReg,
+                                1,
+                                1,
+                                gerador.nextInt(3) + 1,
+                                LocalDateTime.now(),
+                                looca.getProcessador().getUso()
+                        );
+
+                        //RAM
+                        con.update(insertReg,
+                                1,
+                                2,
+                                gerador.nextInt(3) + 1,
+                                LocalDateTime.now(),
+                                looca.getMemoria().getEmUso()
+                        );
+
+                        //DISCO
+                        con.update(insertReg,
+                                1,
+                                3,
+                                gerador.nextInt(3) + 1,
+                                LocalDateTime.now(),
+                                tamanho);
+                    }
+
                     Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
-                    inserts.msg();
 
                     for (int i = 0; i < processlist; i++) {
                         try {
@@ -129,6 +236,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                                     looca.getGrupoDeProcessos().getProcessos().remove(i);
                                 }
                             }
+
                         } catch (Exception x) {
 
                         }

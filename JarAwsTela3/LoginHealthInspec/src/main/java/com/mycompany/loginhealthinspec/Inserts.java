@@ -44,75 +44,148 @@ public class Inserts {
         System.out.println(String.format("%s PROCESSADOR %s MEMÓRIA RAM %s DISCO %s",
                 espaco, espaco, espaco, espaco));
 
+        System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
+                espaco, looca.getProcessador().getUso(),
+                espaco, ram, espaco, tamanho / 1073741824.0));
+
+        // Máquinas
+        String insertMaq = "INSERT INTO maquinas (tipoMaquina, fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
+
+        con.update(insertMaq,
+                "Computador",
+                gerador.nextInt(3) + 1,
+                hostName,
+                so,
+                bits
+        );
+
+        con.update(insertMaq,
+                "Totem",
+                gerador.nextInt(4) + 1,
+                hostName,
+                so,
+                bits
+        );
+
+        con.update(insertMaq,
+                "Computador",
+                1,
+                hostName,
+                so,
+                bits
+        );
+
+        // Componentes:
+        String insertCompMaq = "INSERT INTO componentes_has_maquinas (fkComponente, fkMaquina, totalComponente, unidadeMedida) VALUES (?, ?, ?, ?);";
+
+        //CPU
+        con.update(insertCompMaq,
+                1,
+                1,
+                looca.getProcessador().getFrequencia(),
+                "Ghz"
+        );
+
+        con.update(insertCompMaq,
+                1,
+                2,
+                looca.getProcessador().getFrequencia(),
+                "Ghz"
+        );
+
+        con.update(insertCompMaq,
+                1,
+                3,
+                looca.getProcessador().getFrequencia(),
+                "Ghz"
+        );
+
+        //RAM
+        con.update(insertCompMaq,
+                2,
+                1,
+                String.format("Memória de %.1f",
+                        ram),
+                "Gb"
+        );
+
+        con.update(insertCompMaq,
+                2,
+                2,
+                String.format("Memória de %.1f",
+                        ram),
+                "Gb"
+        );
+
+        con.update(insertCompMaq,
+                2,
+                3,
+                String.format("Memória de %.1f",
+                        ram),
+                "Gb"
+        );
+
+        //DISCO
+        con.update(insertCompMaq,
+                3,
+                1,
+                String.format("Disco de %.1f",
+                        disco),
+                "Gb"
+        );
+
+        con.update(insertCompMaq,
+                3,
+                2,
+                String.format("Disco de %.1f",
+                        disco),
+                "Gb"
+        );
+
+        con.update(insertCompMaq,
+                3,
+                3,
+                String.format("Disco de %.1f",
+                        disco),
+                "Gb"
+        );
+        
         while (contador) {
 
             System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
                     espaco, looca.getProcessador().getUso(),
                     espaco, ram, espaco, tamanho / 1073741824.0));
 
-            // Máquinas
-            String insertMaq = "INSERT INTO maquinas (tipoMaquina, fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
-
-            con.update(insertMaq,
-                    "Computador",
-                    gerador.nextInt(2) + 1,
-                    hostName,
-                    so,
-                    bits
-            );
-
-            // Componentes:
-            String insertComp = "INSERT INTO componentes (nomeComponente, tipoComponente, descricaoComponente, fkMaquina) VALUES (?, ?, ?, ?);";
-
-            //CPU
-            con.update(insertComp,
-                    looca.getProcessador().getNome(),
-                    "CPU",
-                    String.format("Processador de %d Núcleos e %d Threads",
-                            looca.getProcessador().getNumeroCpusFisicas(),
-                            looca.getProcessador().getNumeroCpusLogicas()),
-                    gerador.nextInt(3) + 1
-            );
-            //RAM
-            con.update(insertComp,
-                    looca.getMemoria().toString(),
-                    "RAM",
-                    String.format("Memória de %.1f Gb",
-                            looca.getMemoria().getTotal().doubleValue()),
-                    gerador.nextInt(3) + 1
-            );
-            //DISCO
-            con.update(insertComp,
-                    looca.getGrupoDeDiscos().toString(),
-                    "DISCO",
-                    String.format("Disco de %.1f Gb",
-                            looca.getGrupoDeDiscos().getTamanhoTotal().doubleValue()),
-                    gerador.nextInt(3) + 1
-            );
-
             // Registros:
-            String insertReg = "INSERT INTO registros (totalUsado, dataHora, fkComponente) VALUES (?, ?, ?)";
+            String insertReg = "INSERT INTO registros (fkComponenteMaquina, fkComponente, fkMaquina, dataHora, totalUsado) VALUES (?, ?, ?, ?, ?)";
 
             //CPU
             con.update(insertReg,
-                    String.format("%.1f", looca.getProcessador().getUso()),
-                    LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE),
-                    gerador.nextInt(3) + 1
+                    1,
+                    1,
+                    gerador.nextInt(3) + 1,
+                    LocalDateTime.now(),
+                    looca.getProcessador().getUso()
             );
 
             //RAM
             con.update(insertReg,
-                    String.format("%.1f", looca.getMemoria().getEmUso().doubleValue()),
-                    LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE),
-                    gerador.nextInt(3) + 1
+                    1,
+                    2,
+                    gerador.nextInt(3) + 1,
+                    LocalDateTime.now(),
+                    looca.getMemoria().getEmUso()
             );
 
             //DISCO
             con.update(insertReg,
-                    String.format("%.1f", tamanho),
-                    LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE),
-                    gerador.nextInt(3) + 1
-            );
+                    1,
+                    3,
+                    gerador.nextInt(3) + 1,
+                    LocalDateTime.now(),
+                    tamanho);
         }
+
     }
+
 }
