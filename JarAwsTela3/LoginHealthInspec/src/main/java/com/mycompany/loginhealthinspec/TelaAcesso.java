@@ -37,7 +37,6 @@ public class TelaAcesso extends javax.swing.JFrame {
 
             Scanner scan = new Scanner(System.in);
             Looca looca = new Looca();
-            Inserts inserts = new Inserts();
             String so = looca.getSistema().getSistemaOperacional();
             Integer bits = looca.getSistema().getArquitetura();
             Log log = new Log();
@@ -127,10 +126,9 @@ public class TelaAcesso extends javax.swing.JFrame {
                 Boolean contador = true;
                 
                 // Máquinas
-                    String insertMaq = "INSERT INTO maquinas (tipoMaquina, fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
+                    String insertMaq = "INSERT INTO maquinas (fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
 
                     con.update(insertMaq,
-                            "Computador",
                             gerador.nextInt(3) + 1,
                             hostName,
                             so,

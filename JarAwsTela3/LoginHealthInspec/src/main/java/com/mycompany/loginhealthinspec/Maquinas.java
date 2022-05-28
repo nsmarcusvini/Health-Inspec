@@ -1,13 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.loginhealthinspec;
 
-/**
- *
- * @author danil
- */
 public class Maquinas {
+    private Integer idMaquina;
+    private Integer fkHospital;
     
+    public Maquinas(Integer idMaquina, Integer fkHospital) {
+        this.idMaquina = idMaquina;
+        this.fkHospital = fkHospital;
+    }
+
+    public Integer getIdMaquina() {
+        return idMaquina;
+    }
+
+    public void setIdMaquina(Integer idMaquina) {
+        this.idMaquina = idMaquina;
+    }
+
+    public Integer getFkHospital() {
+        return fkHospital;
+    }
+
+    public void setFkHospital(Integer fkHospital) {
+        this.fkHospital = fkHospital;
+    }
 }
