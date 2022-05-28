@@ -279,7 +279,6 @@ public class Login extends javax.swing.JFrame {
                     Log.guardarLog("Tentativa de login falhou");
                     lblError.setForeground(Color.red);
                     lblError.setText("Usuário ou senha incorreta!");
-                    
                 }
 
             }
