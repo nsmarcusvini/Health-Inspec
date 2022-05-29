@@ -1110,5 +1110,173 @@ footer {
         line-height: 2;
         font-size: 0.9rem;
     }
-
 }
+@media (max-width: 440px) {
+    .about-us-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(150deg, rgb(6, 65, 77), rgb(24, 95, 110), rgb(33, 72, 82));
+        padding-top: 10rem;
+    }
+    .work-process-container {
+        background-color: #eceaea;
+        height: 80rem;
+        padding-top: 5.5rem;
+        padding-bottom: 8rem;
+    }
+
+    .work-process-subtitle {
+        font-size: 16px;
+        line-height: 29px;
+        color: rgba(0, 0, 0, 0.623);
+        margin-top: 3%;
+        text-align: center;
+    }
+
+    .step-image img {
+        height: 9rem;
+        width: 9rem;
+    }
+
+    .step-title {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 30px;
+    }
+
+    .step-subtitle {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 30px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.623);
+    }
+}
+@media (max-width: 406px){
+    .page-title-container {
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        margin-left: 3%;
+    }
+    .page-title{
+        height: 50%;
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .page-title .title {
+        line-height: 1.6;
+        font-size: 2rem;
+    }
+
+    .page-title .description {
+        line-height: 2;
+        font-size: 0.9rem;
+    }
+}
+@media (max-width: 340px){
+    .page-title-container {
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        margin-left: 3%;
+    }
+    .about-us-container {
+        width: 100%;
+        height: 130vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(150deg, rgb(6, 65, 77), rgb(24, 95, 110), rgb(33, 72, 82));
+        padding-top: 10rem;
+    }
+
+    .about-us-title {
+        font-weight: 600;
+        font-size: 34px;
+        line-height: 45px;
+        margin: auto;
+        color: #FAFAFA;
+    }
+
+    .about-us-subtitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3%;
+        width: 85%;
+    }
+
+    .about-us-subtitle .paragraphs-container {
+        height: 100%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .about-us-subtitle .paragraphs-container .paragraph {
+        height: 40%;
+        width: 100%;
+        font-size: 16px;
+        line-height: 2.5;
+        color: #FAFAFA;
+        text-align: justify;
+        align-items: center;
+    }
+
+    .about-us-subtitle .paragraphs-container .paragraph .health-inspec {
+        font-weight: bolder;
+        font-size: 18px;
+    }
+
+    .about-us-subtitle .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .about-us-subtitle .image img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        width: 80%;
+    }
+
+    .line-about-us {
+        background-color: #FAFAFA;
+        height: 0.2rem;
+        width: 15rem;
+        margin: auto;
+    }
+
+    .page-title{
+        height: 50%;
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .page-title .title {
+        line-height: 1.6;
+        font-size: 1.5rem;
+    }
+
+    .page-title .description {
+        line-height: 2;
+        font-size: 0.9rem;
+    }
+    
+} 
