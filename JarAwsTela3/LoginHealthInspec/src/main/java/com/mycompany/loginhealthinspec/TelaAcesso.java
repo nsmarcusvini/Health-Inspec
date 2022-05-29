@@ -73,54 +73,51 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
+                Long ramTotal = looca.getMemoria().getEmUso();
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
                 Double cpu = looca.getProcessador().getUso();
                 Long discoTotaL = looca.getGrupoDeDiscos().getTamanhoTotal();
-                List<Double> tamanhoListaDisco = new ArrayList<>();
-                List<Double> tamanhoListaCpu = new ArrayList<>();
+                List<Long> tamanhoListaDisco = new ArrayList<>();
+                List<Long> tamanhoListaCpu = new ArrayList<>();
                 List<Double> tamanhoListaRam = new ArrayList<>();
                 while (true) {
-                    tamanhoListaDisco.add(disco);
+                    tamanhoListaDisco.add(discoTotaL);
                     tamanhoListaCpu.add(ramTotal);
                     tamanhoListaRam.add(cpu);
                     if (tamanhoListaDisco.size() > 30) {
 
-                        if (discoTotaL < disco * 0.35) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 35%");
+                        if (discoTotaL < discoTotaL * 0.55) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 55%");
                         }
-                        if (discoTotaL > disco * 0.90) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 90%");
+                        if (discoTotaL > discoTotaL * 0.80) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta chegando em 90%! \n"
+                                    + "Proucure resfriar sua máquina!\nRecomendação feche abas desnecessárias");
                         }
-                        if (discoTotaL > disco * 0.150) {
-                            SlackIntegration.sendMessageToSlack("Alerta!!Sr.(A) usuario seu disco esta em: 100%");
-                        }
+
                         tamanhoListaDisco.clear();
                     }
                     if (tamanhoListaRam.size() > 30) {
 
-                        if (ramTotal > 0.75) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 75%");
+                        if (ramTotal > ramTotal * 0.55) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 55%");
                         }
-                        if (ramTotal == ramTotal * 0.100) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria ram esta em: 100%");
+                        if (ramTotal > ramTotal * 0.80) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta chegando em 90%! \n"
+                                    + "Proucure resfriar sua máquina!\nRecomendação feche abas desnecessárias");
                         }
-                        if (ramTotal > ramTotal * 0.45) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria ram esta em: 45%");
-                        }
+                        
                         tamanhoListaRam.clear();
                     }
                     if (tamanhoListaCpu.size() > 30) {
 
-                        if (cpu > 0.80) {
-                            SlackIntegration.sendMessageToSlack("Alerta !!Sr.(A) usuario sua CPU esta em: 80%%");
+                        if (cpu > cpu * 0.80) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta chegando em 90%! \n"
+                                    + "Proucure resfriar seu processador!\nRecomendação feche abas desnecessárias");
                         }
-                        if (cpu < 0.70) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: abaixo de 70%");
+                        if (cpu > cpu * 0.55) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: 55%");
                         }
-                        if (cpu > 0.30) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: em 35%");
-                        }
+                        
                         tamanhoListaCpu.clear();
                     }
 

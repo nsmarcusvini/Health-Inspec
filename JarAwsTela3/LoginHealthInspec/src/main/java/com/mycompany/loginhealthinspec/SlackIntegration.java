@@ -16,12 +16,11 @@ public class SlackIntegration {
     
     
 
-    private static String webHookUrl = "https://hooks.slack.com/services/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";
+    private static String webHookUrl = "https://hooks.slack.com/services/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";
     private static String oAuthToken = "xoxb-3482532505233-3523046039027-MbPFejOnM6mGpr7dk4IKTOWK";
     private static String slackChannel = "projeto-agilidade-de-processos";
 
     public static void sendMessageToSlack(String message) {
-
         try {
 
             StringBuilder msgbuilder = new StringBuilder();
