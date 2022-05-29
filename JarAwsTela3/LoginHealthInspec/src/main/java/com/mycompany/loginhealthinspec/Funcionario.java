@@ -13,6 +13,11 @@ public class Funcionario {
         this.senha = senha;
     }
 
+    public Funcionario() {
+    }
+    
+    
+
     public Integer getIdFuncionario() {
         return idFuncionario;
     }
@@ -44,4 +49,11 @@ public class Funcionario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "idFuncionario=" + idFuncionario + ", fkHospital=" + fkHospital + ", email=" + email + ", senha=" + senha + '}';
+    }
+    
+    
 }

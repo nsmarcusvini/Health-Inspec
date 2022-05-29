@@ -5,15 +5,17 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.discos.Volume;
 import com.github.britooo.looca.api.group.processos.Processo;
 import java.io.File;
 import java.net.InetAddress;
-import java.sql.ResultSet;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import java.util.Date;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 /**
  *
  * @author Nicolas
@@ -34,11 +36,9 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         @Override
         public void run() {
-
-            Scanner scan = new Scanner(System.in);
+            ConnectionAzure azure = new ConnectionAzure();
+            JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
             Looca looca = new Looca();
-            String so = looca.getSistema().getSistemaOperacional();
-            Integer bits = looca.getSistema().getArquitetura();
             Log log = new Log();
             Integer processList = looca.getGrupoDeProcessos().getProcessos().size();
 
@@ -53,14 +53,14 @@ public class TelaAcesso extends javax.swing.JFrame {
                     String fraseProcesso = "";
 
                     Processo processoAtual = looca.getGrupoDeProcessos().getProcessos().get(i);
-                    
+
                     if (processoAtual.getUsoMemoria() > 0.1 && processoAtual.getUsoCpu() > 0.1) {
                         txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
                     }
-                    
+
                     fraseProcesso = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
                     log.guardarLog("Processo: " + fraseProcesso + " em execução.");
-                    
+
                     if (i == processList - 1) {
                         break;
                     }
@@ -114,117 +114,75 @@ public class TelaAcesso extends javax.swing.JFrame {
             // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
             try {
-                String tipoMaquina = "Computador";
-                Random gerador = new Random();
                 String espaco = "==========";
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-                String hostName = InetAddress.getLocalHost().getHostName();
-                Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
-                ConnectionAzure azure = new ConnectionAzure();
-                JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
-                Boolean contador = true;
                 
-                // Máquinas
-                    String insertMaq = "INSERT INTO maquinas (fkTecnico, nomeMaquina, sistemaOperacional, arquitetura) VALUES (?, ?, ?, ?, ?)";
+                List<Volume> volumes = looca.getGrupoDeDiscos().getVolumes();
+                Double discoDisponivel = 0.0;
+                
+                for (Volume volume : volumes) {
+                    discoDisponivel+= volume.getDisponivel();
+                }
+                
+                String hostName = InetAddress.getLocalHost().getHostName();
 
-                    con.update(insertMaq,
-                            gerador.nextInt(3) + 1,
-                            hostName,
-                            so,
-                            bits
-                    );
+                Boolean contador = true;
 
-                    // Componentes:
-                    String insertCompMaq = "INSERT INTO componentes_has_maquinas (fkComponente, fkMaquina, totalComponente, unidadeMedida) VALUES (?, ?, ?, ?);";
+                List<Maquinas> listaMaquinas = con.query("SELECT idMaquina FROM maquinas;",
+                        new BeanPropertyRowMapper<>(Maquinas.class));
+
+                Maquinas maquina = listaMaquinas.get(0);
+
+                List<ComponentesMaquinas> idCpu = con.query("SELECT idComponenteMaquina from componentes_has_maquinas WHERE fkMaquina = " + maquina.getIdMaquina() + " AND fkComponente = '3';",
+                        new BeanPropertyRowMapper<>(ComponentesMaquinas.class));
+
+                List<ComponentesMaquinas> idMemoria = con.query("SELECT idComponenteMaquina from componentes_has_maquinas WHERE fkMaquina = " + maquina.getIdMaquina() + " AND fkComponente = '1';",
+                        new BeanPropertyRowMapper<>(ComponentesMaquinas.class));
+
+                List<ComponentesMaquinas> idDisco = con.query("SELECT idComponenteMaquina from componentes_has_maquinas WHERE fkMaquina = " + maquina.getIdMaquina() + " AND fkComponente = '2';",
+                        new BeanPropertyRowMapper<>(ComponentesMaquinas.class));
+
+                while (contador) {
+                    BigDecimal consumoRAM = new BigDecimal(looca.getMemoria().getEmUso().doubleValue() / 1073741824).setScale(2, RoundingMode.HALF_EVEN);
+                BigDecimal percentualCPU = new BigDecimal(looca.getProcessador().getUso()).setScale(2, RoundingMode.HALF_EVEN);
+                BigDecimal consumoDisco = new BigDecimal(discoDisponivel / 1e+9).setScale(0, RoundingMode.HALF_EVEN);Date data = new Date();
+                    SimpleDateFormat formatar = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String dataFormatada = formatar.format(data);
+
+                    System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
+                            espaco, looca.getProcessador().getUso(),
+                            espaco, ram, espaco, tamanho / 1073741824.0));
+
+                    // Registros:
+                    String insertReg = "INSERT INTO registros (fkComponenteMaquina, fkComponente, fkMaquina, dataHora, totalUsado) VALUES (?, ?, ?, ?, ?)";
 
                     //CPU
-                    con.update(insertCompMaq,
-                            1,
-                            1,
-                            looca.getProcessador().getFrequencia(),
-                            "Ghz"
-                    );
-
-                    con.update(insertCompMaq,
-                            1,
-                            2,
-                            looca.getProcessador().getFrequencia(),
-                            "Ghz"
+                    con.update(insertReg,
+                            idCpu.get(0).getIdComponenteMaquina(),
+                            3,
+                            maquina.getIdMaquina(),
+                            dataFormatada,
+                            percentualCPU
                     );
 
                     //RAM
-                    con.update(insertCompMaq,
-                            2,
+                    con.update(insertReg,
+                            idMemoria.get(0).getIdComponenteMaquina(),
                             1,
-                            String.format("Memória de %.1f",
-                                    ram),
-                            "Gb"
-                    );
-
-                    con.update(insertCompMaq,
-                            2,
-                            2,
-                            String.format("Memória de %.1f",
-                                    ram),
-                            "Gb"
+                            maquina.getIdMaquina(),
+                            dataFormatada,
+                            consumoRAM
                     );
 
                     //DISCO
-                    con.update(insertCompMaq,
-                            3,
-                            1,
-                            String.format("Disco de %.1f",
-                                    disco),
-                            "Gb"
-                    );
-
-                    con.update(insertCompMaq,
-                            3,
+                    con.update(insertReg,
+                            idDisco.get(0).getIdComponenteMaquina(),
                             2,
-                            String.format("Disco de %.1f",
-                                    disco),
-                            "Gb"
+                            maquina.getIdMaquina(),
+                            dataFormatada,
+                            consumoDisco
                     );
-                
-                while (contador) {
-
-
-                    while (contador) {
-
-                        System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
-                                espaco, looca.getProcessador().getUso(),
-                                espaco, ram, espaco, tamanho / 1073741824.0));
-
-                        // Registros:
-                        String insertReg = "INSERT INTO registros (fkComponenteMaquina, fkComponente, fkMaquina, dataHora, totalUsado) VALUES (?, ?, ?, ?, ?)";
-
-                        //CPU
-                        con.update(insertReg,
-                                1,
-                                1,
-                                gerador.nextInt(3) + 1,
-                                LocalDateTime.now(),
-                                looca.getProcessador().getUso()
-                        );
-
-                        //RAM
-                        con.update(insertReg,
-                                1,
-                                2,
-                                gerador.nextInt(3) + 1,
-                                LocalDateTime.now(),
-                                looca.getMemoria().getEmUso()
-                        );
-
-                        //DISCO
-                        con.update(insertReg,
-                                1,
-                                3,
-                                gerador.nextInt(3) + 1,
-                                LocalDateTime.now(),
-                                tamanho);
-                    }
 
                     Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
 

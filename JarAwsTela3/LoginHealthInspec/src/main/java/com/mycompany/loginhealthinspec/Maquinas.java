@@ -9,6 +9,11 @@ public class Maquinas {
         this.fkHospital = fkHospital;
     }
 
+    public Maquinas() {
+    }
+    
+    
+
     public Integer getIdMaquina() {
         return idMaquina;
     }
@@ -24,4 +29,10 @@ public class Maquinas {
     public void setFkHospital(Integer fkHospital) {
         this.fkHospital = fkHospital;
     }
+
+    @Override
+    public String toString() {
+        return "Maquinas{" + "idMaquina=" + idMaquina + ", fkHospital=" + fkHospital + '}';
+    }
+    
 }
