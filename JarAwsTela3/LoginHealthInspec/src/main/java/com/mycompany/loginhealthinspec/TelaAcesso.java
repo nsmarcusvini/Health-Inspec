@@ -5,10 +5,17 @@
 package com.mycompany.loginhealthinspec;
 
 import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.discos.Volume;
+import com.github.britooo.looca.api.group.processos.Processo;
 import java.io.File;
 import java.net.InetAddress;
+import java.text.SimpleDateFormat;
 import java.util.*;
-
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.Date;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 /**
  *
  * @author Nicolas
@@ -29,6 +36,8 @@ public class TelaAcesso extends javax.swing.JFrame {
 
         @Override
         public void run() {
+            ConnectionAzure azure = new ConnectionAzure();
+            JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
             Looca looca = new Looca();
             Log log = new Log();
             Integer processList = looca.getGrupoDeProcessos().getProcessos().size();
@@ -43,9 +52,18 @@ public class TelaAcesso extends javax.swing.JFrame {
                 for (int i = 0; i < processList; i++) {
                     String fraseProcesso = "";
 
-                    txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
+                    Processo processoAtual = looca.getGrupoDeProcessos().getProcessos().get(i);
+
+                    if (processoAtual.getUsoMemoria() > 0.1 && processoAtual.getUsoCpu() > 0.1) {
+                        txtTxtArea.setText(txtTxtArea.getText() + looca.getGrupoDeProcessos().getProcessos().get(i).getNome() + "\n");
+                    }
+
                     fraseProcesso = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
                     log.guardarLog("Processo: " + fraseProcesso + " em execução.");
+
+                    if (i == processList - 1) {
+                        break;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -54,7 +72,6 @@ public class TelaAcesso extends javax.swing.JFrame {
             try {
 
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
                 Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
@@ -96,30 +113,105 @@ public class TelaAcesso extends javax.swing.JFrame {
 
             // while que verifica o uso de CPU e RAM(falta o disco)
             //While da blacklist
-            Boolean verdadeiro = true;
-            while (verdadeiro) {
-                Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
-                for (int i = 0; i < processlist; i++) {
-                    try {
-                        if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
-                            if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
-                                String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
-                                String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
-                                Runtime.getRuntime().exec(killWindows);
-                                log.guardarLog("Processo: " + processoFinalizado + " finalizado pela BlackList!");
-                                looca.getGrupoDeProcessos().getProcessos().remove(i);
-                            }
-                            if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
-                                String killUbuntu = "kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
-                                Runtime.getRuntime().exec(killUbuntu);
-                                looca.getGrupoDeProcessos().getProcessos().remove(i);
-                            }
-                        }
-                    } catch (Exception x) {
-
-                    }
+            try {
+                String espaco = "==========";
+                Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+                double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+                
+                List<Volume> volumes = looca.getGrupoDeDiscos().getVolumes();
+                Double discoDisponivel = 0.0;
+                
+                for (Volume volume : volumes) {
+                    discoDisponivel+= volume.getDisponivel();
                 }
+                
+                String hostName = InetAddress.getLocalHost().getHostName();
+
+                Boolean contador = true;
+
+                List<Maquinas> listaMaquinas = con.query("SELECT idMaquina FROM maquinas;",
+                        new BeanPropertyRowMapper<>(Maquinas.class));
+
+                Maquinas maquina = listaMaquinas.get(0);
+
+                List<ComponentesMaquinas> idCpu = con.query("SELECT idComponenteMaquina from componentes_has_maquinas WHERE fkMaquina = " + maquina.getIdMaquina() + " AND fkComponente = '3';",
+                        new BeanPropertyRowMapper<>(ComponentesMaquinas.class));
+
+                List<ComponentesMaquinas> idMemoria = con.query("SELECT idComponenteMaquina from componentes_has_maquinas WHERE fkMaquina = " + maquina.getIdMaquina() + " AND fkComponente = '1';",
+                        new BeanPropertyRowMapper<>(ComponentesMaquinas.class));
+
+                List<ComponentesMaquinas> idDisco = con.query("SELECT idComponenteMaquina from componentes_has_maquinas WHERE fkMaquina = " + maquina.getIdMaquina() + " AND fkComponente = '2';",
+                        new BeanPropertyRowMapper<>(ComponentesMaquinas.class));
+
+                while (contador) {
+                    BigDecimal consumoRAM = new BigDecimal(looca.getMemoria().getEmUso().doubleValue() / 1073741824).setScale(2, RoundingMode.HALF_EVEN);
+                BigDecimal percentualCPU = new BigDecimal(looca.getProcessador().getUso()).setScale(2, RoundingMode.HALF_EVEN);
+                BigDecimal consumoDisco = new BigDecimal(discoDisponivel / 1e+9).setScale(0, RoundingMode.HALF_EVEN);Date data = new Date();
+                    SimpleDateFormat formatar = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String dataFormatada = formatar.format(data);
+
+                    System.out.println(String.format("%s %.2f%% %s %.2f GB USADOS %s %.2f USADOS",
+                            espaco, looca.getProcessador().getUso(),
+                            espaco, ram, espaco, tamanho / 1073741824.0));
+
+                    // Registros:
+                    String insertReg = "INSERT INTO registros (fkComponenteMaquina, fkComponente, fkMaquina, dataHora, totalUsado) VALUES (?, ?, ?, ?, ?)";
+
+                    //CPU
+                    con.update(insertReg,
+                            idCpu.get(0).getIdComponenteMaquina(),
+                            3,
+                            maquina.getIdMaquina(),
+                            dataFormatada,
+                            percentualCPU
+                    );
+
+                    //RAM
+                    con.update(insertReg,
+                            idMemoria.get(0).getIdComponenteMaquina(),
+                            1,
+                            maquina.getIdMaquina(),
+                            dataFormatada,
+                            consumoRAM
+                    );
+
+                    //DISCO
+                    con.update(insertReg,
+                            idDisco.get(0).getIdComponenteMaquina(),
+                            2,
+                            maquina.getIdMaquina(),
+                            dataFormatada,
+                            consumoDisco
+                    );
+
+                    Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
+
+                    for (int i = 0; i < processlist; i++) {
+                        try {
+                            if (blackList.containsValue(looca.getGrupoDeProcessos().getProcessos().get(i).getNome())) {
+                                if (looca.getSistema().getSistemaOperacional().equals("Windows")) {
+                                    String processoFinalizado = looca.getGrupoDeProcessos().getProcessos().get(i).getNome();
+                                    String killWindows = "taskkill /F /T /PID " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
+                                    Runtime.getRuntime().exec(killWindows);
+                                    log.guardarLog("Processo: " + processoFinalizado + " finalizado pela BlackList!");
+                                    looca.getGrupoDeProcessos().getProcessos().remove(i);
+                                }
+                                if (looca.getSistema().getSistemaOperacional().equals("Ubuntu")) {
+                                    String killUbuntu = "kill -SIGKILL " + looca.getGrupoDeProcessos().getProcessos().get(i).getPid();
+                                    Runtime.getRuntime().exec(killUbuntu);
+                                    looca.getGrupoDeProcessos().getProcessos().remove(i);
+                                }
+                            }
+
+                        } catch (Exception x) {
+
+                        }
+                    }
+
+                }
+            } catch (Exception e) {
             }
+
         }
     };
 
