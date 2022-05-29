@@ -6,11 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec | Tabela</title>
     <link rel="stylesheet" href="./css/tabela-maquinas.css">
-    <script src="./assets/js/funcoes.js"></script>
+    <script src="assets/js/funcoes.js"></script>
 
     <script src="https://kit.fontawesome.com/dc4799c2db.js" crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/alert.js"></script>
 </head>
 <body onload="validarSessao()">
+    <div class="dark-body-container">
+        <div class="pop-up-container">
+            <div class="close-pop-up-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Deletar máquina</h2>
+
+                <form id="form_deletar" method="post" onsubmit="return deletar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+
+                            <label for="userSelect">Selecione a máquina</label>
+
+                            <select name="userSelect" id="user_select">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-delete-button">Deletar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+
+    <div class="update-dark-body">
+        <div class="update-pop-up">
+            <div class="close-update-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Atualizar máquina</h2>
+
+                <form id="form_atualizar" method="post" onsubmit="return atualizar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+
+                            <label for="userSelect">Selecione a máquina</label>
+                            <select name="userSelect" id="update_user_select">
+                                <option value=""></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="fieldSelect">Selecione o campo</label>
+                            <select name="fieldSelect" id="field_select">
+                                <option value=""></option>
+                                <option value="apelido">Apelido</option>
+                                <option value="tipoMaquina">Tipo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="newValue">Digite o novo valor</label>
+                            <input type="text" name="newValue" id="new_value" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-update-button">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
@@ -57,146 +141,32 @@
         </span>
 
         <div class="table-container">
+            <div class="options-container">
+                <div class="options">
+                    <span class="update-button">
+                        <i class="fa-solid fa-arrows-rotate update-icon"></i>
+                    </span>
+    
+                    <span class="delete-button">
+                        <i class="fa-solid fa-trash-can trash-icon"></i>
+                    </span>
+                </div>
+            </div>
+
             <div class="table-scroll">
                 <table class="fixed-tr">
                     <tr>
-                        <th>Apelido</th>
+                        <th>ID</th>
+
                         <th>Hostname</th>
+
+                        <th>Apelido</th>
+
                         <th>Tipo</th>
-                        <th>Processador</th>
-                        <th>RAM</th>
-                        <th>Disco</th>
-                        <th>Data do cadastro</th>
-                    </tr>
-                </table>
 
-                <table>
-                    <tr>
-                        <td>
-                            Desktop Dell 1 - Recepção
-                        </td>
-                        <td>
-                            DESKTOP-51LJJK5
-                        </td>
-                        <td>
-                            Desktop
-                        </td>
-                        <td>
-                            AMD Ryzen 7
-                        </td>
-                        <td>
-                            16GB
-                        </td>
-                        <td>
-                            256 SSD
-                        </td>
-                        <td>
-                            18/02/2022
-                        </td>
-                    </tr>
-                </table>
+                        <th>Sistema Operacional</th>
 
-                <table>
-                    <tr>
-                        <td>
-                            Totem 1 - Andar 2 
-                        </td>
-                        <td>
-                            TOTEM-51LJJK5
-                        </td>
-                        <td>
-                            Totem
-                        </td>
-                        <td>
-                            Intel i5
-                        </td>
-                        <td>
-                            4GB
-                        </td>
-                        <td>
-                            512GB HDD
-                        </td>
-                        <td>
-                            05/03/2022
-                        </td>
-                    </tr>
-                </table>
-    
-                <table>
-                    <tr>
-                        <td>
-                            Desktop Dell 3 - Andar 4
-                        </td>
-                        <td>
-                            DESKTOP-IFC110
-                        </td>
-                        <td>
-                            Desktop
-                        </td>
-                        <td>
-                            Intel i5
-                        </td>
-                        <td>
-                            8GB
-                        </td>
-                        <td>
-                            256GB SSD
-                        </td>
-                        <td>
-                            30/04/2022
-                        </td>
-                    </tr>
-                </table>
-
-                <table>
-                    <tr>
-                        <td>
-                            Desktop Dell 5 - Andar 10
-                        </td>
-                        <td>
-                            DESKTOP-IFC125
-                        </td>
-                        <td>
-                            Desktop
-                        </td>
-                        <td>
-                            Intel i5
-                        </td>
-                        <td>
-                            8GB
-                        </td>
-                        <td>
-                            1TB HDD
-                        </td>
-                        <td>
-                            30/04/2022
-                        </td>
-                    </tr>
-                </table>
-
-                <table>
-                    <tr>
-                        <td>
-                            Totem 3 - Andar 6
-                        </td>
-                        <td>
-                            TOTEM-IFC110
-                        </td>
-                        <td>
-                            Totem
-                        </td>
-                        <td>
-                            Intel i5
-                        </td>
-                        <td>
-                            8GB
-                        </td>
-                        <td>
-                            512GB
-                        </td>
-                        <td>
-                            30/04/2022
-                        </td>
+                        <th>Arquitetura</th>
                     </tr>
                 </table>
             </div>
@@ -204,3 +174,206 @@
     </div>
 </body>
 </html>
+
+<script>
+    const darkBodyContainer = document.querySelector(".dark-body-container");
+    const popUpContainer = document.querySelector(".pop-up-container");
+    const deleteButton = document.querySelector(".delete-button");
+    const closeDeleteButton = document.querySelector(".close-pop-up-button");
+
+    deleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.add("active-dark-body-container");
+        popUpContainer.classList.add("active");
+    });
+
+    closeDeleteButton.addEventListener("click", () => {
+        document.getElementById("user_select").value = "";
+        darkBodyContainer.classList.remove("active-dark-body-container");
+        popUpContainer.classList.remove("active");
+    });
+
+    const updateDarkBody = document.querySelector(".update-dark-body");
+    const updatePopUp = document.querySelector(".update-pop-up");
+    const updateButton = document.querySelector(".update-button");
+    const closeUpdateButton = document.querySelector(".close-update-button");
+
+    updateButton.addEventListener("click", () => {
+        updateDarkBody.classList.add("active-update-dark-body");
+        updatePopUp.classList.add("active");
+    });
+
+    closeUpdateButton.addEventListener("click", () => {
+        document.getElementById("update_user_select").value = "";
+        document.getElementById("field_select").value = "";
+        document.getElementById("new_value").value = "";
+        updateDarkBody.classList.remove("active-update-dark-body");
+        updatePopUp.classList.remove("active");
+    });
+</script>
+
+<script>
+    fetch(`/usuarios/listarMaquinas/${sessionStorage.FK_HOSPITAL}`).then(function(resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function(resposta) {
+                let tableContainer = document.querySelector(".table-scroll");
+                let userSelect = document.querySelector(".form-element select");
+                let updateUserSelect = document.querySelector("#update_user_select");
+
+                for (let i = 0; i < resposta.length; i++) {
+                    let maquina = resposta[i];
+
+                    let table = document.createElement("table");
+                    let elements = document.createElement("tr");
+                    
+                    let id = document.createElement("td");
+                    let hostname = document.createElement("td");
+                    let nickname = document.createElement("td");
+                    let machineType = document.createElement("td");
+                    let operatingSystem = document.createElement("td");
+                    let architecture = document.createElement("td");
+
+                    id.textContent = maquina.idMaquina;
+                    hostname.textContent = maquina.nomeMaquina; 
+                    nickname.textContent = maquina.apelido == null ? "--" : maquina.apelido;
+                    machineType.textContent = maquina.tipoMaquina == null ? "--" : maquina.tipoMaquina;
+                    operatingSystem.textContent = maquina.sistemaOperacional;
+                    architecture.textContent = maquina.arquitetura;
+
+                    elements.appendChild(id);
+                    elements.appendChild(hostname);
+                    elements.appendChild(nickname);
+                    elements.appendChild(machineType);
+                    elements.appendChild(operatingSystem);
+                    elements.appendChild(architecture);
+
+                    table.appendChild(elements);
+
+                    tableContainer.appendChild(table);
+
+                    let nameOption = document.createElement("option");
+                    nameOption.value = maquina.idMaquina;
+                    nameOption.textContent = maquina.apelido == null ? maquina.nomeMaquina : maquina.apelido;
+
+                    userSelect.appendChild(nameOption);
+
+                    let updateName = document.createElement("option");
+                    updateName.value = maquina.idMaquina;
+                    updateName.textContent = maquina.apelido == null ? maquina.nomeMaquina : maquina.apelido;
+                    
+                    updateUserSelect.appendChild(updateName);
+                }
+            })
+        } else {
+            throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+        }
+    }).catch(function(resposta) {
+        console.log(resposta);
+    })
+</script>
+
+<script>
+    function deletar() {
+        aguardar();
+
+        let formulario = new URLSearchParams(new FormData(document.getElementById("form_deletar")));
+
+        let select = document.getElementById("user_select");
+
+        if (select.value == "") {
+            throwAlert("error", "Selecione uma máquina!");
+
+            return false;
+        }
+
+        fetch(`/usuarios/deletarMaquina/${user_select.value}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Máquina deletada com sucesso!");
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o delete!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function atualizar() {
+        aguardar();
+
+        const formulario = new URLSearchParams(new FormData(document.getElementById("form_atualizar")));
+
+        const userSelect= document.getElementById("update_user_select");
+        const fieldSelect = document.getElementById("field_select");
+        const newValue = document.getElementById("new_value");
+
+        if (userSelect.value == "") {
+            throwAlert("error", "Selecione um usuário!");
+
+            return false;
+        }
+        if (fieldSelect.value == "") {
+            throwAlert("error", "Selecione um campo para ser atualizado!");
+
+            return false;
+        } 
+        if (newValue.value == "") {
+            throwAlert("error", "Digite o novo valor!");
+
+            return false;
+        }
+
+        const isNicknameSelected = fieldSelect.value == "apelido";
+        const isTypeSelected = fieldSelect.value == "tipoMaquina";
+
+        if (isTypeSelected) {
+            if (newValue.value.toUpperCase() != "TOTEM" && newValue.value.toUpperCase() != "DESKTOP") {
+                throwAlert("error", "O tipo da máquina deve ser Totem ou Desktop!");
+
+                return false;
+            }
+        }
+
+        fetch(`/usuarios/atualizarMaquina/${userSelect.value}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Máquina atualizada com sucesso!");
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+</script>

@@ -23,6 +23,22 @@ function listarTecnicos(req, res) {
     )
 }
 
+function listarMaquinas(req, res) {
+    const fkHospital = req.params.fkHospital;
+
+    usuarioModel.listarMaquinas(fkHospital)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 function listarInfoHospital(req, res) {
     const idHospital = req.params.idHospital;
 
@@ -253,10 +269,29 @@ function cadastrarTecnico(req, res) {
 function deletarHospital(req, res) {
     const idHospital = req.params.idHospital;
 
-    usuarioModel.deletarTodosTecnicos(idHospital)
+    usuarioModel.deletarTodasMaquinas(idHospital)
     .then(
         function(resultado) {
-            usuarioModel.deletarHospital(idHospital)
+            usuarioModel.deletarTodosTecnicos(idHospital);
+            usuarioModel.deletarHospital(idHospital);
+            res.json(resultado);
+        }
+    ).catch(
+        function(erro) {
+            console.log(erro);
+            console.log(erro.sqlMessage);
+        }
+    )
+}
+
+function deletarMaquina(req, res) {
+    let id = req.params.idMaquina;
+
+    usuarioModel.deletarRegistrosMaquina(id)
+    .then(
+        function(resultado) {
+            usuarioModel.deletarComponentesMaquina(id);
+            usuarioModel.deletarMaquina(id);
             res.json(resultado);
         }
     ).catch(
@@ -271,16 +306,16 @@ function deletarTecnico(req, res) {
     let id = req.params.idTecnico;
 
     usuarioModel.deletarTecnico(id)
-        .then(
-            function(resultado) {
-                res.json(resultado);
-            }
-        ).catch(
-            function(erro) {
-                console.log(erro);
-                console.log(erro.sqlMessage);
-            }
-        )
+    .then(
+        function(resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function(erro) {
+            console.log(erro);
+            console.log(erro.sqlMessage);
+        }
+    )
 }
 
 function atualizarHospital(req, res) {
@@ -306,6 +341,32 @@ function atualizarHospital(req, res) {
                 console.log(error.sqlMessage);
             }
         )
+    }
+}
+
+function atualizarMaquina(req, res) {
+    let id = req.params.idMaquina;
+    let field = req.body.fieldSelect;
+    let value = req.body.newValue;
+
+    if(id == undefined) {
+        res.status(400).send("O nome está undefined!");
+    } else if (field == undefined) {
+        res.status(400).send("O campo está undefined!");
+    } else if (value == undefined) {
+        res.status(400).send("O valor está undefined!");
+    } else {
+        usuarioModel.atualizarMaquina(id, field, value)
+            .then(
+                function(resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function(error) {
+                    console.log(error);
+                    console.log(error.sqlMessage);
+                }
+            )
     }
 }
 
@@ -359,11 +420,14 @@ module.exports = {
     cadastrar,
     cadastrarTecnico,
     deletarHospital,
+    deletarMaquina,
     deletarTecnico,
     atualizarHospital,
+    atualizarMaquina,
     atualizarTecnico,
     listar,   
     listarTecnicos,
+    listarMaquinas,
     listarInfoHospital,
     testar,
     listarAcessos
