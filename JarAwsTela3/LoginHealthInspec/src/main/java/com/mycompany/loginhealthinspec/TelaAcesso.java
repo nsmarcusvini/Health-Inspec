@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.Date;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 /**
  *
  * @author Nicolas
@@ -143,14 +144,14 @@ public class TelaAcesso extends javax.swing.JFrame {
                 String espaco = "==========";
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-                
+
                 List<Volume> volumes = looca.getGrupoDeDiscos().getVolumes();
                 Double discoDisponivel = 0.0;
-                
+
                 for (Volume volume : volumes) {
-                    discoDisponivel+= volume.getDisponivel();
+                    discoDisponivel += volume.getDisponivel();
                 }
-                
+
                 String hostName = InetAddress.getLocalHost().getHostName();
 
                 Boolean contador = true;
@@ -171,8 +172,9 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                 while (contador) {
                     BigDecimal consumoRAM = new BigDecimal(looca.getMemoria().getEmUso().doubleValue() / 1073741824).setScale(2, RoundingMode.HALF_EVEN);
-                BigDecimal percentualCPU = new BigDecimal(looca.getProcessador().getUso()).setScale(2, RoundingMode.HALF_EVEN);
-                BigDecimal consumoDisco = new BigDecimal(discoDisponivel / 1e+9).setScale(0, RoundingMode.HALF_EVEN);Date data = new Date();
+                    BigDecimal percentualCPU = new BigDecimal(looca.getProcessador().getUso()).setScale(2, RoundingMode.HALF_EVEN);
+                    BigDecimal consumoDisco = new BigDecimal(discoDisponivel / 1e+9).setScale(0, RoundingMode.HALF_EVEN);
+                    Date data = new Date();
                     SimpleDateFormat formatar = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String dataFormatada = formatar.format(data);
 
