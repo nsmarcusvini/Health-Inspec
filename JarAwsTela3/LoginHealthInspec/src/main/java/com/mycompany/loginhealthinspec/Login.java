@@ -4,11 +4,19 @@
  */
 package com.mycompany.loginhealthinspec;
 
+import com.github.britooo.looca.api.core.Looca;
 import java.awt.Color;
+import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -254,32 +262,85 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         ConnectionAzure azure = new ConnectionAzure();
-
+        Looca looca = new Looca();
         ResultSet resultSetEmail = null;
         try {
-
+            Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+            Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+            double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
+            double tamanhoTotal = new File("C:\\").getTotalSpace();
+            String so = looca.getSistema().getSistemaOperacional();
+            Integer bits = looca.getSistema().getArquitetura();
+            String hostName = InetAddress.getLocalHost().getHostName();
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             java.sql.Connection connection = DriverManager.getConnection(azure.connectionUrl);
-            Statement statement = connection.createStatement();
+            JdbcTemplate con = new JdbcTemplate(azure.getDataSource());
             System.out.println("Conexão obtida com sucesso!");
-            String selectEmailSql = "SELECT email, senha FROM hospital;";
-            resultSetEmail = statement.executeQuery(selectEmailSql);
 
-            while (resultSetEmail.next()) {
+            List<Funcionario> listaLoginFuncionario = con.query(
+                    "SELECT idFuncionario, email, fkHospital, senha FROM funcionario WHERE email = '" + txtUsuario.getText() + "' AND senha = '" + passwdSenha.getText() + "';",
+                    new BeanPropertyRowMapper<>(Funcionario.class));
 
-                if (txtUsuario.getText().equals(resultSetEmail.getString(1))
-                        && passwdSenha.getText().equals(resultSetEmail.getString(2))) {
-                    TelaAcesso acesso = new TelaAcesso();
-                    acesso.setVisible(true);
-                    Log.guardarLog("Login efetuado com sucesso");
-                    dispose();
-                } else {
-                    Log.guardarLog("Tentativa de login falhou");
-                    lblError.setForeground(Color.red);
-                    lblError.setText("Usuário ou senha incorreta!");
+            if (listaLoginFuncionario.isEmpty()) {
+                Log.guardarLog("Tentativa de login falhou");
+                lblError.setForeground(Color.red);
+                lblError.setText("Usuário ou senha incorreta!");
+            } else {
+
+                Funcionario funcionario = listaLoginFuncionario.get(0);
+                System.out.println(funcionario.getFkHospital());
+
+                List<Maquinas> listaMaquinas = con.query("SELECT * FROM maquinas WHERE fkHospital = " + funcionario.getFkHospital() + ";",
+                        new BeanPropertyRowMapper<>(Maquinas.class));
+
+                //System.out.println(listaMaquinas.get(0).toString());
+                if (listaMaquinas.isEmpty()) {
+
+                    String insertMaquinas = "INSERT INTO maquinas (tipoMaquina, nomeMaquina, sistemaOperacional, arquitetura, fkHospital) VALUES (?, ?, ?, ?, ?);";
+                    con.update(insertMaquinas,
+                            "Computador",
+                            hostName,
+                            so,
+                            bits,
+                            funcionario.getFkHospital()
+                    );
+                    listaMaquinas = con.query("SELECT * FROM maquinas WHERE fkHospital = " + funcionario.getFkHospital() + ";",
+                        new BeanPropertyRowMapper<>(Maquinas.class));
+                    Maquinas maquinas = listaMaquinas.get(0);
                     
-                }
+                    String insertCompMaq = "INSERT INTO componentes_has_maquinas (fkComponente, fkMaquina, totalComponente, unidadeMedida) VALUES (?, ?, ?, ?);";
 
+                    //CPU
+                    con.update(insertCompMaq,
+                            3,
+                            maquinas.getIdMaquina(),
+                            looca.getProcessador().getFrequencia(),
+                            "Ghz"
+                    );
+
+                    //RAM
+                    con.update(insertCompMaq,
+                            1,
+                            maquinas.getIdMaquina(),
+                            String.format("Memória de %.1f Gb",
+                                    ram),
+                            "Gb"
+                    );
+
+                    //DISCO
+                    con.update(insertCompMaq,
+                            2,
+                            maquinas.getIdMaquina(),
+                            String.format("Disco de %.1f",
+                                    disco),
+                            "Gb"
+                    );
+
+                    //TelaAcesso telaAcesso = new TelaAcesso();
+                    //telaAcesso.setVisible(true);
+                } else {
+                    System.out.println("Máquina já inserida!");
+                }
             }
 
         } catch (Exception e) {
@@ -324,8 +385,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-
+    public static void main(String args[]) throws UnknownHostException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
