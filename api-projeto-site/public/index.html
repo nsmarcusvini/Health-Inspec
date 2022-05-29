@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Inspec</title>
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -33,7 +33,7 @@
                             <label for="corporateName">Razão social</label>
                             <input type="text" name="corporateName" id="corporateName" placeholder="Health Inspec">
                         </div>
-                        
+
                         <div class="form-element">
                             <label for="cnpj">CNPJ</label>
                             <input type="text" name="cnpj" id="cnpj" placeholder="XX. XXX. XXX/0001-XX">
@@ -82,22 +82,24 @@
                             <i id="eye_icon" class="far fa-eye"></i>
                             <input type="password" name="password" id="password" placeholder="******">
                         </div>
-                        
+
                         <div class="form-element">
                             <label for="passwdConfirmation">Confirme a senha</label>
-                            <input type="password" name="passwdConfirmation" id="passwdConfirmation" placeholder="******">
+                            <input type="password" name="passwdConfirmation" id="passwdConfirmation"
+                                placeholder="******">
                         </div>
                     </div>
-                    
+
                     <div class="form-element form-row">
                         <button>Cadastrar</button>
                     </div>
                 </form>
             </div>
         </div>
-        
+
         <div id="div_aguardar" class="loading-div" style="display: none;">
-            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif"
+                style="display: none;">
         </div>
 
         <div id="div_erros_login"></div>
@@ -117,7 +119,8 @@
                                     <label for="loginEmail">Email</label>
                                 </div>
                                 <i class="fa fa-envelope"></i>
-                                <input type="text" id="loginEmail" name="loginEmail" placeholder="health_inspec@gmail.com">
+                                <input type="text" id="loginEmail" name="loginEmail"
+                                    placeholder="health_inspec@gmail.com">
                             </div>
                         </div>
                     </div>
@@ -145,14 +148,14 @@
                     <div class="form-element form-row">
                         <button>Entrar</button>
                     </div>
-                    
+
                     <div class="form-row errorTextContainer">
                         <div class="form-element">
                             <span class="loginErrorText">Usuário ou senha inválida!</span>
                         </div>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </div>
@@ -165,13 +168,13 @@
                 <div class="open-slide">
                     <a href="#" id="sidebar-open-button">
                         <svg width="30" height="30">
-                            <path d="M0, 5 30,5" stroke="#fff" stroke-width="5"/>
-                            <path d="M0, 14 30,14" stroke="#fff" stroke-width="5"/>
-                            <path d="M0, 23 30,23" stroke="#fff" stroke-width="5"/>
+                            <path d="M0, 5 30,5" stroke="#fff" stroke-width="5" />
+                            <path d="M0, 14 30,14" stroke="#fff" stroke-width="5" />
+                            <path d="M0, 23 30,23" stroke="#fff" stroke-width="5" />
                         </svg>
                     </a>
                 </div>
- 
+
                 <ul class="header-items">
                     <li id="beginButton" class="current"><a href="#div-begin">Início</a></li>
                     <li id="workProcessButton"><a href="#div-process">Como funciona</a></li>
@@ -244,7 +247,8 @@
                 </div>
                 <span class="step-title">Monitoramento</span>
                 <br>
-                <span class="step-subtitle">As máquinas monitoradas apresentarão os picos de processos que causam lentidão no sistema</span>
+                <span class="step-subtitle">As máquinas monitoradas apresentarão os picos de processos que causam
+                    lentidão no sistema</span>
             </div>
 
             <div class="arrow">
@@ -280,7 +284,7 @@
                         <span>para o monitoramento de máquinas</span>
                         <span>de estabelecimentos de saúde.</span>
                     </span>
-    
+
                     <span class="paragraph">
                         <span>Com nossos serviços, hospitais</span>
                         <span>e postos conseguem impedir problemas</span>
@@ -288,8 +292,11 @@
                         <span>pelos atendimentos, evitando, assim,</span>
                         <span>lentidão e instabilidade.</span>
                     </span>
+
                 </span>
-                <img src="assets/about-us-monitoring.png">
+                <span class="image">
+                    <img src="assets/about-us-monitoring.png">
+                </span>
                 <!-- <span> Nosso time de Tech acompanha o desenvolvimento do software que irá monitorar as máquinas do estabelecimento, a fim de alertar a equipe de suporte caso seja detectado algo fora dos padrões e que pode gerar travamento ou sobrecarga no sistema. Além disso, Health Inspec também te ajudará a controlar os processos abertos nos computadores para que, caso algum processo indevido esteja aberto consumindo memória, seja encerrado para evitar lentidão e melhorar a eficiência das máquinas.</span> -->
             </div>
         </div>
@@ -304,6 +311,7 @@
         </div>
     </footer>
 </body>
+
 </html>
 
 <script src="assets/jsEffects/scrollreveal.min.js"></script>
@@ -343,20 +351,20 @@
         let passwdConfirmation = formulario.get("passwdConfirmation");
 
         // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
-        if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == ''|| passwdConfirmation == '') {
-            
+        if (corporateName == "" || cnpj == "" || email == "" || phoneNumber == "" || cep == '' || publicPlace == '' || state == '' || city == '' || password == '' || passwdConfirmation == '') {
+
             throwAlert("error", "Preencha todos os campos!");
 
-            if (corporateName == "")  {
+            if (corporateName == "") {
                 console.log('nome está em branco')
             }
-            if (cnpj == "" )  {
+            if (cnpj == "") {
                 console.log('email está em branco')
             }
-            if (email == "" )  {
+            if (email == "") {
                 console.log('senha está em branco')
             }
-            if (phoneNumber == "" )  {
+            if (phoneNumber == "") {
                 console.log('confirmacaoSenha está em branco')
             }
             if (cep == '') {
@@ -381,14 +389,14 @@
             finalizarAguardar();
             return false;
         }
-        
+
         if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
             throwAlert("error", 'E-mail deve conter "@" e ".com"!');
 
             finalizarAguardar();
             return false;
         }
-        
+
         if (password != passwdConfirmation) {
             throwAlert("error", "As senhas inseridas devem ser iguais!");
 
@@ -421,7 +429,7 @@
                     throwAlert("error", "Esse e-mail já foi cadastrado!");
                 }
 
-                throw("Houve um erro ao tentar realizar o cadastro!");
+                throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
@@ -472,8 +480,8 @@
 
             if (resposta.ok) {
                 console.log(resposta);
-                
-                resposta.json().then(json => { 
+
+                resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
 
@@ -499,12 +507,12 @@
                 console.log("Erro de login!");
 
                 resposta.text().then(texto => {
-                    console.error(texto);                    
+                    console.error(texto);
                     // limparFormulario();
                 });
 
-                let errorText = document.querySelector(".errorTextContainer"); 
-                
+                let errorText = document.querySelector(".errorTextContainer");
+
                 errorText.style.display = "flex";
 
                 setTimeout(() => {
