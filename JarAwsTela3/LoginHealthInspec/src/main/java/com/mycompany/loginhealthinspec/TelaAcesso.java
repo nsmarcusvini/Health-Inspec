@@ -73,7 +73,8 @@ public class TelaAcesso extends javax.swing.JFrame {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 70%");
                         }
                         if (discoTotaL > discoTotaL * 0.90) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 90%");
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta chegando em 90%! \n"
+                                    + "Proucure resfriar sua máquina!\nRecomendação feche abas desnecessárias");
                         }
 
                         tamanhoListaDisco.clear();
@@ -84,7 +85,8 @@ public class TelaAcesso extends javax.swing.JFrame {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 70%");
                         }
                         if (ramTotal > ramTotal * 0.90) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 90%");
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta chegando em 90%! \n"
+                                    + "Proucure resfriar sua máquina!\nRecomendação feche abas desnecessárias");
                         }
                         
                         tamanhoListaRam.clear();
@@ -92,7 +94,8 @@ public class TelaAcesso extends javax.swing.JFrame {
                     if (tamanhoListaCpu.size() > 30) {
 
                         if (cpu > cpu * 0.90) {
-                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: 90%");
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta chegando em 90%! \n"
+                                    + "Proucure resfriar seu processador!\nRecomendação feche abas desnecessárias");
                         }
                         if (cpu > cpu * 0.70) {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: 70%");
