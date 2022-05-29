@@ -64,7 +64,6 @@
                 <label for="select-machine">Máquina selecionada: </label>
                 <select name="select-machine" id="select_machine">
                     <option value=""></option>
-                    <option value="">Máquina teste</option>
                 </select>
             </div>
         </div>
@@ -191,6 +190,30 @@
         document.getElementById("chart_ram").style.display = "none";
         document.getElementById("chart_disco").style.display = "none";
     });
+</script>
+
+<script>
+    fetch(`/usuarios/listarMaquinas/${sessionStorage.FK_HOSPITAL}`).then(function(resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function(resposta) {
+                let machineSelect = document.getElementById("select_machine");
+
+                for (let i = 0; i < resposta.length; i++) {
+                    let maquina = resposta[i];
+
+                    let nameOption = document.createElement("option");
+                    nameOption.value = maquina.idMaquina;
+                    nameOption.textContent = maquina.apelido == null ? maquina.nomeMaquina : maquina.apelido;
+
+                    machineSelect.appendChild(nameOption);
+                }
+            })
+        } else {
+            throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+        }
+    }).catch(function(resposta) {
+        console.log(resposta);
+    })
 </script>
 
 <script>
