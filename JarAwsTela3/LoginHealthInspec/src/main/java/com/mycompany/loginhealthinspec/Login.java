@@ -313,7 +313,7 @@ public class Login extends javax.swing.JFrame {
                     con.update(insertCompMaq,
                             3,
                             maquinas.getIdMaquina(),
-                            String.format("%.1f Ghz",looca.getProcessador().getFrequencia()),
+                            String.format("%.1f Ghz",looca.getProcessador().getFrequencia().doubleValue()),
                             "Ghz"
                     );
 
