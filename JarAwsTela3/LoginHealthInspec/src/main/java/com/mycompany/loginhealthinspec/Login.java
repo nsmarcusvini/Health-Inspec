@@ -296,9 +296,8 @@ public class Login extends javax.swing.JFrame {
                 //System.out.println(listaMaquinas.get(0).toString());
                 if (listaMaquinas.isEmpty()) {
 
-                    String insertMaquinas = "INSERT INTO maquinas (tipoMaquina, nomeMaquina, sistemaOperacional, arquitetura, fkHospital) VALUES (?, ?, ?, ?, ?);";
+                    String insertMaquinas = "INSERT INTO maquinas (nomeMaquina, sistemaOperacional, arquitetura, fkHospital) VALUES (?, ?, ?, ?);";
                     con.update(insertMaquinas,
-                            "Computador",
                             hostName,
                             so,
                             bits,
@@ -336,10 +335,12 @@ public class Login extends javax.swing.JFrame {
                             "Gb"
                     );
 
-                    //TelaAcesso telaAcesso = new TelaAcesso();
-                    //telaAcesso.setVisible(true);
+                    TelaAcesso telaAcesso = new TelaAcesso();
+                    telaAcesso.setVisible(true);
                 } else {
                     System.out.println("Máquina já inserida!");
+                    TelaAcesso telaAcesso = new TelaAcesso();
+                    telaAcesso.setVisible(true);
                 }
             }
 
