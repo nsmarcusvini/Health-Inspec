@@ -2,14 +2,17 @@
     font-family: montserrat;
     src: url(../assets/fontMontSerrat.otf);
 }
+
 * {
     padding: 0;
     margin: 0;
     font-family: montserrat;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 
 /* Modal */
 .register-dark-body-container {
@@ -24,17 +27,19 @@ html {
     visibility: hidden;
     opacity: 0;
     transition: top 0ms ease-in-out 0ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
-    z-index: 3;   
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
+    z-index: 3;
 }
+
 .active-register-dark-body-container {
     visibility: visible;
     opacity: 1;
     transition: top 0ms ease-out 0ms,
-                opacity 200ms ease-out 0ms,
-                transform 200ms ease-out 0ms;
+        opacity 200ms ease-out 0ms,
+        transform 200ms ease-out 0ms;
 }
+
 .register-container {
     position: absolute;
     top: -150%;
@@ -47,18 +52,20 @@ html {
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     transition: top 0ms ease-in-out 200ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
     z-index: 3;
 }
+
 .register-container.active {
     top: 52%;
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     transition: top 0ms ease-in-out 0ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
 }
+
 .close-register-button {
     position: absolute;
     top: 10px;
@@ -72,6 +79,7 @@ html {
     border-radius: 15px;
     cursor: pointer;
 }
+
 .login-dark-body-container {
     position: fixed;
     width: 100vw;
@@ -83,17 +91,19 @@ html {
     visibility: hidden;
     opacity: 0;
     transition: top 0ms ease-in-out 0ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
 }
+
 .active-login-dark-body-container {
     visibility: visible;
     opacity: 1;
     z-index: 1000;
     transition: top 0ms ease-out 0ms,
-                opacity 200ms ease-out 0ms,
-                transform 200ms ease-out 0ms;
+        opacity 200ms ease-out 0ms,
+        transform 200ms ease-out 0ms;
 }
+
 .login-container {
     position: absolute;
     top: -150%;
@@ -107,17 +117,19 @@ html {
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     transition: top 0ms ease-in-out 0ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
 }
+
 .login-container.active {
     top: 52%;
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     transition: top 0ms ease-in-out 0ms,
-                opacity 200ms ease-in-out 0ms,
-                transform 200ms ease-in-out 0ms;
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
 }
+
 .close-login-button {
     position: absolute;
     top: 10px;
@@ -131,10 +143,12 @@ html {
     border-radius: 15px;
     cursor: pointer;
 }
+
 .form {
     width: 100%;
     margin-right: 5%;
 }
+
 .login-container .form {
     width: 100%;
     height: 100%;
@@ -143,17 +157,20 @@ html {
     justify-content: space-between;
     align-items: center;
 }
+
 .register-container .form h2 {
     text-align: center;
     color: #222;
     margin: 10px 0px 20px;
     font-size: 25px;
 }
+
 .login-container .form h2 {
     text-align: center;
     color: #222;
     font-size: 25px;
 }
+
 .register-container .form-columns {
     width: 100%;
     display: flex;
@@ -161,6 +178,7 @@ html {
     justify-content: space-around;
     align-items: center;
 }
+
 .login-container .form-columns {
     width: 100%;
     height: 80%;
@@ -169,22 +187,26 @@ html {
     justify-content: space-around;
     align-items: center;
 }
+
 .form-row {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
+
 .form .form-element {
     margin: 5px 0px;
     position: relative;
 }
+
 .login-container .form .form-element {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .login-container .form .form-element .elements {
     width: 80%;
     display: flex;
@@ -192,17 +214,21 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .elements .label-container {
     display: flex;
     width: 67%;
     justify-content: flex-start;
     align-items: flex-start;
 }
+
 .form .form-element label {
     font-size: 14px;
     color: #222;
 }
-.form .form-element input, select {
+
+.form .form-element input,
+select {
     margin-top: 5px;
     display: block;
     padding: 10px;
@@ -210,26 +236,32 @@ html {
     border: 1px solid #aaa;
     border-radius: 5px;
 }
+
 .login-container .form .form-element input[type=text],
 .login-container .form .form-element input[type=password] {
     width: 60%;
 }
+
 .form .form-element i {
     position: absolute;
     top: 2.2rem;
 }
+
 .register-container .form .form-element i {
     cursor: pointer;
     right: 0.2rem;
 }
+
 .login-container .form .form-element i {
     left: 4.5rem;
     top: 2.1rem;
 }
+
 .login-container .login-eye {
     left: 17.5rem !important;
     cursor: pointer;
 }
+
 .form .form-row .checkbox-element {
     width: 100%;
     display: flex;
@@ -237,9 +269,11 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .form .form-row .checkbox-element label {
     padding: .25rem 0rem 0rem .3rem;
 }
+
 .form .form-element button {
     width: 50%;
     height: 2.5rem;
@@ -252,18 +286,22 @@ html {
     cursor: pointer;
     transition: 200ms;
 }
+
 .form .form-element button:hover {
     background-color: #eceaea;
     color: #222;
 }
+
 .form .errorTextContainer {
     display: none;
 }
+
 .form .form-element .loginErrorText {
     color: red;
     font-size: medium;
     font-weight: bolder;
 }
+
 /* FIM DO MODAL */
 
 .header-image {
@@ -273,10 +311,12 @@ html {
     background-attachment: fixed;
     height: 95vh;
 }
+
 .header-container {
     width: 100%;
     transition: 0.5s;
 }
+
 .header {
     display: flex;
     flex-direction: row;
@@ -287,6 +327,7 @@ html {
     color: #FAFAFA;
     transition: 0.5s;
 }
+
 .fixed-header {
     position: fixed;
     background-color: #01677E;
@@ -294,12 +335,14 @@ html {
     width: 100%;
     height: 11%;
 }
+
 .header span {
     font-size: 1.8rem;
     font-weight: 600;
     margin-top: 1%;
-    color: #FAFAFA; 
+    color: #FAFAFA;
 }
+
 .header-items {
     display: flex;
     list-style: none;
@@ -307,26 +350,33 @@ html {
     justify-content: space-between;
     margin-top: 2%;
 }
+
 .header li {
     cursor: pointer;
     color: #FAFAFA;
     transition: 0.5s;
 }
+
 .header li a {
     text-decoration: none;
     color: #FAFAFA;
 }
+
 .header li:hover {
     font-weight: bolder;
     font-size: large;
 }
+
 .current {
     font-weight: bolder;
     font-size: large;
 }
+
 .open-slide {
+    margin-top: 3%;
     display: none;
 }
+
 .sidebar {
     height: 100vh;
     width: 0;
@@ -340,6 +390,7 @@ html {
     padding-top: 3.75rem;
     transition: 0.5s;
 }
+
 .sidebar ul {
     padding: 0.625rem 0.625rem 0.625rem 1.875rem;
     list-style: none;
@@ -352,6 +403,7 @@ html {
     justify-content: space-around;
     align-items: flex-start;
 }
+
 .sidebar-close {
     position: absolute;
     top: 0;
@@ -362,14 +414,17 @@ html {
     padding: 0.625rem 0.625rem 0.625rem 1.875rem;
     color: #ccc;
 }
+
 .sidebar ul li:hover {
     color: #fff;
     font-size: 1.05rem;
 }
+
 .container-como-funciona {
     height: 95vh;
     background-color: #FAFAFA;
 }
+
 .page-title-container {
     height: 100%;
     display: flex;
@@ -378,6 +433,7 @@ html {
     color: white;
     margin-left: 3%;
 }
+
 .page-title {
     height: 48%;
     width: 70%;
@@ -385,6 +441,7 @@ html {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .page-title .title {
     line-height: 1.4;
     font-weight: 600;
@@ -392,18 +449,21 @@ html {
     color: #f8f7f7;
     text-shadow: 4px 5px 22px #eceaea;
 }
+
 .page-title .description {
-    line-height: 1.8;  
+    line-height: 1.8;
     font-weight: 400;
     font-size: 1.25rem;
     color: #fafafae8;
 }
+
 .work-process-container {
     background-color: #eceaea;
     height: 95vh;
     padding-top: 5.5rem;
     padding-bottom: 5.5rem;
 }
+
 .centered-title {
     width: 100%;
     display: flex;
@@ -411,21 +471,25 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .work-process-title {
     font-weight: 600;
     font-size: 34px;
     line-height: 45px;
     color: #020710;
-} 
+}
+
 .work-process-title span {
     color: #41566e;
 }
+
 .work-process-subtitle {
     font-size: 16px;
     line-height: 29px;
     color: rgba(0, 0, 0, 0.623);
     margin-top: 3%;
 }
+
 .line {
     background-color: #01677E;
     height: 0.2rem;
@@ -433,32 +497,38 @@ html {
     margin-top: 3%;
     margin-bottom: 16%;
 }
+
 .phases-container {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 }
-.arrow{
+
+.arrow {
     animation: arrow 2s;
     animation-iteration-count: infinite;
 }
+
 @keyframes arrow {
-    from{
+    from {
         transform: translateX(0rem);
     }
-    50%{
+
+    50% {
         transform: translateX(-1rem);
     }
-    to{
+
+    to {
         transform: translateX(0rem);
     }
 }
+
 .arrow img {
     height: 7rem;
-    width: 7rem;    
+    width: 7rem;
 }
+
 .steps {
     height: 5rem;
     width: 15rem;
@@ -467,22 +537,27 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .step-image img {
     height: 11rem;
     width: 11rem;
 }
+
 .rocket-div {
     margin-top: 2.5%;
 }
+
 .rocket-image img {
     height: 9rem;
     width: 9rem;
 }
+
 .step-title {
     font-size: 27px;
     font-weight: 600;
     line-height: 50px;
 }
+
 .step-subtitle {
     font-size: 15px;
     font-weight: 400;
@@ -490,24 +565,27 @@ html {
     text-align: center;
     color: rgba(0, 0, 0, 0.623);
 }
-.about-us-container{
+
+.about-us-container {
     width: 100%;
     height: 95vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;   
+    justify-content: center;
     background: linear-gradient(150deg, rgb(6, 65, 77), rgb(24, 95, 110), rgb(33, 72, 82));
     padding-bottom: 5rem;
 }
-.about-us-title{
+
+.about-us-title {
     font-weight: 600;
     font-size: 34px;
     line-height: 45px;
     margin-top: 5rem;
     margin-left: 15rem;
-    color: #FAFAFA;   
+    color: #FAFAFA;
 }
-.about-us-subtitle{
+
+.about-us-subtitle {
     display: flex;
     justify-content: space-around;
     margin-top: 3%;
@@ -515,6 +593,7 @@ html {
     width: 95%;
     visibility: hidden;
 }
+
 .about-us-subtitle .paragraphs-container {
     height: 100%;
     width: 40%;
@@ -523,6 +602,7 @@ html {
     justify-content: space-around;
     align-items: center;
 }
+
 .about-us-subtitle .paragraphs-container .paragraph {
     height: 40%;
     width: 100%;
@@ -531,16 +611,19 @@ html {
     color: #FAFAFA;
     text-align: justify;
 }
+
 .about-us-subtitle .paragraphs-container .paragraph .health-inspec {
     font-weight: bolder;
     font-size: 18px;
 }
-.about-us-subtitle img{
+
+.about-us-subtitle img {
     width: 30rem;
     margin-left: 2.5rem;
     margin-right: 2.5rem;
     border-radius: 1rem;
 }
+
 .line-about-us {
     background-color: #FAFAFA;
     height: 0.2rem;
@@ -549,13 +632,14 @@ html {
     margin-left: 12.7rem;
     margin-bottom: 1%;
 }
+
 footer {
     background-color: #01677E;
-    width: 98.5%;
     height: auto;
     padding: 0.625rem;
     color: #FCFEF0;
 }
+
 .footerContent {
     margin: 0;
     padding: 0;
@@ -566,25 +650,236 @@ footer {
     flex-direction: column;
     text-align: center;
 }
+
 .footerContent p {
     max-width: 28.125rem;
     margin: 0.438rem auto;
     line-height: 1.438rem;
     font-size: 0.875rem;
 }
+
 .footerBottom {
     width: 100%;
     padding: 0.938rem 0;
     text-align: center;
 }
+
 .footerBottom p {
     font-size: 0.875rem;
     word-spacing: 0.125rem;
     text-transform: capitalize;
 }
+
 .footerBottom span {
     text-transform: uppercase;
     font-weight: 200;
+}
+
+@media only screen and (min-width: 500px) and (max-width: 850px) {
+    .open-slide {
+        display: block;
+    }
+
+    .header-items {
+        display: none;
+    }
+    .header span {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-top: 2%;
+        color: #FAFAFA;
+    }
+
+    .page-title {
+        height: 50%;
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .fixed-header {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        background-color: #01677E;
+        z-index: 2;
+        width: 100%;
+        height: 13%;
+    }
+
+    .work-process-container {
+        background-color: #eceaea;
+        height: 80rem;
+        padding-top: 5.5rem;
+        padding-bottom: 5.5rem;
+    }
+
+    .centered-title {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .work-process-title {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 45px;
+        color: #020710;
+    }
+
+    .work-process-title span {
+        color: #41566e;
+    }
+
+    .work-process-subtitle {
+        font-size: 16px;
+        line-height: 29px;
+        color: rgba(0, 0, 0, 0.623);
+        margin-top: 3%;
+    }
+
+    .line {
+        background-color: #01677E;
+        height: 0.2rem;
+        width: 10rem;
+        margin-top: 3%;
+        margin-bottom: 11.5rem;
+    }
+
+    .phases-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .steps {
+        height: 5rem;
+        width: 15rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 20rem;
+    }
+
+    .step-image img {
+        height: 11rem;
+        width: 11rem;
+    }
+
+    .rocket-div {
+        margin-top: 2.5%;
+    }
+
+    .rocket-image img {
+        height: 9rem;
+        width: 9rem;
+    }
+
+    .step-title {
+        font-size: 27px;
+        font-weight: 600;
+        line-height: 50px;
+    }
+
+    .step-subtitle {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.623);
+    }
+
+    .about-us-container {
+        width: 100%;
+        height: 95vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(150deg, rgb(6, 65, 77), rgb(24, 95, 110), rgb(33, 72, 82));
+        padding-top: 10rem;
+    }
+
+    .about-us-title {
+        font-weight: 600;
+        font-size: 34px;
+        line-height: 45px;
+        margin: auto;
+        color: #FAFAFA;
+    }
+
+    .about-us-subtitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3%;
+        width: 85%;
+    }
+
+    .about-us-subtitle .paragraphs-container {
+        height: 100%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .about-us-subtitle .paragraphs-container .paragraph {
+        height: 40%;
+        width: 100%;
+        font-size: 16px;
+        line-height: 2.5;
+        color: #FAFAFA;
+        text-align: justify;
+        align-items: center;
+    }
+
+    .about-us-subtitle .paragraphs-container .paragraph .health-inspec {
+        font-weight: bolder;
+        font-size: 18px;
+    }
+
+    .about-us-subtitle .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .about-us-subtitle .image img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        width: 80%;
+    }
+
+    .line-about-us {
+        background-color: #FAFAFA;
+        height: 0.2rem;
+        width: 15rem;
+        margin: auto;
+    }
+
+    .page-title .title {
+        line-height: 1.5;
+        font-size: 2rem;
+    }
+
+    .page-title .description {
+        line-height: 2;
+        font-size: 1rem;
+    }
+
 }
 
 @media (max-width: 1300px) {
@@ -592,34 +887,228 @@ footer {
         width: 60%;
     }
 }
+@media (max-width: 600px){
+    .fixed-header {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        background-color: #01677E;
+        z-index: 2;
+        width: 100%;
+        height: 12%;
+    }
+}
 
-@media (max-width: 850px) {
+@media (max-width: 500px) {
     .open-slide {
         display: block;
     }
+
     .header-items {
         display: none;
     }
+    .header span {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-top: 2%;
+        color: #FAFAFA;
+    }
+    .fixed-header {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        background-color: #01677E;
+        z-index: 2;
+        width: 100%;
+        height: 10%;
+    }
+
     .page-title {
         height: 50%;
         width: 80%;
         justify-content: space-between;
     }
-    .page-title .title {
-        line-height: 1.8;
-        font-size: 1.5rem;
-    }
-    .page-title .description {
-        line-height: 1.8;
-        font-size: 1rem;
-    }
-    .phases-container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
+
     .arrow {
         display: none;
     }
+
+    .work-process-container {
+        background-color: #eceaea;
+        height: 80rem;
+        padding-top: 5.5rem;
+        padding-bottom: 5.5rem;
+    }
+
+    .centered-title {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .work-process-title {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 45px;
+        color: #020710;
+        text-align: center;
+    }
+
+    .work-process-title span {
+        color: #41566e;
+    }
+
+    .work-process-subtitle {
+        font-size: 16px;
+        line-height: 29px;
+        color: rgba(0, 0, 0, 0.623);
+        margin-top: 3%;
+        text-align: center;
+    }
+
+    .line {
+        background-color: #01677E;
+        height: 0.2rem;
+        width: 10rem;
+        margin-top: 3%;
+        margin-bottom: 11.5rem;
+    }
+
+    .phases-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .steps {
+        height: 5rem;
+        width: 15rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 20rem;
+    }
+
+    .step-image img {
+        height: 11rem;
+        width: 11rem;
+    }
+
+    .rocket-div {
+        margin-top: 2.5%;
+    }
+
+    .rocket-image img {
+        height: 9rem;
+        width: 9rem;
+    }
+
+    .step-title {
+        font-size: 27px;
+        font-weight: 600;
+        line-height: 50px;
+    }
+
+    .step-subtitle {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.623);
+    }
+
+    .about-us-container {
+        width: 100%;
+        height: 95vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(150deg, rgb(6, 65, 77), rgb(24, 95, 110), rgb(33, 72, 82));
+        padding-top: 10rem;
+    }
+
+    .about-us-title {
+        font-weight: 600;
+        font-size: 34px;
+        line-height: 45px;
+        margin: auto;
+        color: #FAFAFA;
+    }
+
+    .about-us-subtitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3%;
+        width: 85%;
+    }
+
+    .about-us-subtitle .paragraphs-container {
+        height: 100%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .about-us-subtitle .paragraphs-container .paragraph {
+        height: 40%;
+        width: 100%;
+        font-size: 16px;
+        line-height: 2.5;
+        color: #FAFAFA;
+        text-align: justify;
+        align-items: center;
+    }
+
+    .about-us-subtitle .paragraphs-container .paragraph .health-inspec {
+        font-weight: bolder;
+        font-size: 18px;
+    }
+
+    .about-us-subtitle .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .about-us-subtitle .image img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+        width: 80%;
+    }
+
+    .line-about-us {
+        background-color: #FAFAFA;
+        height: 0.2rem;
+        width: 15rem;
+        margin: auto;
+    }
+
+    .page-title{
+        height: 50%;
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .page-title .title {
+        line-height: 1.6;
+        font-size: 2rem;
+    }
+
+    .page-title .description {
+        line-height: 2;
+        font-size: 0.9rem;
+    }
+
 }
