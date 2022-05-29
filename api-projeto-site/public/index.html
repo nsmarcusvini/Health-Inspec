@@ -11,16 +11,15 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/dc4799c2db.js" crossorigin="anonymous"></script>
 
     <script src="assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
+    <script src="assets/js/alert.js"></script>
     <!-- <script src="../src/models/usuarioModel.js"></script> -->
 </head>
 
 <body>
-
-
     <div class="register-dark-body-container">
         <div class="register-container">
             <div class="close-register-button">&times;</div>
@@ -489,6 +488,7 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.razao_social;
                     sessionStorage.NOME_TECNICO = json.nome;
+                    sessionStorage.FK_HOSPITAL = json.fkHospital;
                     sessionStorage.ID_HOSPITAL = json.idHospital;
 
                     if (isChecked) {
@@ -525,24 +525,5 @@
         })
 
         return false;
-    }
-
-    function throwAlert(icon, message) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: icon,
-            title: message
-        })
     }
 </script>
