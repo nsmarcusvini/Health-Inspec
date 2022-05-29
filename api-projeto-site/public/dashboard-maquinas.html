@@ -11,6 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body onload="validarSessao()">
+    <!--StartofhealthinspecsupportZendeskWidgetscript-->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d84d7d73-a41a-42c7-8837-da33a68c5c2a"></script>
+    <!--EndofhealthinspecsupportZendeskWidgetscript-->
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
@@ -65,7 +68,6 @@
                 </select>
             </div>
         </div>
-
 
         <div class="cards-container">
             <div id="card1" class="card" onclick="obterDadosGrafico(ram)">
@@ -192,159 +194,5 @@
 </script>
 
 <script>
-    let proximaAtualizacao;
-    let proximaAtualizacao2;
     
-    function obterDadosGrafico(idComponente) {
-        if (proximaAtualizacao != undefined && proximaAtualizacao2 != undefined) {
-            clearTimeout(proximaAtualizacao);
-            clearTimeout(proximaAtualizacao2);
-        }
-
-        fetch(`/medidas/ultimas/${idComponente}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    plotarGrafico(resposta, idComponente);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        }).catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-    }
-
-    function plotarGrafico(resposta, idComponente) {
-        console.log('iniciando plotagem do gráfico...');
-
-        var dados = {
-            labels: [],
-            datasets: [
-                {
-                    // label: 'Luminosidade',
-                    // borderColor: '#32B9CD',
-                    // backgroundColor: '#32b9cd8f',
-                    fill: true,
-                    data: []
-                }
-            ]
-        };
-
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            dados.labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.logLuminosidade * Math.random());
-        }
-
-        console.log(JSON.stringify(dados));
-
-        var ctx = canvas_grafico.getContext('2d');
-        window.grafico_linha = Chart.Line(ctx, {
-            data: dados,
-            //Configurações do gráfico
-            options: {
-                responsive: true,
-                animation: { duration: 500 },
-                hoverMode: 'index',
-                stacked: false,
-                title: {
-                    display: true,
-                    text: 'Histórico recente de Luminosidade'
-                },
-                scales: {
-                    yAxes: [ {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        id: 'y-luminosidade',
-
-                        gridLines: {
-                            drawOnChartArea: false,
-                        },
-                    }],
-                }
-            }
-        });
-
-        
-        //Atualiza os dados de 2 em 2 segundos
-        setTimeout(() => atualizarGrafico(idComponente, dados), 3000);
-    }
-
-    function atualizarGrafico(idSensor, dados) {
-        fetch(`/medidas/tempo-real/${idSensor}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico: ${dados.labels}`);
-                    console.log(`Dados atuais do gráfico: ${dados.datasets[0].data}`);
-
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].logLuminosidade); // incluir uma nova medida de umidade
-
-                    if(novoRegistro[0].logLuminosidade < 300) {
-                        dados.datasets[0].borderColor = "#cd32328f";
-                        dados.datasets[0].backgroundColor = "#cd32328f";
-                        div_msg.innerHTML = `<h2 style="color: #cd32328f;">Luminosidade ${novoRegistro[0].logLuminosidade}, muito abaixo dos padrões ideais, estado crítico!!!</h2><br>
-                            <h4 style="color: #fff;">Resolva URGENTEMETE o controle de Luminosidade da sua Estufa!</h4>
-                            `
-                    } else if (novoRegistro[0].logLuminosidade < 400) {
-                        dados.datasets[0].borderColor = "#eb720f8f";
-                        dados.datasets[0].backgroundColor = "#eb720f8f";
-                        div_msg.innerHTML = `<h2 style="color: #eb720f8f;">Luminosidade ${novoRegistro[0].logLuminosidade}, abaixo dos padrões ideais, estado emergêncial</h2><br>
-                        <h4 style="color: #fff;"> Resolva o controle de Luminosidade da sua Estufa o mais cedo possível</h4>`
-                    } else if (novoRegistro[0].logLuminosidade < 500) {
-                        dados.datasets[0].borderColor = "#dfca158f";
-                        dados.datasets[0].backgroundColor = "#dfca158f";
-                        div_msg.innerHTML = `<h2 style="color: #dfca158f;">Luminosidade ${novoRegistro[0].logLuminosidade}, abaixo do padrão ideal </h2><br>
-                        <h4 style="color: #fff;"> Cheque o controle de Luminosidade da sua Estufa</h4>`
-                    } else if (novoRegistro[0].logLuminosidade < 900) {
-                        dados.datasets[0].borderColor = "#6bcd328f";
-                        dados.datasets[0].backgroundColor = "#6bcd328f";
-                        div_msg.innerHTML = `<h2 style="color: #6bcd328f;">Luminosidade ${novoRegistro[0].logLuminosidade},  nos padrões ideais</h2> <br>
-                        <h4 style="color: #fff;"> Nada a se fazer</h4>`
-                    } else if (novoRegistro[0].logLuminosidade < 1000) {
-                        dados.datasets[0].borderColor = "#dfca158f";
-                        dados.datasets[0].backgroundColor = "#dfca158f";
-                        div_msg.innerHTML = `<h2 style="color: #dfca158f;">Luminosidade ${novoRegistro[0].logLuminosidade}, acima dos padrões ideais </h2><br>
-                        <h4 style="color: #fff;">  Cheque o controle de Luminosidade da sua Estufa</h4>`
-                    } else if (novoRegistro[0].logLuminosidade <= 1100) {
-                        dados.datasets[0].borderColor = "#eb720f8f";
-                        dados.datasets[0].backgroundColor = "#eb720f8f";
-                        div_msg2.innerHTML = `<h2 style="color: #eb720f8f;">Luminosidade ${novoRegistro[0].logLuminosidade}, acima dos padrões ideais, estado emergêncial</h2><br>
-                        <h4 style="color: #fff;">Resolva o controle de Luminosidade da sua Estufa o mais cedo possível</h4>`
-                    } else if (novoRegistro[0].logLuminosidade > 1100) {
-                        dados.datasets[0].borderColor = "#cd32328f";
-                        dados.datasets[0].backgroundColor = "#cd32328f";
-                        div_msg.innerHTML = `<h2 style="color: #cd32328f;">Luminosidade ${novoRegistro[0].logLuminosidade}, muito acima dos padrões ideais, estado crítico!!!</h2><br>
-                        <h4 style="color: #fff;"> Resolva URGENTEMETE o controle de Luminosidade da sua Estufa!</h4>`
-                    }
-
-                    window.grafico_linha.update();
-
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados), 5000);
-
-                });
-
-                if(novoRegistro[0].logLuminosidade < 650) {
-                    canvas_grafico.dados.datasets[0].backgroundColor = "red"
-                }
-
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados), 5000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
 </script>
