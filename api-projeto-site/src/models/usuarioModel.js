@@ -9,6 +9,26 @@ function listar() {
     return database.executar(instrucao);
 }
 
+function listarInfoHospital(idHospital) {
+    let instrucao = `
+        SELECT
+            razao_social,
+            cnpj,
+            estado,
+            cidade,
+            cep,
+            logradouro,
+            telefone,
+            email
+        FROM
+            hospital
+        WHERE
+            idHospital = ${idHospital};
+    `;
+
+    return database.executar(instrucao);
+}
+
 function listarTecnicos(fkHospital) {
     let instrucao = `
         SELECT 
@@ -19,6 +39,24 @@ function listarTecnicos(fkHospital) {
             email
         FROM 
             funcionario
+        WHERE 
+            fkHospital = ${fkHospital};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function listarMaquinas(fkHospital) {
+    let instrucao = `
+        SELECT 
+            idMaquina,
+            nomeMaquina,
+            sistemaOperacional,
+            arquitetura,
+            apelido,
+            tipoMaquina
+        FROM
+            maquinas
         WHERE 
             fkHospital = ${fkHospital};
     `;
@@ -53,14 +91,113 @@ function validarCadastroTecnico(email) {
     return database.executar(instrucao);
 }
 
+function deletarHospital(idHospital) {
+    let instrucao = `
+        DELETE FROM
+            hospital
+        WHERE
+            idHospital = ${idHospital};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function deletarTodosTecnicos(fkHospital) {
+    let instrucao = `
+        DELETE FROM
+            funcionario
+        WHERE
+            fkHospital = ${fkHospital};
+    `;
+
+    return database.executar(instrucao)
+}
+
 function deletarTecnico(id) {
     let instrucao = `DELETE FROM funcionario WHERE idFuncionario = ${id};`;
 
     return database.executar(instrucao);
 }
 
+function deletarMaquina(id) {
+    let instrucao = `
+        DELETE FROM
+            maquinas
+        WHERE
+            idMaquina = ${id};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function deletarRegistrosMaquina(fkMaquina) {
+    let instrucao = `
+        DELETE FROM 
+            registros
+        WHERE
+            fkMaquina = ${fkMaquina};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function deletarComponentesMaquina(fkMaquina) {
+    let instrucao = `
+        DELETE FROM 
+            componentes_has_maquinas
+        WHERE
+            fkMaquina = ${fkMaquina};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function deletarTodasMaquinas(fkHospital) {
+    let instrucao = `
+        DELETE FROM 
+            maquinas
+        WHERE
+            fkHospital = ${fkHospital};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function atualizarHospital(id, field, value) {
+    let instrucao = `
+        UPDATE 
+            hospital
+        SET 
+            ${field} = '${value}'
+        WHERE
+            idHospital = ${id};
+    `;
+
+    return database.executar(instrucao);
+}
+
 function atualizarTecnico(id, field, value) {
-    let instrucao = `UPDATE funcionario SET ${field} = '${value}' WHERE idFuncionario = ${id};`;
+    let instrucao = `
+        UPDATE 
+            funcionario 
+        SET 
+            ${field} = '${value}' 
+        WHERE 
+            idFuncionario = ${id};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function atualizarMaquina(id, field, value) {
+    let instrucao = `
+        UPDATE
+            maquinas
+        SET
+            ${field} = '${value}'
+        WHERE
+            idMaquina = ${id};
+    `;
 
     return database.executar(instrucao);
 }
@@ -99,10 +236,20 @@ module.exports = {
     entrar,
     validarCadastro,
     validarCadastroTecnico,
+    deletarHospital,
+    deletarMaquina,
+    deletarTodasMaquinas,
+    deletarRegistrosMaquina,
+    deletarComponentesMaquina,
+    deletarTodosTecnicos,
     deletarTecnico,
+    atualizarHospital,
+    atualizarMaquina,
     atualizarTecnico,
     cadastrar,
     cadastrarTecnico,
     listar,
-    listarTecnicos
+    listarTecnicos,
+    listarMaquinas,
+    listarInfoHospital
 };

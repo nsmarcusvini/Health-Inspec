@@ -1,14 +1,12 @@
-let ctxCpu = document.getElementById('chartCpu').getContext('2d');
-let ctxRam = document.getElementById('chartRam').getContext('2d');
-let ctxDisco = document.getElementById('chartDisco').getContext('2d');
+let ctxCpu = document.getElementById('chart_cpu').getContext('2d');
+let ctxRam = document.getElementById('chart_ram').getContext('2d');
+let ctxDisco = document.getElementById('chart_disco').getContext('2d');
 
 Chart.defaults.global.defaultFontFamily = 'Roboto'
 
 var cpuAleatorio = Math.random() * (10 - 1) + 1;
 var ramAleatorio = Math.random() * (10 - 1) + 1;
 var Discoleatorio = Math.random() * (10 - 1) + 1;
-
-
 
 let chartCpu = new Chart(ctxCpu, {
     // The type of chart we want to create
@@ -19,17 +17,7 @@ let chartCpu = new Chart(ctxCpu, {
         datasets: [{
             label: "",
             backgroundColor: [
-                'rgb(255, 0, 0, 0.8)',
-                'rgba(41, 128, 185,0.8)',
-                'rgba(52, 73, 94,0.8)',
-                'rgba(44, 62, 80,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-                'rgba(127, 140, 141,0.8)'
+                'rgb(194, 2, 2)'
             ],
             borderColor: [
                 'rgb(0, 0, 0)',
@@ -48,6 +36,7 @@ let chartCpu = new Chart(ctxCpu, {
     },
     // Configuration options go here
     options: {
+        maintainAspectRatio: false,
         animation: {
             duration: 2000,
             easing: 'easeOutBounce'
@@ -61,11 +50,11 @@ let chartCpu = new Chart(ctxCpu, {
             }
         },
         legend: {
-            display: true,
+            display: false,
             position: 'bottom'
         },
         title: {
-            display: true,
+            display: false,
             text: 'Processador/Cpu',
             fontSize: 20
         },
@@ -75,20 +64,18 @@ let chartCpu = new Chart(ctxCpu, {
             backgroundColor: 'rgba(41, 128, 185,0.8)'
         },
         scales: {
-            xAxes: [{
-                gridLines: {
-                    display: false,
-                    drawBorder: false
-                },
-                position: 'bottom'
-            }],
-            yAxes: [{
-
-                gridLines: {
-                    display: false,
-                    drawBorder: false
+            y: {
+                stacked: true,
+                grid: {
+                    display: true,
+                    color: "rgba(255,99,132,0.2)"
                 }
-            }]
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
         }
     }
 });
@@ -102,17 +89,7 @@ let chartDisco = new Chart(ctxDisco, {
         datasets: [{
             label: "",
             backgroundColor: [
-                'rgba(238, 241, 26, 0.801)',
-                'rgba(41, 128, 185,0.8)',
-                'rgba(52, 73, 94,0.8)',
-                'rgba(44, 62, 80,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)',
-                'rgba(127, 140, 141,0.8)'
+                'rgb(226, 226, 3)'
             ],
             borderColor: [
                 'rgb(0, 0, 0)',
@@ -131,6 +108,7 @@ let chartDisco = new Chart(ctxDisco, {
     },
     // Configuration options go here
     options: {
+        maintainAspectRatio: false,
         animation: {
             duration: 2000,
             easing: 'easeOutBounce'
@@ -144,11 +122,11 @@ let chartDisco = new Chart(ctxDisco, {
             }
         },
         legend: {
-            display: true,
+            display: false,
             position: 'bottom'
         },
         title: {
-            display: true,
+            display: false,
             text: 'Disco',
             fontSize: 20
         },
@@ -158,20 +136,18 @@ let chartDisco = new Chart(ctxDisco, {
             backgroundColor: 'rgba(41, 128, 185,0.8)'
         },
         scales: {
-            xAxes: [{
-                gridLines: {
-                    display: false,
-                    drawBorder: false
-                },
-                position: 'bottom'
-            }],
-            yAxes: [{
-
-                gridLines: {
-                    display: false,
-                    drawBorder: false
+            y: {
+                stacked: true,
+                grid: {
+                    display: true,
+                    color: "rgba(255,99,132,0.2)"
                 }
-            }]
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
         }
     }
 });
@@ -185,19 +161,7 @@ let chartRam = new Chart(ctxRam, {
         datasets: [{
             label: "",
             backgroundColor: [
-                'rgb(21, 243, 1, 0.8)',
-                'rgba(41, 128, 185,0.8)',
-                'rgb(21, 243, 1, 0.8)',
-                'rgb(21, 243, 1, 0.8)',
-                'rgb(21, 243, 1, 0.8)',
-                'rgb(21, 243, 1, 0.8)',
-                'rgb(21, 243, 1, 0.8)',
-                'rgb(21, 243, 1, 0.8)',
-                'rgba(41, 128, 185,0.8)',
-                'rgba(52, 73, 94,0.8)',
-                'rgba(44, 62, 80,0.8)',
-                'rgba(149, 165, 166,0.8)',
-                'rgba(127, 140, 141,0.8)'
+                'rgb(3, 119, 3)'
             ],
             borderColor: [
                 'rgb(0, 0, 0)',
@@ -212,6 +176,7 @@ let chartRam = new Chart(ctxRam, {
     },
     // Configuration options go here
     options: {
+        maintainAspectRatio: false,
         animation: {
             duration: 2000,
             easing: 'easeOutBounce'
@@ -225,11 +190,11 @@ let chartRam = new Chart(ctxRam, {
             }
         },
         legend: {
-            display: true,
+            display: false,
             position: 'bottom'
         },
         title: {
-            display: true,
+            display: false,
             text: 'Memória Ram',
             fontSize: 20
         },
@@ -239,20 +204,18 @@ let chartRam = new Chart(ctxRam, {
             backgroundColor: 'rgba(41, 128, 185,0.8)'
         },
         scales: {
-            xAxes: [{
-                gridLines: {
-                    display: false,
-                    drawBorder: false
-                },
-                position: 'bottom'
-            }],
-            yAxes: [{
-
-                gridLines: {
-                    display: false,
-                    drawBorder: false
+            y: {
+                stacked: true,
+                grid: {
+                    display: true,
+                    color: "rgba(255,99,132,0.2)"
                 }
-            }]
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
         }
     }
 });

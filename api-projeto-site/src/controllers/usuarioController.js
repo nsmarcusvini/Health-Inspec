@@ -23,6 +23,38 @@ function listarTecnicos(req, res) {
     )
 }
 
+function listarMaquinas(req, res) {
+    const fkHospital = req.params.fkHospital;
+
+    usuarioModel.listarMaquinas(fkHospital)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
+function listarInfoHospital(req, res) {
+    const idHospital = req.params.idHospital;
+
+    usuarioModel.listarInfoHospital(idHospital)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 function listar(req, res) {
     usuarioModel.listar()
     .then(function (resultado) {
@@ -155,6 +187,15 @@ function validarCadastroTecnico(req, res) {
 
 function cadastrar(req, res) {
     let corporateName = req.body.corporateName;
+
+    let arrayNome = corporateName.split(" ");
+
+    for (let i = 0; i < arrayNome.length; i++) {
+        arrayNome[i] = arrayNome[i].charAt(0).toUpperCase() + arrayNome[i].slice(1);
+    }
+
+    const capitalizedName = arrayNome.join(" ");
+
     let cnpj = req.body.cnpj;
     let email = req.body.email;
     let phoneNumber = req.body.phoneNumber;
@@ -164,7 +205,7 @@ function cadastrar(req, res) {
     let city = req.body.city;
     let password = req.body.password;
 
-    usuarioModel.cadastrar(corporateName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
+    usuarioModel.cadastrar(capitalizedName, cnpj, email, phoneNumber, cep, publicPlace, state, city, password)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -183,6 +224,13 @@ function cadastrar(req, res) {
 
 function cadastrarTecnico(req, res) {
     let name = req.body.name;
+    let arrayNome = name.split(" ");
+
+    for (let i = 0; i < arrayNome.length; i++) {
+        arrayNome[i] = arrayNome[i].charAt(0).toUpperCase() + arrayNome[i].slice(1);
+    }
+
+    const capitalizedName = arrayNome.join(" ");
     let cpf = req.body.cpf;
     let phoneNumber = req.body.phone;
     let email = req.body.email;
@@ -200,7 +248,7 @@ function cadastrarTecnico(req, res) {
     } else if (password == undefined) {
         res.status(400).send("Sua senha está undefined!"); 
     } else {
-        usuarioModel.cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password)
+        usuarioModel.cadastrarTecnico(capitalizedName, email, fkHospital, cpf, phoneNumber, password)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -218,20 +266,108 @@ function cadastrarTecnico(req, res) {
     }
 }
 
+function deletarHospital(req, res) {
+    const idHospital = req.params.idHospital;
+
+    usuarioModel.deletarTodasMaquinas(idHospital)
+    .then(
+        function(resultado) {
+            usuarioModel.deletarTodosTecnicos(idHospital);
+            usuarioModel.deletarHospital(idHospital);
+            res.json(resultado);
+        }
+    ).catch(
+        function(erro) {
+            console.log(erro);
+            console.log(erro.sqlMessage);
+        }
+    )
+}
+
+function deletarMaquina(req, res) {
+    let id = req.params.idMaquina;
+
+    usuarioModel.deletarRegistrosMaquina(id)
+    .then(
+        function(resultado) {
+            usuarioModel.deletarComponentesMaquina(id);
+            usuarioModel.deletarMaquina(id);
+            res.json(resultado);
+        }
+    ).catch(
+        function(erro) {
+            console.log(erro);
+            console.log(erro.sqlMessage);
+        }
+    )
+}
+
 function deletarTecnico(req, res) {
     let id = req.params.idTecnico;
 
     usuarioModel.deletarTecnico(id)
+    .then(
+        function(resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function(erro) {
+            console.log(erro);
+            console.log(erro.sqlMessage);
+        }
+    )
+}
+
+function atualizarHospital(req, res) {
+    let idHospital = req.params.idHospital;
+    let field = req.body.fieldSelect;
+    let value = req.body.newValue;
+
+    if (idHospital == undefined) {
+        res.status(400).send("O id está undefined!");
+    } else if (field == undefined) {
+        res.status(400).send("O campo está undefined!");
+    } else if (value == undefined) {
+        res.status(400).send("o valor está undefined!");
+    } else {
+        usuarioModel.atualizarHospital(idHospital, field, value)
         .then(
-            function(resultado) {
-                res.json(resultado);
+            function(resposta) {
+                res.json(resposta);
             }
         ).catch(
-            function(erro) {
-                console.log(erro);
-                console.log(erro.sqlMessage);
+            function(error) {
+                console.log(error);
+                console.log(error.sqlMessage);
             }
         )
+    }
+}
+
+function atualizarMaquina(req, res) {
+    let id = req.params.idMaquina;
+    let field = req.body.fieldSelect;
+    let value = req.body.newValue;
+
+    if(id == undefined) {
+        res.status(400).send("O nome está undefined!");
+    } else if (field == undefined) {
+        res.status(400).send("O campo está undefined!");
+    } else if (value == undefined) {
+        res.status(400).send("O valor está undefined!");
+    } else {
+        usuarioModel.atualizarMaquina(id, field, value)
+            .then(
+                function(resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function(error) {
+                    console.log(error);
+                    console.log(error.sqlMessage);
+                }
+            )
+    }
 }
 
 function atualizarTecnico(req, res) {
@@ -283,10 +419,16 @@ module.exports = {
     validarCadastroTecnico,
     cadastrar,
     cadastrarTecnico,
+    deletarHospital,
+    deletarMaquina,
     deletarTecnico,
+    atualizarHospital,
+    atualizarMaquina,
     atualizarTecnico,
     listar,   
     listarTecnicos,
+    listarMaquinas,
+    listarInfoHospital,
     testar,
     listarAcessos
 }

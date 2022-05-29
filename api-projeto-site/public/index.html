@@ -11,18 +11,15 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/dc4799c2db.js" crossorigin="anonymous"></script>
 
     <script src="assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
+    <script src="assets/js/alert.js"></script>
     <!-- <script src="../src/models/usuarioModel.js"></script> -->
 </head>
 
 <body>
-    <!--StartofhealthinspechelpZendeskWidgetscript-->
-    <script id="ze-snippet"src="https://static.zdassets.com/ekr/snippet.js?key=158aec72-b531-4749-a30d-c3372516408b"></script>
-    <!--EndofhealthinspechelpZendeskWidgetscript-->
-
     <div class="register-dark-body-container">
         <div class="register-container">
             <div class="close-register-button">&times;</div>
@@ -45,13 +42,13 @@
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="email">E-mail</label>
-                            <input type="text" name="email" id="email" placeholder="health_inspec@gmail.com">
+                            <label for="state">Estado</label>
+                            <input type="text" name="state" id="state" placeholder="SP">
                         </div>
-
+                        
                         <div class="form-element">
-                            <label for="phoneNumber">Telefone</label>
-                            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
+                            <label for="city">Cidade</label>
+                            <input type="text" name="city" id="city" placeholder="São Paulo">
                         </div>
                     </div>
 
@@ -69,13 +66,13 @@
 
                     <div class="form-row">
                         <div class="form-element">
-                            <label for="state">Estado</label>
-                            <input type="text" name="state" id="state" placeholder="SP">
+                            <label for="phoneNumber">Telefone</label>
+                            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="00 12345-6789">
                         </div>
-                        
+
                         <div class="form-element">
-                            <label for="city">Cidade</label>
-                            <input type="text" name="city" id="city" placeholder="São Paulo">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" placeholder="health_inspec@gmail.com">
                         </div>
                     </div>
 
@@ -132,7 +129,7 @@
                                     <label for="loginPassword">Senha</label>
                                 </div>
                                 <i class="fa fa-lock"></i>
-                                <i id="login_eye" class="far fa-eye login-eye"></i>
+                                <i id="login_eye" class="far fa-eye"></i>
                                 <input type="password" id="loginPassword" name="loginPassword" placeholder="******">
                             </div>
                         </div>
@@ -483,6 +480,7 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.razao_social;
                     sessionStorage.NOME_TECNICO = json.nome;
+                    sessionStorage.FK_HOSPITAL = json.fkHospital;
                     sessionStorage.ID_HOSPITAL = json.idHospital;
 
                     if (isChecked) {
@@ -519,24 +517,5 @@
         })
 
         return false;
-    }
-
-    function throwAlert(icon, message) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: icon,
-            title: message
-        })
     }
 </script>

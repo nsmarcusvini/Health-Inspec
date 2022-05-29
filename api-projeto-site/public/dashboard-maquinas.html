@@ -7,8 +7,13 @@
     <title>Health Inspec | Dashboard</title>
     <link rel="stylesheet" href="./css/dashboard-maquinas.css">
     <script src="./assets/js/funcoes.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body onload="validarSessao()">
+    <!--StartofhealthinspecsupportZendeskWidgetscript-->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=d84d7d73-a41a-42c7-8837-da33a68c5c2a"></script>
+    <!--EndofhealthinspecsupportZendeskWidgetscript-->
     <div class="sidebar-menu-container">
         <div class="sidebar-menu">
             <div class="user-container">
@@ -52,18 +57,142 @@
 
         <div class="page-title">
             <div class="title">
-                Selecione a máquina desejada para monitorar seus componentes pelos gráficos.
+                Monitoramento de componentes
             </div>
 
-            <div class="desc">
-                Caso a máquina não tenha o sistema da Health Inspec ou não tenha sido cadastrada 
-                no site, os gráficos não poderão ser exibidos.
+            <div class="select-machine-container">
+                <label for="select-machine">Máquina selecionada: </label>
+                <select name="select-machine" id="select_machine">
+                    <option value=""></option>
+                    <option value="">Máquina teste</option>
+                </select>
             </div>
         </div>
 
-        <div class="graphs-container">
+        <div class="cards-container">
+            <div id="card1" class="card" onclick="obterDadosGrafico(ram)">
+                <div class="card-title">RAM</div>
+                <div class="card-subtitle">Espaço total - 8GB</div>
+                <div class="card-subtitle">Espaço livre - 30%</div>
+                <div class="card-status">
+                    <div class="box green"></div>
+                    <label>Ideal</label>
+                </div>
+            </div>
+            
+            <div id="card2" class="card" onclick="obterDadosGrafico(disco)">
+                <div class="card-title">Disco</div>
+                <div class="card-subtitle">Espaço total - 256SSD</div>
+                <div class="card-subtitle">Espaço livre - 20%</div>
+                <div class="card-status">
+                    <div class="box yellow"></div>
+                    Alerta!
+                </div>
+            </div>
 
+            <div id="card3" class="card" onclick="obterDadosGrafico(processador)">
+                <div class="card-title">Processador</div>
+                <div class="card-subtitle">Uso ideal - 65%</div>
+                <div class="card-subtitle">Uso atual - 90%</div>
+                <div class="card-status">
+                    <div class="box red"></div>
+                    Urgente!
+                </div>
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title-container">
+                <div class="graph-title">Gráfico - RAM</div>
+
+                <div class="graph-desc">
+                    <div class="box-container">
+                        <div class="box green"></div> 
+                        <label class="desc">Uso ideal</label>
+                        <label>-</label>
+                        <label id="graph-range" class="range">até 600</label>
+                    </div>
+                    
+                    <div class="box-container">
+                        <div class="box yellow"></div> 
+                        <label class="desc">Uso em alerta</label>
+                        <label>-</label>
+                        <label id="graph-range" class="range">600 a 700</label>
+                    </div>
+                    
+                    <div class="box-container">
+                        <div class="box red"></div> 
+                        <label class="desc">Uso em urgência</label>
+                        <label>-</label>
+                        <label id="graph-range" class="range">acima de 700</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph">
+                <canvas id="chart_ram" style="display: none;"></canvas>
+                <canvas id="chart_disco" style="display: none;"></canvas>
+                <canvas id="chart_cpu" style="display: none;"></canvas>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+<script src='./node_modules/chart.js/dist/Chart.js'></script>
+<script src="./js/dashboard.js"></script>  
+
+<script>
+    const card1 = document.getElementById("card1");
+    const card2 = document.getElementById("card2");
+    const card3 = document.getElementById("card3");
+
+    card1.addEventListener("click", () => {
+        card1.classList.toggle("active");
+        card2.classList.remove("active");
+        card3.classList.remove("active");
+
+        if (card1.classList.contains("active")) {
+            document.getElementById("chart_ram").style.display = "block";
+        } else {
+            document.getElementById("chart_ram").style.display = "none";
+        }
+
+        document.getElementById("chart_disco").style.display = "none";
+        document.getElementById("chart_cpu").style.display = "none";
+    });
+
+    card2.addEventListener("click", () => {
+        card2.classList.toggle("active");
+        card1.classList.remove("active");
+        card3.classList.remove("active");
+
+        if (card2.classList.contains("active")) {
+            document.getElementById("chart_disco").style.display = "block";
+        } else {
+            document.getElementById("chart_disco").style.display = "none";
+        }
+
+        document.getElementById("chart_ram").style.display = "none";
+        document.getElementById("chart_cpu").style.display = "none";
+    });
+    
+    card3.addEventListener("click", () => {
+        card3.classList.toggle("active");
+        card1.classList.remove("active");
+        card2.classList.remove("active");
+        
+        if (card3.classList.contains("active")) {
+            document.getElementById("chart_cpu").style.display = "block";
+        } else {
+            document.getElementById("chart_cpu").style.display = "none";
+        }
+        
+        document.getElementById("chart_ram").style.display = "none";
+        document.getElementById("chart_disco").style.display = "none";
+    });
+</script>
+
+<script>
+    
+</script>

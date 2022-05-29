@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="./css/perfil-hospital.css">
+
+    <script src="https://kit.fontawesome.com/dc4799c2db.js" crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="assets/js/funcoes.js"></script>
+    <script src="assets/js/alert.js"></script>
+</head>
+<body onload="validarSessao()">
+    <div class="sidebar-menu-container">
+        <div class="sidebar-menu">
+            <div class="user-container">
+                <div class="user-icon"></div>
+
+                <span class="username" id="hospitalName"></span>
+            </div>
+
+            <div class="items-container">
+                <ul>
+                    <li>
+                        <a href="cadastro-tecnicos.html">Cadastrar técnicos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="tabela-tecnicos.html">Técnicos cadastrados</a>
+                    </li>
+                    
+                    <li>
+                        <a href="perfil-hospital.html" class="current">Perfil</a>
+                    </li>
+                    
+                    <li>
+                        <a href="index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <div class="open-slide">
+            <a href="#" id="sidebar-open-button">
+                <svg width="30" height="30">
+                    <path d="M0, 5 30,5" stroke="black" stroke-width="5"/>
+                    <path d="M0, 14 30,14" stroke="black" stroke-width="5"/>
+                    <path d="M0, 23 30,23" stroke="black" stroke-width="5"/>
+                </svg>
+            </a>
+        </div> -->
+
+        <span>
+            Altere sua conta
+        </span>
+
+        <div class="form-container">
+            <div class="form">
+                <form id="form-cadastro-tecnico" method="post" onsubmit="return cadastrarTecnico()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="corporateName">Razão social</label>
+                            <input disabled type="text" name="corporateName" id="corporateName">
+                        </div>  
+                        
+                        <div class="form-element">
+                            <label for="cnpj">CNPJ</label>
+                            <input disabled type="text" name="cnpj" id="cnpj">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="state">Estado</label>
+                            <input disabled type="text" name="state" id="state">
+                        </div>
+                        
+                        <div class="form-element">
+                            <label for="city">Cidade</label>
+                            <input disabled type="text" name="city" id="city">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="cep">CEP</label>
+                            <input disabled type="text" name="cep" id="cep">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="publicPlace">Logradouro</label>
+                            <input disabled type="text" name="publicPlace" id="publicPlace">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="phoneNumber">Telefone</label>
+                            <input disabled type="text" name="phoneNumber" id="phoneNumber">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="email">E-mail</label>
+                            <input disabled type="text" name="email" id="email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="centered-line"></div>
+        </div>
+        <!-- <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div> -->
+
+        <!-- <div id="div_erros_login"></div> -->
+
+        <div class="options-container">
+            <div class="options">   
+                <button class="update-button">Atualizar</button>
+                <button class="delete-button">Deletar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dark-body-container">
+        <div class="pop-up-container">
+            <div class="close-pop-up-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Deletar conta</h2>
+
+                <form id="form_deletar" method="post" onsubmit="return deletar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="userSelect">Digite o nome do hospital</label>
+                            <input id="delete_confirmation" type="text" placeholder="Health Inspec">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-delete-button">Deletar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+
+    <div class="update-dark-body">
+        <div class="update-pop-up">
+            <div class="close-update-button">&times;</div>
+
+            <div class="pop-up">
+                <h2>Atualizar conta</h2>
+
+                <form id="form_atualizar" method="post" onsubmit="return atualizar()" class="form-columns">
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="fieldSelect">Selecione o campo</label>
+                            <select name="fieldSelect" id="field_select">
+                                <option value=""></option>
+                                <option value="razao_social">Razão Social</option>
+                                <option value="cnpj">CNPJ</option>
+                                <option value="estado">Estado</option>
+                                <option value="cidade">Cidade</option>
+                                <option value="cep">CEP</option>
+                                <option value="logradouro">Logradouro</option>
+                                <option value="telefone">Telefone</option>
+                                <option value="email">E-mail</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-element">
+                            <label for="newValue">Digite o novo valor</label>
+                            <input type="text" name="newValue" id="new_value" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-element form-row">
+                        <button class="confirm-update-button">Atualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="div_aguardar" class="loading-div" style="display: none;">
+            <img src="../apiCadastro/api-projeto-site/public/assets/circle-loading.gif" id="loading-gif" style="display: none;">
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const darkBodyContainer = document.querySelector(".dark-body-container");
+    const popUpContainer = document.querySelector(".pop-up-container");
+    const deleteButton = document.querySelector(".delete-button");
+    const closeDeleteButton = document.querySelector(".close-pop-up-button");
+
+    deleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.add("active-dark-body-container");
+        popUpContainer.classList.add("active");
+    });
+
+    closeDeleteButton.addEventListener("click", () => {
+        darkBodyContainer.classList.remove("active-dark-body-container");
+        popUpContainer.classList.remove("active");
+    });
+
+    const updateDarkBody = document.querySelector(".update-dark-body");
+    const updatePopUp = document.querySelector(".update-pop-up");
+    const updateButton = document.querySelector(".update-button");
+    const closeUpdateButton = document.querySelector(".close-update-button");
+
+    updateButton.addEventListener("click", () => {
+        updateDarkBody.classList.add("active-update-dark-body");
+        updatePopUp.classList.add("active");
+    });
+
+    closeUpdateButton.addEventListener("click", () => {
+        document.getElementById("field_select").value = "";
+        document.getElementById("new_value").value = "";
+        updateDarkBody.classList.remove("active-update-dark-body");
+        updatePopUp.classList.remove("active");
+    });
+</script>
+
+<script>
+    fetch(`/usuarios/listarInfoHospital/${sessionStorage.ID_HOSPITAL}`).then(function(resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function(resposta) {
+                const corporateName = document.getElementById("corporateName");
+                const cnpj = document.getElementById("cnpj");
+                const state = document.getElementById("state");
+                const city = document.getElementById("city");
+                const cep = document.getElementById("cep");
+                const publicPlace = document.getElementById("publicPlace");
+                const phoneNumber = document.getElementById("phoneNumber");
+                const email = document.getElementById("email");
+
+                for (let i = 0; i < resposta.length; i++) {
+                    const hospital = resposta[i];
+
+                    corporateName.placeholder = hospital.razao_social;
+                    cnpj.placeholder = hospital.cnpj;
+                    state.placeholder = hospital.estado;
+                    city.placeholder = hospital.cidade;
+                    cep.placeholder = hospital.cep;
+                    publicPlace.placeholder = hospital.logradouro;
+                    phoneNumber.placeholder = hospital.telefone;
+                    email.placeholder = hospital.email;
+                }
+            })
+        } else {
+            throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+        }
+    }).catch(function(resposta) {
+        console.log(resposta);
+    })
+</script>
+
+<script>
+    function deletar() {
+        const formulario = new URLSearchParams(new FormData(document.getElementById("form_deletar")));
+
+        const confirmation = document.getElementById("delete_confirmation");
+
+        if (confirmation.value.toUpperCase() != sessionStorage.NOME_USUARIO.toUpperCase()) {
+            throwAlert("error", "Digite o nome do hospital para confirmar!");
+            
+            return false;
+        }
+
+        fetch(`/usuarios/deletarHospital/${sessionStorage.ID_HOSPITAL}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Conta deletada com sucesso. Até logo!");
+
+                setTimeout(() => {
+                    window.location = "index.html";
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o delete!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function atualizar() {
+        aguardar();
+
+        const formulario = new URLSearchParams(new FormData(document.getElementById("form_atualizar")));
+
+        const fieldSelect = document.getElementById("field_select");
+        const newValue = document.getElementById("new_value");
+
+        if (fieldSelect.value == "") {
+            throwAlert("error", "Selecione um campo para ser atualizado!");
+
+            return false;
+        } 
+        if (newValue.value == "") {
+            throwAlert("error", "Digite o novo valor!");
+
+            return false;
+        }
+
+        const isNameSelected = fieldSelect.value == "razao_social";
+        const isCnpjSelected = fieldSelect.value == "cnpj";
+        const isCepSelected = fieldSelect.value == "cep";
+        const isEmailSelected = fieldSelect.value == "email";
+        const isCpfSelected = fieldSelect.value == "cpf";
+        const isPhoneSelected = fieldSelect.value == "telefone";
+
+        if (isCnpjSelected) {
+            if (newValue.value.length != 14) {
+                throwAlert("error", "Digite um CNPJ válido (14 dígitos)!");
+
+                return false;
+            }
+        } else if (isCepSelected) {
+            if (newValue.value.length != 8) {
+                throwAlert("error", "Digite um CEP válido (8 dígitos)!");
+
+                return false;
+            }
+        } else if (isEmailSelected) {
+            if (newValue.value.indexOf("@") == -1 || newValue.value.indexOf(".com") == -1) {
+                throwAlert("error", "Novo e-mail deve conter @ e .com!");
+                
+                return false;
+            }
+        } else if (isCpfSelected) {
+            if (newValue.value.length != 11) {
+                throwAlert("error", "Digite um CPF válido (11 dígitos)!");
+
+                return false;
+            }
+        } else if (isPhoneSelected) {
+            if (newValue.value.length != 11) {
+                throwAlert("error", "Digite um número de telefone válido (11 dígitos)!");
+
+                return false;
+            }
+        }
+
+        fetch(`/usuarios/atualizarHospital/${sessionStorage.ID_HOSPITAL}`, {
+            method: "POST",
+            body: formulario
+        }).then(function(resposta) {
+            if (resposta.ok) {
+                throwAlert("success", "Conta atualizada com sucesso!");
+
+                if (isNameSelected) {
+                    sessionStorage.NOME_USUARIO = newValue.value;
+                }
+                
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+                limparFormulario();
+
+                finalizarAguardar();
+            } else {
+                console.log(resposta);
+
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+</script>

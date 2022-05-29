@@ -9,9 +9,10 @@
     <script src="./assets/js/funcoes.js"></script>
     <script src="../src/controllers/usuarioController.js"></script>
 
-    <script src="https://kit.fontawesome.com/513a8fc4a0.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/dc4799c2db.js" crossorigin="anonymous"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/alert.js"></script>
 </head>
 <body onload="validarSessao()">
     <div class="dark-body-container">
@@ -116,6 +117,10 @@
                     </li>
                     
                     <li>
+                        <a href="perfil-hospital.html">Perfil</a>
+                    </li>
+                    
+                    <li>
                         <a href="index.html">Sair</a>
                     </li>
                 </ul>
@@ -141,9 +146,13 @@
         <div class="table-container">
             <div class="options-container">
                 <div class="options">
-                    <span class="update-button">Atualizar</span>
+                    <span class="update-button">
+                        <i class="fa-solid fa-arrows-rotate update-icon"></i>
+                    </span>
     
-                    <span class="delete-button">Deletar</span>
+                    <span class="delete-button">
+                        <i class="fa-solid fa-trash-can trash-icon"></i>
+                    </span>
                 </div>
             </div>
 
@@ -384,24 +393,5 @@
         });
 
         return false;
-    }
-
-    function throwAlert(icon, message) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: icon,
-            title: message
-        })
     }
 </script>

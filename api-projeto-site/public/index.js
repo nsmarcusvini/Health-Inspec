@@ -85,29 +85,32 @@ eyeIcon.addEventListener("click", function() {
     let password = document.getElementById("password");
     let confirmation = document.getElementById("passwdConfirmation");
     if (password.type == "password") {
-        eyeIcon.classList.remove("far", "fa-eye");
-        eyeIcon.classList.add("far", "fa-eye-slash");
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
         password.type = "text";
         confirmation.type = "text";
     } else {
-        eyeIcon.classList.remove("far", "fa-eye-slash");
-        eyeIcon.classList.add("far", "fa-eye");
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
         password.type = "password"
         confirmation.type = "password"
     }
 });
 
-let loginEyeIcon = document.getElementById("login_eye");
+const loginEyeIcon = document.getElementById("login_eye");
 loginEyeIcon.addEventListener("click", () => {
-    const loginPasswd = document.getElementById("loginPassword");
-    if (loginPasswd.type == "password") {
-        loginPasswd.classList.remove("far", "fa-eye");
-        loginPasswd.classList.add("far", "fa-eye-slash");
-        loginPasswd.type = "text";
+    const loginInput = document.getElementById("loginPassword");
+
+    if (loginInput.type == "password") {
+        loginEyeIcon.classList.remove("fa-eye");
+        loginEyeIcon.classList.add("fa-eye-slash");
+
+        loginInput.type = "text";
     } else {
-        loginPasswd.classList.remove("far", "fa-eye-slash");
-        loginPasswd.classList.add("far", "fa-eye");
-        loginPasswd.type = "password";
+        loginEyeIcon.classList.remove("fa-eye-slash");
+        loginEyeIcon.classList.add("fa-eye");
+
+        loginInput.type = "password";
     }
 });
 
