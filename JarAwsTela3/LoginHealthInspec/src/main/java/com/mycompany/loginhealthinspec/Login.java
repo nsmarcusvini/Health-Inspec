@@ -265,7 +265,7 @@ public class Login extends javax.swing.JFrame {
         Looca looca = new Looca();
         ResultSet resultSetEmail = null;
         try {
-            Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+            Double ram = looca.getMemoria().getTotal() / 1073741824.0;
             Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
             double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
             double tamanhoTotal = new File("C:\\").getTotalSpace();
