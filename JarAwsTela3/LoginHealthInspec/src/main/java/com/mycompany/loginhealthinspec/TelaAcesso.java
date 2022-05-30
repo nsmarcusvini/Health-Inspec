@@ -166,7 +166,7 @@ public class TelaAcesso extends javax.swing.JFrame {
                     tamanhoListaDisco.add(discoTotaL);
                     tamanhoListaCpu.add(ramTotal);
                     tamanhoListaRam.add(cpu);
-                    if (tamanhoListaDisco.size() > 30) {
+                    if (tamanhoListaDisco.size() > 10) {
 
                         if (discoTotaL < discoTotaL * 0.55) {
                             SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 55%");
@@ -178,7 +178,7 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                         tamanhoListaDisco.clear();
 
-                        if (tamanhoListaRam.size() > 30) {
+                        if (tamanhoListaRam.size() > 10) {
 
                             if (ramTotal > ramTotal * 0.55) {
                                 SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 55%");
@@ -190,7 +190,7 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                             tamanhoListaRam.clear();
                         }
-                        if (tamanhoListaCpu.size() > 30) {
+                        if (tamanhoListaCpu.size() > 10) {
 
                             if (cpu > cpu * 0.80) {
                                 SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta chegando em 90%! \n"
