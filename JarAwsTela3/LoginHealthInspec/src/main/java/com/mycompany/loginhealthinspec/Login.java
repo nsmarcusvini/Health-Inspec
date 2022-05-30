@@ -332,7 +332,7 @@ public class Login extends javax.swing.JFrame {
                     con.update(insertCompMaq,
                             2,
                             maquinas.getIdMaquina(),
-                            String.format("%.1f Gb",
+                            String.format("%.1f",
                                     disco),
                             "GB"
                     );
