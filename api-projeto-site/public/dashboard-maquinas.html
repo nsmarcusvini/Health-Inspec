@@ -9,6 +9,10 @@
     <script src="./assets/js/funcoes.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="assets/js/alert.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body onload="validarSessao()">
     <!--StartofhealthinspecsupportZendeskWidgetscript-->
@@ -62,68 +66,68 @@
 
             <div class="select-machine-container">
                 <label for="select-machine">Máquina selecionada: </label>
-                <select name="select-machine" id="select_machine">
+                <select name="select-machine" id="select_machine" onchange="listarConsumoMaquina()">
                     <option value=""></option>
                 </select>
             </div>
         </div>
 
         <div class="cards-container">
-            <div id="card1" class="card" onclick="obterDadosGrafico(ram)">
+            <div id="card1" class="card" onclick="exibirGraficoRAM()">
                 <div class="card-title">RAM</div>
-                <div class="card-subtitle">Espaço total - 8GB</div>
-                <div class="card-subtitle">Espaço livre - 30%</div>
-                <div class="card-status">
-                    <div class="box green"></div>
-                    <label>Ideal</label>
+                <div class="card-subtitle">Espaço total - <span id="totalRam"></span>GB</div>
+                <div class="card-subtitle">Espaço usado - <span id="usadoRam"></span>%</div>
+                <div id="status_ram" class="card-status">
+                    <!-- <div class="box green"></div>
+                    <label>Ideal</label> -->
                 </div>
             </div>
             
-            <div id="card2" class="card" onclick="obterDadosGrafico(disco)">
+            <div id="card2" class="card" onclick="exibirGraficoDisco()">
                 <div class="card-title">Disco</div>
-                <div class="card-subtitle">Espaço total - 256SSD</div>
-                <div class="card-subtitle">Espaço livre - 20%</div>
-                <div class="card-status">
-                    <div class="box yellow"></div>
-                    Alerta!
+                <div class="card-subtitle">Espaço total - <span id="totalDisco"></span>GB</div>
+                <div class="card-subtitle">Espaço livre - <span id="usadoDisco"></span>%</div>
+                <div id="status_disco" class="card-status">
+                    <!-- <div class="box yellow"></div>
+                    Alerta! -->
                 </div>
             </div>
 
-            <div id="card3" class="card" onclick="obterDadosGrafico(processador)">
+            <div id="card3" class="card" onclick="exibirGraficoProcessador()">
                 <div class="card-title">Processador</div>
-                <div class="card-subtitle">Uso ideal - 65%</div>
-                <div class="card-subtitle">Uso atual - 90%</div>
-                <div class="card-status">
-                    <div class="box red"></div>
-                    Urgente!
+                <div class="card-subtitle">Total - <span id="totalProcessador"></span>GHz</div>
+                <div class="card-subtitle">Uso atual - <span id="usadoProcessador"></span>%</div>
+                <div id="status_processador" class="card-status">
+                    <!-- <div id="status_processador" class="box red"></div>
+                    Urgente! -->
                 </div>
             </div>
         </div>
 
         <div class="graph-container">
             <div class="graph-title-container">
-                <div class="graph-title">Gráfico - RAM</div>
+                <div class="graph-title">Gráfico - <span id="graph_title"></span></div>
 
                 <div class="graph-desc">
                     <div class="box-container">
                         <div class="box green"></div> 
                         <label class="desc">Uso ideal</label>
                         <label>-</label>
-                        <label id="graph-range" class="range">até 600</label>
+                        <label id="range_ideal" class="range">até 50%</label>
                     </div>
                     
                     <div class="box-container">
                         <div class="box yellow"></div> 
                         <label class="desc">Uso em alerta</label>
                         <label>-</label>
-                        <label id="graph-range" class="range">600 a 700</label>
+                        <label id="graph-range" class="range">até 80%</label>
                     </div>
                     
                     <div class="box-container">
                         <div class="box red"></div> 
                         <label class="desc">Uso em urgência</label>
                         <label>-</label>
-                        <label id="graph-range" class="range">acima de 700</label>
+                        <label id="graph-range" class="range">acima de 80%</label>
                     </div>
                 </div>
             </div>
@@ -139,58 +143,8 @@
 </html>
 
 <script src='./node_modules/chart.js/dist/Chart.js'></script>
-<script src="./js/dashboard.js"></script>  
-
-<script>
-    const card1 = document.getElementById("card1");
-    const card2 = document.getElementById("card2");
-    const card3 = document.getElementById("card3");
-
-    card1.addEventListener("click", () => {
-        card1.classList.toggle("active");
-        card2.classList.remove("active");
-        card3.classList.remove("active");
-
-        if (card1.classList.contains("active")) {
-            document.getElementById("chart_ram").style.display = "block";
-        } else {
-            document.getElementById("chart_ram").style.display = "none";
-        }
-
-        document.getElementById("chart_disco").style.display = "none";
-        document.getElementById("chart_cpu").style.display = "none";
-    });
-
-    card2.addEventListener("click", () => {
-        card2.classList.toggle("active");
-        card1.classList.remove("active");
-        card3.classList.remove("active");
-
-        if (card2.classList.contains("active")) {
-            document.getElementById("chart_disco").style.display = "block";
-        } else {
-            document.getElementById("chart_disco").style.display = "none";
-        }
-
-        document.getElementById("chart_ram").style.display = "none";
-        document.getElementById("chart_cpu").style.display = "none";
-    });
-    
-    card3.addEventListener("click", () => {
-        card3.classList.toggle("active");
-        card1.classList.remove("active");
-        card2.classList.remove("active");
-        
-        if (card3.classList.contains("active")) {
-            document.getElementById("chart_cpu").style.display = "block";
-        } else {
-            document.getElementById("chart_cpu").style.display = "none";
-        }
-        
-        document.getElementById("chart_ram").style.display = "none";
-        document.getElementById("chart_disco").style.display = "none";
-    });
-</script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> -->
+<!-- <script src="./js/dashboard.js"></script>   -->
 
 <script>
     fetch(`/usuarios/listarMaquinas/${sessionStorage.FK_HOSPITAL}`).then(function(resposta) {
@@ -217,5 +171,424 @@
 </script>
 
 <script>
-    
+    function listarConsumoMaquina() {
+        const selectedMachine = document.getElementById("select_machine").value;
+
+        if (selectedMachine == "") {
+            clearTextContent();
+
+            return false;
+        }
+
+        fetchTotalRam(selectedMachine);
+        fetchUsadoRam(selectedMachine);
+
+        fetchTotalDisco(selectedMachine);
+        fetchUsadoDisco(selectedMachine);
+        
+        fetchTotalProcessador(selectedMachine);
+        fetchUsadoProcessador(selectedMachine);
+
+        const statusRam = document.getElementById("status_ram");
+        const statusDisco = document.getElementById("status_disco");
+        const statusProcessador = document.getElementById("status_processador");
+
+        exibirEstadoComponente(sessionStorage.PORCENTAGEM_RAM, statusRam);
+        exibirEstadoComponente(sessionStorage.PORCENTAGEM_DISCO, statusDisco);
+        exibirEstadoComponente(sessionStorage.PORCENTAGEM_PROCESSADOR, statusProcessador);
+    }
+
+    function clearTextContent() {
+        document.getElementById("totalRam").textContent = "";
+        document.getElementById("usadoRam").textContent = "";
+        document.getElementById("totalDisco").textContent = "";
+        document.getElementById("usadoDisco").textContent = "";
+        document.getElementById("totalProcessador").textContent = "";
+        document.getElementById("usadoProcessador").textContent = "";
+        document.getElementById("status_ram").innerHTML = "";
+        document.getElementById("status_disco").innerHTML = "";
+        document.getElementById("status_processador").innerHTML = "";
+    }
+
+    function fetchTotalRam(idMaquina) {
+        fetch(`/usuarios/getTotalRam/${idMaquina}`).then(function(resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function(resposta) {
+                    let totalRam = document.getElementById("totalRam");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        let componente = resposta[i];
+
+                        totalRam.textContent = componente.totalComponente;
+                        sessionStorage.TOTAL_RAM = componente.totalComponente;
+                        sessionStorage.ID_RAM = componente.idComponenteMaquina;
+                    }
+                })
+            } else {
+                throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+            }
+        }).catch(function(resposta) {
+            console.log(resposta);
+        })
+    }
+
+    function fetchTotalDisco(idMaquina) {
+        fetch(`/usuarios/getTotalDisco/${idMaquina}`).then(function(resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function(resposta) {
+                    let totalDisco = document.getElementById("totalDisco");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        let componente = resposta[i];
+
+                        totalDisco.textContent = componente.totalComponente;
+                        sessionStorage.TOTAL_DISCO = componente.totalComponente;
+                        sessionStorage.ID_DISCO = componente.idComponenteMaquina;
+                    }
+                })
+            } else {
+                throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+            }
+        }).catch(function(resposta) {
+            console.log(resposta);
+        })
+    }
+
+    function fetchTotalProcessador(idMaquina) {
+        fetch(`/usuarios/getTotalProcessador/${idMaquina}`).then(function(resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function(resposta) {
+                    let totalProcessador = document.getElementById("totalProcessador");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        let componente = resposta[i];
+
+                        totalProcessador.textContent = componente.totalComponente;
+                        sessionStorage.ID_PROCESSADOR = componente.idComponenteMaquina;
+                    }
+                })
+            } else {
+                throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+            }
+        }).catch(function(resposta) {
+            console.log(resposta);
+        })
+    }
+
+    function fetchUsadoRam(idMaquina) {
+        fetch(`/usuarios/getUsadoRam/${idMaquina}`).then(function(resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function(resposta) {
+                    let usadoRam = document.getElementById("usadoRam");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        let componente = resposta[i];
+
+                        usadoRam.textContent = ((componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_RAM)).toFixed(2);
+
+                        sessionStorage.PORCENTAGEM_RAM = ((componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_RAM)).toFixed(2);
+                    }
+                })
+            } else {
+                throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+            }
+        }).catch(function(resposta) {
+            console.log(resposta);
+        })
+    }
+
+    function fetchUsadoDisco(idMaquina) {
+        fetch(`/usuarios/getUsadoDisco/${idMaquina}`).then(function(resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function(resposta) {
+                    let usadoDisco = document.getElementById("usadoDisco");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        let componente = resposta[i];
+
+                        usadoDisco.textContent = (((componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_DISCO))).toFixed(2);
+
+                        sessionStorage.PORCENTAGEM_DISCO = (
+                            100.00 - ( (componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_DISCO) )
+                        ).toFixed(2);
+                    }
+                })
+            } else {
+                throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+            }
+        }).catch(function(resposta) {
+            console.log(resposta);
+        })
+    }
+
+    function fetchUsadoProcessador(idMaquina) {
+        fetch(`/usuarios/getUsadoProcessador/${idMaquina}`).then(function(resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function(resposta) {
+                    let usadoProcessador = document.getElementById("usadoProcessador");
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        let componente = resposta[i];
+
+                        usadoProcessador.textContent = componente.totalUsado;
+                        sessionStorage.PORCENTAGEM_PROCESSADOR = componente.totalUsado;
+                    }
+                })
+            } else {
+                throw(`Houve um erro! ${resposta.status} - ${resposta}`);
+            }
+        }).catch(function(resposta) {
+            console.log(resposta);
+        })
+    }
+
+    function exibirEstadoComponente(porcentagem, container) {
+        const box = document.createElement("div");
+        box.classList.add("box");
+
+        const label = document.createElement("label");
+
+        if (porcentagem <= 50) {
+            box.classList.add("green");    
+            label.textContent = "Ideal!";
+        } else if (porcentagem <= 80) {
+            box.classList.add("yellow");
+            label.textContent = "Alerta!";
+        } else {
+            box.classList.add("red");
+            label.textContent = "Urgente!";
+        }
+
+        container.appendChild(box);
+        container.appendChild(label);
+    }
+</script>
+
+<script>
+    let ctxRam = document.getElementById('chart_ram').getContext('2d');
+
+    let chartConfig = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: "",
+                data: [],
+                backgroundColor: ['#ff7f7f'],
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: false,
+                    text: '',
+                    position: 'bottom',
+                }
+            },  
+            scales: {
+                xAxes: [{
+                    distribution: 'series',
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: false,
+                        labelString: ''
+                    },
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            animation: {
+                duration: 0.1
+            }
+        }
+    };
+
+    let chartRAM = new Chart(ctxRam, chartConfig);
+
+    const card1 = document.getElementById("card1");
+    const card2 = document.getElementById("card2");
+    const card3 = document.getElementById("card3");
+
+    async function exibirGraficoRAM(){
+        const selectedMachine = document.getElementById("select_machine").value;
+        if (selectedMachine == "") {
+            throwAlert("warning", "Selecione uma máquina para ver os gráficos!");
+            
+            return false;
+        } 
+
+        card1.classList.toggle("active");
+        card2.classList.remove("active");
+        card3.classList.remove("active");
+
+        if (card1.classList.contains("active")) {
+            document.getElementById("chart_ram").style.display = "block";
+        } else {
+            document.getElementById("chart_ram").style.display = "none";
+        }
+
+        document.getElementById("chart_disco").style.display = "none";
+        document.getElementById("chart_cpu").style.display = "none";
+
+        document.getElementById("graph_title").textContent = "RAM";
+
+        console.log('iniciando plotagem do gráfico de RAM...');
+        contador = 0;
+        let registroHoraRAM = await fetch(`/medidas/getHoraRegistrosComponente/${sessionStorage.ID_RAM}`);
+        registroHoraRAM = await registroHoraRAM.json();
+
+        registroHoraRAM.forEach(data => {
+            if (chartRAM.data.labels.length >= 10) {
+                chartRAM.data.labels.shift()
+                chartRAM.data.datasets[0].data.shift();
+            }
+
+            console.log(contador)
+            
+            chartRAM.data.labels.push(
+                `${registroHoraRAM[contador].hora}` + ":" + 
+                `${registroHoraRAM[contador].minuto}` + ":" + 
+                `${registroHoraRAM[contador].segundo}`
+            );
+
+            chartRAM.data.datasets[0].data.push(parseFloat(data.totalUsado));
+
+            mudarCorGrafico(sessionStorage.PORCENTAGEM_RAM, chartRAM.data.datasets[0]);
+            
+            chartRAM.update();
+            contador++;
+        });
+    }
+
+    let ctxDisco = document.getElementById('chart_disco').getContext('2d');
+
+    let chartDisco = new Chart(ctxDisco, chartConfig);
+
+    async function exibirGraficoDisco(){
+        const selectedMachine = document.getElementById("select_machine").value;
+
+        if (selectedMachine == "") {
+            throwAlert("warning", "Selecione uma máquina para ver os gráficos!");
+
+            return false;
+        }
+
+        card2.classList.toggle("active");
+        card1.classList.remove("active");
+        card3.classList.remove("active");
+
+        if (card2.classList.contains("active")) {
+            document.getElementById("chart_disco").style.display = "block";
+        } else {
+            document.getElementById("chart_disco").style.display = "none";
+        }
+
+        document.getElementById("chart_ram").style.display = "none";
+        document.getElementById("chart_cpu").style.display = "none";
+
+        document.getElementById("graph_title").textContent = "Disco";
+
+        console.log('iniciando plotagem do gráfico de Disco...');
+        contador = 0;
+        let registroHoraDisco = await fetch(`/medidas/getHoraRegistrosComponente/${sessionStorage.ID_DISCO}`);
+        registroHoraDisco = await registroHoraDisco.json();
+
+        registroHoraDisco.forEach(data => {
+            if (chartDisco.data.labels.length >= 10) {
+                chartDisco.data.labels.shift()
+                chartDisco.data.datasets[0].data.shift();
+            }
+
+            console.log(contador)
+            
+            chartDisco.data.labels.push(
+                `${registroHoraDisco[contador].hora}` + ":" + 
+                `${registroHoraDisco[contador].minuto}` + ":" + 
+                `${registroHoraDisco[contador].segundo}`
+            );
+
+            chartDisco.data.datasets[0].data.push(parseFloat(data.totalUsado));
+
+            mudarCorGrafico(sessionStorage.PORCENTAGEM_DISCO, chartDisco.data.datasets[0]);
+
+            chartDisco.update();
+            contador++;
+        });
+    }
+
+    let ctxCpu = document.getElementById('chart_cpu').getContext('2d');
+
+    let chartProcessador = new Chart(ctxCpu, chartConfig);
+
+    async function exibirGraficoProcessador() {
+        const selectedMachine = document.getElementById("select_machine").value;
+        if (selectedMachine == "") {
+            throwAlert("warning", "Selecione uma máquina para ver os gráficos!");
+
+            return false;
+        } 
+
+        card3.classList.toggle("active");
+        card1.classList.remove("active");
+        card2.classList.remove("active");
+        
+        if (card3.classList.contains("active")) {
+            document.getElementById("chart_cpu").style.display = "block";
+        } else {
+            document.getElementById("chart_cpu").style.display = "none";
+        }
+        
+        document.getElementById("chart_ram").style.display = "none";
+        document.getElementById("chart_disco").style.display = "none";
+
+        document.getElementById("graph_title").textContent = "Processador";
+
+        console.log('iniciando plotagem do gráfico do Processador...');
+        contador = 0;
+        let registroHoraProcessador = await fetch(`/medidas/getHoraRegistrosComponente/${sessionStorage.ID_PROCESSADOR}`);
+        registroHoraProcessador = await registroHoraProcessador.json();
+
+        registroHoraProcessador.forEach(data => {
+            if (chartProcessador.data.labels.length >= 10) {
+                chartProcessador.data.labels.shift()
+                chartProcessador.data.datasets[0].data.shift();
+            }
+
+            console.log(contador)
+            
+            chartProcessador.data.labels.push(
+                `${registroHoraProcessador[contador].hora}` + ":" + 
+                `${registroHoraProcessador[contador].minuto}` + ":" + 
+                `${registroHoraProcessador[contador].segundo}`
+            );
+
+            chartProcessador.data.datasets[0].data.push(parseFloat(data.totalUsado));
+
+            mudarCorGrafico(sessionStorage.PORCENTAGEM_PROCESSADOR, chartProcessador.data.datasets[0]);
+
+            chartProcessador.update();
+            contador++;
+        });
+    }
+
+    function mudarCorGrafico(porcentagem, chart) {
+        if (porcentagem <= 50) {
+            chart.backgroundColor = 'rgb(3, 119, 3)';
+        } else if (porcentagem <= 80) {
+            chart.backgroundColor = 'rgb(226, 226, 3)';
+        } else {
+            chart.backgroundColor = 'rgb(194, 2, 2)';
+        }
+    }
+
+    setInterval(() => {
+        clearTextContent();
+        listarConsumoMaquina();
+    }, 20000);
 </script>

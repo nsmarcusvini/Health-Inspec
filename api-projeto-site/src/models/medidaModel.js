@@ -1,5 +1,24 @@
 var database = require("../database/config");
 
+function getHoraRegistrosComponente(fkComponenteMaquina) {
+    let instrucao = `
+        SELECT 
+            TOP 5 totalUsado,
+            DATEPART(hour, dataHora) as 'hora',
+            DATEPART(minute, dataHora) as 'minuto',
+            DATEPART(second, dataHora) as 'segundo' 
+        FROM 
+            registros 
+        WHERE 
+            fkComponenteMaquina = '${fkComponenteMaquina}' 
+        ORDER BY 
+            idRegistros
+        DESC;
+    `;
+
+    return database.executar(instrucao);
+}
+
 function buscarUltimasMedidas(idAquario,limite_linhas) {
     let instrucaoSql = `
         select top 7 
@@ -30,8 +49,8 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
-
 module.exports = {
+    getHoraRegistrosComponente,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal
 }

@@ -7,6 +7,8 @@ package com.mycompany.loginhealthinspec;
 import com.github.britooo.looca.api.core.Looca;
 import java.awt.Color;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.DriverManager;
@@ -265,8 +267,9 @@ public class Login extends javax.swing.JFrame {
         Looca looca = new Looca();
         ResultSet resultSetEmail = null;
         try {
-            Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
+            Double ram = looca.getMemoria().getTotal() / 1073741824.0;
             Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
+            BigDecimal totalCPU = new BigDecimal(looca.getProcessador().getFrequencia() / 1e+9).setScale(2, RoundingMode.HALF_EVEN);
             double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
             double tamanhoTotal = new File("C:\\").getTotalSpace();
             String so = looca.getSistema().getSistemaOperacional();
@@ -288,7 +291,6 @@ public class Login extends javax.swing.JFrame {
             } else {
 
                 Funcionario funcionario = listaLoginFuncionario.get(0);
-                System.out.println(funcionario.getFkHospital());
 
                 List<Maquinas> listaMaquinas = con.query("SELECT * FROM maquinas WHERE fkHospital = " + funcionario.getFkHospital() + ";",
                         new BeanPropertyRowMapper<>(Maquinas.class));
@@ -313,26 +315,26 @@ public class Login extends javax.swing.JFrame {
                     con.update(insertCompMaq,
                             3,
                             maquinas.getIdMaquina(),
-                            String.format("%.1f Ghz",looca.getProcessador().getFrequencia().doubleValue()),
-                            "Ghz"
+                            String.format("%.1f", totalCPU),
+                            "GHz"
                     );
 
                     //RAM
                     con.update(insertCompMaq,
                             1,
                             maquinas.getIdMaquina(),
-                            String.format("%.1f Gb",
+                            String.format("%.1f",
                                     ram),
-                            "Gb"
+                            "GB"
                     );
 
                     //DISCO
                     con.update(insertCompMaq,
                             2,
                             maquinas.getIdMaquina(),
-                            String.format("%.1f Gb",
+                            String.format("%.1f",
                                     disco),
-                            "Gb"
+                            "GB"
                     );
 
                     TelaAcesso telaAcesso = new TelaAcesso();

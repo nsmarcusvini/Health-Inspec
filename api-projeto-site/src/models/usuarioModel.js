@@ -232,6 +232,44 @@ function cadastrarTecnico(name, email, fkHospital, cpf, phoneNumber, password) {
     return database.executar(instrucao);
 }
 
+function getTotalComponente(idMaquina, fkComponente) {
+    let instrucao = `
+        SELECT 
+            * 
+        FROM
+            componentes_has_maquinas 
+        INNER JOIN 
+            maquinas 
+        ON
+            fkMaquina = idMaquina
+        WHERE 
+            idMaquina = ${idMaquina} 
+        AND
+            fkComponente = ${fkComponente};
+    `;
+
+    return database.executar(instrucao);
+}
+
+function getUsadoComponente(idMaquina, fkComponente) {
+    let instrucao = `
+        SELECT 
+            * 
+        FROM 
+            registros 
+        INNER JOIN 
+            maquinas 
+        ON 
+            fkMaquina = idMaquina
+        WHERE 
+            idMaquina = ${idMaquina}
+        AND 
+            fkComponente = ${fkComponente};
+    `;
+
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     validarCadastro,
@@ -251,5 +289,7 @@ module.exports = {
     listar,
     listarTecnicos,
     listarMaquinas,
-    listarInfoHospital
+    listarInfoHospital,
+    getTotalComponente,
+    getUsadoComponente
 };
