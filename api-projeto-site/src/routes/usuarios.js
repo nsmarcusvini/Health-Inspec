@@ -73,7 +73,7 @@ router.get("/getTotalDisco/:fkMaquina", function(req, res) {
 
 router.get("/getTotalProcessador/:fkMaquina", function(req, res) {
     usuarioController.getTotalProcessador(req, res);
-})
+});
 
 router.get("/getUsadoRam/:fkMaquina", function(req, res) {
     usuarioController.getUsadoRam(req, res);
@@ -85,6 +85,6 @@ router.get("/getUsadoDisco/:fkMaquina", function(req, res) {
 
 router.get("/getUsadoProcessador/:fkMaquina", function(req, res) {
     usuarioController.getUsadoProcessador(req, res);
-})
+});
   
 module.exports = router;

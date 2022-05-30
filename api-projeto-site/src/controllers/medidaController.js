@@ -1,5 +1,21 @@
 var medidaModel = require("../models/medidaModel");
 
+function getHoraRegistrosComponente(req, res) {
+    const fkComponenteMaquina = req.params.fkComponenteMaquina;
+
+    medidaModel.getHoraRegistrosComponente(fkComponenteMaquina)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 function buscarUltimasMedidas(req, res) {
 
     const limiteLinhas = 7;
@@ -42,7 +58,7 @@ function buscarMedidasEmTempoReal(req, res) {
 }
 
 module.exports = {
+    getHoraRegistrosComponente,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal
-    
 }
