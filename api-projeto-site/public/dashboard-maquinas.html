@@ -71,31 +71,31 @@
         <div class="cards-container">
             <div id="card1" class="card" onclick="obterDadosGrafico(1)">
                 <div class="card-title">RAM</div>
-                <div class="card-subtitle">Espaço total - <span id="totalRam"></span></div>
-                <div class="card-subtitle">Espaço usado - <span id="usadoRam"></span></div>
-                <div class="card-status">
-                    <div class="box green"></div>
-                    <label>Ideal</label>
+                <div class="card-subtitle">Espaço total - <span id="totalRam"></span>GB</div>
+                <div class="card-subtitle">Espaço usado - <span id="usadoRam"></span>%</div>
+                <div id="status_ram" class="card-status">
+                    <!-- <div class="box green"></div>
+                    <label>Ideal</label> -->
                 </div>
             </div>
             
             <div id="card2" class="card" onclick="obterDadosGrafico(2)">
                 <div class="card-title">Disco</div>
-                <div class="card-subtitle">Espaço total - <span id="totalDisco"></span></div>
-                <div class="card-subtitle">Espaço livre - <span id="usadoDisco"></span></div>
-                <div class="card-status">
-                    <div class="box yellow"></div>
-                    Alerta!
+                <div class="card-subtitle">Espaço total - <span id="totalDisco"></span>GB</div>
+                <div class="card-subtitle">Espaço usado - <span id="usadoDisco"></span>%</div>
+                <div id="status_disco" class="card-status">
+                    <!-- <div class="box yellow"></div>
+                    Alerta! -->
                 </div>
             </div>
 
             <div id="card3" class="card" onclick="obterDadosGrafico(3)">
                 <div class="card-title">Processador</div>
-                <div class="card-subtitle">Total - <span id="totalProcessador"></span></div>
-                <div class="card-subtitle">Uso atual - <span id="usadoProcessador"></span></div>
-                <div class="card-status">
-                    <div class="box red"></div>
-                    Urgente!
+                <div class="card-subtitle">Total - <span id="totalProcessador"></span>GHz</div>
+                <div class="card-subtitle">Uso atual - <span id="usadoProcessador"></span>%</div>
+                <div id="status_processador" class="card-status">
+                    <!-- <div id="status_processador" class="box red"></div>
+                    Urgente! -->
                 </div>
             </div>
         </div>
@@ -227,6 +227,8 @@
             document.getElementById("usadoDisco").textContent = "";
             document.getElementById("totalProcessador").textContent = "";
             document.getElementById("usadoProcessador").textContent = "";
+            document.getElementById("status_ram").innerHTML = "";
+
             return false;
         }
 
@@ -238,6 +240,14 @@
         
         fetchTotalProcessador(selectedMachine);
         fetchUsadoProcessador(selectedMachine);
+
+        const statusRam = document.getElementById("status_ram");
+        const statusDisco = document.getElementById("status_disco");
+        const statusProcessador = document.getElementById("status_processador");
+
+        exibirEstadoComponente(sessionStorage.PORCENTAGEM_RAM, statusRam);
+        exibirEstadoComponente(sessionStorage.PORCENTAGEM_DISCO, statusDisco);
+        exibirEstadoComponente(sessionStorage.PORCENTAGEM_PROCESSADOR, statusProcessador);
     }
 
     function fetchTotalRam(idMaquina) {
@@ -250,6 +260,7 @@
                         let componente = resposta[i];
 
                         totalRam.textContent = componente.totalComponente;
+                        sessionStorage.TOTAL_RAM = componente.totalComponente;
                     }
                 })
             } else {
@@ -270,6 +281,7 @@
                         let componente = resposta[i];
 
                         totalDisco.textContent = componente.totalComponente;
+                        sessionStorage.TOTAL_DISCO = componente.totalComponente;
                     }
                 })
             } else {
@@ -309,7 +321,9 @@
                     for (let i = 0; i < resposta.length; i++) {
                         let componente = resposta[i];
 
-                        usadoRam.textContent = componente.totalUsado;
+                        usadoRam.textContent = ((componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_RAM)).toFixed(2);
+
+                        sessionStorage.PORCENTAGEM_RAM = ((componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_RAM)).toFixed(2);
                     }
                 })
             } else {
@@ -329,7 +343,13 @@
                     for (let i = 0; i < resposta.length; i++) {
                         let componente = resposta[i];
 
-                        usadoDisco.textContent = componente.totalUsado;
+                        usadoDisco.textContent = (
+                            100.00 - ( (componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_DISCO) )
+                        ).toFixed(2);
+
+                        sessionStorage.PORCENTAGEM_DISCO = (
+                            100.00 - ( (componente.totalUsado * 100) / parseInt(sessionStorage.TOTAL_DISCO) )
+                        ).toFixed(2);
                     }
                 })
             } else {
@@ -350,6 +370,7 @@
                         let componente = resposta[i];
 
                         usadoProcessador.textContent = componente.totalUsado;
+                        sessionStorage.PORCENTAGEM_PROCESSADOR = componente.totalUsado;
                     }
                 })
             } else {
@@ -358,5 +379,26 @@
         }).catch(function(resposta) {
             console.log(resposta);
         })
+    }
+
+    function exibirEstadoComponente(porcentagem, container) {
+        const box = document.createElement("div");
+        box.classList.add("box");
+
+        const label = document.createElement("label");
+
+        if (porcentagem < 40) {
+            box.classList.add("green");    
+            label.textContent = "Ideal!";
+        } else if (porcentagem < 70) {
+            box.classList.add("yellow");
+            label.textContent = "Alerta!";
+        } else {
+            box.classList.add("red");
+            label.textContent = "Urgente!";
+        }
+
+        container.appendChild(box);
+        container.appendChild(label);
     }
 </script>
