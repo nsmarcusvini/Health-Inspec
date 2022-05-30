@@ -4,7 +4,7 @@ process.env.AMBIENTE_PROCESSO = "producao";
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
-var PORTA = 3333;
+var PORTA = 8080;
 
 var app = express();
 
