@@ -1,12 +1,10 @@
 {
-  "name": "api-projeto-site",
-  "version": "0.0.1",
+  "name": "projeto-aquatec",
+  "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "private" : true,
+  "main": "index.js",
   "scripts": {
-    "start": "node ./api-projeto-site/app.js",
-    "postinstall": "cd api-projeto-site && npm install",
+    "start": "node app.js",
     "dev": "nodemon --exec node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
