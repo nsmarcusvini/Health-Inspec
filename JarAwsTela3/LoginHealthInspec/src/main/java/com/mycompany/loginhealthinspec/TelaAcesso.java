@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.Date;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 /**
  *
  * @author Nicolas
@@ -73,38 +74,64 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
-                Double ramTotal = looca.getMemoria().getTotal() / 1073741824.0;
+                Long ramTotal = looca.getMemoria().getEmUso();
                 Double disco = looca.getGrupoDeDiscos().getTamanhoTotal() / 1073741824.0;
-                if (disco > disco * 0.33) {
-                    SlackIntegration.sendMessageToSlack("Disco elevado : acima 75%");
-                    if (disco > disco * 0.75) {
-                        SlackIntegration.sendMessageToSlack("Disco elevado acima 75%");
+                Double cpu = looca.getProcessador().getUso();
+                Long discoTotaL = looca.getGrupoDeDiscos().getTamanhoTotal();
+                List<Long> tamanhoListaDisco = new ArrayList<>();
+                List<Long> tamanhoListaCpu = new ArrayList<>();
+                List<Double> tamanhoListaRam = new ArrayList<>();
+                while (true) {
+                    tamanhoListaDisco.add(discoTotaL);
+                    tamanhoListaCpu.add(ramTotal);
+                    tamanhoListaRam.add(cpu);
+                    if (tamanhoListaDisco.size() > 30) {
+
+                        if (discoTotaL < discoTotaL * 0.55) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta em: 55%");
+                        }
+                        if (discoTotaL > discoTotaL * 0.80) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario seu disco esta chegando em 90%! \n"
+                                    + "Proucure resfriar sua máquina!\nRecomendação feche abas desnecessárias");
+                        }
+
+                        tamanhoListaDisco.clear();
                     }
-                    if (disco < disco * 0.75) {
-                        SlackIntegration.sendMessageToSlack("Disco estável");
+                    if (tamanhoListaRam.size() > 30) {
+
+                        if (ramTotal > ramTotal * 0.55) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta em: 55%");
+                        }
+                        if (ramTotal > ramTotal * 0.80) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua memoria RAM esta chegando em 90%! \n"
+                                    + "Proucure resfriar sua máquina!\nRecomendação feche abas desnecessárias");
+                        }
+                        
+                        tamanhoListaRam.clear();
                     }
-                    if (ramTotal > 1) {
-                        SlackIntegration.sendMessageToSlack("Memória ram elevada : acima 75%");
-                    }
-                    if (ramTotal < ramTotal * 0.75) {
-                        SlackIntegration.sendMessageToSlack("Memória ram estável");
+                    if (tamanhoListaCpu.size() > 30) {
+
+                        if (cpu > cpu * 0.80) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta chegando em 90%! \n"
+                                    + "Proucure resfriar seu processador!\nRecomendação feche abas desnecessárias");
+                        }
+                        if (cpu > cpu * 0.55) {
+                            SlackIntegration.sendMessageToSlack("Sr.(A) usuario sua CPU esta em: 55%");
+                        }
+                        
+                        tamanhoListaCpu.clear();
                     }
 
                     lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
                     lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
                     lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
-                    SlackIntegration.sendMessageToSlack("memoria ram elevado acima 75%");
-                }
-                if (ramTotal < 1) {
-                    SlackIntegration.sendMessageToSlack("memoria ram estavel");
-                }
 
-                lblHostName.setText(InetAddress.getLocalHost().getHostName());
-                lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
-                lblProcessador.setText(looca.getProcessador().getNome());
-                lblMemoriaRam.setText(String.format("%.1f Gb", ram));
-                lblDisco.setText(String.format("%.1f Gb", disco));
-
+                    lblHostName.setText(InetAddress.getLocalHost().getHostName());
+                    lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
+                    lblProcessador.setText(looca.getProcessador().getNome());
+                    lblMemoriaRam.setText(String.format("%.1f Gb", ram));
+                    lblDisco.setText(String.format("%.1f Gb", disco));
+                }
             } catch (Exception e) {
 
                 e.printStackTrace();
@@ -117,14 +144,14 @@ public class TelaAcesso extends javax.swing.JFrame {
                 String espaco = "==========";
                 Double ram = looca.getMemoria().getEmUso() / 1073741824.0;
                 double tamanho = new File("C:\\").getTotalSpace() - new File("C:\\").getFreeSpace();
-                
+
                 List<Volume> volumes = looca.getGrupoDeDiscos().getVolumes();
                 Double discoDisponivel = 0.0;
-                
+
                 for (Volume volume : volumes) {
-                    discoDisponivel+= volume.getDisponivel();
+                    discoDisponivel += volume.getDisponivel();
                 }
-                
+
                 String hostName = InetAddress.getLocalHost().getHostName();
 
                 Boolean contador = true;
@@ -145,8 +172,9 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                 while (contador) {
                     BigDecimal consumoRAM = new BigDecimal(looca.getMemoria().getEmUso().doubleValue() / 1073741824).setScale(2, RoundingMode.HALF_EVEN);
-                BigDecimal percentualCPU = new BigDecimal(looca.getProcessador().getUso()).setScale(2, RoundingMode.HALF_EVEN);
-                BigDecimal consumoDisco = new BigDecimal(discoDisponivel / 1e+9).setScale(0, RoundingMode.HALF_EVEN);Date data = new Date();
+                    BigDecimal percentualCPU = new BigDecimal(looca.getProcessador().getUso()).setScale(2, RoundingMode.HALF_EVEN);
+                    BigDecimal consumoDisco = new BigDecimal(discoDisponivel / 1e+9).setScale(0, RoundingMode.HALF_EVEN);
+                    Date data = new Date();
                     SimpleDateFormat formatar = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String dataFormatada = formatar.format(data);
 
