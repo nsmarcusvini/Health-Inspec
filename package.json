@@ -1,0 +1,9 @@
+{
+    "name": "api-projeto-site",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node ./api-projeto-site/app.js",
+        "postinstall": "cd api-projeto-site && npm install"
+    }
+}
