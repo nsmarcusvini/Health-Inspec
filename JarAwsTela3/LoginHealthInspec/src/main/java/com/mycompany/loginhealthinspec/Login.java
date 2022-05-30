@@ -288,7 +288,6 @@ public class Login extends javax.swing.JFrame {
             } else {
 
                 Funcionario funcionario = listaLoginFuncionario.get(0);
-                System.out.println(funcionario.getFkHospital());
 
                 List<Maquinas> listaMaquinas = con.query("SELECT * FROM maquinas WHERE fkHospital = " + funcionario.getFkHospital() + ";",
                         new BeanPropertyRowMapper<>(Maquinas.class));
