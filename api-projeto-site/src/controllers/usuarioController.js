@@ -413,6 +413,102 @@ function listarAcessos(req, res) {
         );
 }
 
+function getTotalRam(req, res) {
+    const fkMaquina = req.params.fkMaquina;
+
+    usuarioModel.getTotalComponente(fkMaquina, 1)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
+function getTotalDisco(req, res) {
+    const fkMaquina = req.params.fkMaquina;
+
+    usuarioModel.getTotalComponente(fkMaquina, 2)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
+function getTotalProcessador(req, res) {
+    const fkMaquina = req.params.fkMaquina;
+
+    usuarioModel.getTotalComponente(fkMaquina, 3)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
+function getUsadoRam(req, res) {
+    const fkMaquina = req.params.fkMaquina;
+
+    usuarioModel.getUsadoComponente(fkMaquina, 1)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
+function getUsadoDisco(req, res) {
+    const fkMaquina = req.params.fkMaquina;
+
+    usuarioModel.getUsadoComponente(fkMaquina, 2)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
+function getUsadoProcessador(req, res) {
+    const fkMaquina = req.params.fkMaquina;
+
+    usuarioModel.getUsadoComponente(fkMaquina, 3)
+    .then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        }
+    }).catch(
+        function(error) {
+            console.log(error);
+            res.status(500).json(error.sqlMessage);
+        }
+    )
+}
+
 module.exports = {
     entrar,
     validarCadastro,
@@ -430,5 +526,11 @@ module.exports = {
     listarMaquinas,
     listarInfoHospital,
     testar,
-    listarAcessos
+    listarAcessos,
+    getTotalRam,
+    getTotalDisco,
+    getTotalProcessador,
+    getUsadoRam,
+    getUsadoDisco,
+    getUsadoProcessador
 }
