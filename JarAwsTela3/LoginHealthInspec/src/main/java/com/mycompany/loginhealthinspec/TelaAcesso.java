@@ -202,17 +202,17 @@ public class TelaAcesso extends javax.swing.JFrame {
 
                             tamanhoListaCpu.clear();
                         }
-
-                        lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
-                        lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
-                        lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
-
-                        lblHostName.setText(InetAddress.getLocalHost().getHostName());
-                        lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
-                        lblProcessador.setText(looca.getProcessador().getNome());
-                        lblMemoriaRam.setText(String.format("%.1f Gb", ram));
-                        lblDisco.setText(String.format("%.1f Gb", disco));
                     }
+                    
+                    lblUsoProcessador.setText(String.format("%.2f%%", looca.getProcessador().getUso()));
+                    lblUsoMemoriaRam.setText(String.format("%.2f GB usados", ram));
+                    lblUsoDisco.setText(String.format("%.2f usados", tamanho / 1073741824.0));
+
+                    lblHostName.setText(InetAddress.getLocalHost().getHostName());
+                    lblSistemaOperacional.setText(looca.getSistema().getSistemaOperacional());
+                    lblProcessador.setText(looca.getProcessador().getNome());
+                    lblMemoriaRam.setText(String.format("%.1f Gb", ram));
+                    lblDisco.setText(String.format("%.1f Gb", disco));
 
                     Integer processlist = looca.getGrupoDeProcessos().getProcessos().size();
 
