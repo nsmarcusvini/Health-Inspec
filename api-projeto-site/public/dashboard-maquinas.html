@@ -71,7 +71,7 @@
         <div class="cards-container">
             <div id="card1" class="card" onclick="obterDadosGrafico(ram)">
                 <div class="card-title">RAM</div>
-                <div class="card-subtitle">Espaço total - 8GB</div>
+                <div class="card-subtitle">Espaço total - <span class="totalRam"></span></div>
                 <div class="card-subtitle">Espaço livre - 30%</div>
                 <div class="card-status">
                     <div class="box green"></div>
@@ -217,5 +217,9 @@
 </script>
 
 <script>
-    
+    function selecionarMaquina() {
+        const selectedMachine = document.getElementById("select_machine").value;
+
+        fetch(`/usuarios/getTotalComponente/${selectedMachine}`)
+    }
 </script>
